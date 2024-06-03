@@ -1,4 +1,7 @@
-# SHDS_Project1
+# 여러분 곁에 있는<br> 넥서스입니다.
+<img src="https://github.com/dlehgus97/SHDS_Project1/assets/76528931/b3bee98e-e1c7-40e1-ba02-b7ee5987f7cf" alt="centered image">
+
+
 
 ## Team
 | 팀장 | 팀원 | 팀원 |
