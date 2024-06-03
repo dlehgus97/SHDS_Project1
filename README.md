@@ -50,7 +50,7 @@
 - 신고접수내역 확인
 
 ## 3. ERD
-![image](https://github.com/dlehgus97/SHDS_Project1/assets/47552691/9a18b028-43a5-4c3a-a90a-42640fee9e46)
+![image](https://github.com/dlehgus97/SHDS_Project1/assets/47552691/0c2f618a-f7d0-4847-89cf-36f1ef7a1412)
 
 ## 4. 기술 스택
 ### ✔️Frond-end
