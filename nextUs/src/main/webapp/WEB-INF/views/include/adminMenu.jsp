@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/adminMenu.css" />
+<link rel="stylesheet" href="/css/adminMenu.css" />
 
 </head>
 
