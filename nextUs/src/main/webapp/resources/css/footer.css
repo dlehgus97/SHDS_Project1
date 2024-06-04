@@ -1,0 +1,72 @@
+@charset "UTF-8";
+#footer_container {
+    display: flex;
+	background-color: black;
+    height: 400px;
+}
+#left_container {
+    width: 20%;
+    min-width: 400px;
+}
+#logo_container {
+	display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+#logo_container > h2 {
+    width: 100px;
+    padding-top: 60px;
+    padding-right: 0px;
+    margin-right: 0px;
+}
+#logo_icon {
+	display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 120px;
+    height: 100px;
+    padding: 20px;
+    padding-top: 60px;
+}
+#sns_container {
+	display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+}
+
+#center_container {
+    position: relative;
+    width: 40%;
+}
+#company_info {
+    position: absolute;
+	bottom: 100px;
+}
+#company_info > p {
+    color: #FFF;
+    font-size: 14px;
+}
+
+#right_container {
+    position: relative;
+    width: 40%;
+}
+#footer_table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-top: 60px;
+}
+#footer_table > a {
+    font-size: 18px;
+    text-decoration-line: none;
+    text-align: center;
+    padding: 20px;
+}
+.sns_icon {
+    filter: invert(43%);
+    padding: 14px;
+}
+h2 {
+    width: 100%;
+    color: #FFF;
+    text-align: center;
+}
