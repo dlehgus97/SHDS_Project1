@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/adminMenu.css" />
+<link rel="stylesheet" href="../resources/css/adminMenu.css" />
 
 </head>
 
 <body>
 	<div class="left-side-bar">
 		<ul>
-			<li><a href="#">메인화면</a></li>
-			<li><a href="#">정산관리</a>
+			<li><a href="/adminMain.do">메인화면</a></li>
+			<li><a href="/sellerSettlement.do">정산관리</a>
 				<ul>
-					<li><a href="#">판매자 정산 내역</a></li>
+					<li><a href="/sellerSettlement.do">판매자 정산 내역</a></li>
 					<li><a href="#">매출 통계</a></li>
 				</ul>
 			</li>
@@ -24,9 +24,9 @@
 					<li><a href="#">샐러 제재 관리</a></li>
 				</ul>
 			</li>
-			<li><a href="#">회원관리</a>
+			<li><a href="/memberStatus.do">회원관리</a>
 				<ul>
-					<li><a href="#">회원 현황</a></li>
+					<li><a href="/memberStatus.do">회원 현황</a></li>
 					<li><a href="#">회원 제재 관리</a></li>
 					<li><a href="#">쿠폰관리</a></li>
 				</ul>
@@ -46,4 +46,7 @@
 	</div>
 	
 </body>
+
+
+
 </html>
