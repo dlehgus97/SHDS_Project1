@@ -3,9 +3,8 @@
 <mapper namespace="kr.co.nextus.reply.ReplyMapper">
 	
 	<insert id="insert" parameterType="kr.co.nextus.reply.ReplyVO">
-		INSERT INTO reply (
-			title, content, regdate, readcnt,
-			filename_org, filename_real,
+		INSERT INTO QnA (
+			title, text, regdate, readcnt,
 			gno, ono, nested, writer 
 		) VALUES (
 			#{title}, #{content}, NOW(), 0,
@@ -35,7 +34,7 @@
 		WHERE no=#{no}
 	</update>
 	<delete id="delete" parameterType="int">
-		DELETE FROM reply WHERE no=#{no}
+		DELETE FROM QnA WHERE no=#{no}
 	</delete>
 	
 	<sql id="searchSql">
@@ -54,16 +53,16 @@
 	<!-- 목록 -->
 	<select id="list" parameterType="kr.co.nextus.reply.ReplyVO" resultType="kr.co.nextus.reply.ReplyVO">
 		SELECT *,
-			(SELECT name FROM MEMBER WHERE no=Q&A.memberno) as writer_name,
-			(SELECT COUNT(*) from COMMENT WHERE no=Q&A.no) as comment_count
-		FROM Q&A
+			(SELECT name FROM MEMBER WHERE no=QnA.memberno) as writer_name,
+			(SELECT COUNT(*) from COMMENT WHERE no=QnA.no) as comment_count
+		FROM QnA
 		<include refid="searchSql"/>
 		ORDER BY gno DESC, ono ASC
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.reply.ReplyVO" resultType="int">
-		SELECT COUNT(*) FROM reply
+		SELECT COUNT(*) FROM QnA
 		<include refid="searchSql"/>
 	</select>
 	
