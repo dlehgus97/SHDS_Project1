@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<link rel="stylesheet" href="../resources/css/adminMain.css" />
+<link rel="stylesheet" href="/css/adminMain.css" />
 
 </head>
 <body>
