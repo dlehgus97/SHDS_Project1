@@ -1,4 +1,4 @@
-package kr.co.project;
+package kr.co.nextus;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import kr.co.project.member.MemberMapper;
-import kr.co.project.member.MemberVO;
+import kr.co.nextus.member.MemberMapper;
+import kr.co.nextus.member.MemberVO;
 import lombok.extern.log4j.Log4j;
 
 @Log4j

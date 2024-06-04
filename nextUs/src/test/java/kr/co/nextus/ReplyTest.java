@@ -1,4 +1,4 @@
-package kr.co.project;
+package kr.co.nextus;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import kr.co.project.reply.ReplyMapper;
-import kr.co.project.reply.ReplyVO;
+import kr.co.nextus.reply.ReplyMapper;
+import kr.co.nextus.reply.ReplyVO;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
