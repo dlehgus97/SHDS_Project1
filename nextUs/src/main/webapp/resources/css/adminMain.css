@@ -1,0 +1,34 @@
+@charset "utf-8";
+body {
+	background-color: #F2F0F0;
+}
+
+.container {
+	display: flex;
+}
+
+.ad-menu {
+	width: 20%;
+	height: 100%;
+}
+
+.right {
+	width: 80%;
+	height: 100%;
+	margin: 20px 40px 20px 40px;
+}
+
+.right_div {
+	background: white;
+	
+}
+
+.new_issue {
+	width: 25%;
+	height: 300px;
+}
+
+.graph {
+	width: 30%;
+	height: 500px;
+}
