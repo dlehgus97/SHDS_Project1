@@ -107,6 +107,26 @@ public class MvcConfig implements WebMvcConfigurer {
 		return dtm;
 	}
 
+//	// 로그인인터셉터 빈등록
+//	@Bean
+//	public LoginInterceptor loginInterception() {
+//		return new LoginInterceptor();
+//	}
+
+//	// 인터셉터 설정
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		// url 설정
+//		registry.addInterceptor(loginInterception())
+//				.addPathPatterns("/reply/**")
+//				.excludePathPatterns("/reply/index.do")
+//				.excludePathPatterns("/reply/view.do")
+//				.addPathPatterns("/member/edit.do");
+//		/*
+//		 * 관리자페이지 .addPathPatterns("/admin/**") .excludePathPatterns("/admin/login.do")
+//		 */
+//	}
+
 	// properties 설정
 	@Bean
 	public static PropertyPlaceholderConfigurer propreties() {
