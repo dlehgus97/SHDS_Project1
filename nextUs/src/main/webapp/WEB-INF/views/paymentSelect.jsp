@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/paymentSelect.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/paymentSelect.css">
 </head>
 <body>
 	<div id="payment_container">
