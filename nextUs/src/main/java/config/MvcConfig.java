@@ -23,8 +23,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-// import util.LoginInterceptor;
-
 @Configuration
 @ComponentScan(basePackages = { "kr.co.nextus" })
 @EnableWebMvc
