@@ -21,11 +21,11 @@
             <button id="header_regist_seller" class="header_right_object">셀러등록</button>
             <div id="header_chat" class="header_right_object">
                 <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
-                <a href="" id="header_chat_text">CHAT</a>
+                <a href="" id="header_chat_text" class="text_color_white">CHAT</a>
             </div>
             <div id="login_status" class="header_right_object">
-                <a href="" style="font-size: 18px; text-decoration-line: none;">로그인</a>
-                <a href="" style="display: none; font-size: 18px; text-decoration-line: none;">로그아웃</a>
+                <a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그인</a>
+                <a href="" class="text_color_white" style="display: none; font-size: 18px; text-decoration-line: none;">로그아웃</a>
             </div>
         </div>
     </div>

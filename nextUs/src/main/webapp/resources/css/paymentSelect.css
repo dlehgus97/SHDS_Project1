@@ -1,31 +1,75 @@
 @charset "UTF-8";
+#p_container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: rgb(245, 245, 245);
+}
+
 #payment_container {
-    border: 1px solid black;
-    width: 500px;
+    display: flex;
+    justify-content: center;
+    width: 80%;
     padding: 20px;
 }
-#left {
-    display: grid;
-    grid-auto-flow: column;
+
+#payment_left_container {
+    position: relative;
+    width: 70%;
 }
-.paymentSelections {
-    display: flex;
+
+#product_title {
+    color: #000;
+}
+
+#info_detail {
+    width: 100%;
+}
+
+.info_size {
+    width: 80%;
+}
+
+#coupon_confirm_button {
+    background-color: #fff;
     border: 1px solid;
     border-radius: 20px;
-    margin: 14px;
-    width: 200px;
-    height: 100px;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
+    width: 60px;
+    height: 20px;
 }
-#toss {
-    background-color:dodgerblue;
+
+#payment_right_container {
+    position: relative;
+    width: 30%;
 }
-#kakao {
-    background-color: gold;
+
+#cost_info_container {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 50px;
+    text-align: center;
 }
-a {
-    font-size: 30px;
-    color:azure;
+
+#cost_detail p {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    margin-left: auto;
+}
+
+.payment_border {
+    border: 1px solid black;
+    border-radius: 30px;
+    margin: 50px 30px 50px 30px;
+    padding: 20px 20px 40px 20px;
+    background-color: #fff;
+}
+
+#payment_button {
+    background-color: white;
+    width: 80%;
+    height: 50px;
 }

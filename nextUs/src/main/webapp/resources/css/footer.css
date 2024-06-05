@@ -60,12 +60,13 @@
     text-decoration-line: none;
     text-align: center;
     padding: 20px;
+    color: #FFF;
 }
 .sns_icon {
     filter: invert(43%);
     padding: 14px;
 }
-h2 {
+.footer_h2 {
     width: 100%;
     color: #FFF;
     text-align: center;

@@ -79,6 +79,10 @@
     justify-content: center;
 }
 
+.text_color_white {
+    color: #FFF;
+}
+
 .header_right_object {
     display: flex;
     align-items: center;
