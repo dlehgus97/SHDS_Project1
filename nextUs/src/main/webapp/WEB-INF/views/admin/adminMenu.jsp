@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/adminMenu.css" />
+<link rel="stylesheet" href="../resources/css/admin/adminMenu.css" />
 
 </head>
 
@@ -27,8 +27,8 @@
 			<li><a href="/memberStatus.do">회원관리</a>
 				<ul>
 					<li><a href="/memberStatus.do">회원 현황</a></li>
-					<li><a href="#">회원 제재 관리</a></li>
-					<li><a href="#">쿠폰관리</a></li>
+					<li><a href="/memberBanManagement.do">회원 제재 관리</a></li>
+					<li><a href="/couponManagement">쿠폰관리</a></li>
 				</ul>
 			</li>
 			<li><a href="#">상품관리</a></li>

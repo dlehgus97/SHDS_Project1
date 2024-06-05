@@ -21,7 +21,11 @@ a {
     left: 100%;
     background-color: #F2F0F0;
 }
-
+#banSubmit{
+	width:500px;
+	background-color:red;
+	
+}
 body {
     width: 100%;
     height: 100%;

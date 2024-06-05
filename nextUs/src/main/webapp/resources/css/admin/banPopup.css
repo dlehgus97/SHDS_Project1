@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.ban_upper{
+	height:350px;
+}
+.ban_lower{
+	display: flex;
+}
+.instruction{
+	width:50%;
+	background-color:F2F0F0;
+}
+#context{
+	width:97%;
+	height:6.25em;
+	resize:none;
+	font-size:22px;
+}
+
+#datepicker{
+	width:350px;
+	font-size:30px;
+}
+#banSubmit{
+	width:500px;
+	background-color:#33CC33;
+	border-style: outset;
+	border-color: #33CC33;
+	text-shadow: none;
+	color:white;
+	font-size:30px;
+	
+}
