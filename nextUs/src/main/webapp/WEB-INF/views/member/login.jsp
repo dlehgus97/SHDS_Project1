@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/contents.css"/>
-    <script src="/js/script.js"></script>
+    
     <script>
     function loginCheck() {
     	if ($("#email").val() == '') {
@@ -31,7 +31,7 @@
 </head> 
 <body>
     <div class="wrap">
-        <!-- 헤더 위치 -->
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <form action="login.do" method="post" id="board1" name="board1" onsubmit="return loginCheck();"><!-- header에서 id="board"이미 사용중이라서 board2로 함 -->
             <div class="sub">
                 <div class="size">
@@ -49,7 +49,7 @@
                             </fieldset>
                             <div class="btnSet clear">
                                 <div>
-                                    <a href="join.do" class="btn">회원가입</a> 
+                                    <a href="regist.do" class="btn">회원가입</a> 
                                     <a href="idsearch.do" class="btn">이메일/비밀번호 찾기</a>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </form>
-		<!-- 푸터 위치 -->
+		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body> 
 </html>

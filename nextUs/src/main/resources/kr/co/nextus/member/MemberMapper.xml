@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nextus.member.MemberMapper">
+	<insert id="regist" parameterType="kr.co.nextus.member.MemberVO">
+		INSERT INTO MEMBER (
+			no, email, pwd, name,
+			nickname, gender, birthday, hp, zipcode,
+			addr1, addr2, regdate, state, seller,
+			profile_org, profile_real)
+		VALUES (
+			#{no}, #{email}, #{pwd}, #{name},
+			#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
+			#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
+			#{profile_org}, #{profile_real});
+		<selectKey order="AFTER" keyProperty="no" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<select id="emailCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE email=#{email}
+	</select>
 	
 	<select id="login" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
-		SELECT * FROM MEMBER WHERE email=#{email} AND pwd=#{pwd}
+		SELECT * FROM MEMBER WHERE email=#{email} AND pwd=MD5(#{pwd})
 	</select>
+	
+	<select id="detail" resultType="kr.co.nextus.member.MemberVO" parameterType="int">
+		SELECT * FROM MEMBER WHERE no=#{no}
+	</select>
+	
+	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
+		UPDATE MEMBER SET
+			<if test="pwd != ''">
+			pwd = MD5(#{pwd}),
+			</if>
+			name = #{name},
+			gender = #{gender},
+			birthday = #{birthday},
+			hp = #{hp},
+			zipcode = #{zipcode},
+			addr1 = #{addr1},
+			addr2 = #{addr2}	
+		WHERE no = #{no}
+	</update>
+	
 	
 </mapper>

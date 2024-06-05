@@ -22,6 +22,5 @@ public class MemberVO {
 	private int state;
 	private int seller;
 	private String profile_org;
-	private String profile_real;
-	
+	private String profile_real;	
 }

@@ -48,17 +48,23 @@ public class MemberController {
 		return service.emailCheck(email);
 	}
 	
+	@GetMapping("/member/regist.do")
+	public String regist() {
+		// 회원가입 폼 페이지로 이동
+		return "member/join";
+	}
+	
 	@PostMapping("/member/insert.do")
-	public String insert(MemberVO vo, Model model) {
+	public String regist(MemberVO vo, Model model) {
 		if (service.regist(vo)) {
-			
 			model.addAttribute("msg", "정상적으로 가입되었습니다.");
 			model.addAttribute("url", "/index.do");
+			return "common/alert";
 		} else {
 			model.addAttribute("msg", "가입 오류");
-			model.addAttribute("url", "regist.do");
+			model.addAttribute("url", "/member/regist.do");
+			return "common/alert";
 		}
-		return "common/alert";
 	}
 	
 	@GetMapping("/member/edit.do")
