@@ -93,28 +93,29 @@
         <!-- 헤더 위치 -->
         <div class="sub">
             <div class="size">
-                <h3 class="sub_title">답변 게시판</h3>
+                <h3 class="sub_title">이벤트</h3>
                 <div class="bbs">
                     <div class="view">
                         <div class="title">
                             <dl>
                                 <dt>${vo.title }</dt>
-                                <dd class="date">작성일 : <fmt:formatDate value="${vo.regdate }" pattern="YYYY-MM-dd HH:mm:ss"/> </dd>
+                                <dd class="date">시작일 : <fmt:formatDate value="${vo.start }" pattern="YYYY-MM-dd"/> </dd><br>
+                                <dd class="date">종료일 : <fmt:formatDate value="${vo.end }" pattern="YYYY-MM-dd"/> </dd>
                             </dl>
                         </div>
                         <div class="cont">${vo.content }</div>
-                        <c:if test="${!empty vo.filename_org}">
+                        <c:if test="${!empty vo.thumbnail_org}">
                         <dl class="file">
                             <dt>첨부파일 </dt>
                             <dd>
-                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/board&filename_org=${URLEncoder.encode(vo.filename_org)}&filename_real=${vo.filename_real}" target="_blank">${vo.filename_org}</a></dd>
+                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/board&filename_org=${URLEncoder.encode(vo.thumbnail_org)}&filename_real=${vo.thumbnail_real}" target="_blank">${vo.thumbnail_org}</a></dd>
                         </dl>
                 		</c:if>                    
                         <div class="btnSet clear">
                             <div class="fl_l">
                             	<a href="index.do" class="btn">목록</a>
                             	<a href="reply.do?no=${vo.no}" class="btn">답변</a>
-                            	<c:if test="${!empty login and login.no == vo.writer}">
+                            	<c:if test="${!empty login and login.name == 'admin'}">
                             	<a href="edit.do?no=${vo.no}" class="btn">수정</a>
                             	<a href="javascript:del();" class="btn">삭제</a>
                             	</c:if>

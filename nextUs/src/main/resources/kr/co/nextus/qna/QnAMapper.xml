@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.qna.QnAMapper">
+	
+	<insert id="insert" parameterType="kr.co.nextus.qna.QnAVO">
+		INSERT INTO QnA (
+			writer, title, text, write_date, category
+		) VALUES (
+			#{writer}, #{title}, #{text}, NOW(), #{category} 
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="kr.co.nextus.qna.QnAVO">
+		UPDATE QnA SET 
+			title=#{title}, text=#{text}
+		WHERE no=#{no}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM QnA WHERE no=#{no}
+	</delete>
+	
+	<sql id="searchSql">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					title LIKE '%${searchWord}%' OR text LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 목록 -->
+	<select id="list" parameterType="kr.co.nextus.qna.QnAVO" resultType="kr.co.nextus.qna.QnAVO">
+		SELECT *,
+			(SELECT name FROM MEMBER WHERE no=QnA.writer) as writer_name,
+			(SELECT COUNT(*) from COMMENT WHERE no=QnA.no) as comment_count
+		FROM QnA
+		<include refid="searchSql"/>
+		ORDER BY no DESC
+		LIMIT #{startIdx}, 10
+		
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.qna.QnAVO" resultType="int">
+		SELECT COUNT(*) FROM QnA
+		<include refid="searchSql"/>
+	</select>
+	
+	<!-- 상세 -->
+	<select id="detail" parameterType="kr.co.nextus.qna.QnAVO" resultType="kr.co.nextus.qna.QnAVO">
+		SELECT * FROM QnA WHERE no=#{no}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseReadcnt" parameterType="int">
+		UPDATE QnA SET readcnt=readcnt+1 WHERE no=#{no}
+	</update>
+	
+</mapper>

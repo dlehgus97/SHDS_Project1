@@ -24,10 +24,10 @@
         <!-- 헤더 위치 -->
         <div class="sub">
             <div class="size">
-                <h3 class="sub_title">답변게시판</h3>
+                <h3 class="sub_title">고객센터(QnA)</h3>
                 <div class="bbs">
                     <table class="list">
-                    <p><span><strong>총 ${map.count }개</strong>  |  ${replyVO.page }/${map.totalPage }페이지</span></p>
+                    <p><span><strong>총 ${map.count }개</strong>  |  ${QnAVO.page }/${map.totalPage }페이지</span></p>
                         <caption>게시판 목록</caption>
                         <colgroup>
                             <col width="80px" />
@@ -55,19 +55,14 @@
                             <tr>
                                 <td>${vo.no }</td>
                                 <td style="text-align:left;">
-                                	<c:forEach begin="1" end="${vo.nested }">
-                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                	</c:forEach>
-                                	<c:if test="${vo.nested > 0 }">
-                                		<img src="/img/ico_re.png">
-                                	</c:if>
+                                	
                                     <a href="view.do?no=${vo.no}">${vo.title } [${vo.comment_count}]</a>
                                 </td>
                                 <td class="writer">
                                     ${vo.writer_name }
                                 </td>
                                 <td>${vo.readcnt }</td>
-                                <td class="date"><fmt:formatDate value="${vo.regdate }" pattern="YYYY-MM-dd"/></td>
+                                <td class="date"><fmt:formatDate value="${vo.write_date }" pattern="YYYY-MM-dd"/></td>
                             </tr>
                        </c:forEach>
                         </tbody>
@@ -77,21 +72,21 @@
                         <a class="btn" href="write.do">글작성 </a>
                     </c:if>
                     </div>
-                    <div class="pagenate clear">
+                    <div class="pagenate">
                         <ul class='paging'>
                         <c:if test="${map.prev }">
-                        	<li><a href="index.do?page=${map.startPage-1 }&searchType=${replyVO.searchType}&searchWord=${replyVO.searchWord}"> << </a></li>
+                        	<li><a href="index.do?page=${map.startPage-1 }&searchType=${QnAVO.searchType}&searchWord=${QnAVO.searchWord}"> << </a></li>
                         </c:if>
                         <c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
-                        	<c:if test="${p == replyVO.page}">
+                        	<c:if test="${p == QnAVO.page}">
                             <li><a href='#;' class='current'>${p}</a></li>
                             </c:if>
-                            <c:if test="${p != replyVO.page}">
-                            <li><a href='index.do?page=${p}&searchType=${replyVO.searchType}&searchWord=${replyVO.searchWord}'>${p}</a></li>
+                            <c:if test="${p != QnAVO.page}">
+                            <li><a href='index.do?page=${p}&searchType=${QnAVO.searchType}&searchWord=${QnAVO.searchWord}'>${p}</a></li>
                             </c:if>
                         </c:forEach>
                         <c:if test="${map.next }">
-                        	<li><a href="index.do?page=${map.endPage+1 }&searchType=${replyVO.searchType}&searchWord=${replyVO.searchWord}"> >> </a></li>
+                        	<li><a href="index.do?page=${map.endPage+1 }&searchType=${QnAVO.searchType}&searchWord=${QnAVO.searchWord}"> >> </a></li>
                         </c:if>
                         </ul> 
                     </div>
@@ -102,12 +97,12 @@
                             <span class="srchSelect">
                                 <select id="stype" name="searchType" class="dSelect" title="검색분류 선택">
                                     <option value="all">전체</option>
-                                    <option value="title" <c:if test="${replyVO.searchType == 'title'}">selected</c:if>>제목</option>
-                                    <option value="content" <c:if test="${replyVO.searchType == 'content'}">selected</c:if>>내용</option>
+                                    <option value="title" <c:if test="${QnAVO.searchType == 'title'}">selected</c:if>>제목</option>
+                                    <option value="text" <c:if test="${QnAVO.searchType == 'text'}">selected</c:if>>내용</option>
                                 </select>
                             </span>
                             <span class="searchWord">
-                                <input type="text" id="sval" name="searchWord" value="${replyVO.searchWord}"  title="검색어 입력">
+                                <input type="text" id="sval" name="searchWord" value="${QnAVO.searchWord}"  title="검색어 입력">
                                 <input type="button" id="" value="검색" title="검색">
                             </span>
                         </form>

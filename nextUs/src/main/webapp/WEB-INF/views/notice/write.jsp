@@ -47,7 +47,7 @@
         <!-- 헤더 위치 -->
         <div class="sub">
             <div class="size">
-                <h3 class="sub_title">답변 게시판</h3>
+                <h3 class="sub_title">공지사항</h3>
     
                 <div class="bbs">
                 <form method="post" name="frm" id="frm" action="insert.do" enctype="multipart/form-data" >
@@ -63,12 +63,6 @@
                             <th>내용</th>
                             <td>
                                 <textarea name="content" id="content" style="width:100%;"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>첨부파일</th>
-                            <td>
-                                <input type="file" name="file" id="file" class="wid100"/>
                             </td>
                         </tr>
                         </tbody>
