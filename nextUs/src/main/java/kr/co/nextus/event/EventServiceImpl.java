@@ -1,4 +1,4 @@
-package kr.co.nextus.reply;
+package kr.co.nextus.event;
 
 import java.io.File;
 import java.util.HashMap;
@@ -12,37 +12,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class ReplyServiceImpl implements ReplyService {
+public class EventServiceImpl implements EventService {
 	
 	@Autowired
-	private ReplyMapper mapper;
+	private EventMapper mapper;
 	
 	@Override
-	public int insert(ReplyVO vo, MultipartFile file, HttpServletRequest request) {
+	public int insert(EventVO vo, MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
 			// 파일명
 			String org = file.getOriginalFilename();
 			String ext = org.substring(org.lastIndexOf("."));
 			String real = System.currentTimeMillis()+ext;
 			// 파일저장
-			String path = request.getRealPath("/upload/board/")+real;
+			String path = request.getRealPath("/upload/event/")+real;
 			try {
 				file.transferTo(new File(path));
 			} catch (Exception e) {}
-			vo.setFilename_org(org);
-			vo.setFilename_real(real);
+			vo.setThumbnail_org(org);
+			vo.setThumbnail_real(real);
 		}
 		int r = mapper.insert(vo);
-		if (r > 0) mapper.updateGno(vo.getNo());
 		return r;
 	}
 	
 	@Override
-	public int update(ReplyVO vo, MultipartFile file, HttpServletRequest request) {
+	public int update(EventVO vo, MultipartFile file, HttpServletRequest request) {
 		if ("ok".equals(request.getParameter("fileDelete"))) {
-			ReplyVO data = mapper.detail(vo);
+			EventVO data = mapper.detail(vo);
 			mapper.fileDelete(vo.getNo());
-			File f = new File(request.getRealPath("/upload/board/")+data.getFilename_real());
+			File f = new File(request.getRealPath("/upload/event/")+data.getThumbnail_real());
 			f.delete();
 		}
 		if (!file.isEmpty()) {
@@ -51,56 +50,34 @@ public class ReplyServiceImpl implements ReplyService {
 			String ext = org.substring(org.lastIndexOf("."));
 			String real = System.currentTimeMillis()+ext;
 			// 파일저장
-			String path = request.getRealPath("/upload/board/")+real;
+			String path = request.getRealPath("/upload/event/")+real;
 			try {
 				file.transferTo(new File(path));
 			} catch (Exception e) {}
-			vo.setFilename_org(org);
-			vo.setFilename_real(real);
+			vo.setThumbnail_org(org);
+			vo.setThumbnail_real(real);
 		}
 		int r = mapper.update(vo);
 		return r;
 	}
 
 	@Override
-	public int delete(ReplyVO vo, HttpServletRequest request) {
-		ReplyVO data = mapper.detail(vo);
-		if (data.getFilename_real() != null && !"".equals(data.getFilename_real())) {
-			File f = new File(request.getRealPath("/upload/board/")+data.getFilename_real());
+	public int delete(EventVO vo, HttpServletRequest request) {
+		EventVO data = mapper.detail(vo);
+		if (data.getThumbnail_real() != null && !"".equals(data.getThumbnail_real())) {
+			File f = new File(request.getRealPath("/upload/event/")+data.getThumbnail_real());
 			f.delete();
 		}
 		return mapper.delete(vo.getNo());
 	}
-	
-	@Override
-	public int reply(ReplyVO vo, MultipartFile file, HttpServletRequest request) {
-		if (!file.isEmpty()) {
-			// 파일명
-			String org = file.getOriginalFilename();
-			String ext = org.substring(org.lastIndexOf("."));
-			String real = System.currentTimeMillis()+ext;
-			// 파일저장
-			String path = request.getRealPath("/upload/board/")+real;
-			try {
-				file.transferTo(new File(path));
-			} catch (Exception e) {}
-			vo.setFilename_org(org);
-			vo.setFilename_real(real);
-		}
-		mapper.updateOno(vo);
-		vo.setOno(vo.getOno()+1);
-		vo.setNested(vo.getNested()+1);
-		int r = mapper.insert(vo);
-		return r;
-	}
 
 	@Override
-	public Map<String, Object> list(ReplyVO param) {
+	public Map<String, Object> list(EventVO param) {
 		int count = mapper.count(param); // 총개수
         // 총페이지수
         int totalPage = count / 10;
         if (count % 10 > 0) totalPage++;
-        List<ReplyVO> list = mapper.list(param); // 목록
+        List<EventVO> list = mapper.list(param); // 목록
         
         Map<String, Object> map = new HashMap<>();
         map.put("count", count);
@@ -121,11 +98,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public ReplyVO detail(ReplyVO vo, boolean isUpdate) {
-		if (isUpdate) {
-			mapper.increaseReadcnt(vo.getNo());
-		}
-		ReplyVO data = mapper.detail(vo);
+	public EventVO detail(EventVO vo, boolean isUpdate) {
+		EventVO data = mapper.detail(vo);
 		return data;
 	}
 

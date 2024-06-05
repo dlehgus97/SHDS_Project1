@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.event.EventMapper">
+	
+	<insert id="insert" parameterType="kr.co.nextus.event.EventVO">
+		INSERT INTO EVENT (
+			title, content, start, end, thumbnail_org, thumbnail_real
+		) VALUES (
+			#{title}, #{content}, #{start}, #{end}, #{thumbnail_org}, #{thumbnail_real}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="kr.co.nextus.event.EventVO">
+		UPDATE EVENT SET 
+			title=#{title}
+			, content=#{content}
+			<if test="thumbnail_org != null">
+			, thumbnail_org=#{thumbnail_org}
+			, thumbnail_real=#{thumbnail_real}
+			</if> 
+		WHERE no=#{no}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM EVENT WHERE no=#{no}
+	</delete>
+	
+	<sql id="searchSql">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					title LIKE '%${searchWord}%' OR content LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 목록 -->
+	<select id="list" parameterType="kr.co.nextus.event.EventVO" resultType="kr.co.nextus.event.EventVO">
+		SELECT * FROM EVENT
+		<include refid="searchSql"/>
+		ORDER BY no DESC
+		LIMIT #{startIdx}, 10
+		
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.event.EventVO" resultType="int">
+		SELECT COUNT(*) FROM EVENT
+		<include refid="searchSql"/>
+	</select>
+	
+	<!-- 상세 -->
+	<select id="detail" parameterType="kr.co.nextus.event.EventVO" resultType="kr.co.nextus.event.EventVO">
+		SELECT * FROM EVENT WHERE no=#{no}
+	</select>
+	
+	<!-- 파일 삭제 -->
+	<update id="fileDelete" parameterType="int">
+		UPDATE EVENT SET thumbnail_org=null, thumbnail_real=null WHERE no=#{no}
+	</update>
+	
+</mapper>

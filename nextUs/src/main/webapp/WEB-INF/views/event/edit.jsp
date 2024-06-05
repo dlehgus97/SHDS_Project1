@@ -47,7 +47,7 @@
         <!-- 헤더 위치 -->
         <div class="sub">
             <div class="size">
-                <h3 class="sub_title">답변 게시판</h3>
+                <h3 class="sub_title">이벤트 수정</h3>
     
                 <div class="bbs">
                 <form method="post" name="frm" id="frm" action="update.do" enctype="multipart/form-data" >
@@ -69,7 +69,7 @@
                         <tr>
                             <th>첨부파일</th>
                             <td>
-                            	<c:if test="${!empty vo.filename_org}">
+                            	<c:if test="${!empty vo.thumbnail_org}">
                             	<input type="checkbox" name="fileDelete" value="ok"> 기존파일삭제
                             	</c:if>
                                 <input type="file" name="file" id="file" class="wid100"/>

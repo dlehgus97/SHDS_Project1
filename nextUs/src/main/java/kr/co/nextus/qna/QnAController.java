@@ -1,4 +1,4 @@
-package kr.co.nextus.reply;
+package kr.co.nextus.qna;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,28 +13,28 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.nextus.member.MemberVO;
 
 @Controller
-public class ReplyController {
+public class QnAController {
 
 	@Autowired
-	private ReplyService service;
+	private QnAService service;
 	
-	@GetMapping("/reply/index.do")
-	public String index(Model model, ReplyVO vo) {
+	@GetMapping("/qna/index.do")
+	public String index(Model model, QnAVO vo) {
 		model.addAttribute("map", service.list(vo));
-		return "reply/index";
+		return "qna/index";
 	}
 	
-	@GetMapping("/reply/write.do")
+	@GetMapping("/qna/write.do")
 	public String write() {
-		return "reply/write";
+		return "qna/write";
 	}
 	
-	@PostMapping("/reply/insert.do")
-	public String insert(Model model, HttpServletRequest request, ReplyVO vo, MultipartFile file) {
+	@PostMapping("/qna/insert.do")
+	public String insert(Model model, HttpServletRequest request, QnAVO vo) {
 		HttpSession sess = request.getSession();
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		vo.setWriter(login.getNo());
-		int r = service.insert(vo, file, request);
+		int r = service.insert(vo, request);
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
@@ -46,19 +46,19 @@ public class ReplyController {
 		return "common/alert";
 	}
 	
-	@GetMapping("/reply/view.do")
-	public String view(Model model, ReplyVO vo) {
+	@GetMapping("/qna/view.do")
+	public String view(Model model, QnAVO vo) {
 		model.addAttribute("vo", service.detail(vo, true));
-		return "reply/view";
+		return "qna/view";
 	}
-	@GetMapping("/reply/edit.do")
-	public String edit(Model model, ReplyVO vo) {
+	@GetMapping("/qna/edit.do")
+	public String edit(Model model, QnAVO vo) {
 		model.addAttribute("vo", service.detail(vo, false));
-		return "reply/edit";
+		return "qna/edit";
 	}
-	@PostMapping("/reply/update.do")
-	public String update(Model model, HttpServletRequest request, ReplyVO vo, MultipartFile file) {
-		int r = service.update(vo, file, request);
+	@PostMapping("/qna/update.do")
+	public String update(Model model, HttpServletRequest request, QnAVO vo, MultipartFile file) {
+		int r = service.update(vo, request);
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 수정되었습니다.");
@@ -69,17 +69,17 @@ public class ReplyController {
 		}
 		return "common/alert";
 	}
-	@GetMapping("/reply/reply.do")
-	public String reply(Model model, ReplyVO vo) {
+	@GetMapping("/qna/reply.do")
+	public String reply(Model model, QnAVO vo) {
 		model.addAttribute("vo", service.detail(vo, false));
-		return "reply/reply";
+		return "qna/reply";
 	}
-	@PostMapping("/reply/reply.do")
-	public String replyProcess(Model model, HttpServletRequest request, ReplyVO vo, MultipartFile file) {
+	@PostMapping("/qna/reply.do")
+	public String replyProcess(Model model, HttpServletRequest request, QnAVO vo) {
 		HttpSession sess = request.getSession();
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		vo.setWriter(login.getNo());
-		int r = service.reply(vo, file, request);
+		int r = service.reply(vo, request);
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 등록되었습니다.");
@@ -90,8 +90,8 @@ public class ReplyController {
 		}
 		return "common/alert";
 	}
-	@GetMapping("/reply/delete.do")
-	public String delete(Model model, HttpServletRequest request, ReplyVO vo, MultipartFile file) {
+	@GetMapping("/qna/delete.do")
+	public String delete(Model model, HttpServletRequest request, QnAVO vo) {
 		int r = service.delete(vo, request);
 		if (r > 0) {
 			model.addAttribute("cmd", "move");

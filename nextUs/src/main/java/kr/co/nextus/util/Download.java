@@ -1,4 +1,4 @@
-package util;
+package kr.co.nextus.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,16 +19,16 @@ public class Download {
 	public void download(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html;charset=utf-8");
 		String file_repo = request.getRealPath(request.getParameter("uploadPath"));
-		String filename_org = request.getParameter("filename_org");
-		String filename_real = request.getParameter("filename_real");
+		String thumbnail_org = request.getParameter("thumbnail_org");
+		String thumbnail_real = request.getParameter("thumbnail_real");
 		// 한글처리
-		filename_org = new String(filename_org.getBytes("UTF-8"),"ISO-8859-1");
+		thumbnail_org = new String(thumbnail_org.getBytes("UTF-8"),"ISO-8859-1");
 		OutputStream out = response.getOutputStream();
-		String downFile = file_repo+"/"+filename_real; 
+		String downFile = file_repo+"/"+thumbnail_real; 
 		File f = new File(downFile);
 		
 		response.setHeader("Cache-Control", "no-cache");
-		response.setHeader("Content-disposition", "attachment; fileName="+filename_org);
+		response.setHeader("Content-disposition", "attachment; fileName="+thumbnail_org);
 		
 		FileInputStream in = new FileInputStream(f);
 		byte[] buffer = new byte[1024*8];

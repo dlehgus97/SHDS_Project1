@@ -1,4 +1,4 @@
-package util;
+package kr.co.nextus.util;
 
 import java.io.File;
 import java.util.Date;
