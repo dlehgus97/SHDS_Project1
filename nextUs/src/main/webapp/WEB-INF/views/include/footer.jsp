@@ -9,25 +9,25 @@
 <body>
 <!-- FOOTER -->
 <div id="footer_container">
-    <div id="left_container">
-	    <div id="logo_container">
-            <h2>NEXTUS</h2>
-	        <img id="logo_icon" src="../resources/imgs/nexus2.png">
+    <div id="footer_left_container">
+	    <div id="footer_logo_container">
+            <h2 class="footer_h2">NEXTUS</h2>
+	        <img id="footer_logo_icon" src="../resources/imgs/nexus2.png">
 	    </div>
-        <h2>CONTACT US</h2>
+        <h2 class="footer_h2">CONTACT US</h2>
         <div id="sns_container">
         	<img class="sns_icon" src="../resources/imgs/icons/facebook.svg" alt="facebook" />
             <img class="sns_icon" src="../resources/imgs/icons/youtube.svg" alt="youtube" />
             <img class="sns_icon" src="../resources/imgs/icons/github.svg" alt="github" />
         </div>
     </div>
-    <div id="center_container">
+    <div id="footer_center_container">
         <div id="company_info">
             <p>Company address : 서울 마포구 월드컵북로4길 77</p>
             <p>대표  최동규 / hp  010-9898-4334 / 좋아하는 것  천국이네 / 키  8.4cm</p>
         </div>
     </div>
-    <div id="right_container">
+    <div id="footer_right_container">
         <div id="footer_table">
             <a>Support</a>
             <a>About Us</a>

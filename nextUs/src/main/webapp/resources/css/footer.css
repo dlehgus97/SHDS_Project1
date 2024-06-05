@@ -2,24 +2,24 @@
 #footer_container {
     display: flex;
 	background-color: black;
-    height: 400px;
+    height: 350px;
 }
-#left_container {
+#footer_left_container {
     width: 20%;
     min-width: 400px;
 }
-#logo_container {
+#footer_logo_container {
 	display: flex;
     justify-content: center; /* 수평 중앙 정렬 */
     align-items: center; /* 수직 중앙 정렬 */
 }
-#logo_container > h2 {
+#footer_logo_container > h2 {
     width: 100px;
     padding-top: 60px;
     padding-right: 0px;
     margin-right: 0px;
 }
-#logo_icon {
+#footer_logo_icon {
 	display: flex;
     justify-content: center; /* 수평 중앙 정렬 */
     align-items: center; /* 수직 중앙 정렬 */
@@ -33,7 +33,7 @@
     justify-content: center; /* 수평 중앙 정렬 */
 }
 
-#center_container {
+#footer_center_container {
     position: relative;
     width: 40%;
 }
@@ -46,7 +46,7 @@
     font-size: 14px;
 }
 
-#right_container {
+#footer_right_container {
     position: relative;
     width: 40%;
 }

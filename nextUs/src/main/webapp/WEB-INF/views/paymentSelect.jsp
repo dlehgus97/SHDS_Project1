@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../resources/css/paymentSelect.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/footer.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/header.css">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div id="payment_container">
 		<div id="left">
             <a href="" class="paymentSelections" id="toss">
