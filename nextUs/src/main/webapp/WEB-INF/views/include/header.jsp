@@ -13,6 +13,7 @@
     <div id="header_left_container">
 	    <div id="header_menu_container">
             <img id="header_menu_button" src="../resources/imgs/icons/grid.svg" alt="menu">
+            <a id="header_event" href="/event/index.do">이벤트</a>
 	    </div>
     </div>
     <div id="header_logo_container">

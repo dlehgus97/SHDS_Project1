@@ -32,10 +32,10 @@
             <a>Support</a>
             <a>About Us</a>
             <a>Spring</a>
-            <a href="">공지사항</a>
+            <a href="/notice/index.do">공지사항</a>
             <a href="">회사소개</a>
             <a href="">Project</a>
-            <a href="">고객센터</a>
+            <a href="/qna/index.do">고객센터</a>
             <a href="">연혁</a>
             <a href="">Very</a>
             <a href="">자주하는 질문</a>

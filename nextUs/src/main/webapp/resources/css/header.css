@@ -9,9 +9,16 @@
 #header_left_container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 5%;
+    width: 20%;
     min-width: 50px;
+}
+#header_menu_container {
+	display: flex;
+	align-items: center;
+}
+#header_event {
+	color: #FFF;
+	text-decoration-line: none;
 }
 #header_logo_container {
 	position: absolute;
