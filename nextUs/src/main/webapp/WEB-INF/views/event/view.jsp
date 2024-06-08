@@ -13,10 +13,11 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/contents.css"/>
-    <script src="/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+	<link rel="stylesheet" href="/resources/css/reset.css"/>
+	<link rel="stylesheet" href="/resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/css/contents.css"/>
     <script>
     function del() {
     	if (confirm('삭제하시겠습니까?')) {
@@ -90,7 +91,7 @@
 </head> 
 <body>
     <div class="wrap">
-        <!-- 헤더 위치 -->
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <div class="sub">
             <div class="size">
                 <h3 class="sub_title">이벤트</h3>
@@ -108,13 +109,12 @@
                         <dl class="file">
                             <dt>첨부파일 </dt>
                             <dd>
-                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/board&filename_org=${URLEncoder.encode(vo.thumbnail_org)}&filename_real=${vo.thumbnail_real}" target="_blank">${vo.thumbnail_org}</a></dd>
+                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/board&thumbnail_org=${URLEncoder.encode(vo.thumbnail_org)}&thumbnail_real=${vo.thumbnail_real}" target="_blank">${vo.thumbnail_org}</a></dd>
                         </dl>
                 		</c:if>                    
                         <div class="btnSet clear">
                             <div class="fl_l">
                             	<a href="index.do" class="btn">목록</a>
-                            	<a href="reply.do?no=${vo.no}" class="btn">답변</a>
                             	<c:if test="${!empty login and login.name == 'admin'}">
                             	<a href="edit.do?no=${vo.no}" class="btn">수정</a>
                             	<a href="javascript:del();" class="btn">삭제</a>
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </div>
-		<!-- 푸터 위치 -->
+		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body> 
 </html>

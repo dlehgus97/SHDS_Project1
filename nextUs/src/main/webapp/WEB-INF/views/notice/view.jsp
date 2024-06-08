@@ -13,10 +13,11 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/contents.css"/>
-    <script src="/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+	<link rel="stylesheet" href="/resources/css/reset.css"/>
+	<link rel="stylesheet" href="/resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/css/contents.css"/>
     <script>
     function del() {
     	if (confirm('삭제하시겠습니까?')) {
@@ -90,7 +91,7 @@
 </head> 
 <body>
     <div class="wrap">
-        <!-- 헤더 위치 -->
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <div class="sub">
             <div class="size">
                 <h3 class="sub_title">공지사항</h3>
@@ -116,7 +117,7 @@
                 </div>
             </div>
         </div>
-		<!-- 푸터 위치 -->
+		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body> 
 </html>

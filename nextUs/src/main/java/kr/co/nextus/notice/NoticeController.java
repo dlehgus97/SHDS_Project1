@@ -68,11 +68,6 @@ public class NoticeController {
 		}
 		return "common/alert";
 	}
-	@GetMapping("/notice/reply.do")
-	public String reply(Model model, NoticeVO vo) {
-		model.addAttribute("vo", service.detail(vo, false));
-		return "notice/reply";
-	}
 
 	@GetMapping("/notice/delete.do")
 	public String delete(Model model, HttpServletRequest request, NoticeVO vo) {
