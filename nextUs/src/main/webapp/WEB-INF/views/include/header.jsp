@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,23 +10,30 @@
 <body>
 <!-- HEADER -->
 <div id="header_container">
-    
     <div id="header_left_container">
-	    <div id="header_logo_container">
-	        <img id="header_menu_button" src="../resources/imgs/icons/grid.svg" alt="menu">
+	    <div id="header_menu_container">
+            <img id="header_menu_button" src="../resources/imgs/icons/grid.svg" alt="menu">
 	    </div>
     </div>
-    <img id="header_logo_icon" src="../resources/imgs/nexus2.png" alt="logo">
+    <div id="header_logo_container">
+    	<a href="/index.do">
+	    	<img id="header_logo_icon" src="../resources/imgs/nexus2.png" alt="logo">
+	    </a>
+    </div>
     <div id="header_right_container">
         <div id="header_userinfo_menu">
             <button id="header_regist_seller" class="header_right_object">셀러등록</button>
             <div id="header_chat" class="header_right_object">
                 <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
-                <a href="" id="header_chat_text" class="text_color_white">CHAT</a>
+                <a href="/chat" id="header_chat_text" class="text_color_white">CHAT</a>
             </div>
             <div id="login_status" class="header_right_object">
-                <a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그인</a>
-                <a href="" class="text_color_white" style="display: none; font-size: 18px; text-decoration-line: none;">로그아웃</a>
+            	<c:if test="${empty login }">
+            		<a href="/member/login.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그인</a>
+            	</c:if>
+            	<c:if test="${!empty login }">
+            		<a href="/member/logout.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그아웃</a>
+            	</c:if>
             </div>
         </div>
     </div>

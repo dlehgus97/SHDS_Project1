@@ -13,14 +13,16 @@
     width: 5%;
     min-width: 50px;
 }
-#header_logo_icon {
+#header_logo_container {
 	position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 100px;
     padding: 20px;
     padding-top: 30px;
+}
+#header_logo_icon {
+	width: 120px;
+    height: 100px;
 }
 
 #header_right_container {

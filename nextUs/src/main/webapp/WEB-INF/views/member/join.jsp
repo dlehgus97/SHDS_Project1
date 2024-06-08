@@ -10,10 +10,10 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/contents.css"/>
-    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/resources/css/reset.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css"/>
+    <link rel="stylesheet" href="/resources/css/contents.css"/>
+    <script src="/resources/js/script.js"></script>
     <script>
     	var dupCheck = false;
     	function goSave() {

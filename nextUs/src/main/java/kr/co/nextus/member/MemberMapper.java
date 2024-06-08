@@ -1,5 +1,7 @@
 package kr.co.nextus.member;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -18,4 +20,5 @@ public interface MemberMapper {
 	
 	//관리자
 	int count(MemberVO param);
+	List<MemberVO> list(MemberVO param);
 }

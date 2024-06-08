@@ -56,15 +56,15 @@ public class MemberServiceImpl implements MemberService {
         map.put("list", list);
         
         // 하단에 페이징처리
-        int endPage = (int)(Math.ceil(param.getPage()/10.0)*10);
-        int startPage = endPage - 9;
-        if (endPage > totalPage) endPage = totalPage;
-        boolean isPrev = startPage > 1;
-        boolean isNext = endPage < totalPage;
-        map.put("endPage", endPage);
-        map.put("startPage", startPage);
-        map.put("isPrev", isPrev);
-		map.put("isNext", isNext);
+//        int endPage = (int)(Math.ceil(param.getPage()/10.0)*10);
+//        int startPage = endPage - 9;
+//        if (endPage > totalPage) endPage = totalPage;
+//        boolean isPrev = startPage > 1;
+//        boolean isNext = endPage < totalPage;
+//        map.put("endPage", endPage);
+//        map.put("startPage", startPage);
+//        map.put("isPrev", isPrev);
+//		map.put("isNext", isNext);
 		return map;
 	}
 
