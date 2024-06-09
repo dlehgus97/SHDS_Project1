@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.faq.FAQMapper">
+	
+	<insert id="insert" parameterType="kr.co.nextus.faq.FAQVO">
+		INSERT INTO FAQ (
+			question, answer 
+		) VALUES (
+			#{question}, #{answer}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="kr.co.nextus.faq.FAQVO">
+		UPDATE FAQ SET 
+			question=#{question}, answer=#{answer}
+		WHERE no=#{no}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM FAQ WHERE no=#{no}
+	</delete>
+	
+	<sql id="searchSql">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					question LIKE '%${searchWord}%' OR answer LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 목록 -->
+	<select id="list" parameterType="kr.co.nextus.faq.FAQVO" resultType="kr.co.nextus.faq.FAQVO">
+		SELECT * FROM FAQ
+		<include refid="searchSql"/>
+		ORDER BY no DESC
+		LIMIT #{startIdx}, 10
+		
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.faq.FAQVO" resultType="int">
+		SELECT COUNT(*) FROM FAQ
+		<include refid="searchSql"/>
+	</select>
+	
+	<!-- 상세 -->
+	<select id="detail" parameterType="kr.co.nextus.faq.FAQVO" resultType="kr.co.nextus.faq.FAQVO">
+		SELECT * FROM FAQ WHERE no=#{no}
+	</select>
+	
+</mapper>

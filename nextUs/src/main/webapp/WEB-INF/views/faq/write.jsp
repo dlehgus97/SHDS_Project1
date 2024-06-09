@@ -10,10 +10,11 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/contents.css"/>
-    <script src="/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+	<link rel="stylesheet" href="/resources/css/reset.css"/>
+	<link rel="stylesheet" href="/resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/css/contents.css"/>
     <script src="/smarteditor/js/HuskyEZCreator.js"></script>
     <script>
     var oEditors = [];
@@ -44,34 +45,25 @@
 </head> 
 <body>
     <div class="wrap">
-        <!-- 헤더 위치 -->
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <div class="sub">
             <div class="size">
-                <h3 class="sub_title">답변 게시판</h3>
+                <h3 class="sub_title">자주하는질문 등록하기</h3>
     
                 <div class="bbs">
-                <form method="post" name="frm" id="frm" action="reply.do" enctype="multipart/form-data" >
-                <input type="hidden" name="gno" value="${vo.gno}">
-                <input type="hidden" name="ono" value="${vo.ono}">
-                <input type="hidden" name="nested" value="${vo.nested}">
+                <form method="post" name="frm" id="frm" action="insert.do" enctype="multipart/form-data" >
                     <table class="board_write">
                         <tbody>
                         <tr>
-                            <th>제목</th>
+                            <th>질문</th>
                             <td>
-                                <input type="text" name="title" id="title" class="wid100" value=""/>
+                                <input type="text" name="question" id="title" class="wid100" value=""/>
                             </td>
                         </tr>
                         <tr>
-                            <th>내용</th>
+                            <th>답변</th>
                             <td>
-                                <textarea name="content" id="content" style="width:100%;"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>첨부파일</th>
-                            <td>
-                                <input type="file" name="file" id="file" class="wid100"/>
+                                <textarea name="answer" id="content" style="width:100%;"></textarea>
                             </td>
                         </tr>
                         </tbody>
@@ -83,7 +75,7 @@
                 </div>
             </div>
         </div>
-		<!-- 푸터 위치 -->
+		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body> 
 </html>

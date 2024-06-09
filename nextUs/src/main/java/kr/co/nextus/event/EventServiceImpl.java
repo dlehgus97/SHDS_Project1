@@ -25,7 +25,7 @@ public class EventServiceImpl implements EventService {
 			String ext = org.substring(org.lastIndexOf("."));
 			String real = System.currentTimeMillis()+ext;
 			// 파일저장
-			String path = request.getRealPath("/upload/event/")+real;
+			String path = request.getRealPath("/upload/board/")+real;
 			try {
 				file.transferTo(new File(path));
 			} catch (Exception e) {}
@@ -41,7 +41,7 @@ public class EventServiceImpl implements EventService {
 		if ("ok".equals(request.getParameter("fileDelete"))) {
 			EventVO data = mapper.detail(vo);
 			mapper.fileDelete(vo.getNo());
-			File f = new File(request.getRealPath("/upload/event/")+data.getThumbnail_real());
+			File f = new File(request.getRealPath("/upload/board/")+data.getThumbnail_real());
 			f.delete();
 		}
 		if (!file.isEmpty()) {
@@ -50,7 +50,7 @@ public class EventServiceImpl implements EventService {
 			String ext = org.substring(org.lastIndexOf("."));
 			String real = System.currentTimeMillis()+ext;
 			// 파일저장
-			String path = request.getRealPath("/upload/event/")+real;
+			String path = request.getRealPath("/upload/board/")+real;
 			try {
 				file.transferTo(new File(path));
 			} catch (Exception e) {}
@@ -65,7 +65,7 @@ public class EventServiceImpl implements EventService {
 	public int delete(EventVO vo, HttpServletRequest request) {
 		EventVO data = mapper.detail(vo);
 		if (data.getThumbnail_real() != null && !"".equals(data.getThumbnail_real())) {
-			File f = new File(request.getRealPath("/upload/event/")+data.getThumbnail_real());
+			File f = new File(request.getRealPath("/upload/board/")+data.getThumbnail_real());
 			f.delete();
 		}
 		return mapper.delete(vo.getNo());
