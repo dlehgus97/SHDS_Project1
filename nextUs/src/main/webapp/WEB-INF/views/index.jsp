@@ -10,17 +10,10 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-		<div class="header">
-            <div class="size">
-                <div><a href="/index.do"></a></div>
-                <div class="login">
-                </div>
-            </div>
-        </div>
-        <div class="menu">
-            <ul class="depth1">
-            </ul>
-        </div>
+	<!-- 이벤트 메인 배너 -->
+	<div id="main_banner_container">
+	
+	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

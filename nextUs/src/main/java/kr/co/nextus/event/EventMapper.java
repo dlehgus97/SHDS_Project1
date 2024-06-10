@@ -15,4 +15,5 @@ public interface EventMapper {
 	int update(EventVO vo);
 	int delete(int no);
 	int fileDelete(int no);
+	EventVO mainBanner();
 }

@@ -12,4 +12,5 @@ public interface EventService {
 	int delete(EventVO vo, HttpServletRequest request);
 	Map<String, Object> list(EventVO vo);
 	EventVO detail(EventVO vo, boolean isUpdate);
+	EventVO mainBanner();
 }
