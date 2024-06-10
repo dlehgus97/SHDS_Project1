@@ -9,31 +9,43 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class SocketTextHandler extends TextWebSocketHandler {
 	private final Map<String, WebSocketSession> sessions = new HashMap<>();
-	private int n = 1;
+	private final ObjectMapper objectMapper = new ObjectMapper();
+	
+
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) {
+        // 로그인 ID를 세션에 저장하여 사용자 식별   	
+        String userId = session.getId();
+//    	 String userId = (String) session.getAttributes().get("userId");
+        sessions.put(userId, session);
+        System.out.println("새 클라이언트와 연결되었습니다: " + userId);
+       
+    }
 
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) {
-		sessions.put(n+"", session);
-		n++;
+	 protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        System.out.println(message.getPayload()); // getPayload => 메시지 불러오는 역할
+        String payload = message.getPayload();
+        Map<String, String> messageMap = objectMapper.readValue(payload, Map.class);
+        // 현재 세션의 사용자 ID를 가져옴
+        String currentUserId = session.getId();
+        String userMessage = messageMap.get("message");
 
-		System.out.println("새 클라이언트와 연결되었습니다.");
-		System.out.println(session.getId());
-		System.out.println(n);
+        // 모든 세션을 순회하면서 상대방에게 메시지 전송
+        for (Map.Entry<String, WebSocketSession> entry : sessions.entrySet()) {
+            String userId = entry.getKey();
+            WebSocketSession userSession = entry.getValue();
+
+            // 현재 사용자와 동일한 사용자에게는 메시지를 보내지 않음
+            if (!userId.equals(currentUserId)) {
+                userSession.sendMessage(new TextMessage(objectMapper.writeValueAsString(messageMap)));
+            }
+        }
 	}
-
-	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
-		System.out.println(message.getPayload());// getPayload => 메시지불러오는 역할
-		TextMessage send;
-		if (sessions.containsKey("2")) {
-			WebSocketSession sessionOp = sessions.get("2");
-			sessionOp.sendMessage(message);
-		} else {
-			System.out.println("안들어옴");
-		}
-		System.out.println("나옴");
 		
 		//sessionId + message 합치서 구분자변수
 		//session 구할 수 있다 -> 위에서로 부터
@@ -54,12 +66,6 @@ public class SocketTextHandler extends TextWebSocketHandler {
 		//5-3 내 세션.sendMessage(message);
 		
 
-//		for (WebSocketSession connectedSession : sessions.values()) {
-//            if (connectedSession.isOpen()) {
-//            	connectedSession.sendMessage(message);
-//            }
-//        }
-    }
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
@@ -68,4 +74,3 @@ public class SocketTextHandler extends TextWebSocketHandler {
 		System.out.println("특정 클라이언트와의 연결이 해제되었습니다.");
 	}
 }
-

@@ -1,18 +1,29 @@
 @charset "UTF-8";
-#main_banner_container {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-}
-.banner {
-    position: absolute;
+#main_first_container {
+	display: flex;
+	justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
-    display: none;
+}
+#main_banner_container {
+    position: relative;
+    width: 80%;
+    height: 600px;
+    overflow: hidden;
+}
+.banner-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease;
+}
+.banner {
+    min-width: 100%;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain; /* 비율을 유지하며 컨테이너에 맞춤 */
+    background-size: contain;
 }
 .active {
     display: block;
@@ -26,6 +37,7 @@
     border: none;
     padding: 10px;
     cursor: pointer;
+    z-index: 1;
 }
 .arrow.left {
     left: 10px;
