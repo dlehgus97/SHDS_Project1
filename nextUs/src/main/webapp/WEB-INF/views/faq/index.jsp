@@ -40,7 +40,7 @@
 
 						<!-- Heading -->
 						<h3 class="mb-10 text-center">Frequently Asked Questionss</h3>
-
+						<p><span><strong>총 ${map.count }개</strong>  |  ${FAQVO.page }/${map.totalPage }페이지</span></p>
 						<c:if test="${empty map.list }">
 							<div>등록된 글이 없습니다.</div>
 						</c:if>

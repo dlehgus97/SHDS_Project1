@@ -30,7 +30,7 @@
                 <h3 class="sub_title">고객센터(QnA)</h3>
                 <div class="bbs">
                     <table class="list">
-                    <p><span><strong>총 ${map.count }개</strong>  |  ${QnAVO.page }/${map.totalPage }페이지</span></p>
+                    <p><span><strong>총 ${map.count }개</strong>  |  ${qnAVO.page }/${map.totalPage }페이지</span></p>
                         <caption>게시판 목록</caption>
                         <colgroup>
                             <col width="80px" />
@@ -59,7 +59,7 @@
                                 <td>${vo.no }</td>
                                 <td style="text-align:left;">
                                 	
-                                    <a href="view.do?no=${vo.no}">${vo.title } [${vo.comment_count}]</a>
+                                    <a href="view.do?no=${vo.no}">${vo.title }</a>
                                 </td>
                                 <td class="writer">
                                     ${vo.writer_name }
@@ -106,7 +106,7 @@
                             </span>
                             <span class="searchWord">
                                 <input type="text" id="sval" name="searchWord" value="${QnAVO.searchWord}"  title="검색어 입력">
-                                <input type="button" id="" value="검색" title="검색">
+                                <input type="submit" id="" value="검색" title="검색">
                             </span>
                         </form>
                         

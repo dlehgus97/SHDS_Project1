@@ -34,14 +34,12 @@
 				<div class="bbs">
 					<table class="list">
 						<p>
-							<span><strong>총 ${map.count }개</strong> | ${NoticeVO.page }/${map.totalPage }페이지</span>
+							<span><strong>총 ${map.count }개</strong> | ${noticeVO.page }/${map.totalPage }페이지</span>
 						</p>
 						<caption>게시판 목록</caption>
 						<colgroup>
 							<col width="80px" />
 							<col width="*" />
-							<col width="100px" />
-							<col width="100px" />
 							<col width="100px" />
 						</colgroup>
 						<thead>
@@ -112,7 +110,7 @@
 							</span> 
 							<span class="searchWord"> 
 								<input type="text" id="sval" name="searchWord" value="${NoticeVO.searchWord}" title="검색어 입력">
-								<input type="button" value="검색" title="검색">
+								<input type="submit" id="" value="검색" title="검색">
 							</span>
 						</form>
 
