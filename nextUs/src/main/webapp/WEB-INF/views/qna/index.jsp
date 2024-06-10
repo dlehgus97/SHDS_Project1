@@ -44,7 +44,7 @@
                                 <th>번호</th>
                                 <th>제목</th>
                                 <th>작성자</th>
-                                <th>조회수</th>
+                                <th>카테고리</th>
                                 <th>작성일</th>
                             </tr>
                         </thead>
@@ -64,7 +64,7 @@
                                 <td class="writer">
                                     ${vo.writer_name }
                                 </td>
-                                <td>${vo.readcnt }</td>
+                                <td>${vo.category }</td>
                                 <td class="date"><fmt:formatDate value="${vo.write_date }" pattern="YYYY-MM-dd"/></td>
                             </tr>
                        </c:forEach>
