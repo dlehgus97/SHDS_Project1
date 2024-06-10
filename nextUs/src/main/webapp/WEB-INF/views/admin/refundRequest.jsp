@@ -4,14 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>샐러 등록 관리</title>
+<title>환불관리</title>
 <link rel="stylesheet" href="../resources/css/admin/adminMain.css" />
 <link rel="stylesheet"
 	href="../resources/css/admin/sellerRegistManagement.css" />
 <script src="../resources/js/admin/memberStatus.js"></script>
 <style>
-	#sellerRegistManagement{color:purple;}
-	#sellerRegistManagement_M{color:purple;}
+	#refundRequest{color:purple;}
 </style>
 </head>
 <body>
@@ -22,7 +21,7 @@
 		</div>
 		<div class="right">
 			<div class="bg-wh seller_div">
-				<h1 style="margin-left: 30px;margin-top: 10px;font-size:30px;">샐러 등록 요청</h1>
+				<h1 style="margin-left: 30px;margin-top: 10px;font-size:30px;">환불 요청 목록</h1>
 				<p class="NUM_1">&nbsp;6&nbsp;</p>
 				<!-- 여기 미승인 건수 넣기 -->
 				<p class="NUM_2">미승인 건수</p>
@@ -41,11 +40,12 @@
 				&ensp;&ensp;&ensp;&ensp;
 				<table class="sellerRegist_table">
 					<colgroup>
-						<col width="253px" />
-						<col width="283px" />
-						<col width="253px" />
-						<col width="253px" />
-						<col width="253px" />
+						<col width="200px" />
+						<col width="250px" />
+						<col width="230px" />
+						<col width="250px" />
+						<col width="230px" />
+						<col width="230px" />
 					</colgroup>
 					<thead>
 						<tr>
@@ -54,6 +54,7 @@
 							<th>닉네임</th>
 							<th>요청일자</th>
 							<th>내용</th>
+							<th>상태</th>
 						</tr>
 					</thead>
 					<tbody>

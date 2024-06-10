@@ -10,8 +10,7 @@
 	href="../resources/css/admin/simpleTable.css" />
 <script src="../resources/js/admin/memberBanManagement.js"></script>
 <style>
-	#sellerBanManagement{color:purple;}
-	#sellerRegistManagement_M{color:purple;}
+	#report{color:purple;}
 </style>
 </head>
 <body>
@@ -23,23 +22,24 @@
 		<div class="m_right">
 			<div class="header">
 			
-				<h2>샐러 제재 내역</h2>
-				<button class="button1" onclick="openPopup(); return false;">제재내역 추가</button>
+				<h2>신고접수내역</h2>
 			</div>
 				<div class="bg-wh Ban_div">
 				<table class="member_list">
 						<colgroup>
-							<col width="325px" />
-							<col width="325px" />
-							<col width="325px" />
-							<col width="325px" />
+							<col width="236px" />
+							<col width="306px" />
+							<col width="236px" />
+							<col width="276px" />
+							<col width="246px" />
 						</colgroup>
 						<thead>
 							<tr>
-								<th>번호</th>
-								<th>이메일</th>
-								<th>사유</th>
-								<th>기간</th>
+								<th>신고번호</th>
+								<th>아이디</th>
+								<th>글 유형</th>
+								<th>신고 날짜</th>
+								<th>상세내용</th>
 							</tr>
 						</thead>
 						<tbody>

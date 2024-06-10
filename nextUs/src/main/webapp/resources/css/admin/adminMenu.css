@@ -19,8 +19,10 @@ a {
     position: absolute;
     top: 0;
     left: 100%;
-    background-color: #F2F0F0;
+    background-color: #d3d3d3;
+   
 }
+
 #banSubmit{
 	width:500px;
 	background-color:red;
@@ -32,7 +34,7 @@ body {
 }
 
 .left-side-bar {
-    background-color: #F2F0F0;
+    background-color: #d3d3d3;
     height: 100%;
     width: 220px; /* Adjust this value to match the li width */
     position: fixed;
@@ -46,6 +48,7 @@ body {
     font-weight: bold;
     text-align: center;
     padding: 0;
+     border-radius:5px 5px 5px 5px;
 }
 
 .left-side-bar ul > li > a {

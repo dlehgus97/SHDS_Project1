@@ -10,8 +10,13 @@
 <link rel="stylesheet" href="../resources/css/admin/adminMain.css" />
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <script src="../resources/js/admin/memberStatus.js"></script>
+<style>
+	#memberStatus{color:purple;}
+	#memberStatus_M{color:purple;}
+</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 	<div class="container">
 		<div class="ad-menu">
 			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>

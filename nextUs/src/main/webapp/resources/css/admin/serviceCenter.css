@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+.service_div {
+	width: 1300px;
+	height: 800px;
+	margin-top: 19px;
+}
+
+.service_header{
+	width:1300px;
+	height:12%;
+	border-bottom: 2px solid black; 
+	
+	 
+}
+
+.title_notice{
+	font-size:40px;
+	margin-top:10px;
+	margin-left:550px;
+}
+.title_qna{
+	font-size:40px;
+	margin-top:10px;
+	margin-left:500px;
+}
+.title_faq{
+	font-size:40px;
+	margin-top:10px;
+	margin-left:440px;
+}
+.title_event{
+	font-size:40px;
+	margin-top:10px;
+	margin-left:570px;
+}
+
+
+
+
+
+.button1{
+	margin-top:-20px;
+	margin-left: 1000px;
+	margin-bottom: 40px;
+	width:260px;
+	height:50px;
+	font-size:20px;
+	border-radius: 15px 15px 15px 15px;
+	border-color: black;
+	border-style: groove;
+	font-weight: bold;
+	background-color: #d6e1e9;
+}
+.button1:hover{
+	background-color: #99ccff;
+    transition: 0.5s;
+}

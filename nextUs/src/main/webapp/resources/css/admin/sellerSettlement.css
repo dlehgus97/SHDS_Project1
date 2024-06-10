@@ -11,6 +11,8 @@
 	font-size: 20px;
 	
 }
-thead{
-	border-bottom: 1px solid black;
+thead {
+	font-size:25px;
+	background-color: #d6e1e9;
+	border-bottom: 2px solid black;
 }

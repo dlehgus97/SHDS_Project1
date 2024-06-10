@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+
+.header2{
+	margin-top:20px;
+}
+.Ban_div{
+	
+	height:700px;
+}
+.c1,.c2{
+	width:400px;
+	height:70px;
+	font-size:30px;
+	border-radius: 10px 10px 0px 0px;
+	display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    font-weight: bold;
+}
+.c1:hover,.c2:hover{
+    background-color: #d6e1e9;
+    transition: 0.5s;
+
+}
+.c1{
+	background-color: #bbbbbb;
+}
+
+.c2{
+	margin-left:500px;
+	background-color:white;
+	
+}
+form{
+	font-size:24px;
+}
+input[type=text]{
+	width:500px;
+	height:40px;
+	font-size:24px;
+}
+
+input[type=submit]{
+	margin-left:1030px;
+	margin-top:25px;
+	width:150px;
+	height:50px;
+	font-size:24px;
+}
+
+.target_list{
+	background-color: #F2F0F0;
+	border-radius: 5px 5px 5px 5px;
+	width:1000px;
+	height:420px;
+	margin-left:180px;
+	margin-top:-25px;
+}
+
+/*라디오버튼*/
+input[type='radio'] {
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  appearance: none; 
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc; 
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type='radio']:checked {
+  background-color: #22d3ee; 
+  border: 3px solid white;
+  box-shadow: 0 0 0 1.6px #22d3ee;
+}
+
+input[type=submit]{
+	font-weight: bold;
+	width:150px;
+	height:60px;
+	font-size:20px;
+	border-radius: 15px 15px 15px 15px;
+	border-color: black;
+	border-style: groove;
+}
+input[type=submit]:hover{
+	background-color: #d6e1e9;
+    transition: 0.5s;
+}
+

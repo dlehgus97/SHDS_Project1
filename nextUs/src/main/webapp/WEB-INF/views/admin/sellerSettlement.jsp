@@ -8,16 +8,20 @@
 <link rel="stylesheet" href="../resources/css/admin/adminMain.css" />
 <link rel="stylesheet"
 	href="../resources/css/admin/sellerSettlement.css" />
-
+<style>
+	#sellerSettlement{color:purple;}
+	#sellerSettlement_M{color:purple;}
+</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 	<div class="container">
 		<div class="ad-menu">
 			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		</div>
 		<div class="right">
 			<div class="bg-wh seller_div">
-				<h1 style="margin-left: 30px">판매자 정산 내역</h1><br>
+				<h1 style="margin-left: 30px;margin-top:10px;font-size:30px;">판매자 정산 내역</h1><br>
 				<table class="settlement_table">
 					<colgroup>
 						<col width="210px" />

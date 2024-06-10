@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매출통계</title>
+<title>FaQ</title>
 <link rel="stylesheet" href="../resources/css/admin/adminMain.css" />
+<link rel="stylesheet" href="../resources/css/admin/serviceCenter.css" />
 <style>
-	#saleStatement{color:purple;}
-	#sellerSettlement_M{color:purple;}
+	#serviceCenter{color:purple;}
+	#FaQ{color:purple;}
 </style>
 </head>
 <body>
@@ -18,13 +19,15 @@
 			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		</div>
 		<div class="right">
-			<div class="three_graph">
-				<div class="bg-wh main_graph">
-					<canvas id="line-chart" width="300" height="250"></canvas>
+			<div class="bg-wh service_div">
+				
+				<div class="service_header">
+					<h1 class="title_faq">자주 묻는 질문(FAQ)</h1>
+					<button class="button1" onclick="openPopup(); return false;">질문 등록</button>
 				</div>
-				<div class="bg-wh main_graph"></div>
-				<div class="bg-wh main_graph"></div>
+				
 			</div>
+			
 		</div>
 	</div>
 </body>

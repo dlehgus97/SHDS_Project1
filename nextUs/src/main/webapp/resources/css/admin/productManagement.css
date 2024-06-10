@@ -1,41 +1,23 @@
 @charset "UTF-8";
-.m_right{
-	width: 80%;
-	height: 100%;
-	margin-top: 1px;
-	display:flex;
 
-    flex-direction: column;
-}
-.member_up{
-	display: flex;
+.product_div {
+	width: 1300px;
+	height: 700px;
+	margin-top: 19px;
 }
 
-.member_graph{
-	margin: 20px 10px;
-	width: 600px;
-	height: 250px;
+.product_list {
+	font-size: 30px;
+	border-collapse: collapse;
 }
 
-.member_table{
-	margin: 0px 5px;
-	width: 1220px;
-	height: 500px;
-	
-}
-#searchForm{
-	font-size:30px;
-}
-.member_list{
-	font-size: 20px;
-	 border-collapse: collapse;
-}
-thead{
-background-color: #d6e1e9;
+thead {
+	background-color: #d6e1e9;
 	border-bottom: 2px solid black;
 }
-
-
+form{
+	margin-left:150px;
+}
 input[type=text]{
 	width:400px;
 	height:45px;

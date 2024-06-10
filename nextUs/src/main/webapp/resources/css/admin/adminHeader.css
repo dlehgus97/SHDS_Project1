@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+}
+
+#header_container {
+	display: flex;
+	align-items: center;
+	background-color: white;
+	padding: 10px 20px;
+	border-bottom: 2px solid #000000;
+}
+
+#header_menu_button {
+	width: 50px; /* 적절한 크기로 설정하세요 */
+	height: 50px;
+	margin-right: 20px;
+}
+
+h1 {
+	margin: 0;
+	font-size: 24px;
+	color: #333;
+}

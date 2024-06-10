@@ -2,7 +2,7 @@
 
 .seller_div{
 	width: 1300px;
-	height: 700px;
+	height: 750px;
 	margin-top: 19px;
 }
 
@@ -11,7 +11,7 @@
 	text-decoration-line: underline;
 	color:red;
 	
-	margin-top: -80px;
+	margin-top: -40px;
 	margin-left: 600px;
 	
 }
@@ -19,19 +19,29 @@
 	font-size:18px;
 	color:black;
 	
-	margin-top: -90px;
-	margin-left: 605px;
+	margin-top: -80px;
+	margin-left: 600px;
 	
 }
-
+form{
+	font-size:20px;
+}
 input[type=text]{
 	width:400px;
-	height:40px;
+	height:45px;
+	font-size:20px;
+	box-sizing: border-box;
 }
-
+input[type="text"]:disabled {
+            background-color: #f0f0f0;
+            color: #999;
+            border: 1px solid #ccc;
+            box-shadow: none;
+        }
 input[type=date]{
 	width:150px;
 	height:40px;
+	font-size:20px;
 }
 select{
 	width:150px;
@@ -39,11 +49,23 @@ select{
 	margin-left:130px;
 }
 input[type=submit]{
-	width:100px;
+	font-weight: bold;
+	width:130px;
 	height:49px;
+	font-size:20px;
+	border-radius: 15px 15px 15px 15px;
+	border-color: black;
+	border-style: groove;
+}
+input[type=submit]:hover{
+	background-color: #d6e1e9;
+    transition: 0.5s;
 }
 
 
+select{
+	font-size:20px;
+}
 
 .sellerRegist_table{
 	border-collapse: collapse;
@@ -51,5 +73,6 @@ input[type=submit]{
 	
 }
 thead{
-	border-bottom: 1px solid black;
+	background-color: #d6e1e9;
+	border-bottom: 2px solid black;
 }

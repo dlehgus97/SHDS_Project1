@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+
+.header2{
+	margin-top:20px;
+}
+.c1,.c2{
+	width:400px;
+	height:70px;
+	font-size:30px;
+	border-radius: 10px 10px 0px 0px;
+	display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    font-weight: bold;
+}
+
+.c1{
+	background-color:white;
+}
+
+.c2{
+	margin-left:500px;
+	background-color:#bbbbbb;
+	
+}
+
+.c1:hover,.c2:hover{
+    background-color: #d6e1e9;
+    transition: 0.5s;
+
+}
