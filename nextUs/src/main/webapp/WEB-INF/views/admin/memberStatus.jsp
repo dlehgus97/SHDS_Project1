@@ -25,7 +25,7 @@
 				<div class="bg-wh member_table">
 					<br>
 					<form method="get" name="searchForm" id="searchForm" action="memberStatus.do">
-						회원관리
+						&ensp;회원관리
 						<select name="searchType">
 							<option value="all">전체</option>
 							<option value="no">번호</option>
@@ -37,7 +37,7 @@
 						<input type="submit" value="검색">
 					</form>
 
-
+					<br>
 					<table class="member_list">
 						<colgroup>
 							<col width="200px" />

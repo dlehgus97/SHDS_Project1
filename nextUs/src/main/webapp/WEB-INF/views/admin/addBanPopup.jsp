@@ -6,13 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- calendar쓰려고 -->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-
-
 <title>제재 내역 추가</title>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" href="../resources/css/admin/banPopup.css" />
@@ -32,7 +25,7 @@
 			<input type="text" name="searchWord" />
 			<input type="submit" value="검색">
 		</form>
-
+		<br>
 		<table class="member_list">
 			<colgroup>
 				<col width="200px" />
@@ -68,16 +61,13 @@
 		</table>
 	</div>
 	<div class="ban_lower">
-		<div class="instruction">
-	
-		</div>
 		<div class="doBan">
 		<form method="get" name="banForm" id="banForm" action="banMember.do" style="font-size:30px;">
 			제재 사유<br>
 			<textarea name="context" id="context"></textarea><br>
 			제재 기간
-			<input type="date" name = "date" id="date">
-			<input type="text" name = "memberno" >
+			<input type="date" name = "date" id="date" style="width:345px;height:50px;font-size:20px">
+			<br><br>
 			<input type="submit" id="banSubmit" value="등록하기">
 			
 		</form>

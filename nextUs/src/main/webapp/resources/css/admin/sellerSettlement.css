@@ -1,0 +1,16 @@
+@charset "EUC-KR";
+
+.seller_div{
+	width: 1300px;
+	height: 700px;
+	margin-top: 19px;
+}
+
+.settlement_table{
+	border-collapse: collapse;
+	font-size: 20px;
+	
+}
+thead{
+	border-bottom: 1px solid black;
+}

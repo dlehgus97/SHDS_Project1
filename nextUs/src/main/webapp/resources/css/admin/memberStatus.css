@@ -2,7 +2,7 @@
 .m_right{
 	width: 80%;
 	height: 100%;
-	margin: 15px 0px 15px 0px;
+	margin-top: 1px;
 	display:flex;
 
     flex-direction: column;
@@ -28,6 +28,7 @@
 }
 .member_list{
 	font-size: 20px;
+	 border-collapse: collapse;
 }
 thead{
 

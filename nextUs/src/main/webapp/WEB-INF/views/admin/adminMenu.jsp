@@ -11,23 +11,23 @@
 <body>
 	<div class="left-side-bar">
 		<ul>
-			<li><a href="/adminMain.do">메인화면</a></li>
-			<li><a href="/sellerSettlement.do">정산관리</a>
+			<li><a href="/adminMain">메인화면</a></li>
+			<li><a href="/sellerSettlement">정산관리</a>
 				<ul>
-					<li><a href="/sellerSettlement.do">판매자 정산 내역</a></li>
-					<li><a href="#">매출 통계</a></li>
+					<li><a href="/sellerSettlement">판매자 정산 내역</a></li>
+					<li><a href="/saleStatement">매출 통계</a></li>
 				</ul>
 			</li>
-			<li><a href="#">셀러관리</a>
+			<li><a href="/sellerRegistManagement">셀러관리</a>
 				<ul>
-					<li><a href="#">샐러 등록 관리</a></li>
-					<li><a href="#">샐러 제재 관리</a></li>
+					<li><a href="/sellerRegistManagement">샐러 등록 관리</a></li>
+					<li><a href="/sellerBanManagement">샐러 제재 관리</a></li>
 				</ul>
 			</li>
-			<li><a href="/memberStatus.do">회원관리</a>
+			<li><a href="/memberStatus">회원관리</a>
 				<ul>
-					<li><a href="/memberStatus.do">회원 현황</a></li>
-					<li><a href="/memberBanManagement.do">회원 제재 관리</a></li>
+					<li><a href="/memberStatus">회원 현황</a></li>
+					<li><a href="/memberBanManagement">회원 제재 관리</a></li>
 					<li><a href="/couponManagement">쿠폰관리</a></li>
 				</ul>
 			</li>

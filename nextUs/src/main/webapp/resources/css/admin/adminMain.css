@@ -20,7 +20,7 @@ body {
 .right {
 	width: 80%;
 	height: 100%;
-	margin: 15px 0px 15px 0px;
+	margin-top: -1px;
 	display:flex;
 }
 
