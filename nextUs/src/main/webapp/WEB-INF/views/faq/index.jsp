@@ -59,10 +59,6 @@
 											<div class="mt-5">
 												<p class="mb-0 fs-lg text-gray-500">
 													A. ${vo.answer }
-													<c:if test="${!empty login}">
-														<a href="edit.do?no=${vo.no}" class="btn">수정</a>
-														<a href="delete.do?no=${vo.no}" class="btn">삭제</a>
-													</c:if>
 												</p>
 											</div>
 										</div>
@@ -71,9 +67,6 @@
 							</tr>
 						</c:forEach>
 						<div class="btnSet" style="text-align: right;">
-							<c:if test="${!empty login}">
-								<a class="btn" href="write.do">글작성 </a>
-							</c:if>
 						</div>
 						<div class="pagenate clear">
 							<ul class='paging'>
