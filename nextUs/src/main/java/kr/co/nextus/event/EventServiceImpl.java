@@ -104,8 +104,8 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
-	public EventVO mainBanner() {
-		EventVO data = mapper.mainBanner();
+	public List<EventVO> mainBanner() {
+		List<EventVO> data = mapper.mainBanner();
 		return data;
 	}
 }

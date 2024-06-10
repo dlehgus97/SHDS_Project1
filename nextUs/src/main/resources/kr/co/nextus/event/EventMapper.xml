@@ -67,6 +67,6 @@
 	
 	<!-- 메인배너 리스트 가져오기 -->
 	<select id="mainBanner" parameterType="kr.co.nextus.event.EventVO" resultType="kr.co.nextus.event.EventVO">
-		SELECT * FROM event WHERE is_main = 1
+		SELECT * FROM EVENT WHERE is_main = 1
 	</select>
 </mapper>
