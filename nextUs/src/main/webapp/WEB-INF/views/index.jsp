@@ -16,25 +16,37 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<!-- 이벤트 메인 배너 -->
-	<div id="main_banner_container">
-		<c:forEach var="vo" items="${mainBanner }">
-			<img class="banner" src="/upload/board/${vo.thumbnail_real}" alt="Banner Image">
-		</c:forEach>
-		<button class="arrow left">&#9664;</button>
-        <button class="arrow right">&#9654;</button>
+	<div id="main_first_container">
+		<div id="main_banner_container">
+			<div class="banner-wrapper">
+                <c:forEach var="vo" items="${mainBanner}">
+                    <div class="banner" style="background-image: url('/upload/board/${vo.thumbnail_real}')"></div>
+                </c:forEach>
+            </div>
+			<button class="arrow left">&#9664;</button>
+	        <button class="arrow right">&#9654;</button>
+		</div>
 	</div>
 	<script>
         $(document).ready(function () {
         	let currentIndex = 0;
             const banners = $('#main_banner_container .banner');
             const totalBanners = banners.length;
+            const bannerWrapper = $('.banner-wrapper');
+            let slideInterval;
 
-            // Initialize the first banner
-            banners.eq(currentIndex).show();
+            function startSlider() {
+                slideInterval = setInterval(nextBanner, 5000);
+            }
+
+            function resetSlider() {
+                clearInterval(slideInterval);
+                startSlider();
+            }
 
             function showBanner(index) {
-                banners.eq(currentIndex).fadeOut(1000);
-                banners.eq(index).fadeIn(1000);
+                const offset = -index * 100; // Calculate the offset percentage
+                bannerWrapper.css('transform', 'translateX(' + offset + '%)');
                 currentIndex = index;
             }
 
@@ -48,10 +60,19 @@
                 showBanner(prevIndex);
             }
 
-            $('.arrow.right').click(nextBanner);
-            $('.arrow.left').click(prevBanner);
+            $('.arrow.right').click(function() {
+                nextBanner();
+                resetSlider();
+            });
 
-            setInterval(nextBanner, 10000);
+            $('.arrow.left').click(function() {
+                prevBanner();
+                resetSlider();
+            });
+
+            // Initialize the first banner and start the slider
+            showBanner(currentIndex);
+            startSlider();
         });
     </script>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
