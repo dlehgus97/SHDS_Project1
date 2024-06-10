@@ -1,50 +1,63 @@
-package util;
+package kr.co.nextus.websoket;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.co.nextus.member.MemberVO;
+
 public class SocketTextHandler extends TextWebSocketHandler {
-	private final Map<String, WebSocketSession> sessions = new HashMap<>();
+	private final Map<Integer, WebSocketSession> sessions = new HashMap<>();
 	private final ObjectMapper objectMapper = new ObjectMapper();
-	
+	private int userNo;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         // 로그인 ID를 세션에 저장하여 사용자 식별   	
         String userId = session.getId();
-//    	 String userId = (String) session.getAttributes().get("userId");
-        sessions.put(userId, session);
         System.out.println("새 클라이언트와 연결되었습니다: " + userId);
-       
     }
 
 	@Override
 	 protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println(message.getPayload()); // getPayload => 메시지 불러오는 역할
         String payload = message.getPayload();
-        Map<String, String> messageMap = objectMapper.readValue(payload, Map.class);
-        // 현재 세션의 사용자 ID를 가져옴
-        String currentUserId = session.getId();
-        String userMessage = messageMap.get("message");
 
-        // 모든 세션을 순회하면서 상대방에게 메시지 전송
-        for (Map.Entry<String, WebSocketSession> entry : sessions.entrySet()) {
-            String userId = entry.getKey();
-            WebSocketSession userSession = entry.getValue();
-
-            // 현재 사용자와 동일한 사용자에게는 메시지를 보내지 않음
-            if (!userId.equals(currentUserId)) {
-                userSession.sendMessage(new TextMessage(objectMapper.writeValueAsString(messageMap)));
-            }
+        // JSON 문자열을 MessageData 객체로 변환
+        MessageVO vo = objectMapper.readValue(payload, MessageVO.class);
+        
+        // 개별 변수로 접근
+        if ("connect".equals(vo.getAction())) {
+        	int no = vo.getSenderno();
+        	sessions.put(no, session);
+        	userNo = no;
+        	System.out.println(vo.getSenderno() + "접속");
+        } else if ("disconnect".equals(vo.getAction())) {
+        	int no = vo.getSenderno();
+        	sessions.remove(vo.getSenderno());
+        	System.out.println(vo.getSenderno() + "접속해제");
+        } else if ("sendMessage".equals(vo.getAction())) {
+        	int senderNo = vo.getSenderno();
+            int opNo = vo.getOpno();
+            String msg = vo.getContent();
+            
+            WebSocketSession opSession = sessions.get(opNo);
+            //접속 안했을 때 찾아야함
+            
+            opSession.sendMessage(message);
         }
+        
 	}
 		
 		//sessionId + message 합치서 구분자변수
@@ -69,8 +82,8 @@ public class SocketTextHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-		sessions.remove(session.getId());
-
+		sessions.remove(userNo);
+		System.out.println(userNo + "접속해제");
 		System.out.println("특정 클라이언트와의 연결이 해제되었습니다.");
 	}
 }

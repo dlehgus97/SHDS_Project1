@@ -88,6 +88,13 @@
     justify-content: center;
 }
 
+#header_profile {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%; /* 프로필을 동그랗게 만듭니다 */
+    overflow: hidden; /* 내용이 둥근 테두리를 벗어나지 않게 합니다 */
+}
+
 .text_color_white {
     color: #FFF;
 }
@@ -97,6 +104,6 @@
     align-items: center;
     justify-content: center;
     height: 40px;
-    width: 100px;
+    width: 140px;
     color: #FFF;
 }

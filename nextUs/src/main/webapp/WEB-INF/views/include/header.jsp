@@ -25,8 +25,10 @@
         <div id="header_userinfo_menu">
             <button id="header_regist_seller" class="header_right_object">셀러등록</button>
             <div id="header_chat" class="header_right_object">
+            	<c:if test="${!empty login }">
                 <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
                 <a href="/chat" id="header_chat_text" class="text_color_white">CHAT</a>
+                </c:if>
             </div>
             <div id="login_status" class="header_right_object">
             	<c:if test="${empty login }">
@@ -36,6 +38,19 @@
             		<a href="/member/logout.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그아웃</a>
             	</c:if>
             </div>
+            <c:if test="${!empty login }">
+            <div class="header_right_object">
+            	<a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">마이페이지</a>
+            	<img src="" id="header_profile" alt="프로필">
+            </div>
+            <div></div><div></div>
+            <div class="header_right_object">
+            	<a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">장바구니</a>
+            </div>
+            <div class="header_right_object">
+            	<a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">찜목록</a>
+            </div>
+            </c:if>
         </div>
     </div>
 </div>
