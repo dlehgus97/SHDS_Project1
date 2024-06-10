@@ -109,9 +109,10 @@
 									<option value="content"
 										<c:if test="${NoticeVO.searchType == 'content'}">selected</c:if>>내용</option>
 							</select>
-							</span> <span class="searchWord"> <input type="text" id="sval"
-								name="searchWord" value="${NoticeVO.searchWord}" title="검색어 입력">
-								<input type="button" id="" value="검색" title="검색">
+							</span> 
+							<span class="searchWord"> 
+								<input type="text" id="sval" name="searchWord" value="${NoticeVO.searchWord}" title="검색어 입력">
+								<input type="button" value="검색" title="검색">
 							</span>
 						</form>
 

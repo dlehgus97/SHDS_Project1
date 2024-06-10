@@ -107,6 +107,13 @@
                                 <input type="date" name="end" id="end_date" class="wid100" value=""/>
                             </td>
                         </tr>
+                        <tr>
+                            <th>메인 이벤트</th>
+                            <td>
+                                <input type="checkbox" name="is_main" id="is_main" value="1"/>
+                                <label for="main_event">메인 이벤트로 지정</label>
+                            </td>
+                        </tr>
                         
                         
                         <tr>

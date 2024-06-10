@@ -97,7 +97,7 @@
                                 </select>
                             </span>
                             <span class="searchWord">
-                                <input type="text" id="sval" name="searchWord" value="${eventVO.searchWord}"  title="검색어 입력">
+                                <input type="text" id="sval" name="searchWord" value="${eventVO.searchWord}"  title="검색어 입력"><br>
                                 <input type="button" id="" value="검색" title="검색">
                             </span>
                         </form>
