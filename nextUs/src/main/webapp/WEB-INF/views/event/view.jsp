@@ -124,32 +124,6 @@
                 
                     </div>
 
-                    <div>
-                    <form method="post" name="frm" id="frm" action="" enctype="multipart/form-data" >
-                        <table class="board_write">
-                            <colgroup>
-                                <col width="*" />
-                                <col width="100px" />
-                            </colgroup>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <textarea name="content" id="content" style="height:50px;"></textarea>
-                                </td>
-                                <td>
-                                    <div class="btnSet"  style="text-align:right;">
-                                        <a class="btn" href="javascript:goSave();">저장 </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        </form>
-
-                        <div id="commentArea">
-                        
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

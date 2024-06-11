@@ -1,5 +1,6 @@
 package kr.co.nextus.event;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,4 +13,5 @@ public interface EventService {
 	int delete(EventVO vo, HttpServletRequest request);
 	Map<String, Object> list(EventVO vo);
 	EventVO detail(EventVO vo, boolean isUpdate);
+	List<EventVO> mainBanner();
 }

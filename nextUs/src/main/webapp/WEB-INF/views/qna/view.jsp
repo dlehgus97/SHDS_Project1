@@ -108,10 +108,6 @@
                         <div class="btnSet clear">
                             <div class="fl_l">
                             	<a href="index.do" class="btn">목록</a>
-                            	<c:if test="${!empty login and login.no == vo.writer}">
-                            	<a href="edit.do?no=${vo.no}" class="btn">수정</a>
-                            	<a href="javascript:del();" class="btn">삭제</a>
-                            	</c:if>
                             </div>
                         </div>
                     </div>

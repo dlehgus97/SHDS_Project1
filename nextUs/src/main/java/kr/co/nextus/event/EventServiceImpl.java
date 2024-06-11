@@ -102,5 +102,10 @@ public class EventServiceImpl implements EventService {
 		EventVO data = mapper.detail(vo);
 		return data;
 	}
-
+	
+	@Override
+	public List<EventVO> mainBanner() {
+		List<EventVO> data = mapper.mainBanner();
+		return data;
+	}
 }

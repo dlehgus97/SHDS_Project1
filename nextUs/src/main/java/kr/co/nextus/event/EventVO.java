@@ -11,6 +11,7 @@ public class EventVO {
 	private String content;
 	private Date start;
 	private Date end;
+	private int is_main;
 	
 	// 첨부파일
 	private String thumbnail_real;

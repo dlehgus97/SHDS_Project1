@@ -4,9 +4,9 @@
 	
 	<insert id="insert" parameterType="kr.co.nextus.event.EventVO">
 		INSERT INTO EVENT (
-			title, content, start, end, thumbnail_org, thumbnail_real
+			title, content, start, end, thumbnail_org, thumbnail_real, is_main
 		) VALUES (
-			#{title}, #{content}, #{start}, #{end}, #{thumbnail_org}, #{thumbnail_real}
+			#{title}, #{content}, #{start}, #{end}, #{thumbnail_org}, #{thumbnail_real}, #{is_main}
 		)
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
@@ -17,6 +17,7 @@
 		UPDATE EVENT SET 
 			title=#{title}
 			, content=#{content}
+			, is_main=#{is_main}
 			<if test="thumbnail_org != null">
 			, thumbnail_org=#{thumbnail_org}
 			, thumbnail_real=#{thumbnail_real}
@@ -64,4 +65,8 @@
 		UPDATE EVENT SET thumbnail_org=null, thumbnail_real=null WHERE no=#{no}
 	</update>
 	
+	<!-- 메인배너 리스트 가져오기 -->
+	<select id="mainBanner" parameterType="kr.co.nextus.event.EventVO" resultType="kr.co.nextus.event.EventVO">
+		SELECT * FROM EVENT WHERE is_main = 1
+	</select>
 </mapper>

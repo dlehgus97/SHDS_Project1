@@ -63,6 +63,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>카테고리</th>
+                            <td>
+                                <input type="radio" name="category" id="category_product" value="상품"/>
+                                <label for="category_product">상품</label>
+                                <input type="radio" name="category" id="category_payment" value="결제"/>
+                                <label for="category_payment">결제</label>
+                                <input type="radio" name="category" id="category_other" value="기타"/>
+                                <label for="category_other">기타</label>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>내용</th>
                             <td>
                                 <textarea name="text" id="content" style="width:100%;"></textarea>
