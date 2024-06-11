@@ -24,7 +24,7 @@
 		SELECT * FROM MEMBER WHERE email=#{email} AND pwd=MD5(#{pwd})
 	</select>
 	
-	<select id="detail" resultType="kr.co.nextus.member.MemberVO" parameterType="int">
+	<select id="detail" parameterType="int" resultType="kr.co.nextus.member.MemberVO" >
 		SELECT * FROM MEMBER WHERE no=#{no}
 	</select>
 	
@@ -43,5 +43,37 @@
 		WHERE no = #{no}
 	</update>
 	
+	
+	<!-- ========== -->
+	<!-- 관리자 페이지 -->
+	<!-- ========== -->
+	<sql id="searchSql">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					no like no <!-- 전체 검색이라 그냥 이렇게 썼음 -->
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 리스트 -->
+	<select id="list" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT *,(SELECT COUNT(*) FROM BUYLIST WHERE memberno=MEMBER.no)as purchaseCount
+
+		FROM MEMBER
+		<include refid="searchSql"/>
+		ORDER BY no
+		LIMIT #{startIdx}, 10
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.member.MemberVO" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		<include refid="searchSql"/>
+	</select>
+
 	
 </mapper>

@@ -18,10 +18,7 @@ public class AdminController {
 	public String sellerSettlement() {
 		return "admin/sellerSettlement";
 	}
-	@RequestMapping("/memberStatus")
-	public String memberStatus() {
-		return "admin/memberStatus";
-	}
+	
 	@RequestMapping("/memberBanManagement")
 	public String memberBanManagement() {
 		return "admin/memberBanManagement";

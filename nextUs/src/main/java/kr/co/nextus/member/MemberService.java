@@ -1,6 +1,8 @@
 package kr.co.nextus.member;
 
+import java.util.List;
 import java.util.Map;
+
 
 
 public interface MemberService {
@@ -12,5 +14,6 @@ public interface MemberService {
 	
 	
 	//관리자 페이지에서 동작
-	Map<String, Object> list(MemberVO vo);
+	List<MemberVO> all(MemberVO vo);
+	Map index(MemberVO vo);
 }
