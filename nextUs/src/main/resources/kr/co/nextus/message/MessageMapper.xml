@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.message.MessageMapper">
+	<insert id="regist" parameterType="kr.co.nextus.message.MessageVO">
+	    <!-- Step 1: 최대 chatno 값을 계산하는 selectKey -->
+	    <selectKey keyProperty="chatno" resultType="int" order="BEFORE">
+	        SELECT COALESCE(MAX(chatno), 0) + 1 FROM CHAT
+	    </selectKey>
+	
+	    <!-- Step 2: 계산된 chatno 값을 사용하여 INSERT 문 실행 -->
+	    INSERT INTO CHAT (
+	        chatno, sellno, senderno, opno, content, time, read_flag
+	    )
+	    VALUES (
+	        #{chatno},
+	        #{sellno}, #{senderno}, #{opno}, NULL, NOW(), 3
+	    );
+	</insert>
+	
+	<select id="list" parameterType="int" resultType="kr.co.nextus.message.MessageVO">
+	    SELECT
+	        c.*, 
+	        (
+		        SELECT profile_real 
+		        FROM MEMBER m 
+		        WHERE 
+		            (c.opno = #{no} AND c.senderno = m.no) OR 
+		            (c.senderno = #{no} AND c.opno = m.no)
+		    ) AS profile_real, 
+		    (
+		        SELECT nickname
+		        FROM MEMBER m 
+		        WHERE 
+		            (c.opno = #{no} AND c.senderno = m.no) OR 
+		            (c.senderno = #{no} AND c.opno = m.no)
+		    ) AS senderNickname,
+		    (
+		        SELECT m.no
+		        FROM MEMBER m 
+		        WHERE 
+		            (c.opno = #{no} AND c.senderno = m.no) OR 
+		            (c.senderno = #{no} AND c.opno = m.no)
+		    ) AS chatMember
+	    FROM
+	        CHAT c
+	    INNER JOIN (
+	        SELECT
+	            chatno,
+	            MAX(time) AS latest_time
+	        FROM
+	            CHAT
+	        GROUP BY
+	            chatno
+	    ) AS latest_chat
+	    ON c.chatno = latest_chat.chatno AND c.time = latest_chat.latest_time
+	    WHERE c.senderno = #{no} OR c.opno = #{no}
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="kr.co.nextus.message.MessageVO">
+		<![CDATA[
+		SELECT *,
+		(
+	        SELECT profile_real 
+	        FROM MEMBER m 
+	        WHERE 
+	            (c.opno = #{no} AND c.senderno = m.no) OR 
+	            (c.senderno = #{no} AND c.opno = m.no)
+	    ) AS profile_real, 
+	    (
+	        SELECT nickname
+	        FROM MEMBER m 
+	        WHERE 
+	            (c.opno = #{no} AND c.senderno = m.no) OR 
+	            (c.senderno = #{no} AND c.opno = m.no)
+	    ) AS senderNickname,
+	    (
+	        SELECT m.no
+	        FROM MEMBER m 
+	        WHERE 
+	            (c.opno = 6 AND c.senderno = m.no) OR 
+	            (c.senderno = 6 AND c.opno = m.no)
+	    ) AS chatMember
+	     FROM CHAT c WHERE chatno = #{chatno} AND read_flag < 3
+		]]>
+	</select>
+	
+	<select id="insert" parameterType="kr.co.nextus.message.MessageVO">
+		INSERT INTO CHAT (
+	        chatno, sellno, senderno, opno, content, time, read_flag
+	    )
+	    VALUES (
+	        #{chatno},
+	        #{sellno}, #{senderno}, #{opno}, #{content}, NOW(), 1
+	    );
+	</select>
+	
+	<delete id="delete" parameterType="kr.co.nextus.message.MessageVO">
+		DELETE FROM CHAT
+    	WHERE chatno = #{chatno}
+	</delete>
+	
+	<update id="update" parameterType="int">
+		UPDATE CHAT
+	    SET read_flag = 0
+	    WHERE chatno = #{chatno} AND read_flag = 1
+	</update>
+	
+	
+</mapper>

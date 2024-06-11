@@ -1,0 +1,66 @@
+@charset "UTF-8";
+#outer_container {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+form {
+   background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    clear: both;
+    width: 100%;
+    box-sizing: border-box;
+}
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="button"] {
+    width: 48%;
+	background-color: #B19CD9;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+input[type="button"]:hover {
+    background-color: #9f85c2;
+}
+textarea {
+    resize: horizontal;
+}
+.message-box {
+    display: inline-block;
+    padding: 10px;
+    margin-bottom : 10px;
+    background-color: #f0f0f0;
+    font-size: 16px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+.message-box.me {
+    background-color: #DCF8C6;
+    align-self: flex-end;
+    text-align: right;
+}
+.message-box.other {
+    background-color: #FFFFFF;
+    align-self: flex-start;
+    text-align: left;
+}

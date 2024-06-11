@@ -8,7 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
-import kr.co.nextus.websoket.SocketTextHandler;
+import kr.co.nextus.message.SocketTextHandler;
 
 
 

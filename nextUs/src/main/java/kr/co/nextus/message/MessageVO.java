@@ -1,4 +1,4 @@
-package kr.co.nextus.websoket;
+package kr.co.nextus.message;
 
 import java.sql.Timestamp;
 
@@ -10,9 +10,12 @@ public class MessageVO {
 	private int chatno;
 	private int sellno;
 	private int senderno;
-	private String senderNickname;
 	private int opno;
 	private String content;
 	private Timestamp time;
-	private int read;
+	private int read_flag;
+	
+	private String profile_real;
+	private String senderNickname;
+	private int chatMember; //채팅 상대방을 편하게 설정하기 위함
 }

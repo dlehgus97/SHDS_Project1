@@ -1,0 +1,99 @@
+@charset "UTF-8";
+#chat_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#chat_header_object {
+	background-color: rgb(174, 87, 255);
+    border-radius: 20px 20px 0px 0px;
+    position: relative;
+    width: 60%;
+    text-align: center;
+}
+
+#chat_header_object > p {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#chat_rooms_list {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 10px rgb(174, 87, 255) solid;
+    box-sizing: border-box;
+    width: 60%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#profile {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    left: 50px;
+    top: 30px;
+    overflow: hidden;
+}
+
+#nickname {
+    position: absolute;
+    left: 100px;
+    top: 0px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+#content {
+    position: absolute;
+    left: 100px;
+    top: 40px;
+    font-size: 18px;
+    color: #777777;
+}
+
+#chat_footer_object {
+	position: relative;
+	background-color: rgb(174, 87, 255);
+	border-radius: 0px 0px 20px 20px;
+	height: 80px;
+	width: 60%;
+}
+
+.chat_rooms {
+	position: relative;
+    margin: 10px;
+    background-color: white;
+    border: 2px rgb(174, 87, 255) solid;
+    border-radius: 20px;
+    width: 90%;
+    height: 100px;
+}
+
+.chat_new {
+	position: absolute;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+    top: -8px;
+    left: 14px;
+}
+
+#new_container {
+    position: absolute;
+    background-color: red;
+    width: 40px;
+    height: 40px;
+    right: 20px;
+    top: 30px;
+}

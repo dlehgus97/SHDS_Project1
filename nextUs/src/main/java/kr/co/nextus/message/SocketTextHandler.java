@@ -1,4 +1,4 @@
-package kr.co.nextus.websoket;
+package kr.co.nextus.message;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -21,6 +22,9 @@ public class SocketTextHandler extends TextWebSocketHandler {
 	private final Map<Integer, WebSocketSession> sessions = new HashMap<>();
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private int userNo;
+	
+	@Autowired
+	private MessageService service;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
@@ -54,8 +58,11 @@ public class SocketTextHandler extends TextWebSocketHandler {
             
             WebSocketSession opSession = sessions.get(opNo);
             //접속 안했을 때 찾아야함
+            if (opSession != null) {
+            	opSession.sendMessage(message);
+            }
+            service.insert(vo);
             
-            opSession.sendMessage(message);
         }
         
 	}

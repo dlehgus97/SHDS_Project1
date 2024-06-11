@@ -1,91 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="kr.co.nextus.member.MemberVO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        form {
-           background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: block;
-            clear: both;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="button"] {
-            width: 48%;
-		    background-color: #B19CD9;
-		    color: white;
-		    padding: 14px 20px;
-		    margin: 8px 0;
-		    border: none;
-		    border-radius: 4px;
-		    cursor: pointer;
-        }
-        input[type="button"]:hover {
-            background-color: #9f85c2;
-        }
-        textarea {
-            resize: horizontal;
-        }
-        .message-box {
-            display: inline-block;
-            padding: 10px;
-            margin-bottom : 10px;
-            background-color: #f0f0f0;
-            font-size: 16px;
-            max-width: 100%;
-            word-wrap: break-word;
-        }
-        .message-box.me {
-            background-color: #DCF8C6;
-            align-self: flex-end;
-            text-align: right;
-        }
-        .message-box.other {
-            background-color: #FFFFFF;
-            align-self: flex-start;
-            text-align: left;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<title>끼예에에에엑</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/chatDetail.css">
 </head>
 <body>
-	<textarea id="messageTextArea" rows="10" cols="50"></textarea>
-	<div id="messageContainer" style="width:100%; display:flex; flex-direction:column;"></div>
-	<form>
-        <input id="textMessage" type="text">
-        <input onclick="sendMessage()" value="전송" type="button">
-        <input onclick="disconnect()" value="나가기" type="button">
-    </form>
+	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	
+	<textarea id="messageTextArea" rows="10" cols="50" style="display: none;"></textarea>
+	<div id="outer_container">
+		<div id="messageContainer" style="width:100%; display:flex; flex-direction:column;">
+			<c:forEach var="vo" items="${list }">
+				
+				<div class="message-box ${login.no == vo.senderno ? 'me' : 'other'}">
+					<p>${vo.content }</p>
+				</div>
+			</c:forEach>
+		</div>
+		<form>
+	        <input id="textMessage" type="text">
+	        <input onclick="sendMessage()" value="전송" type="button">
+	        <input onclick="disconnect()" value="나가기" type="button">
+	    </form>
+    </div>
 
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     
 	<script>
-		<%
-			MemberVO user = (MemberVO)session.getAttribute("login");
-		%>
 		var webSocket = new WebSocket("ws://localhost:8090/websocket");
 		var messageTextArea = document.getElementById("messageTextArea");
 		var messageContainer = document.getElementById("messageContainer");
@@ -94,7 +46,7 @@
 			messageTextArea.value += "Server connect...\n";
 			var messageData = {
             	action: "connect",
-            	senderno: <%= user.getNo() %>
+            	senderno: ${login.no}
             };
 			webSocket.send(JSON.stringify(messageData));
 		};
@@ -128,13 +80,17 @@
 		// Send 버튼을 누르면 호출되는 함수
 		function sendMessage() {
             var message = document.getElementById("textMessage").value;
-            var userNo = <%= user.getNo() %>;
+            var chatno = ${chatno };
+            var sellno = ${sellno };
+            var userNo = ${login.no};
             console.log(userNo);
-            var userNickname = "<%= user.getNickname() %>";
-            var op = ${op };
+            var userNickname = "${login.nickname }";
+            var op = ${chatMember };
             console.log(op);
             var messageData = {
             	action: "sendMessage",
+            	chatno: chatno,
+            	sellno: sellno,
                 senderno: userNo,
                 senderNickname: userNickname, 
                 opno: op,
@@ -149,14 +105,14 @@
 		function disconnect() {
 			var messageData = {
             	action: "disconnect",
-            	senderno: <%= user.getNo() %>
+            	senderno: ${login.no}
             };
 			webSocket.send(JSON.stringify(messageData));
 			webSocket.close();
 		}
 		
 		function addMessageToContainer(sender, text) {
-			var userNickname = "<%= user.getNickname() %>";
+			var userNickname = "${login.nickname }";
 			var messageBox = document.createElement("div");
 			messageBox.classList.add("message-box");
 			if (sender === userNickname) {
@@ -164,7 +120,7 @@
 			} else {
 				messageBox.classList.add("other");
 			}
-			messageBox.textContent = sender + ": " + text;
+			messageBox.textContent = text;
 			messageContainer.appendChild(messageBox);
 		}
 	</script>

@@ -27,7 +27,7 @@
             <div id="header_chat" class="header_right_object">
             	<c:if test="${!empty login }">
                 <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
-                <a href="/chat" id="header_chat_text" class="text_color_white">CHAT</a>
+                <a href="/chat/chats.do" id="header_chat_text" class="text_color_white">CHAT</a>
                 </c:if>
             </div>
             <div id="login_status" class="header_right_object">
