@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface SellListMapper {
-    List<SellListVO> list(SellListVO vo);
     SellListVO detail(int no);
+    
+    
+    List<SellListVO> list(SellListVO vo);
+    
+    //관리자
+    int count(SellListVO param);
+	List<SellListVO> all(SellListVO vo);
+	List<SellListVO> list2(SellListVO vo);
 }

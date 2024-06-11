@@ -43,15 +43,8 @@ public class AdminController {
 	public String couponManagement() {
 		return "admin/couponManagement";
 	}
-	@RequestMapping("/giveCoupon")
-	public String giveCoupon() {
-		return "admin/giveCoupon";
-	}
 	
-	@RequestMapping("/productManagement")
-	public String productManagement() {
-		return "admin/productManagement";
-	}
+
 	@RequestMapping("/refundRequest")
 	public String refundRequest() {
 		return "admin/refundRequest";

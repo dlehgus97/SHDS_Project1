@@ -9,6 +9,42 @@
 	<!-- 상세 -->
 	<select id="detail" parameterType="int" resultType="kr.co.nextus.selllist.SellListVO">
 		SELECT *
-		FROM SELLLIST WHERE sellno=#{no}
+		FROM SELLLIST WHERE sellno=#{sellno}
+	</select>
+	
+	
+	<!-- ========== -->
+	<!-- 관리자 페이지 -->
+	<!-- ========== -->
+	<sql id="searchSql">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					sellno like sellno <!-- 전체 검색이라 그냥 이렇게 썼음 -->
+				</if>
+				<if test="searchType == 'seller'">
+					sellno like (SELECT no FROM MEMBER WHERE name LIKE '${searchWord}')
+				</if>
+				
+				<if test="searchType == 'title'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 리스트 -->
+	<select id="list2" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
+		SELECT *,(SELECT NAME FROM MEMBER WHERE no=SELLLIST.seller)as sellerName
+
+		FROM SELLLIST
+		<include refid="searchSql"/>
+		ORDER BY sellno
+		LIMIT #{startIdx}, 10
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.selllist.SellListVO" resultType="int">
+		SELECT COUNT(*) FROM SELLLIST
+		<include refid="searchSql"/>
 	</select>
 </mapper>   

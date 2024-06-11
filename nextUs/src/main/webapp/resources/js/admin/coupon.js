@@ -1,5 +1,5 @@
   function updatePlaceholder() {
-        var fixedRadio = document.querySelector('input[name="type"][value="fixed"]');
+        var fixedRadio = document.querySelector('input[name="type"][class="fc"]');
         var discountInput = document.querySelector('input[name="discount"]');
         
         if (fixedRadio.checked) {

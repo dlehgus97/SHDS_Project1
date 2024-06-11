@@ -1,4 +1,4 @@
-package kr.co.nextus.selllist;
+package kr.co.nextus.coupon;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,33 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
-public class SellListServiceImpl implements SellListService {
-	
+public class CouponServiceImpl implements CouponService {
+
 	@Autowired
-	private SellListMapper mapper;
+	private CouponMapper mapper;
 
-	@Override
-	public List<SellListVO> list(SellListVO vo) {
-		List<SellListVO> data = mapper.list(vo);
-		return data;
-	}
 	
-	@Override
-	public SellListVO detail(int no) {
-		SellListVO data = mapper.detail(no);
-		return data;
-	}
-	
-	
-	//관리자
-	@Override
-	public List<SellListVO> all(SellListVO vo) {
-		return mapper.all(vo);
-	}
+	//관리자페이지에서 동작
 
+	//쿠폰 리스트 출력
 	@Override
-	public Map index(SellListVO vo) {
+	public Map index(CouponVO vo) {
 		int totalCount = mapper.count(vo); // 총 게시물 수
 		// 총 페이지 수
 		int totalPage = totalCount / 10;
@@ -47,7 +33,7 @@ public class SellListServiceImpl implements SellListService {
 		if(startIdx<0)startIdx=0;
 		
 		vo.setStartIdx(startIdx); // sql문에 파라미터로 넣어줌
-		List<SellListVO> list = mapper.list2(vo); // 목록
+		List<CouponVO> list = mapper.list(vo); // 목록
 		
 		
 		// 페이징처리
@@ -70,5 +56,13 @@ public class SellListServiceImpl implements SellListService {
 		
 		return map;
 	}
+
+
+	@Override
+	public boolean create(CouponVO vo) {
+		return mapper.create(vo) == 0 ? false : true;
+	}
+
+
 
 }

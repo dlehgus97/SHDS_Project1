@@ -15,6 +15,10 @@ thead {
 	background-color: #d6e1e9;
 	border-bottom: 2px solid black;
 }
+tbody td {
+      text-align: center;
+    }
+
 form{
 	margin-left:150px;
 }
@@ -44,10 +48,44 @@ input[type=submit]{
 	border-radius: 15px 15px 15px 15px;
 	border-color: black;
 	border-style: groove;
-font-weight: bold;
+	font-weight: bold;
 }
 input[type=submit]:hover{
 	background-color: #d6e1e9;
+    transition: 0.5s;
+
+}
+
+.rev_button{
+	width:100px;
+	height:40px;
+	font-size:15px;
+	border-radius: 5px 5px 5px 5px;
+	border-color: black;
+	border-style: groove;
+	font-weight: bold;
+	color:white;
+	background-color: #5966e8;
+}
+.rev_button:hover{
+	background-color: #003be8;
+    transition: 0.5s;
+
+}
+
+.del_button{
+	width:100px;
+	height:40px;
+	font-size:15px;
+	border-radius: 5px 5px 5px 5px;
+	border-color: black;
+	border-style: groove;
+	font-weight: bold;
+	color:white;
+	background-color: #ff0000;
+}
+.del_button:hover{
+	background-color: #b50000;
     transition: 0.5s;
 
 }

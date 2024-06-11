@@ -42,8 +42,9 @@
 						<option value="email">이메일</option>
 						<option value="nickname">닉네임</option>
 						<option value="gender">성별</option>
-					</select> <input type="text" name="searchWord" /> <input type="submit"
-						value="검색">
+					</select>
+					<input type="text" name="searchWord" />
+					<input type="submit" value="검색">
 				</form>
 
 				<br>
@@ -80,10 +81,11 @@
 										<td>${vo.no != null ? vo.no : '(미입력)'}</td>
 										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 										<td>${vo.nickname != null ? vo.nickname : '(미입력)'}</td>
-										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.regdate}" /></td>
+										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.regdate}" /></td>
+										
 										<!-- 최근구매일로 바꾸기 -->
-										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.regdate}" /></td>
-										<!-- 누적구매수로 바꾸기 -->
+										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.regdate}" /></td>
+										
 										<td>${vo.purchaseCount}</td>
 									</tr>
 								

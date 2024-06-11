@@ -31,13 +31,13 @@
 			</div>
 				<div class="bg-wh Ban_div">
 					<br>
-					<form method="post" name="couponForm" id="couponForm" action="">
+					<form method="post" name="couponForm" id="couponForm" action="giveCoupon.do">
 					&emsp;&ensp;&ensp;쿠폰 이름:&emsp;<input type="text" name="name"
 						placeholder=' 쿠폰 이름을 입력하세요'/>&emsp;
 						
-					<input type="radio" name="type" value="fixed" checked="checked">고정할인&emsp;
-					<input type="radio" name="type" value="percent">%할인
-					<!-- 여기 fixed,percent 바꿔야할듯 sql에 맞게 -->
+					<input type="radio" class="fc" name="type" value=1 checked="checked">고정할인&emsp;
+					<input type="radio" class="pc" name="type" value=2>%할인
+			
 					<br><br>
 					
 					&emsp;&ensp;&ensp;할&emsp;&nbsp;&emsp;인:&emsp;<input type="text" name="discount" placeholder='할인 금액(원)을 입력해주세요'/>

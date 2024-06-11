@@ -41,16 +41,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.update(vo);
 	}
 	
-
 	
 	
-	
-	//관리자페이지에서 동작
-	@Override
-	public List<MemberVO> all(MemberVO vo) {
-		return mapper.all(vo);
-	}
-
+	//관리자
 	@Override
 	public Map index(MemberVO vo) {
 		int totalCount = mapper.count(vo); // 총 게시물 수
@@ -65,9 +58,6 @@ public class MemberServiceImpl implements MemberService {
 		if(startIdx<0)startIdx=0;
 		
 		vo.setStartIdx(startIdx); // sql문에 파라미터로 넣어줌
-	//	vo.setPurchaseCount(mapper.purchaseCount(vo));
-	//	System.out.println(vo.getNo());
-	//	System.out.println(mapper.purchaseCount(vo));
 		List<MemberVO> list = mapper.list(vo); // 목록
 		
 		
