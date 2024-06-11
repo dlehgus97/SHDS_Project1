@@ -17,7 +17,6 @@ public class CouponServiceImpl implements CouponService {
 
 	
 	//관리자페이지에서 동작
-
 	//쿠폰 리스트 출력
 	@Override
 	public Map index(CouponVO vo) {
@@ -33,6 +32,7 @@ public class CouponServiceImpl implements CouponService {
 		if(startIdx<0)startIdx=0;
 		
 		vo.setStartIdx(startIdx); // sql문에 파라미터로 넣어줌
+		System.out.println(1.5);
 		List<CouponVO> list = mapper.list(vo); // 목록
 		
 		

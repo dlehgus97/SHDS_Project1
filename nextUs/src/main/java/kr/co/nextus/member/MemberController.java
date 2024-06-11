@@ -90,11 +90,9 @@ public class MemberController {
 	}
 
 	// 관리자에서하는겁니다요
+	
+
 	@GetMapping("/memberStatus.do")
-	public String memberList(MemberVO vo, Model model) {
-		model.addAttribute("member", service.index(vo));
-		return "admin/memberStatus";
-	}
 	@RequestMapping("/memberStatus")
 	public String memberStatus(MemberVO vo, Model model) {
 		model.addAttribute("member", service.index(vo));

@@ -39,10 +39,7 @@ public class AdminController {
 	public String sellerBanManagement() {
 		return "admin/sellerBanManagement";
 	}
-	@RequestMapping("/couponManagement")
-	public String couponManagement() {
-		return "admin/couponManagement";
-	}
+	
 	
 
 	@RequestMapping("/refundRequest")

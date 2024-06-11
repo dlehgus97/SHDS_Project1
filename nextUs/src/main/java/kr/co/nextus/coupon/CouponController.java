@@ -15,7 +15,14 @@ public class CouponController {
 	@Autowired
 	private CouponService service;
 	
-	
+	@GetMapping("/couponManagement")
+	@RequestMapping("/couponManagement")
+	public String couponManagement(CouponVO vo, Model model) {
+		System.out.println(1);
+		model.addAttribute("coupon", service.index(vo));
+		System.out.println(2);
+		return "admin/couponManagement";
+	}
 	
 	// 관리자에서하는겁니다요
 	@RequestMapping("/giveCoupon")
