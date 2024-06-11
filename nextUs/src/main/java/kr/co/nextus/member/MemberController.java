@@ -83,6 +83,7 @@ public class MemberController {
 			msg = "정상적으로 수정되었습니다.";
 		} else {
 			msg = "수정 오류";
+			int num = 1;
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
