@@ -144,13 +144,12 @@ public class MemberController {
 //	        }
 //	    }
 
-	// 관리자에서하는겁니다요
 	
-
+	// 관리자에서하는겁니다요
 	@GetMapping("/memberStatus.do")
 	@RequestMapping("/memberStatus")
 	public String memberStatus(MemberVO vo, Model model) {
-		model.addAttribute("member", service.index(vo));
+		model.addAttribute("map", service.list(vo));
 		return "admin/memberStatus";
 	}
 }

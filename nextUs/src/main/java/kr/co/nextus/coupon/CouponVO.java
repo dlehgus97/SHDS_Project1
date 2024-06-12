@@ -20,5 +20,15 @@ public class CouponVO {
 	private String searchWord;
 	private int page; // 사용자가 요청한 페이지 번호
 	private int startIdx; // limit 앞에 들어갈 시작인덱스값
+	
+	private String memberEmail;
+	
+	public CouponVO() {
+		this.page = 1;
+	}
+	
+	public int getStartIdx() {
+		return (page-1) * 10;
+	}
 
 }

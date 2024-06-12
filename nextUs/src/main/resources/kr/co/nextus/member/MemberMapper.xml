@@ -8,7 +8,7 @@
 			addr1, addr2, regdate, state, seller,
 			profile_org, profile_real)
 		VALUES (
-			#{no}, #{email}, MD5(#{pwd}), #{name},
+			#{no}, #{email}, #{pwd}, #{name},
 			#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
 			#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
 			#{profile_org}, #{profile_real});
@@ -51,7 +51,9 @@
 		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					no like no <!-- 전체 검색이라 그냥 이렇게 썼음 -->
+					no LIKE '%${searchWord}%' OR
+					email LIKE '%${searchWord}%' OR
+					nickname LIKE '%${searchWord}%'
 				</if>
 				<if test="searchType != 'all'">
 					${searchType} LIKE '%${searchWord}%'
@@ -60,10 +62,9 @@
 		</where>
 	</sql>
 	
-	<!-- 리스트 -->
+	<!-- 리스트 10개씩 출력-->
 	<select id="list" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
 		SELECT *,(SELECT COUNT(*) FROM BUYLIST WHERE memberno=MEMBER.no)as purchaseCount
-
 		FROM MEMBER
 		<include refid="searchSql"/>
 		ORDER BY no
@@ -74,6 +75,11 @@
 		SELECT COUNT(*) FROM MEMBER
 		<include refid="searchSql"/>
 	</select>
-
+	<!-- 리스트 한번에 다 출력-->
+	<select id="listAtOnce" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT * FROM MEMBER
+		<include refid="searchSql"/>
+		ORDER BY no
+	</select>
 	
 </mapper>

@@ -23,10 +23,17 @@ public class AdminController {
 	public String memberBanManagement() {
 		return "admin/memberBanManagement";
 	}
+	
+	
 	@RequestMapping("/addBanPopup")
 	public String addBanPopup() {
 		return "admin/addBanPopup";
 	}
+	
+	
+	
+	
+	
 	@RequestMapping("/saleStatement")
 	public String saleStatement() {
 		return "admin/saleStatement";
