@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.seller.SellerMapper">
+
+    <insert id="insertSeller" parameterType="kr.co.nextus.seller.SellerVO">
+        INSERT INTO SELLER (no, info, category1, category2, bank, account, 
+        rating_avg, review_cnt)
+        VALUES (#{no}, #{info}, #{category1}, #{category2}, #{bank}, 
+        #{account}, #{rating_avg}, #{review_cnt})
+    </insert>
+
+	
+    <select id="getSellerByNo" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
+        SELECT no, info, category1, category2, bank, account, rating_avg, review_cnt
+        FROM SELLER
+        WHERE no = #{no}
+    </select>
+
+	
+    <update id="updateSeller" parameterType="kr.co.nextus.seller.SellerVO">
+        UPDATE SELLER
+        SET info = #{info}, category1 = #{category1}, category2 = #{category2}, bank = #{bank}, 
+        account = #{account}, rating_avg = #{rating_avg}, review_cnt = #{review_cnt}
+        WHERE no = #{no}
+    </update>
+
+</mapper>
