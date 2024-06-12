@@ -8,8 +8,17 @@
 	</select>
 	<!-- 상세 -->
 	<select id="detail" parameterType="int" resultType="kr.co.nextus.selllist.SellListVO">
-		SELECT *
-		FROM SELLLIST WHERE sellno=#{sellno}
+		SELECT *, 
+		(SELECT content FROM P_OPTION WHERE sellno=#{no} and optionrank = 'bronze') as bronzecontent, 
+		(SELECT content FROM P_OPTION WHERE sellno=#{no} and optionrank = 'silver') as silvercontent,
+		(SELECT content FROM P_OPTION WHERE sellno=#{no} and optionrank = 'gold') as goldcontent,
+		(SELECT price FROM P_OPTION WHERE sellno=#{no} and optionrank = 'bronze') as bronzeprice,
+		(SELECT price FROM P_OPTION WHERE sellno=#{no} and optionrank = 'silver') as silverprice,
+		(SELECT price FROM P_OPTION WHERE sellno=#{no} and optionrank = 'gold') as goldprice,
+		(SELECT info FROM SELLER WHERE no=#{no}) as info,
+		(SELECT rating_avg FROM SELLER WHERE no=#{no}) as rating_avg,
+		(SELECT review_cnt FROM SELLER WHERE no=#{no}) as review_cnt
+		FROM SELLLIST WHERE sellno=#{no}
 	</select>
 	
 	

@@ -4748,7 +4748,7 @@ textarea.form-control-lg {
 
 .breadcrumb-item+.breadcrumb-item:before {
 	color: inherit;
-	content: var(- -bs-breadcrumb-divider, "");
+	content: var(--bs-breadcrumb-divider, ">");
 	float: left;
 	padding-right: .5rem
 }

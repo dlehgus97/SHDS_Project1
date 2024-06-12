@@ -15,13 +15,6 @@ public class SellListController {
 	@Autowired
 	private SellListService service;
 	
-	@GetMapping("/selllist/index.do")
-	public String index(Model model, SellListVO vo) {
-		List<SellListVO> list = service.list(vo);
-		model.addAttribute("list", list);
-		return "selllist/index";
-	}
-	
 	@GetMapping("/selllist/view.do")
 	public String detail(Model model, @RequestParam("no") int no) {
 		SellListVO detail = service.detail(no);
