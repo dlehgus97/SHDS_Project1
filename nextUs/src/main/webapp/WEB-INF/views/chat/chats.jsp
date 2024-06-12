@@ -42,9 +42,9 @@
 				<img src="/upload/board/${vo.profile_real }" id="profile" alt="프로필">
 				<p id="nickname">${vo.senderNickname }</p>
 				<p id="content">${vo.content }</p>
-				<c:if test="${vo.read_flag == 1 }">
-					<div id="new_container">
-						<p class="chat_new">N</p>
+				<c:if test="${vo.read_flag == 1 && not empty unReadList[vo.chatno]}">
+					<div class="new_container">
+						<p class="chat_new">${unReadList[vo.chatno]}</p>
 					</div>
 				</c:if>
 			</a>

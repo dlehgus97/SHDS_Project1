@@ -21,7 +21,6 @@ import kr.co.nextus.member.MemberVO;
 public class SocketTextHandler extends TextWebSocketHandler {
 	private final Map<Integer, WebSocketSession> sessions = new HashMap<>();
 	private final ObjectMapper objectMapper = new ObjectMapper();
-	private int userNo;
 	
 	@Autowired
 	private MessageService service;
@@ -30,6 +29,7 @@ public class SocketTextHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) {
         // 로그인 ID를 세션에 저장하여 사용자 식별   	
         String userId = session.getId();
+        System.out.println("이전 " + sessions);
         System.out.println("새 클라이언트와 연결되었습니다: " + userId);
     }
 
@@ -45,23 +45,30 @@ public class SocketTextHandler extends TextWebSocketHandler {
         if ("connect".equals(vo.getAction())) {
         	int no = vo.getSenderno();
         	sessions.put(no, session);
-        	userNo = no;
+        	session.getAttributes().put("userNo", no);
         	System.out.println(vo.getSenderno() + "접속");
+        	System.out.println("이후 " + sessions);
         } else if ("disconnect".equals(vo.getAction())) {
         	int no = vo.getSenderno();
         	sessions.remove(vo.getSenderno());
         	System.out.println(vo.getSenderno() + "접속해제");
         } else if ("sendMessage".equals(vo.getAction())) {
+        	int chatno = vo.getChatno();
         	int senderNo = vo.getSenderno();
             int opNo = vo.getOpno();
             String msg = vo.getContent();
             
             WebSocketSession opSession = sessions.get(opNo);
-            //접속 안했을 때 찾아야함
+            
+            service.insert(vo);
+            System.out.println(sessions);
+            System.out.println("insert 완료");
+          //접속 해있을 때 찾아야함
             if (opSession != null) {
             	opSession.sendMessage(message);
+            	//읽음처리까지
+            	service.update(chatno, opNo);
             }
-            service.insert(vo);
             
         }
         
@@ -89,8 +96,10 @@ public class SocketTextHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+		int userNo = (int) session.getAttributes().get("userNo");
 		sessions.remove(userNo);
 		System.out.println(userNo + "접속해제");
+		System.out.println("해제이후 " + sessions);
 		System.out.println("특정 클라이언트와의 연결이 해제되었습니다.");
 	}
 }

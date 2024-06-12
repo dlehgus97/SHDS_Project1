@@ -20,19 +20,29 @@
 	
 	<textarea id="messageTextArea" rows="10" cols="50" style="display: none;"></textarea>
 	<div id="outer_container">
-		<div id="messageContainer" style="width:100%; display:flex; flex-direction:column;">
-			<c:forEach var="vo" items="${list }">
-				
-				<div class="message-box ${login.no == vo.senderno ? 'me' : 'other'}">
-					<p>${vo.content }</p>
-				</div>
-			</c:forEach>
-		</div>
-		<form>
-	        <input id="textMessage" type="text">
-	        <input onclick="sendMessage()" value="전송" type="button">
-	        <input onclick="disconnect()" value="나가기" type="button">
-	    </form>
+		<div id="inner_container">
+			<div id="messageContainer">
+				<c:set var="previousSenderno" value=""/>
+				<c:set var="SenderNickname" value="${list[0].senderNickname}"/>
+				<c:forEach var="vo" items="${list }">
+					<c:if test="${login.no != vo.senderno && previousSenderno != vo.senderno}">
+						<div class="profile_container">
+							<img class="profile-img" src="/upload/board/${vo.profile_real}" alt="Profile Image">
+							<p>${vo.senderNickname }</p>
+						</div>
+                    </c:if>
+					<div class="message-box ${login.no == vo.senderno ? 'me' : 'other'}">
+						${vo.content }
+					</div>
+					<c:set var="previousSenderno" value="${vo.senderno}"/>
+				</c:forEach>
+			</div>
+			<form id="messageForm">
+		        <input id="textMessage" type="text">
+		        <input onclick="sendMessage()" value="전송" type="button">
+		        <input onclick="disconnect()" value="나가기" type="button">
+		    </form>
+	    </div>
     </div>
 
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>
@@ -41,6 +51,7 @@
 		var webSocket = new WebSocket("ws://localhost:8090/websocket");
 		var messageTextArea = document.getElementById("messageTextArea");
 		var messageContainer = document.getElementById("messageContainer");
+		var lastSenderNo = ${previousSenderno };
 		// WebSocket 서버와 접속이 되면 호출되는 함수
 		webSocket.onopen = function(message) {
 			messageTextArea.value += "Server connect...\n";
@@ -49,6 +60,8 @@
             	senderno: ${login.no}
             };
 			webSocket.send(JSON.stringify(messageData));
+			//처음 입장해서 스크롤 맨 아래로 내림
+			messageContainer.scrollTop = messageContainer.scrollHeight;
 		};
 		// WebSocket 서버와 접속이 끊기면 호출되는 함수
 		webSocket.onclose = function(message) {
@@ -72,8 +85,15 @@
 			//var op = ${session.getOpId}; //상대방 아이디 얻어서
 			//(if 보내는사람 == op) 맞으면?
 			var userNickname = data.senderNickname;
+			console.log("보낸사람" + data.senderNickname);
+			var profile_real = data.profile_real;
 			messageTextArea.value += "상대방 닉네임 : " + message.data + "\n";
-			addMessageToContainer(userNickname, recieve);
+			addMessageToContainer(userNickname, recieve, profile_real, senderno);
+			// 현재 스크롤 위치가 맨 아래에서 200px 이하인지 확인
+            if (messageContainer.scrollHeight - messageContainer.scrollTop <= messageContainer.clientHeight + 200) {
+                // 스크롤을 맨 밑으로 내리기
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }
 			//message.split
 		};
 		
@@ -85,6 +105,7 @@
             var userNo = ${login.no};
             console.log(userNo);
             var userNickname = "${login.nickname }";
+            var profile_real = "${login.profile_real}";
             var op = ${chatMember };
             console.log(op);
             var messageData = {
@@ -93,13 +114,15 @@
             	sellno: sellno,
                 senderno: userNo,
                 senderNickname: userNickname, 
+                profile_real: profile_real, 
                 opno: op,
                 content: message
             };
             messageTextArea.value += "Send to Server => " + userNo + ": " + message + "\n";
             webSocket.send(JSON.stringify(messageData));
-            addMessageToContainer(userNickname, message);
+            addMessageToContainer(userNickname, message, null, userNo);
             document.getElementById("textMessage").value = "";
+            messageContainer.scrollTop = messageContainer.scrollHeight;
         }
 		// Disconnect 버튼을 누르면 호출되는 함수
 		function disconnect() {
@@ -111,18 +134,39 @@
 			webSocket.close();
 		}
 		
-		function addMessageToContainer(sender, text) {
+		function addMessageToContainer(sender, text, profile_real, senderno) {
 			var userNickname = "${login.nickname }";
 			var messageBox = document.createElement("div");
 			messageBox.classList.add("message-box");
 			if (sender === userNickname) {
 				messageBox.classList.add("me");
 			} else {
+				if (lastSenderNo != senderno) {
+					//실시간 메세지 동기화에 프로필 표현하기 위함
+					var profileBox = document.createElement("div");
+					profileBox.classList.add("profile_container");
+					var profileImg = document.createElement("img");
+					profileImg.classList.add("profile-img");
+					profileImg.src = "/upload/board/" + profile_real;
+					var profileNickname = document.createElement("p");
+					profileNickname.textContent = "${list[0].senderNickname}";
+					profileBox.appendChild(profileImg);
+					profileBox.appendChild(profileNickname);
+					messageContainer.appendChild(profileBox);
+				} 
 				messageBox.classList.add("other");
 			}
 			messageBox.textContent = text;
 			messageContainer.appendChild(messageBox);
+			lastSenderNo = senderno;
+			console.log("저는 실시간 메세지를 만들어요");
 		}
+		
+		//엔터를 누르면 전송만 되도록
+		document.getElementById('messageForm').addEventListener('submit', function(event) {
+		    event.preventDefault();
+		    sendMessage();
+		});
 	</script>
 </body>
 </html>

@@ -60,27 +60,27 @@
 		<![CDATA[
 		SELECT *,
 		(
-	        SELECT profile_real 
+	        SELECT m.profile_real 
 	        FROM MEMBER m 
 	        WHERE 
-	            (c.opno = #{no} AND c.senderno = m.no) OR 
-	            (c.senderno = #{no} AND c.opno = m.no)
+	            (c.opno = #{myno} AND c.senderno = m.no) OR 
+	            (c.senderno = #{myno} AND c.opno = m.no)
 	    ) AS profile_real, 
 	    (
-	        SELECT nickname
+	        SELECT m.nickname
 	        FROM MEMBER m 
 	        WHERE 
-	            (c.opno = #{no} AND c.senderno = m.no) OR 
-	            (c.senderno = #{no} AND c.opno = m.no)
+	            (c.opno != #{myno} AND c.opno = m.no) OR 
+	            (c.senderno != #{myno} AND c.senderno = m.no)
 	    ) AS senderNickname,
 	    (
 	        SELECT m.no
 	        FROM MEMBER m 
 	        WHERE 
-	            (c.opno = 6 AND c.senderno = m.no) OR 
-	            (c.senderno = 6 AND c.opno = m.no)
+	            (c.opno = #{myno} AND c.senderno = m.no) OR 
+	            (c.senderno = #{myno} AND c.opno = m.no)
 	    ) AS chatMember
-	     FROM CHAT c WHERE chatno = #{chatno} AND read_flag < 3
+	     FROM CHAT c WHERE c.chatno = #{chatno} AND c.read_flag < 3
 		]]>
 	</select>
 	
@@ -102,8 +102,19 @@
 	<update id="update" parameterType="int">
 		UPDATE CHAT
 	    SET read_flag = 0
-	    WHERE chatno = #{chatno} AND read_flag = 1
+	    WHERE chatno = #{chatno} AND opno = #{opno} AND read_flag = 1
 	</update>
 	
-	
+	<select id="getUnRead" parameterType="int" resultType="map">
+    	SELECT 
+	        c.chatno, 
+	        COUNT(*) AS unread_cnt
+	    FROM 
+	        CHAT c
+	    WHERE 
+	        c.opno = #{opno} 
+	        AND c.read_flag = 1
+	    GROUP BY 
+	        c.chatno
+	</select>
 </mapper>

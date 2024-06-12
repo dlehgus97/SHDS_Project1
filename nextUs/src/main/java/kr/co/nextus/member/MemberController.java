@@ -126,23 +126,23 @@ public class MemberController {
 	    return "member/callback";
 	}
 	
-	@PostMapping("/member/naverSave")
-	@ResponseBody
-	public String naverSave(MemberVO vo, Model model) {
-	    MemberVO existingMember = service.findMemberByEmail(vo.getEmail());
-
-	    if (existingMember != null) {
-	        // 이미 회원인 경우 로그인 처리
-	        service.login(existingMember);
-	        return "ok";
-	    } else {
-	        // 회원이 아닌 경우 회원가입 처리
-	        if (service.regist(vo)) {
-	            return "ok";
-	        } else {
-	            return "no";
-	        }
-	    }
+//	@PostMapping("/member/naverSave")
+//	@ResponseBody
+//	public String naverSave(MemberVO vo, Model model) {
+//	    MemberVO existingMember = service.findMemberByEmail(vo.getEmail());
+//
+//	    if (existingMember != null) {
+//	        // 이미 회원인 경우 로그인 처리
+//	        service.login(existingMember);
+//	        return "ok";
+//	    } else {
+//	        // 회원이 아닌 경우 회원가입 처리
+//	        if (service.regist(vo)) {
+//	            return "ok";
+//	        } else {
+//	            return "no";
+//	        }
+//	    }
 
 	// 관리자에서하는겁니다요
 	

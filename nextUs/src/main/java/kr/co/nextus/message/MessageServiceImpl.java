@@ -1,6 +1,9 @@
 package kr.co.nextus.message;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +27,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public List<MessageVO> detail(int chatno) {
-		List<MessageVO> list = mapper.detail(chatno);
+	public List<MessageVO> detail(int chatno, int myno) {
+		List<MessageVO> list = mapper.detail(chatno, myno);
 		return list;
 	}
 
@@ -40,8 +43,18 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public void update(int chatno) {
-		mapper.update(chatno);
+	public void update(int chatno, int opno) {
+		mapper.update(chatno, opno);
 	}
-
+	
+	@Override
+	public Map<Integer, Integer> getUnRead(int opno) {
+		List<Map<String, Object>> list = mapper.getUnRead(opno);
+		System.out.println(list);
+		return list.stream()
+	            .collect(Collectors.toMap(
+	                    map -> (Integer) map.get("chatno"),
+	                    map -> ((Long) map.get("unread_cnt")).intValue()
+	            ));
+	}
 }
