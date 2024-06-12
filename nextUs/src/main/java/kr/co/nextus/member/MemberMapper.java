@@ -16,7 +16,8 @@ public interface MemberMapper {
 	MemberVO detail(MemberVO vo);
 	// 회원정보 수정
 	int update(MemberVO vo);
-	
+	//아이디 찾기
+	int findid(MemberVO vo);
 	
 	//관리자
 	int count(MemberVO param);

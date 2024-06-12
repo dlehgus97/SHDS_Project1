@@ -11,6 +11,8 @@ public interface MemberService {
 	MemberVO login(MemberVO vo);
 	MemberVO detail(MemberVO vo);
 	int update(MemberVO vo);
+	boolean findid(MemberVO vo);
+	
 	
 	
 	//관리자 페이지에서 동작

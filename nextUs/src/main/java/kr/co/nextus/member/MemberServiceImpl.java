@@ -41,6 +41,13 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.update(vo);
 	}
 	
+	@Override
+	public boolean findid(MemberVO vo) {
+		
+		return mapper.findid(vo) == 0 ? false : true;
+	}
+
+	
 	
 	
 	//관리자

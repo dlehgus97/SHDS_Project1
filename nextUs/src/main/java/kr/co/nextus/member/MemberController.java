@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -88,6 +89,60 @@ public class MemberController {
 		model.addAttribute("url", url);
 		return "common/alert";
 	}
+	
+	@GetMapping("/member/search.do")
+	public String search() {
+		// 찾기 폼 
+		return "member/search";
+	}
+	
+	
+	@GetMapping("/member/idsearch.do")
+	public String findid() {
+		// 아이디 찾기 폼
+		return "member/idsearch";
+	}
+	@PostMapping("/member/findid.do")
+	public String findId(MemberVO vo, Model model) {
+		if (service.findid(vo)) {
+			model.addAttribute("msg", "아이디는  입니다.");
+			model.addAttribute("url", "/index.do");
+			return "common/alert";
+		} else {
+			model.addAttribute("msg", "가입 오류");
+			model.addAttribute("url", "/member/idsearch.do");
+			return "common/alert";
+		}
+	}
+	
+	@GetMapping("/member/pwdsearch.do")
+	public String pwdSearch() {
+		// 비밀번호 찾기 폼
+		return "member/pwdsearch";
+	}
+	
+	@GetMapping("/member/callback")
+	public String callBack() {
+	    return "member/callback";
+	}
+	
+	@PostMapping("/member/naverSave")
+	@ResponseBody
+	public String naverSave(MemberVO vo, Model model) {
+	    MemberVO existingMember = service.findMemberByEmail(vo.getEmail());
+
+	    if (existingMember != null) {
+	        // 이미 회원인 경우 로그인 처리
+	        service.login(existingMember);
+	        return "ok";
+	    } else {
+	        // 회원이 아닌 경우 회원가입 처리
+	        if (service.regist(vo)) {
+	            return "ok";
+	        } else {
+	            return "no";
+	        }
+	    }
 
 	// 관리자에서하는겁니다요
 	
