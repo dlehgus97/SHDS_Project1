@@ -72,3 +72,8 @@ input[type=submit]:hover{
     transition: 0.5s;
 
 }
+/* 페이징처리 */
+.pagenate {position: fixed;width:100%; clear:both;top:780px;left:85px;}
+.pagenate {text-align:center; margin:5px auto 0;}
+.pagenate li {display:inline-block;width:30px;}
+.pagenate li :hover{background:#d6e1e9; font-weight:bold;}

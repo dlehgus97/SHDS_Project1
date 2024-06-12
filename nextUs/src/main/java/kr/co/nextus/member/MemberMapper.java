@@ -21,4 +21,5 @@ public interface MemberMapper {
 	//관리자
 	int count(MemberVO param);
 	List<MemberVO> list(MemberVO vo);
+	List<MemberVO> listAtOnce(MemberVO vo);
 }

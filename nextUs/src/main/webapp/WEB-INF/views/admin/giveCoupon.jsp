@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +46,34 @@
 					<br><br>
 					
 					&ensp;&nbsp;&ensp;발급대상자: 
+					
 					<div class="target_list" style="overflow: auto;">
+						<table class="member_list">
+							<colgroup>
+								<col width="240px" />
+								<col width="380px" />
+								<col width="380px" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th><input id="selectAll" class="selectAll_button" type="checkbox"></th>
+									<th>이메일</th>
+									<th>닉네임</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							<c:forEach var="vo" items="${memberlist.list}">
+									<tr class="clickable-cell">
+										<td><input class="target_button" name="memberEmails" type="checkbox" value='${vo.email}'></td>
+										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
+										<td>${vo.nickname != null ? vo.nickname : '(미입력)'}</td>
+									</tr>
+							</c:forEach>
+					</tbody>
+				</table>
+						
+						
 						
 					</div>
 					
@@ -53,6 +82,28 @@
 				</div>			
 		</div>
 	</div>
+<script>
+// 전체 선택/해제 기능
+document.getElementById('selectAll').addEventListener('change', function(event) {
+    var checkboxes = document.querySelectorAll('.target_button');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = event.target.checked;
+    });
+});
+
+// 개별 선택/해제 기능
+document.querySelectorAll('.clickable-cell').forEach(function(cell) {
+    cell.addEventListener('click', function(event) {
+        // 클릭된 셀이 td이면 그 안의 checkbox를 찾아서 상태 변경
+        var checkbox = cell.querySelector('.target_button');
+        if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+    });
+});
+//나중에 볼 재혁이형을 위하여:이게 행을 클릭해도 체크박스 체크되게 하려한건데
+//웃긴건 체크박스를 직접 클릭하면 체크가 안댐요ㅋ
+</script>
 
 </body>
 </html>

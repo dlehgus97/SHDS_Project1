@@ -3,6 +3,8 @@ package kr.co.nextus.member;
 
 import java.util.Map;
 
+import kr.co.nextus.qna.QnAVO;
+
 
 
 public interface MemberService {
@@ -14,5 +16,6 @@ public interface MemberService {
 	
 	
 	//관리자 페이지에서 동작
-	Map index(MemberVO vo);
+	Map<String, Object> list(MemberVO vo);
+	Map<String, Object> listAtOnce(MemberVO vo);
 }
