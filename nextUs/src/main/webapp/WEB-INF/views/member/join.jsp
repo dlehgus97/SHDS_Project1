@@ -4,7 +4,7 @@
 <html lang="ko">
 <head> 
     <meta charset="utf-8">
-    <title>회원가입</title>
+    <title>회원 가입</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/resources/css/reset.css"/>
     <link rel="stylesheet" href="/resources/css/style.css"/>
     <link rel="stylesheet" href="/resources/css/contents.css"/>
+    <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/footer.css"/>
     <script src="/resources/js/script.js"></script>
     <script>
     	var dupCheck = false;
@@ -110,7 +112,7 @@
 </head> 
 <body>
     <div class="wrap">
-        <!-- 헤더 위치 -->
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <div class="sub">
             <div class="size">
                 <h3 class="sub_title">회원가입</h3>
@@ -191,7 +193,7 @@
                 </div>
             </div>
         </div>
-		<!-- 푸터 위치 -->
+		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body> 
 </html>
