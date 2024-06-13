@@ -137,11 +137,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
 
                 <!-- Form -->
-                <form method="get" name="frm" action="/cart/insert.do" enctype="multipart/form-data">
+                <form method="get" name="frm" action="/cart/cart.do" enctype="multipart/form-data">
                   	<!-- Hidden field -->
-                  	<input type="hidden" name="memberno" value="${login.no }">
         			<input type="hidden" name="sellno" value="${vo.sellno }">
-        			<input type="hidden" name="optionno" value="${vo.sellno }">
         			
                   <div class="form-group">
 
