@@ -41,7 +41,7 @@ public class CartController {
         int memberno = login.getNo();
         
         int r = service.delete(memberno, sellno, optionno);
-        return r > 0 ? "success" : "fail";
+        return r > 0 ? "success" : "fail"; // 실험용
     }
 }
 
