@@ -20,5 +20,6 @@ public interface MemberService {
 	//관리자 페이지에서 동작
 	Map<String, Object> list(MemberVO vo);
 	Map<String, Object> listAtOnce(MemberVO vo);
-	Map<String, Object> reportCountList(MemberVO vo);
+	Map<String, Object> reportCountList(MemberVO vo,int isSeller);
+	
 }

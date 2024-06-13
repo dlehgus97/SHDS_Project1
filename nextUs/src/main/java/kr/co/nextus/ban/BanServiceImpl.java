@@ -1,5 +1,6 @@
 package kr.co.nextus.ban;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,13 +15,18 @@ public class BanServiceImpl implements BanService {
 	private BanMapper mapper;
 
 	@Override
-	public Map<String, Object> list(BanVO param) {
+	public Map<String, Object> list(BanVO param, int isSeller) {
 		int count = mapper.count(param); // 총개수
 		// 총페이지수
 		int totalPage = count / 10;
-		if (count % 10 > 0)
-			totalPage++;
-		List<BanVO> list = mapper.list(param); // 목록
+		if (count % 10 > 0) totalPage++;
+		List<BanVO> list = new ArrayList<BanVO>();
+		if(isSeller==0) {
+			list = mapper.memberBanList(param); // 목록
+		}
+		else {
+			list = mapper.sellerBanList(param); // 목록
+		}
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("totalPage", totalPage);
@@ -44,8 +50,6 @@ public class BanServiceImpl implements BanService {
 	public boolean add(BanVO vo, List<Integer> membernos) {
 		int result = 0;
 		for (int m : membernos) {
-			System.out.println("AAA "+vo.getContent());
-			System.out.println("AAA "+vo.getDate());
 			vo.setMemberno(m);
 			result += mapper.add(vo);
 		}

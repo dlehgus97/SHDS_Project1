@@ -23,5 +23,6 @@ public interface MemberMapper {
 	int count(MemberVO param);
 	List<MemberVO> list(MemberVO vo);
 	List<MemberVO> listAtOnce(MemberVO vo);
-	List<MemberVO> reportCountList(MemberVO vo);
+	List<MemberVO> memberReportCountList(MemberVO param);
+	List<MemberVO> sellerReportCountList(MemberVO param);
 }

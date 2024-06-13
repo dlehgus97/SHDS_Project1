@@ -91,8 +91,8 @@
 		ORDER BY no
 	</select>
 
-	<!-- 누적 신고횟수 이메일,닉네임과 함께 출력 -->
-	<select id="reportCountList"
+	<!-- (멤버)누적 신고횟수 이메일,닉네임과 함께 출력 -->
+	<select id="memberReportCountList"
 		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
 		SELECT m.no , m.email, m.nickname,
 		m.regdate, COUNT(r.no) AS reportcount
@@ -101,8 +101,20 @@
 		<include refid="searchSql2" /> AND m.seller=0
 		GROUP BY m.no, m.email, m.nickname, m.regdate
 		HAVING reportcount > 0;
-
 	</select>
+	
+	<!-- (샐러)누적 신고횟수 이메일,닉네임과 함께 출력 -->
+	<select id="sellerReportCountList"
+		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT m.no , m.email, m.nickname,
+		m.regdate, COUNT(r.no) AS reportcount
+		FROM MEMBER m
+		LEFT JOIN REPORT r ON m.no = r.reportedmemberno
+		<include refid="searchSql2" /> AND m.seller=1
+		GROUP BY m.no, m.email, m.nickname, m.regdate
+		HAVING reportcount > 0;
+	</select>
+	
 	<!-- SEARCHSQL2 -->
 	<sql id="searchSql2">
 		<where>
@@ -119,4 +131,6 @@
 			</if>
 		</where>
 	</sql>
+	
+	
 </mapper>

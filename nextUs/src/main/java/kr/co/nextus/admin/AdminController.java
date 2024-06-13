@@ -28,10 +28,7 @@ public class AdminController {
 	public String sellerRegistManagement() {
 		return "admin/sellerRegistManagement";
 	}
-	@RequestMapping("/sellerBanManagement")
-	public String sellerBanManagement() {
-		return "admin/sellerBanManagement";
-	}
+	
 	
 	
 

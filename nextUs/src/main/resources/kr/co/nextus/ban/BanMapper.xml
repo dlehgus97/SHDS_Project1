@@ -19,11 +19,18 @@
 	</insert>
 
 	
-	<select id="list" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
-		SELECT *,(SELECT email FROM MEMBER WHERE no = #{memberno} )as email FROM BAN ORDER BY no
+	<select id="memberBanList" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
+		SELECT *,(SELECT email FROM MEMBER WHERE no = #{memberno} AND seller=0 )as email 
+		FROM BAN
+		ORDER BY no
 		LIMIT #{startIdx}, 10
 	</select>
-	
+	<select id="sellerBanList" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
+		SELECT *,(SELECT email FROM MEMBER WHERE no = #{memberno} AND seller=1 )as email 
+		FROM BAN
+		ORDER BY no
+		LIMIT #{startIdx}, 10
+	</select>
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.ban.BanVO" resultType="int">
 		SELECT COUNT(*) FROM BAN

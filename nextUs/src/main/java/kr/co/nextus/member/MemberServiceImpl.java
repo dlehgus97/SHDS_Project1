@@ -88,8 +88,14 @@ public class MemberServiceImpl implements MemberService {
 
 	//제재내역추가할때 누적신고횟수 보여주는놈
 	@Override
-	public Map<String, Object> reportCountList(MemberVO param) {
-		List<MemberVO> list = mapper.reportCountList(param);
+	public Map<String, Object> reportCountList(MemberVO param,int isSeller) {
+		List<MemberVO> list;
+		if(isSeller==0) {
+			list=mapper.memberReportCountList(param);
+		}else {
+			list=mapper.sellerReportCountList(param);
+		}
+		 
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
 		return map;

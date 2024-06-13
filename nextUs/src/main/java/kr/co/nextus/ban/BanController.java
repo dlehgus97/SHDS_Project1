@@ -31,7 +31,14 @@ public class BanController {
 	@GetMapping("/memberBanManagement")
 	@RequestMapping("/memberBanManagement")
 	public String memberBanManagement(BanVO vo, Model model) {
-		model.addAttribute("map", service.list(vo));
+		model.addAttribute("map", service.list(vo,0));
 		return "admin/memberBanManagement";
+	}
+	
+	@GetMapping("/sellerBanManagement")
+	@RequestMapping("/sellerBanManagement")
+	public String sellerBanManagement(BanVO vo, Model model) {
+		model.addAttribute("map", service.list(vo,1));
+		return "admin/sellerBanManagement";
 	}
 }

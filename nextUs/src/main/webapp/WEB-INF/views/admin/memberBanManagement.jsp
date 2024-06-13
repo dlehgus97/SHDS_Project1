@@ -26,7 +26,7 @@
 			<div class="header">
 			
 				<h2>회원 제재 내역</h2>
-				<button class="button1" onclick="openPopup(); return false;">제재내역 추가</button>
+				<button class="button1" onclick="openPopup(member); return false;">제재내역 추가</button>
 			</div>
 				<div class="bg-wh Ban_div">
 				<table class="member_list">
