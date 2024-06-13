@@ -8,10 +8,40 @@
 <!-- 헤더푸터 css -->
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+
+<link rel="stylesheet" href="/resources/css/reset.css" />
+<link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet" href="/resources/css/contents.css" />
 <!--부트스트랩 Libs CSS -->
 <link rel="stylesheet" href="/resources/css/board/libs.bundle.css" />
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
+<!-- 별점평균 정수형으로 변환하는 js -->
+<script type="text/javascript">
+var ratingAvg = ${vo.rating_avg};
+var ratingAvgInt = Math.floor(ratingAvg);
+console.log(ratingAvgInt);
+
+document.addEventListener("DOMContentLoaded", function() {
+	
+	 // 첫 번째 클래스 조합의 요소들 선택
+    var ratingDivs1 = document.querySelectorAll('.rating.fs-xs.text-dark');
+
+    // 두 번째 클래스 조합의 요소들 선택
+    var ratingDivs2 = document.querySelectorAll('.rating.text-dark.h6.mb-4.mb-md-0');
+
+    // data-value 속성 값을 설정하는 함수
+    function setDataValue(elements, value) {
+        elements.forEach(function(element) {
+            element.setAttribute('data-value', value);
+        });
+    }
+
+    // 원하는 값으로 설정
+    setDataValue(ratingDivs1, ratingAvgInt); // 첫 번째 클래스 조합 요소들의 data-value 설정
+    setDataValue(ratingDivs2, ratingAvgInt); // 두 번째 클래스 조합 요소들의 data-value 설정
+});
+</script>
 </head>
 <body>
 <%-- <h1> 판매글예시 </h1>
@@ -73,7 +103,7 @@
 
                   </div>
                   <div class="col-auto">
-                    <div class="rating fs-xs text-dark" data-value="${vo.rating_avg }">
+                    <div class="rating fs-xs text-dark" data-value="">
                       <div class="rating-item">
                         <i class="fas fa-star"></i>
                       </div>
@@ -107,8 +137,12 @@
                 </div>
 
                 <!-- Form -->
-                <form>
-                  
+                <form method="get" name="frm" action="/cart/insert.do" enctype="multipart/form-data">
+                  	<!-- Hidden field -->
+                  	<input type="hidden" name="memberno" value="${login.no }">
+        			<input type="hidden" name="sellno" value="${vo.sellno }">
+        			<input type="hidden" name="optionno" value="${vo.sellno }">
+        			
                   <div class="form-group">
 
                     <!-- Label -->
@@ -124,15 +158,15 @@
                     <!-- Radio -->
                     <div class="mb-2">
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionRadio" id="sizeRadioOne" value="BRONZE" data-toggle="form-caption" data-target="#sizeCaption" checked>
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioOne" value="${vo.bronzeoptionno }" data-toggle="form-caption" data-target="#sizeCaption" checked>
                         <label class="form-check-label" for="sizeRadioOne">BRONZE</label>
                       </div>
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionRadio" id="sizeRadioTwo" value="SILVER" data-toggle="form-caption" data-target="#sizeCaption">
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioTwo" value="${vo.silveroptionno }" data-toggle="form-caption" data-target="#sizeCaption">
                         <label class="form-check-label" for="sizeRadioTwo">SILVER</label>
                       </div>
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionRadio" id="sizeRadioThree" value="GOLD" data-toggle="form-caption" data-target="#sizeCaption">
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioThree" value="${vo.goldoptionno }" data-toggle="form-caption" data-target="#sizeCaption">
                         <label class="form-check-label" for="sizeRadioThree">GOLD</label>
                       </div>
                     </div>
@@ -141,7 +175,7 @@
 					  document.addEventListener('DOMContentLoaded', function () {
 					    const priceElement = document.getElementById('price');
 					    const descriptionElement = document.getElementById('optionDescription');
-					    const radios = document.querySelectorAll('input[name="optionRadio"]');
+					    const radios = document.querySelectorAll('input[name="optionno"]');
 					    const select = document.getElementById('optionSelect');
 					
 					    const prices = {
@@ -456,7 +490,7 @@
 
                 <!-- Rating -->
                  <!-- 별점 별개수로 표현하는곳 소수점은 안되는듯 -->
-                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="3">
+                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="">
                   <div class="rating-item">
                     <i class="fas fa-star"></i>
                   </div>
@@ -498,10 +532,13 @@
               <hr class="my-8">
 
               <!-- Form -->
-              <form>
+              <form method="post" name="frm" action="/review/insert.do" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-12 mb-6 text-center">
-
+					
+        			<!-- Hidden field -->
+        			<input type="hidden" name="no" value="${vo.sellno }">
+        			<input type="hidden" name="writeno" value="${login.no }">
                     <!-- Text -->
                     <p class="mb-1 fs-xs">
                       Score:
@@ -511,7 +548,7 @@
                     <div class="rating-form">
 
                       <!-- Input -->
-                      <input class="rating-input" type="range" min="1" max="5" value="5">
+                      <input class="rating-input" name="score" type="range" min="1" max="5" value="5">
 
                       <!-- Rating -->
                       <div class="rating h5 text-dark" data-value="5">
@@ -533,24 +570,14 @@
                       </div>
 
                     </div>
-
-                  </div>
-                  <div class="col-12 col-md-6">
-
-                    <!-- Name -->
-                    <!-- 로그인한 사용자 이름 들어가게 -->
-                    <div class="form-group">
-                      <label class="visually-hidden" for="reviewName">Your Name:</label>
-                      <input class="form-control form-control-sm" id="reviewName" type="text" placeholder="Your Name *" required>
-                    </div>
-
+                    
                   </div>
                   <div class="col-12">
-
+			
                     <!-- 리뷰 제목 -->
                     <div class="form-group">
                       <label class="visually-hidden" for="reviewTitle">Review Title:</label>
-                      <input class="form-control form-control-sm" id="reviewTitle" type="text" placeholder="Review Title *" required>
+                      <input class="form-control form-control-sm" name="title" id="reviewTitle" type="text" placeholder="Review Title *" required>
                     </div>
 
                   </div>
@@ -559,7 +586,7 @@
                     <!-- 리뷰 내용 -->
                     <div class="form-group">
                       <label class="visually-hidden" for="reviewText">Review:</label>
-                      <textarea class="form-control form-control-sm" id="reviewText" rows="5" placeholder="Review *" required></textarea>
+                      <textarea class="form-control form-control-sm" name="text" id="reviewText" rows="5" placeholder="Review *" required></textarea>
                     </div>
 
                   </div>
@@ -578,7 +605,7 @@
 
             <!-- Reviews -->
             <div class="mt-8">
-
+			<<c:forEach var="vo" items="${review.list }">
               <!-- Review -->
               <div class="review">
                 <div class="review-body">
@@ -600,7 +627,7 @@
                         <div class="col-12">
 
                           <!-- Rating -->
-                          <div class="rating fs-sm text-dark" data-value="5">
+                          <div class="rating fs-sm text-dark" data-value="${vo.score }">
                             <div class="rating-item">
                               <i class="fas fa-star"></i>
                             </div>
@@ -623,7 +650,7 @@
 
                           <!-- 리뷰 작성자, 등록일자 -->
                           <span class="fs-xs text-muted">
-                            Logan Edwards, <time datetime="2019-07-25">25 Jul 2019</time>
+                            ${vo.writer }, ${vo.writedate }
                           </span>
 
                         </div>
@@ -631,44 +658,45 @@
 
                       <!-- 리뷰 제목 -->
                       <p class="mb-2 fs-lg fw-bold">
-                        So cute!
+                        ${vo.title }
                       </p>
 
                       <!-- 리뷰 내용 -->
                       <p class="text-gray-500">
-                        Justo ut diam erat hendrerit. Morbi porttitor, per eu. Sodales curabitur diam sociis. Taciti lobortis nascetur. Ante laoreet odio hendrerit.
-                        Dictumst curabitur nascetur lectus potenti dis sollicitudin habitant quis vestibulum.
+                        ${vo.text }
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
+              </c:forEach>
             </div>
 
-            <!-- 페이징 처리 -->
-            <nav class="d-flex justify-content-center mt-9">
-              <ul class="pagination pagination-sm text-gray-400">
-                <li class="page-item">
-                  <a class="page-link page-link-arrow" href="#">
-                    <i class="fa fa-caret-left"></i>
-                  </a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link page-link-arrow" href="#">
-                    <i class="fa fa-caret-right"></i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+           
+			<!-- 페이지처리 -->
+			<div class="pagenate">
+				<ul class='paging'>
+					<c:if test="${review.prev }">
+						<li><a
+							href="view.do?no=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}">
+								<< </a></li>
+					</c:if>
+					<c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
+						<c:if test="${p == ReviewVO.page}">
+							<li><a href='#;' class='current'>${p}</a></li>
+						</c:if>
+						<c:if test="${p != ReviewVO.page}">
+							<li><a
+								href='view.do?no=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}'>${p}</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${review.next }">
+						<li><a
+							href="view.do?no=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}">
+								>> </a></li>
+					</c:if>
+				</ul>
+			</div>
 
           </div>
         </div>
