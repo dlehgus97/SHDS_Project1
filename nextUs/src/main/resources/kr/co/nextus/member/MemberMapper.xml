@@ -3,47 +3,52 @@
 <mapper namespace="kr.co.nextus.member.MemberMapper">
 	<insert id="regist" parameterType="kr.co.nextus.member.MemberVO">
 		INSERT INTO MEMBER (
-			no, email, pwd, name,
-			nickname, gender, birthday, hp, zipcode,
-			addr1, addr2, regdate, state, seller,
-			profile_org, profile_real)
+		no, email, pwd, name,
+		nickname, gender, birthday, hp, zipcode,
+		addr1, addr2, regdate, state, seller,
+		profile_org, profile_real)
 		VALUES (
-			#{no}, #{email}, #{pwd}, #{name},
-			#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
-			#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
-			#{profile_org}, #{profile_real});
+		#{no}, #{email}, #{pwd}, #{name},
+		#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
+		#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
+		#{profile_org}, #{profile_real});
 		<selectKey order="AFTER" keyProperty="no" resultType="int">
-			SELECT LAST_INSERT_ID()
+			SELECT
+			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
 	<select id="emailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE email=#{email}
 	</select>
-	
-	<select id="login" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
-		SELECT * FROM MEMBER WHERE email=#{email} AND pwd=MD5(#{pwd})
+
+	<select id="login" parameterType="kr.co.nextus.member.MemberVO"
+		resultType="kr.co.nextus.member.MemberVO">
+		SELECT * FROM MEMBER WHERE email=#{email} AND
+		pwd=MD5(#{pwd})
 	</select>
-	
-	<select id="detail" parameterType="int" resultType="kr.co.nextus.member.MemberVO" >
-		SELECT * FROM MEMBER WHERE no=#{no}
+
+	<select id="detail" parameterType="int"
+		resultType="kr.co.nextus.member.MemberVO">
+		SELECT * FROM MEMBER WHERE
+		no=#{no}
 	</select>
-	
+
 	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
 		UPDATE MEMBER SET
-			<if test="pwd != ''">
+		<if test="pwd != ''">
 			pwd = MD5(#{pwd}),
-			</if>
-			name = #{name},
-			gender = #{gender},
-			birthday = #{birthday},
-			hp = #{hp},
-			zipcode = #{zipcode},
-			addr1 = #{addr1},
-			addr2 = #{addr2}	
+		</if>
+		name = #{name},
+		gender = #{gender},
+		birthday = #{birthday},
+		hp = #{hp},
+		zipcode = #{zipcode},
+		addr1 = #{addr1},
+		addr2 = #{addr2}
 		WHERE no = #{no}
 	</update>
-	
-	
+
+
 	<!-- ========== -->
 	<!-- 관리자 페이지 -->
 	<!-- ========== -->
@@ -52,7 +57,8 @@
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
 					no LIKE '%${searchWord}%' OR
-					email LIKE '%${searchWord}%' OR
+					email LIKE '%${searchWord}%'
+					OR
 					nickname LIKE '%${searchWord}%'
 				</if>
 				<if test="searchType != 'all'">
@@ -61,25 +67,56 @@
 			</if>
 		</where>
 	</sql>
-	
-	<!-- 리스트 10개씩 출력-->
+
+	<!-- 리스트 10개씩 출력 -->
 	<select id="list" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
-		SELECT *,(SELECT COUNT(*) FROM BUYLIST WHERE memberno=MEMBER.no)as purchaseCount
+		SELECT *,(SELECT COUNT(*) FROM BUYLIST WHERE memberno=MEMBER.no)as
+		purchaseCount
 		FROM MEMBER
-		<include refid="searchSql"/>
+		<include refid="searchSql" />
 		ORDER BY no
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.member.MemberVO" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
-		<include refid="searchSql"/>
+		<include refid="searchSql" />
 	</select>
-	<!-- 리스트 한번에 다 출력-->
-	<select id="listAtOnce" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+
+	<!-- 리스트 한번에 다 출력 -->
+	<select id="listAtOnce"
+		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
 		SELECT * FROM MEMBER
-		<include refid="searchSql"/>
+		<!-- <include refid="searchSql"/> -->
 		ORDER BY no
 	</select>
-	
+
+	<!-- 누적 신고횟수 이메일,닉네임과 함께 출력 -->
+	<select id="reportCountList"
+		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT m.no , m.email, m.nickname,
+		m.regdate, COUNT(r.no) AS reportcount
+		FROM MEMBER m
+		LEFT JOIN REPORT r ON m.no = r.reportedmemberno
+		<include refid="searchSql2" /> AND m.seller=0
+		GROUP BY m.no, m.email, m.nickname, m.regdate
+		HAVING reportcount > 0;
+
+	</select>
+	<!-- SEARCHSQL2 -->
+	<sql id="searchSql2">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					m.no LIKE '%${searchWord}%' OR
+					m.email LIKE '%${searchWord}%'
+					OR
+					m.nickname LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					m.${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
 </mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +45,45 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!-- 테이블내용 작성 -->
+							<c:if test="${empty map.list}">
+							<tr>
+								<td class="first" colspan="8">제재 내역이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${!empty map.list }">
+							<c:forEach var="vo" items="${map.list}">
+									<tr>
+										<td>${vo.no != null ? vo.no : '(미입력)'}</td>
+										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
+										<td>${vo.content != null ? vo.content : '(미입력)'}</td>
+										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.date}" /></td>
+	
+									</tr>
+								
+
+							</c:forEach>
+						</c:if>
 						</tbody>
 					</table>
+					<!-- paging -->
+                    <div class="pagenate">
+                        <ul class='paging'>
+                        <c:if test="${map.prev }">
+                        	<li><a href="memberBanManagement.do?page=${map.startPage-1 }&searchType=${BanVO.searchType}&searchWord=${BanVO.searchWord}"> << </a></li>
+                        </c:if>
+                        <c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
+                        	<c:if test="${p == MemberVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != MemberVO.page}">
+                            <li><a href='memberBanManagement.do?page=${p}&searchType=${BanVO.searchType}&searchWord=${BanVO.searchWord}'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${map.next }">
+                        	<li><a href="memberBanManagement.do?page=${map.endPage+1 }&searchType=${BanVO.searchType}&searchWord=${BanVO.searchWord}"> >> </a></li>
+                        </c:if>
+                        </ul> 
+                    </div>
 				</div>
 
 			

@@ -67,8 +67,7 @@
 							<th>누적 구매수</th>
 						</tr>
 					</thead>
-					<tbody class="scrollable-tbody">
-
+					<tbody>
 						<c:if test="${empty map.list}">
 							<tr>
 								<td class="first" colspan="8">검색 결과가 없습니다.</td>

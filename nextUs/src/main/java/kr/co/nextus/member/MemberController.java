@@ -152,4 +152,9 @@ public class MemberController {
 		model.addAttribute("map", service.list(vo));
 		return "admin/memberStatus";
 	}
+	@RequestMapping("/addBanPopup")
+	public String addBanPopup(MemberVO vo, Model model) {
+		model.addAttribute("map", service.reportCountList(vo));
+		return "admin/addBanPopup";
+	}
 }

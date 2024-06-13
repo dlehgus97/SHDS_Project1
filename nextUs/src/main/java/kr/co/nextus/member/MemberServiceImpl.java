@@ -80,14 +80,18 @@ public class MemberServiceImpl implements MemberService {
 	//10개씩 출력하는게 아니라 한번에 쫘르륵 하게하는거임요ㅋ
 	@Override
 	public Map listAtOnce(MemberVO param) {
-
 		List<MemberVO> list = mapper.listAtOnce(param);
-
 		Map<String, Object> map = new HashMap<>();
-
 		map.put("list", list);
+		return map;
+	}
 
-		
+	//제재내역추가할때 누적신고횟수 보여주는놈
+	@Override
+	public Map<String, Object> reportCountList(MemberVO param) {
+		List<MemberVO> list = mapper.reportCountList(param);
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
 		return map;
 	}
 

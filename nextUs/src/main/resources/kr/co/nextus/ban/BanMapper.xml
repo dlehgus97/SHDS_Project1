@@ -3,40 +3,24 @@
 <mapper namespace="kr.co.nextus.ban.BanMapper">
 
 
+
+	<!-- ========== -->
+	<!-- 관리자 페이지 -->
+	<!-- ========== -->
 	<insert id="add" parameterType="kr.co.nextus.ban.BanVO">
 		INSERT INTO BAN (
 			memberno, content,date
 		) VALUES (
 			#{memberno},#{content},#{date}
 		)
-		<selectKey keyProperty="banno" order="AFTER" resultType="int">
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
-	
-	
-	
-	
-	<!-- ========== -->
-	<!-- 관리자 페이지 -->
-	<!-- ========== -->
-	<!-- 리스트 -->
-	<sql id="searchSql">
-		<where>
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchType == 'all'">
-					no like no <!-- 전체 검색이라 그냥 이렇게 썼음 -->
-				</if>
-				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
-				</if>
-			</if>
-		</where>
-	</sql>
+
 	
 	<select id="list" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
-		SELECT * FROM BAN ORDER BY banno
+		SELECT *,(SELECT email FROM MEMBER WHERE no = #{memberno} )as email FROM BAN ORDER BY no
 		LIMIT #{startIdx}, 10
 	</select>
 	

@@ -18,21 +18,7 @@ public class AdminController {
 	public String sellerSettlement() {
 		return "admin/sellerSettlement";
 	}
-	
-	@RequestMapping("/memberBanManagement")
-	public String memberBanManagement() {
-		return "admin/memberBanManagement";
-	}
-	
-	
-	@RequestMapping("/addBanPopup")
-	public String addBanPopup() {
-		return "admin/addBanPopup";
-	}
-	
-	
-	
-	
+
 	
 	@RequestMapping("/saleStatement")
 	public String saleStatement() {

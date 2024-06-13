@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -21,11 +21,11 @@
 				<option value="all">전체</option>
 				<option value="email">이메일</option>
 				<option value="nickname">닉네임</option>
-			</select>
-			<input type="text" name="searchWord" />
-			<input type="submit" value="검색">
+			</select> <input type="text" name="searchWord" /> <input type="submit"
+				value="검색">
 		</form>
 		<br>
+		<form method="post" name="banForm" id="banForm" action="BAN.do">
 		<table class="member_list">
 			<colgroup>
 				<col width="200px" />
@@ -48,33 +48,32 @@
 			<tbody>
 				<c:forEach var="vo" items="${map.list }">
 					<tr>
-						<td align="center"><input type="checkbox" name="select"
-							id="chkRow"></td>
-						<td align="center">${vo.email }</td>
-						<td align="center">${vo.nickname }</td>
-						<td align="center" class="date"><fmt:formatDate
-								value="${vo.regdate }" pattern="YYYY-MM-dd" /></td>
-						<td align="center"></td>
+						<td><input name="membernos" type="checkbox" value='${vo.no}'></td>
+						<td>${vo.email != null ? vo.email : '(미입력)'}</td>
+						<td>${vo.nickname != null ? vo.nickname : '(미입력)'}</td>
+						<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${vo.regdate}" /></td>
+						<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
+						<td>
+							<button class="rev_button" type="button">신고내역 보기</button>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	<div class="ban_lower">
-		<div class="doBan">
-		<form method="get" name="banForm" id="banForm" action="banMember.do" style="font-size:30px;">
-			제재 사유<br>
-			<textarea name="context" id="context"></textarea><br>
-			제재 기간
-			<input type="date" name = "date" id="date" style="width:345px;height:50px;font-size:20px">
-			<br><br>
-			<input type="submit" id="banSubmit" value="등록하기">
-			
-		</form>
+		<div class="doBan" style="font-size: 30px;">
+				제재 사유<br>
+				<textarea name="content" id="content"></textarea>
+				<br> 제재 기간 <input type="date" name="date" id="date"
+					style="width: 345px; height: 50px; font-size: 20px"> <br>
+				<br> <input type="submit" id="banSubmit" value="등록하기">
+
 		</div>
 	</div>
-	
 
+	</form>
 
 </body>
 </html>
