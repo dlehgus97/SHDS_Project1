@@ -23,7 +23,12 @@
     </div>
     <div id="header_right_container">
         <div id="header_userinfo_menu">
-            <button id="header_regist_seller" class="header_right_object">셀러등록</button>
+            <c:if test="${!empty login && login.seller == 1}">
+                <a id="header_regist_seller" class="header_right_object" href="seller/selllistManagement">셀러 마이페이지</a>
+            </c:if>
+            <c:if test="${!empty login && login.seller == 0}">
+                <button id="header_regist_seller" class="header_right_object">셀러등록</button>
+            </c:if>
             <div id="header_chat" class="header_right_object">
             	<c:if test="${!empty login }">
                 <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">

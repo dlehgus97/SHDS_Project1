@@ -1,6 +1,11 @@
 package kr.co.nextus.seller;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import kr.co.nextus.review.ReviewVO;
+import kr.co.nextus.selllist.SellListVO;
 
 // MyBatis mapper 인터페이스 정의
 @Mapper
@@ -13,4 +18,8 @@ public interface SellerMapper {
 	
 	// 판매자 정보를 업데이트
 	int updateSeller(SellerVO seller);
+	
+	List<SellListVO> getSellerSellList(int no);
+	
+	List<ReviewVO> getSellerReviews(int no);
 }

@@ -10,6 +10,8 @@ public class SellerVO {
 	private int category2;
 	private String bank;
 	private String account;
-	private double rating_avg;
-	private int review_cnt;
+	private double seller_rating_avg;
+	private int seller_review_cnt;
+	private String profile_real;
+	private String nickname;
 }
