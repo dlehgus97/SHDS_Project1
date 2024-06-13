@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +25,7 @@
 		<div class="right">
 			<div class="bg-wh seller_div">
 				<h1 style="margin-left: 30px;margin-top: 10px;font-size:30px;">샐러 등록 요청</h1>
-				<p class="NUM_1">&nbsp;6&nbsp;</p>
+				<p class="NUM_1">&nbsp;${map.count}&nbsp;</p>
 				<!-- 여기 미승인 건수 넣기 -->
 				<p class="NUM_2">미승인 건수</p>
 				<!-- form 수정필요 -->
@@ -57,9 +59,50 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- 내용설정하기 -->
+						<c:if test="${empty map.list}">
+							<tr>
+								<td class="first" colspan="8">검색 결과가 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${!empty map.list }">
+							<c:forEach var="vo" items="${map.list}">
+								
+									<tr>
+										<td>${vo.no != null ? vo.no : '(미입력)'}</td>
+										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
+										<td>${vo.nickname != null ? vo.nickname : '(미입력)'}</td>
+										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></td>
+										<td>
+											<button class="rev_button" type="button">상세보기</button>
+										</td>
+									</tr>
+								
+
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
+
+
+				<!-- paging -->
+                    <div class="pagenate">
+                        <ul class='paging'>
+                        <c:if test="${map.prev }">
+                        	<li><a href="sellerRegistManagement.do?page=${map.startPage-1 }&searchType=${SellerRequestVO.searchType}&searchWord=${SellerRequestVO.searchWord}"> << </a></li>
+                        </c:if>
+                        <c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
+                        	<c:if test="${p == SellerRequestVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != SellerRequestVO.page}">
+                            <li><a href='sellerRegistManagement.do?page=${p}&searchType=${SellerRequestVO.searchType}&searchWord=${SellerRequestVO.searchWord}'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${map.next }">
+                        	<li><a href="sellerRegistManagement.do?page=${map.endPage+1 }&searchType=${SellerRequestVO.searchType}&searchWord=${SellerRequestVO.searchWord}"> >> </a></li>
+                        </c:if>
+                        </ul> 
+                    </div>
 
 			</div>
 		</div>

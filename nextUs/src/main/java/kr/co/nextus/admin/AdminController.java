@@ -24,13 +24,7 @@ public class AdminController {
 	public String saleStatement() {
 		return "admin/saleStatement";
 	}
-	@RequestMapping("/sellerRegistManagement")
-	public String sellerRegistManagement() {
-		return "admin/sellerRegistManagement";
-	}
-	
-	
-	
+
 
 	@RequestMapping("/refundRequest")
 	public String refundRequest() {

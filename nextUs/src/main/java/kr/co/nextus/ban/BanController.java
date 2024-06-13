@@ -19,23 +19,32 @@ public class BanController {
 	private BanService service;
 	
 	
-	@PostMapping("/BAN.do")
-	public String BAN(BanVO vo,Model model, @RequestParam List<Integer> membernos) {
+	@PostMapping("/BAN0.do")
+	public String BAN0(BanVO vo,Model model, @RequestParam List<Integer> membernos) {
 		model.addAttribute("ban", service.add(vo,membernos));
 		
 		model.addAttribute("msg", "제재 성공");
-		model.addAttribute("url", "/addBanPopup");
+		model.addAttribute("url", "/addBanPopupMember");
 		return "common/alert";
 	}
 	
-	@GetMapping("/memberBanManagement")
+	@PostMapping("/BAN1.do")
+	public String BAN1(BanVO vo,Model model, @RequestParam List<Integer> membernos) {
+		model.addAttribute("ban", service.add(vo,membernos));
+		
+		model.addAttribute("msg", "제재 성공");
+		model.addAttribute("url", "/addBanPopupSeller");
+		return "common/alert";
+	}
+	
+	@GetMapping("/memberBanManagement.do")
 	@RequestMapping("/memberBanManagement")
 	public String memberBanManagement(BanVO vo, Model model) {
 		model.addAttribute("map", service.list(vo,0));
 		return "admin/memberBanManagement";
 	}
 	
-	@GetMapping("/sellerBanManagement")
+	@GetMapping("/sellerBanManagement.do")
 	@RequestMapping("/sellerBanManagement")
 	public String sellerBanManagement(BanVO vo, Model model) {
 		model.addAttribute("map", service.list(vo,1));

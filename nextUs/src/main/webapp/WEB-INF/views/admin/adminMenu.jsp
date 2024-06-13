@@ -20,8 +20,8 @@
 			</li>
 			<li><a id="sellerRegistManagement_M" href="/sellerRegistManagement">셀러관리</a>
 				<ul>
-					<li><a id="sellerRegistManagement" href="/sellerRegistManagement">샐러 등록 관리</a></li>
-					<li><a id="sellerBanManagement" href="/sellerBanManagement">샐러 제재 관리</a></li>
+					<li><a id="sellerRegistManagement" href="/sellerRegistManagement">셀러 등록 관리</a></li>
+					<li><a id="sellerBanManagement" href="/sellerBanManagement">셀러 제재 관리</a></li>
 				</ul>
 			</li>
 			<li><a id="memberStatus_M" href="/memberStatus">회원관리</a>

@@ -76,3 +76,6 @@ thead{
 	background-color: #d6e1e9;
 	border-bottom: 2px solid black;
 }
+tbody td{
+	text-align:center;
+}

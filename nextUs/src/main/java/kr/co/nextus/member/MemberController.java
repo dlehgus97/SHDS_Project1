@@ -152,14 +152,16 @@ public class MemberController {
 		model.addAttribute("map", service.list(vo));
 		return "admin/memberStatus";
 	}
+	
 	@RequestMapping("/addBanPopupMember")
 	public String addBanPopupMember(MemberVO vo, Model model) {
 		model.addAttribute("map", service.reportCountList(vo,0));
-		return "admin/addBanPopup";
+		return "admin/addBanPopupMember";
 	}
+	
 	@RequestMapping("/addBanPopupSeller")
 	public String addBanPopupSeller(MemberVO vo, Model model) {
 		model.addAttribute("map", service.reportCountList(vo,1));
-		return "admin/addBanPopup";
+		return "admin/addBanPopupSeller";
 	}
 }

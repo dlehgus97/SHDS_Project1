@@ -74,7 +74,7 @@
 											pattern="yyyy-MM-dd" value="${vo.postdate}" /></td>
 									<td>${vo.view_cnt != null ? vo.view_cnt : '0'}</td>
 									<td>
-									<button class="rev_button" type="button">리뷰 보기</button>
+									<button class="rev_button" type="button" onclick="goToSellPage(${vo.sellno})">판매글 보기</button>
 									<button class="del_button" type="button">삭제</button>
 									</td>
 								</tr>
@@ -88,5 +88,13 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<script>
+    function goToSellPage(sellno) {
+        var sellPageUrl = '/selllist/view.do?no=' + sellno;
+        window.location.href = sellPageUrl;
+    }
+</script>
 </body>
 </html>

@@ -38,7 +38,8 @@
 	<!-- 쿠폰별 나눠준 멤버 리스트 -->
 	<select id="listAsName" parameterType="kr.co.nextus.coupon.CouponVO"
 		resultType="kr.co.nextus.coupon.CouponVO">
-		SELECT (SELECT email FROM MEMBER WHERE no = #{memberno} )as memberEmail,status FROM COUPON WHERE name=#{name}
+		SELECT (SELECT email FROM MEMBER WHERE no = #{memberno} )as memberEmail,status
+		FROM COUPON WHERE name=#{name}
 	</select>
 
 </mapper>

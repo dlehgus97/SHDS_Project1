@@ -25,7 +25,7 @@
 				value="검색">
 		</form>
 		<br>
-		<form method="post" name="banForm" id="banForm" action="BAN.do">
+		<form method="post" name="banForm" id="banForm" action="BAN0.do">
 		<table class="member_list">
 			<colgroup>
 				<col width="200px" />

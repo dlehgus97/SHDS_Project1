@@ -20,12 +20,12 @@ public class BanServiceImpl implements BanService {
 		// 총페이지수
 		int totalPage = count / 10;
 		if (count % 10 > 0) totalPage++;
-		List<BanVO> list = new ArrayList<BanVO>();
+		List<BanVO> list;
+		
 		if(isSeller==0) {
-			list = mapper.memberBanList(param); // 목록
-		}
-		else {
-			list = mapper.sellerBanList(param); // 목록
+			list = mapper.memberBanList(param); // 멤버밴목록
+		}else {
+			list = mapper.sellerBanList(param); // 샐러밴목록
 		}
 
 		Map<String, Object> map = new HashMap<>();

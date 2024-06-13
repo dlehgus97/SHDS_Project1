@@ -7,6 +7,7 @@ function openPopup(pageName) {
             var top = (screenHeight - popupHeight)/2 -100;
 			
 			var url = "/addBanPopup"+pageName+".do";
+			console.log(url);
             window.open(url, "addBan", `width=${popupWidth},height=${popupHeight},left=${left},top=${top},resizable=yes,scrollbars=yes`);
             console.log('open');
 }

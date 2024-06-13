@@ -26,7 +26,7 @@
 			<div class="header">
 			
 				<h2>샐러 제재 내역</h2>
-				<button class="button1" onclick="openPopup(seller); return false;">제재내역 추가</button>
+				<button class="button1" onclick="openPopup('Seller'); return false;">제재내역 추가</button>
 			</div>
 				<div class="bg-wh Ban_div">
 				<table class="member_list">
@@ -56,7 +56,7 @@
 										<td>${vo.no != null ? vo.no : '(미입력)'}</td>
 										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 										<td>${vo.content != null ? vo.content : '(미입력)'}</td>
-										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.date}" /></td>
+										<td class="date">~<fmt:formatDate pattern="yyyy-MM-dd" value="${vo.date}" /></td>
 	
 									</tr>
 								
@@ -66,24 +66,25 @@
 						</tbody>
 					</table>
 					<!-- paging -->
-                    <div class="pagenate">
+				<div class="pagenate">
                         <ul class='paging'>
                         <c:if test="${map.prev }">
-                        	<li><a href="sellerBanManagement.do?page=${map.startPage-1 }&searchType=${BanVO.searchType}&searchWord=${BanVO.searchWord}"> << </a></li>
+                        	<li><a href="sellerBanManagement?page=${map.startPage-1 }"> << </a></li>
                         </c:if>
                         <c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
-                        	<c:if test="${p == MemberVO.page}">
+                        	<c:if test="${p == BanVO.page}">
                             <li><a href='#;' class='current'>${p}</a></li>
                             </c:if>
-                            <c:if test="${p != MemberVO.page}">
-                            <li><a href='sellerBanManagement.do?page=${p}&searchType=${BanVO.searchType}&searchWord=${BanVO.searchWord}'>${p}</a></li>
+                            <c:if test="${p != BanVO.page}">
+                            <li><a href='sellerBanManagement?page=${p}'>${p}</a></li>
                             </c:if>
                         </c:forEach>
                         <c:if test="${map.next }">
-                        	<li><a href="sellerBanManagement.do?page=${map.endPage+1 }&searchType=${BanVO.searchType}&searchWord=${BanVO.searchWord}"> >> </a></li>
+                        	<li><a href="sellerBanManagement?page=${map.endPage+1 }"> >> </a></li>
                         </c:if>
                         </ul> 
                     </div>
+                    
 				</div>
 
 			

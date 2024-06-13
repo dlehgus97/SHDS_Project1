@@ -1,6 +1,5 @@
 package kr.co.nextus.ban;
 
-
 import java.util.List;
 import java.util.Map;
 
