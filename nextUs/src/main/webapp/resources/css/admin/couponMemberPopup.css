@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	border-bottom: 2px solid black;
+	padding: 7px;
+	 flex: 0 1 auto; /* 콘텐츠에 맞게 크기가 조절되는 상단 영역 */
+  	
+}
+
+.memberList {
+	margin-top: 10px;
+	background-color: lightgray; /* 시각적으로 구분하기 위해 배경색 추가 (선택사항) */
+	height: 685px;
+	flex: 1 1 auto; /* 남은 공간을 차지하는 하단 영역 */
+  	overflow: auto; /* 스크롤이 필요할 경우를 대비해 오버플로 설정 */
+}
+
+tbody td {
+      text-align: center;
+    }

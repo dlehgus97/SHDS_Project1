@@ -11,94 +11,109 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
-    private MemberMapper memberMapper; // MemberMapper 주입
+    private MemberMapper mapper; // MemberMapper 주입
 
     @Override
     public boolean regist(MemberVO vo) {
-        return memberMapper.regist(vo) == 1; // 가입 성공 여부 반환
+        return mapper.regist(vo) == 1; // 가입 성공 여부 반환
     }
 
     @Override
     public int emailCheck(String email) {
-        return memberMapper.emailCheck(email);
+        return mapper.emailCheck(email);
     }
 
     @Override
     public MemberVO login(MemberVO vo) {
-        return memberMapper.login(vo);
+        return mapper.login(vo);
     }
+
 
     @Override
     public MemberVO detail(MemberVO vo) {
-        return memberMapper.detail(vo);
+        return mapper.detail(vo);
     }
-
+    
     @Override
     public int update(MemberVO vo) {
-        return memberMapper.update(vo);
+        return mapper.update(vo);
     }
 
     @Override
     public boolean findid(MemberVO vo) {
-        return memberMapper.findid(vo) == 1; // 아이디 찾기 성공 여부 반환
+        return mapper.findid(vo) == 1; // 아이디 찾기 성공 여부 반환
     }
 
     @Override
     public MemberVO findByEmail(String email) {
-        return memberMapper.findByEmail(email);
+        return mapper.findByEmail(email);
     }
 
     @Override
     public boolean checkMemberExist(String email) {
         // 실제 데이터베이스에서 회원을 조회하여 존재하는지 확인
         // 예시로 직접 구현한 메서드 호출
-        return memberMapper.findByEmail(email)==null ? false : true;
+        return mapper.findByEmail(email)==null ? false : true;
     } 
     
     public boolean insertMember(MemberVO vo) {
         try {
-            memberMapper.insertMember(vo);
+        	mapper.insertMember(vo);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
-    @Override
-    public Map index(MemberVO vo) {
-        int totalCount = memberMapper.count(vo); // 총 게시물 수
-        // 총 페이지 수
-        int totalPage = totalCount / 10;
-        if (totalCount % 10 > 0) totalPage++;
-
-        // 시작인덱스
-        int startIdx = (vo.getPage() - 1) * 10;
-
-        // vo.getPage()가 0이라서 -10부터 검색되는걸 막아봤는데 맞는지는 모름
-        if (startIdx < 0) startIdx = 0;
-
-        vo.setStartIdx(startIdx); // sql문에 파라미터로 넣어줌
-        List<MemberVO> list = memberMapper.list(vo); // 목록
-
-        // 페이징처리
-        int endPage = (int)(Math.ceil(vo.getPage() / 10.0) * 10); // 끝페이지
-        int startPage = endPage - 9; // 시작페이지
-
-        if (endPage > totalPage) endPage = totalPage;
-        boolean prev = startPage > 1;
-        boolean next = endPage < totalPage;
-
-        Map map = new HashMap();
-        map.put("totalCount", totalCount);
+	
+	//관리자
+	@Override
+	public Map list(MemberVO param) {
+		int count = mapper.count(param); // 총개수
+        // 총페이지수
+        int totalPage = count / 10;
+        if (count % 10 > 0) totalPage++;
+        List<MemberVO> list = mapper.list(param); // 목록
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
         map.put("totalPage", totalPage);
-        map.put("list", list); // 모델에 직접 넣어줘도 됨
-
+        map.put("list", list);
+        
+        // 하단에 페이징처리
+        int endPage = (int)(Math.ceil(param.getPage()/10.0)*10);
+        int startPage = endPage - 9;
+        if (endPage > totalPage) endPage = totalPage;
+        boolean isPrev = startPage > 1;
+        boolean isNext = endPage < totalPage;
         map.put("endPage", endPage);
         map.put("startPage", startPage);
-        map.put("prev", prev);
-        map.put("next", next);
+        map.put("isPrev", isPrev);
+		map.put("isNext", isNext);
+		return map;
+	}
+	
+	//10개씩 출력하는게 아니라 한번에 쫘르륵 하게하는거임요ㅋ
+	@Override
+	public Map listAtOnce(MemberVO param) {
+		List<MemberVO> list = mapper.listAtOnce(param);
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		return map;
+	}
 
-        return map;
-    }
+	//제재내역추가할때 누적신고횟수 보여주는놈
+	@Override
+	public Map<String, Object> reportCountList(MemberVO param,int isSeller) {
+		List<MemberVO> list;
+		if(isSeller==0) {
+			list=mapper.memberReportCountList(param);
+		}else {
+			list=mapper.sellerReportCountList(param);
+		}
+		 
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		return map;
+	}
 }

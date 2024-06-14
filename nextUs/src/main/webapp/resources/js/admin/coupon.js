@@ -32,3 +32,4 @@
                 window.location.href = '/giveCoupon'; // 실제 페이지 경로로 변경
             }
         }
+       

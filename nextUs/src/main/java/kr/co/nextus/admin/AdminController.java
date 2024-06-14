@@ -18,29 +18,13 @@ public class AdminController {
 	public String sellerSettlement() {
 		return "admin/sellerSettlement";
 	}
+
 	
-	@RequestMapping("/memberBanManagement")
-	public String memberBanManagement() {
-		return "admin/memberBanManagement";
-	}
-	@RequestMapping("/addBanPopup")
-	public String addBanPopup() {
-		return "admin/addBanPopup";
-	}
 	@RequestMapping("/saleStatement")
 	public String saleStatement() {
 		return "admin/saleStatement";
 	}
-	@RequestMapping("/sellerRegistManagement")
-	public String sellerRegistManagement() {
-		return "admin/sellerRegistManagement";
-	}
-	@RequestMapping("/sellerBanManagement")
-	public String sellerBanManagement() {
-		return "admin/sellerBanManagement";
-	}
-	
-	
+
 
 	@RequestMapping("/refundRequest")
 	public String refundRequest() {

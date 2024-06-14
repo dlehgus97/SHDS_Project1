@@ -71,6 +71,8 @@
 							<a class="btn" href="write.do">글작성 </a>
 						</c:if>
 					</div>
+					
+					<!-- 페이지처리 -->
 					<div class="pagenate">
 						<ul class='paging'>
 							<c:if test="${map.prev }">
@@ -95,7 +97,7 @@
 						</ul>
 					</div>
 
-					<!-- 페이지처리 -->
+					<!-- 검색 -->
 					<div class="bbsSearch">
 						<form method="get" name="searchForm" id="searchForm"
 							action="index.do">

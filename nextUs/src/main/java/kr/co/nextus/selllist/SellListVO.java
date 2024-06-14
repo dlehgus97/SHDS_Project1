@@ -16,6 +16,9 @@ public class SellListVO {
 	private double rating_avg;
 	private int review_cnt;
 	private int status;
+	private int bronzeoptionno;
+	private int silveroptionno;
+	private int goldoptionno;
 	private String bronzecontent;
 	private String silvercontent;
 	private String goldcontent;
@@ -23,6 +26,8 @@ public class SellListVO {
 	private int silverprice;
 	private int goldprice;
 	private String info;
+	private String thumbnail_real;
+	private int like_count;
 
 	// 관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))

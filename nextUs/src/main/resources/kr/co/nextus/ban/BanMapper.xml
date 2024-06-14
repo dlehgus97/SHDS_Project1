@@ -3,43 +3,38 @@
 <mapper namespace="kr.co.nextus.ban.BanMapper">
 
 
+
+	<!-- ========== -->
+	<!-- 관리자 페이지 -->
+	<!-- ========== -->
 	<insert id="add" parameterType="kr.co.nextus.ban.BanVO">
 		INSERT INTO BAN (
 			memberno, content,date
 		) VALUES (
 			#{memberno},#{content},#{date}
 		)
-		<selectKey keyProperty="banno" order="AFTER" resultType="int">
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+
 	
-	
-	
-	
-	
-	<!-- ========== -->
-	<!-- 관리자 페이지 -->
-	<!-- ========== -->
-	<!-- 리스트 -->
-	<sql id="searchSql">
-		<where>
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchType == 'all'">
-					no like no <!-- 전체 검색이라 그냥 이렇게 썼음 -->
-				</if>
-				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
-				</if>
-			</if>
-		</where>
-	</sql>
-	
-	<select id="list" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
-		SELECT * FROM BAN ORDER BY banno
+	<select id="memberBanList" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
+		SELECT BAN.*, MEMBER.email
+		FROM BAN
+		JOIN MEMBER ON BAN.memberno = MEMBER.no
+		WHERE MEMBER.seller = 0
+		ORDER BY no
 		LIMIT #{startIdx}, 10
 	</select>
-	
+	<select id="sellerBanList" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
+		SELECT BAN.*, MEMBER.email
+		FROM BAN
+		JOIN MEMBER ON BAN.memberno = MEMBER.no
+		WHERE MEMBER.seller = 1
+		ORDER BY no
+		LIMIT #{startIdx}, 10
+	</select>
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.ban.BanVO" resultType="int">
 		SELECT COUNT(*) FROM BAN

@@ -1,6 +1,5 @@
 package kr.co.nextus.ban;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,8 @@ public interface BanMapper {
 	
 	
 	//관리자 페이지에서 동작
-	List<BanVO> list(BanVO vo);
+	List<BanVO> memberBanList(BanVO vo);
+	List<BanVO> sellerBanList(BanVO vo);
 	int count(BanVO param);
 		
 	int add(BanVO vo);

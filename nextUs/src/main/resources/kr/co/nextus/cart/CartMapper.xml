@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.cart.CartMapper">
+	<!-- 장바구니 등록 -->
+	<insert id="insert" parameterType="map">
+		INSERT INTO CART (memberno, sellno, optionno, date) 
+		VALUES (#{memberno},#{sellno},#{optionno},now())
+	</insert>
+	<!-- 목록 -->
+	<select id="list" parameterType="int" resultType="kr.co.nextus.cart.CartVO">
+		SELECT 
+		    po.optionno,
+		    po.optionrank,
+		    po.content,
+		    po.price,
+		    sl.sellno,
+		    sl.title,
+		    sl.thumbnail_real
+		FROM 
+		    CART c
+		JOIN 
+		    P_OPTION po ON c.optionno = po.optionno
+		JOIN 
+		    SELLLIST sl ON c.sellno = sl.sellno
+		WHERE 
+		    c.memberno = #{memberno}
+		    
+	</select>
+	
+    <!-- 삭제 -->
+    <delete id="delete" parameterType="map">
+        DELETE FROM CART WHERE memberno = #{memberno} AND sellno = #{sellno} AND optionno = #{optionno}
+    </delete>
+	
+</mapper>   

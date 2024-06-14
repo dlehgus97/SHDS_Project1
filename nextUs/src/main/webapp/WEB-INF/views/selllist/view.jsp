@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +10,43 @@
 <!-- 헤더푸터 css -->
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+
+<link rel="stylesheet" href="/resources/css/reset.css" />
+<link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet" href="/resources/css/contents.css" />
 <!--부트스트랩 Libs CSS -->
 <link rel="stylesheet" href="/resources/css/board/libs.bundle.css" />
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 별점평균 정수형으로 변환하는 js -->
+<script type="text/javascript">
+var ratingAvg = ${vo.rating_avg};
+var ratingAvgInt = Math.floor(ratingAvg);
+console.log(ratingAvgInt);
+
+document.addEventListener("DOMContentLoaded", function() {
+	
+	 // 첫 번째 클래스 조합의 요소들 선택
+    var ratingDivs1 = document.querySelectorAll('.rating.fs-xs.text-dark');
+
+    // 두 번째 클래스 조합의 요소들 선택
+    var ratingDivs2 = document.querySelectorAll('.rating.text-dark.h6.mb-4.mb-md-0');
+
+    // data-value 속성 값을 설정하는 함수
+    function setDataValue(elements, value) {
+        elements.forEach(function(element) {
+            element.setAttribute('data-value', value);
+        });
+    }
+
+    // 원하는 값으로 설정
+    setDataValue(ratingDivs1, ratingAvgInt); // 첫 번째 클래스 조합 요소들의 data-value 설정
+    setDataValue(ratingDivs2, ratingAvgInt); // 두 번째 클래스 조합 요소들의 data-value 설정
+});
+</script>
+
 </head>
 <body>
 <%-- <h1> 판매글예시 </h1>
@@ -73,7 +108,7 @@
 
                   </div>
                   <div class="col-auto">
-                    <div class="rating fs-xs text-dark" data-value="${vo.rating_avg }">
+                    <div class="rating fs-xs text-dark" data-value="">
                       <div class="rating-item">
                         <i class="fas fa-star"></i>
                       </div>
@@ -107,13 +142,15 @@
                 </div>
 
                 <!-- Form -->
-                <form>
-                  
+                <form method="get" name="frm" action="/cart/cart.do" enctype="multipart/form-data">
+                  	<!-- Hidden field -->
+        			<input type="hidden" name="sellno" value="${vo.sellno }">
+        			
                   <div class="form-group">
 
                     <!-- Label -->
                     <p class="mb-5">
-                      옵션: <strong><span id="sizeCaption">BRONZE</span></strong>
+                      옵션: <strong><span id="optionname">BRONZE</span></strong>
                     </p>
                     <!-- 옵션별 설명 -->
                     <p class="mb-5">
@@ -124,36 +161,43 @@
                     <!-- Radio -->
                     <div class="mb-2">
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionRadio" id="sizeRadioOne" value="BRONZE" data-toggle="form-caption" data-target="#sizeCaption" checked>
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioOne" value="${vo.bronzeoptionno }" data-toggle="form-caption" checked>
                         <label class="form-check-label" for="sizeRadioOne">BRONZE</label>
                       </div>
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionRadio" id="sizeRadioTwo" value="SILVER" data-toggle="form-caption" data-target="#sizeCaption">
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioTwo" value="${vo.silveroptionno }" data-toggle="form-caption">
                         <label class="form-check-label" for="sizeRadioTwo">SILVER</label>
                       </div>
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionRadio" id="sizeRadioThree" value="GOLD" data-toggle="form-caption" data-target="#sizeCaption">
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioThree" value="${vo.goldoptionno }" data-toggle="form-caption">
                         <label class="form-check-label" for="sizeRadioThree">GOLD</label>
                       </div>
                     </div>
                     <!-- 옵션마다 가격,설명 바뀌는 자바스크립트 -->
                     <script>
 					  document.addEventListener('DOMContentLoaded', function () {
+					    const optionnameElement = document.getElementById('optionname');
 					    const priceElement = document.getElementById('price');
 					    const descriptionElement = document.getElementById('optionDescription');
-					    const radios = document.querySelectorAll('input[name="optionRadio"]');
+					    const radios = document.querySelectorAll('input[name="optionno"]');
 					    const select = document.getElementById('optionSelect');
-					
+						
+					    const optionname = {
+					    		${vo.bronzeoptionno }: 'BRONZE',
+					    		${vo.silveroptionno }: 'SILVER',
+					    		${vo.goldoptionno }: 'GOLD'
+							    };
+					    
 					    const prices = {
-					      BRONZE: ${vo.bronzeprice},
-					      SILVER: ${vo.silverprice},
-					      GOLD: ${vo.goldprice}
+					    		${vo.bronzeoptionno }: ${vo.bronzeprice},
+					    		${vo.silveroptionno }: ${vo.silverprice},
+					    		${vo.goldoptionno }: ${vo.goldprice}
 					    };
 					
 					    const descriptions = {
-					      BRONZE: '${vo.bronzecontent}',
-					      SILVER: '${vo.silvercontent}',
-					      GOLD: '${vo.goldcontent}'
+					    		${vo.bronzeoptionno }: '${vo.bronzecontent}',
+					    		${vo.silveroptionno }: '${vo.silvercontent}',
+					    		${vo.goldoptionno }: '${vo.goldcontent}'
 					    };
 					
 					    function formatPrice(price) {
@@ -161,6 +205,7 @@
 					    }
 					
 					    function updatePriceAndDescription(option) {
+					   		optionnameElement.textContent = optionname[option];
 					      priceElement.textContent = formatPrice(prices[option]);
 					      descriptionElement.textContent = descriptions[option];
 					    }
@@ -224,11 +269,64 @@
 					</a>
 					&emsp;&emsp;
                     판매글 신고하기
-                    <a href="https://example.com" class="chat-link">
+                    </form>
+                    <!-- 신고 버튼 -->
+	                <a data-bs-toggle="collapse" href="#singoForm">
+	                  <img src="/resources/imgs/singo.jpg" alt="Image" width="30px" height="30px">
+	                </a>
+	            
+	                <!-- 신고 작성 폼 -->
+		            <!-- New Review -->
+		            <div class="collapse" id="singoForm">
+		
+		              <!-- Divider -->
+		              <hr class="my-8">
+		
+		              <!-- Form -->
+		              <form method="post" name="frm" action="/report/insert.do" enctype="multipart/form-data">
+		                <div class="row">
+		                  <div class="col-12 mb-6 text-center">
+							
+		        			<!-- Hidden field -->
+		        			<input type="hidden" name="sellno" value="${vo.sellno }">
+		        			<input type="hidden" name="memberno" value="${login.no }">
+		        			<input type="hidden" name="status" value=1>
+		                    <!-- Text -->
+		                    <p class="mb-1 fs-xs">
+		                      신고 내용을 작성해주세요
+		                    </p>
+		
+		                  </div>
+		                  <div class="col-12">
+		
+		                    <!-- 신고 내용 -->
+		                    <div class="form-group">
+		                      <label class="visually-hidden" for="reviewText">Review:</label>
+		                      <textarea class="form-control form-control-sm" name="content" id="reviewText" rows="5" placeholder="신고 사유를 상세히 작성해주세요 *" required></textarea>
+		                    </div>
+		
+		                  </div>
+		                  <div class="col-12 text-center">
+		
+		                    <!-- 신고 등록 -->
+		                    <button class="btn btn-outline-dark" type="submit">
+		                      판매글 신고하기
+		                    </button>
+		
+		                  </div>
+		                </div>
+		              </form>
+
+            </div>
+	                
+	                
+	                
+                    
+<!--                     <a href="https://example.com" class="chat-link">
 					    <img src="/resources/imgs/singo.jpg" alt="Image" width="30px" height="30px">
 					</a>
-                  </div>
-                </form>
+                  </div> -->
+                
 
               </div>
             </div>
@@ -456,7 +554,7 @@
 
                 <!-- Rating -->
                  <!-- 별점 별개수로 표현하는곳 소수점은 안되는듯 -->
-                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="3">
+                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="">
                   <div class="rating-item">
                     <i class="fas fa-star"></i>
                   </div>
@@ -498,10 +596,13 @@
               <hr class="my-8">
 
               <!-- Form -->
-              <form>
+              <form method="post" name="frm" action="/review/insert.do" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-12 mb-6 text-center">
-
+					
+        			<!-- Hidden field -->
+        			<input type="hidden" name="no" value="${vo.sellno }">
+        			<input type="hidden" name="writeno" value="${login.no }">
                     <!-- Text -->
                     <p class="mb-1 fs-xs">
                       Score:
@@ -511,7 +612,7 @@
                     <div class="rating-form">
 
                       <!-- Input -->
-                      <input class="rating-input" type="range" min="1" max="5" value="5">
+                      <input class="rating-input" name="score" type="range" min="1" max="5" value="5">
 
                       <!-- Rating -->
                       <div class="rating h5 text-dark" data-value="5">
@@ -533,24 +634,14 @@
                       </div>
 
                     </div>
-
-                  </div>
-                  <div class="col-12 col-md-6">
-
-                    <!-- Name -->
-                    <!-- 로그인한 사용자 이름 들어가게 -->
-                    <div class="form-group">
-                      <label class="visually-hidden" for="reviewName">Your Name:</label>
-                      <input class="form-control form-control-sm" id="reviewName" type="text" placeholder="Your Name *" required>
-                    </div>
-
+                    
                   </div>
                   <div class="col-12">
-
+			
                     <!-- 리뷰 제목 -->
                     <div class="form-group">
                       <label class="visually-hidden" for="reviewTitle">Review Title:</label>
-                      <input class="form-control form-control-sm" id="reviewTitle" type="text" placeholder="Review Title *" required>
+                      <input class="form-control form-control-sm" name="title" id="reviewTitle" type="text" placeholder="Review Title *" required>
                     </div>
 
                   </div>
@@ -559,7 +650,7 @@
                     <!-- 리뷰 내용 -->
                     <div class="form-group">
                       <label class="visually-hidden" for="reviewText">Review:</label>
-                      <textarea class="form-control form-control-sm" id="reviewText" rows="5" placeholder="Review *" required></textarea>
+                      <textarea class="form-control form-control-sm" name="text" id="reviewText" rows="5" placeholder="Review *" required></textarea>
                     </div>
 
                   </div>
@@ -578,7 +669,7 @@
 
             <!-- Reviews -->
             <div class="mt-8">
-
+			<c:forEach var="review" items="${review.list }">
               <!-- Review -->
               <div class="review">
                 <div class="review-body">
@@ -600,7 +691,7 @@
                         <div class="col-12">
 
                           <!-- Rating -->
-                          <div class="rating fs-sm text-dark" data-value="5">
+                          <div class="rating fs-sm text-dark" data-value="${review.score }">
                             <div class="rating-item">
                               <i class="fas fa-star"></i>
                             </div>
@@ -623,52 +714,74 @@
 
                           <!-- 리뷰 작성자, 등록일자 -->
                           <span class="fs-xs text-muted">
-                            Logan Edwards, <time datetime="2019-07-25">25 Jul 2019</time>
+                            ${review.writer }, <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${review.writedate }" />&emsp;<c:if test="${login.no == review.writeno}"><a href="javascript:commentDel(${review.reviewno});">[삭제]</a></c:if>
                           </span>
+                          <!-- 댓글 삭제 js -->
+							<script type="text/javascript">
+								function commentDel(reviewno) {
+									$.ajax({
+							            url: '/review/delete.do',
+							            type: 'POST',
+							            data: {
+							              reviewno: reviewno,
+							              sellno: ${vo.sellno }
+							            },
+							            success: function(response) {
+							              alert('리뷰가 삭제되었습니다.');
+							              location.reload();
+							            },
+							            error: function(xhr, status, error) {
+							              alert('삭제 중 오류가 발생했습니다.');
+							            }
+							          });
+								}
+							</script>
 
                         </div>
                       </div>
 
                       <!-- 리뷰 제목 -->
                       <p class="mb-2 fs-lg fw-bold">
-                        So cute!
+                        ${review.title }
                       </p>
 
                       <!-- 리뷰 내용 -->
                       <p class="text-gray-500">
-                        Justo ut diam erat hendrerit. Morbi porttitor, per eu. Sodales curabitur diam sociis. Taciti lobortis nascetur. Ante laoreet odio hendrerit.
-                        Dictumst curabitur nascetur lectus potenti dis sollicitudin habitant quis vestibulum.
+                        ${review.text }
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
+              </c:forEach>
             </div>
+            
 
-            <!-- 페이징 처리 -->
-            <nav class="d-flex justify-content-center mt-9">
-              <ul class="pagination pagination-sm text-gray-400">
-                <li class="page-item">
-                  <a class="page-link page-link-arrow" href="#">
-                    <i class="fa fa-caret-left"></i>
-                  </a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link page-link-arrow" href="#">
-                    <i class="fa fa-caret-right"></i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+           
+			<!-- 페이지처리 -->
+			<div class="pagenate">
+				<ul class='paging'>
+					<c:if test="${review.prev }">
+						<li><a
+							href="view.do?no=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}">
+								<< </a></li>
+					</c:if>
+					<c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
+						<c:if test="${p == ReviewVO.page}">
+							<li><a href='#;' class='current'>${p}</a></li>
+						</c:if>
+						<c:if test="${p != ReviewVO.page}">
+							<li><a
+								href='view.do?no=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}'>${p}</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${review.next }">
+						<li><a
+							href="view.do?no=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}">
+								>> </a></li>
+					</c:if>
+				</ul>
+			</div>
 
           </div>
         </div>

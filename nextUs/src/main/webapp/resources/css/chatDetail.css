@@ -5,10 +5,31 @@
     margin: 0;
     padding: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
+}
+#inner_container {
+	display:flex; 
+	flex-direction:column;
+	align-items: center;
+	background-color: rgb(232, 191, 255);
+    width: 80%;
+    height: 600px;
+    border-radius: 4px;
+}
+#messageContainer {
+	display:flex;
+	flex-direction:column;
+    background-color: white;
+	width: 95%;
+	height: 500px;
+	overflow-y:auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	flex-shrink: 0;
 }
 form {
    background-color: #fff;
@@ -17,7 +38,7 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: block;
     clear: both;
-    width: 100%;
+    width: 95%;
     box-sizing: border-box;
 }
 input[type="text"], textarea {
@@ -53,14 +74,49 @@ textarea {
     font-size: 16px;
     max-width: 100%;
     word-wrap: break-word;
+    border-radius: 10px;
 }
 .message-box.me {
     background-color: #DCF8C6;
     align-self: flex-end;
     text-align: right;
+    margin-right: 10px;
 }
 .message-box.other {
-    background-color: #FFFFFF;
+    background-color: rgb(159, 152, 255);
     align-self: flex-start;
     text-align: left;
+    margin-left: 10px;
+}
+.profile_container {
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
+}
+.profile-img {
+	width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.profile_container > p {
+	margin-left: 10px;
+}
+
+/* Custom Scrollbar Styles */
+#messageContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+#messageContainer::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+
+#messageContainer::-webkit-scrollbar-thumb {
+    background: #AAA; 
+    border-radius: 10px;
+}
+
+#messageContainer::-webkit-scrollbar-thumb:hover {
+    background: #888; 
 }

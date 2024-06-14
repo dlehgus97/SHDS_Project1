@@ -7,22 +7,24 @@
 	<!-- ========== -->
 	<!-- 관리자 페이지 -->
 	<!-- ========== -->
-	<insert id="create" parameterType="kr.co.nextus.coupon.CouponVO">
+	<insert id="createCoupon" parameterType="kr.co.nextus.coupon.CouponVO">
 		INSERT INTO COUPON (
-		no,memberno,discount,status,name,type
-		)VALUES (
-		#{no},3,#{discount},1,#{name},#{type});
+		memberno, discount, status, name, type
+		) VALUES (
+		(SELECT no FROM MEMBER WHERE email = #{memberEmail} LIMIT 1), #{discount}, 1, #{name}, #{type}
+		)<!-- limi1은 이메일이 중복되서 넣은거임 -->
 		<selectKey order="AFTER" keyProperty="no" resultType="int">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-<!--  #{memberno} -->
+
 
 	<!-- 리스트 -->
 	<select id="list" parameterType="kr.co.nextus.coupon.CouponVO"
 		resultType="kr.co.nextus.coupon.CouponVO">
 		SELECT * FROM COUPON
+		GROUP BY name
 		ORDER BY no
 		LIMIT #{startIdx}, 10
 	</select>
@@ -32,5 +34,12 @@
 		SELECT COUNT(*) FROM COUPON
 	</select>
 
+
+	<!-- 쿠폰별 나눠준 멤버 리스트 -->
+	<select id="listAsName" parameterType="kr.co.nextus.coupon.CouponVO"
+		resultType="kr.co.nextus.coupon.CouponVO">
+		SELECT (SELECT email FROM MEMBER WHERE no = #{memberno} )as memberEmail,status
+		FROM COUPON WHERE name=#{name}
+	</select>
 
 </mapper>

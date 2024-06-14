@@ -2,7 +2,11 @@ package kr.co.nextus.member;
 
 import java.util.Map;
 
+
+import kr.co.nextus.qna.QnAVO;
+
 public interface MemberService {
+
 
     boolean regist(MemberVO vo);
 
@@ -21,7 +25,10 @@ public interface MemberService {
     boolean checkMemberExist(String email); // 존재하는 회원인지 확인
     
     boolean insertMember(MemberVO member);
-   
-
-    Map index(MemberVO vo); // 관리자 페이지에서 사용하는 메서드
+	
+	//관리자 페이지에서 동작
+	Map<String, Object> list(MemberVO vo);
+	Map<String, Object> listAtOnce(MemberVO vo);
+	Map<String, Object> reportCountList(MemberVO vo,int isSeller);
+	
 }

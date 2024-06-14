@@ -52,7 +52,6 @@
 		WHERE no = #{no}
 	</update>
 	
-	
 	<!-- ========== -->
 	<!-- 관리자 페이지 -->
 	<!-- ========== -->
@@ -60,7 +59,10 @@
 		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					no like no <!-- 전체 검색이라 그냥 이렇게 썼음 -->
+					no LIKE '%${searchWord}%' OR
+					email LIKE '%${searchWord}%'
+					OR
+					nickname LIKE '%${searchWord}%'
 				</if>
 				<if test="searchType != 'all'">
 					${searchType} LIKE '%${searchWord}%'
@@ -68,21 +70,68 @@
 			</if>
 		</where>
 	</sql>
-	
-	<!-- 리스트 -->
-	<select id="list" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
-		SELECT *,(SELECT COUNT(*) FROM BUYLIST WHERE memberno=MEMBER.no)as purchaseCount
 
+	<!-- 리스트 10개씩 출력 -->
+	<select id="list" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT *,(SELECT COUNT(*) FROM BUYLIST WHERE memberno=MEMBER.no)as
+		purchaseCount
 		FROM MEMBER
-		<include refid="searchSql"/>
+		<include refid="searchSql" />
 		ORDER BY no
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.member.MemberVO" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
-		<include refid="searchSql"/>
+		<include refid="searchSql" />
 	</select>
 
+	<!-- 리스트 한번에 다 출력 -->
+	<select id="listAtOnce"
+		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT * FROM MEMBER
+		<!-- <include refid="searchSql"/> -->
+		ORDER BY no
+	</select>
+
+	<!-- (멤버)누적 신고횟수 이메일,닉네임과 함께 출력 -->
+	<select id="memberReportCountList"
+		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT m.no , m.email, m.nickname,
+		m.regdate, COUNT(r.no) AS reportcount
+		FROM MEMBER m
+		LEFT JOIN REPORT r ON m.no = r.reportedmemberno
+		<include refid="searchSql2" /> AND m.seller=0
+		GROUP BY m.no, m.email, m.nickname, m.regdate
+		HAVING reportcount > 0;
+	</select>
 	
+	<!-- (샐러)누적 신고횟수 이메일,닉네임과 함께 출력 -->
+	<select id="sellerReportCountList"
+		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT m.no , m.email, m.nickname,
+		m.regdate, COUNT(r.no) AS reportcount
+		FROM MEMBER m
+		LEFT JOIN REPORT r ON m.no = r.reportedmemberno
+		<include refid="searchSql2" /> AND m.seller=1
+		GROUP BY m.no, m.email, m.nickname, m.regdate
+		HAVING reportcount > 0;
+	</select>
+	
+	<!-- SEARCHSQL2 -->
+	<sql id="searchSql2">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					m.no LIKE '%${searchWord}%' OR
+					m.email LIKE '%${searchWord}%'
+					OR
+					m.nickname LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					m.${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
 </mapper>

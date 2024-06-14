@@ -76,6 +76,7 @@ public class MemberController {
         return "member/edit";
     }
 
+
     @PostMapping("/member/update.do")
     public String update(MemberVO vo, Model model) {
         int r = service.update(vo);
@@ -90,60 +91,45 @@ public class MemberController {
         model.addAttribute("url", url);
         return "common/alert";
     }
+ 
+	
+	@GetMapping("/member/search.do")
+	public String search() {
+		// 찾기 폼 
+		return "member/search";
+	}
+	
+	
+	@GetMapping("/member/idsearch.do")
+	public String findid() {
+		// 아이디 찾기 폼
+		return "member/idsearch";
+	}
+	@PostMapping("/member/findid.do")
+	public String findId(MemberVO vo, Model model) {
+		if (service.findid(vo)) {
+			model.addAttribute("msg", "아이디는  입니다.");
+			model.addAttribute("url", "/index.do");
+			return "common/alert";
+		} else {
+			model.addAttribute("msg", "가입 오류");
+			model.addAttribute("url", "/member/idsearch.do");
+			return "common/alert";
+		}
+	}
+	
+	@GetMapping("/member/pwdsearch.do")
+	public String pwdSearch() {
+		// 비밀번호 찾기 폼
+		return "member/pwdsearch";
+	}
+	
+	@GetMapping("/member/callback")
+	public String callBack() {
+	    return "member/callback";
+	}
 
-    @GetMapping("/member/search.do")
-    public String search() {
-        // 찾기 폼 
-        return "member/search";
-    }
 
-    @GetMapping("/member/idsearch.do")
-    public String findid() {
-        // 아이디 찾기 폼
-        return "member/idsearch";
-    }
-
-    @PostMapping("/member/findid.do")
-    public String findId(MemberVO vo, Model model) {
-        if (service.findid(vo)) {
-            model.addAttribute("msg", "아이디는  입니다.");
-            model.addAttribute("url", "/index.do");
-            return "common/alert";
-        } else {
-            model.addAttribute("msg", "가입 오류");
-            model.addAttribute("url", "/member/idsearch.do");
-            return "common/alert";
-        }
-    }
-
-    @GetMapping("/member/pwdsearch.do")
-    public String pwdSearch() {
-        // 비밀번호 찾기 폼
-        return "member/pwdsearch";
-    }
-
-    // 네이버 로그인에서 API 갔다가 오는 콜백
-    @GetMapping("/member/callback")
-    public String callBack() {
-         return "member/navercallback";
-    }
-    
-    
-//    // 회원가입에서 네이버 API 갔다가 오는 콜백 (가입 여부) 
-//    @PostMapping("/member/loginCallback")
-//    @ResponseBody
-//    public String loginCallback(String email,MemberVO vo, HttpSession sess) {
-//    	if (service.checkMemberExist(email)) {
-//    		vo.setEmail(email);
-//    		MemberVO login = service.findByEmail(email);
-//    		System.out.println(login);
-//    		sess.setAttribute("login", login);
-//    		return "true";
-//    	} else {
-//    		return "false";
-//    	}
-//    }
-    
     @PostMapping("/member/loginCallback")
     @ResponseBody
     public String loginCallback(String email,MemberVO vo, HttpSession sess) {
@@ -154,7 +140,6 @@ public class MemberController {
             return "true";
         } else {
             // 기존 회원이 아니라면 회원 정보 저장
-            
             vo.setEmail(email);                  
             if (service.insertMember(vo)) {
                 sess.setAttribute("login", vo);
@@ -164,41 +149,34 @@ public class MemberController {
             }
         }
     }
-
-//    @PostMapping("/member/loginCallback")
-//    @ResponseBody
-//    public String registCallback(MemberVO vo, Model model) {
-//        if (service.regist(vo)) {
-//            model.addAttribute("msg", "정상적으로 가입되었습니다.");
-//            model.addAttribute("url", "/index.do");
-//            return "common/alert";
-//        } else {
-//            model.addAttribute("msg", "가입 오류");
-//            model.addAttribute("url", "/member/regist.do");
-//            return "common/alert";
-//        }
-//    }
-//   
-//    	
+  	
     
     @GetMapping("/member/registCheck")
     @ResponseBody
     public String registCheck(String email) {
-    	
     	return service.checkMemberExist(email)+"";
-    }
-    
-    @GetMapping("/member/snsLogin")
-    public String snsLogin() {
-         return "member/snsLogin";
     }
 
     // 관리자에서 하는 것입니다요
 
-    @GetMapping("/memberStatus.do")
-    @RequestMapping("/memberStatus")
-    public String memberStatus(MemberVO vo, Model model) {
-        model.addAttribute("member", service.index(vo));
-        return "admin/memberStatus";
-    }
+	
+	// 관리자에서하는겁니다요
+	@GetMapping("/memberStatus.do")
+	@RequestMapping("/memberStatus")
+	public String memberStatus(MemberVO vo, Model model) {
+		model.addAttribute("map", service.list(vo));
+		return "admin/memberStatus";
+	}
+	
+	@RequestMapping("/addBanPopupMember")
+	public String addBanPopupMember(MemberVO vo, Model model) {
+		model.addAttribute("map", service.reportCountList(vo,0));
+		return "admin/addBanPopupMember";
+	}
+	
+	@RequestMapping("/addBanPopupSeller")
+	public String addBanPopupSeller(MemberVO vo, Model model) {
+		model.addAttribute("map", service.reportCountList(vo,1));
+		return "admin/addBanPopupSeller";
+	}
 }

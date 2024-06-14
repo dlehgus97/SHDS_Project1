@@ -81,15 +81,14 @@
 }
 
 .chat_new {
-	position: absolute;
+	position: relative;
     color: #FFF;
     text-align: center;
     font-weight: bold;
-    top: -8px;
-    left: 14px;
+    bottom: 8px;
 }
 
-#new_container {
+.new_container {
     position: absolute;
     background-color: red;
     width: 40px;

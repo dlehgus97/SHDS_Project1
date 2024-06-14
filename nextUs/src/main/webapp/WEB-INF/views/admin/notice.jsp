@@ -25,7 +25,9 @@
 					<h1 class="title_notice">공지사항</h1>
 					<button class="button1" onclick="openPopup(); return false;">공지 등록</button>
 				</div>
-				
+				<div class="paragraph">
+					
+				</div>
 			</div>
 			
 		</div>
