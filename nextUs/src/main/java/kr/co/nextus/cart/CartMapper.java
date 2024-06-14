@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface CartMapper {
 	
 	int insert(@Param("memberno") int memberno, @Param("sellno") int sellno, @Param("optionno") int optionno);
-	List<CartVO> list(@Param("memberno") int memberno, @Param("sellno") int sellno, @Param("optionno") int optionno);
+//	List<CartVO> list(@Param("memberno") int memberno, @Param("sellno") int sellno, @Param("optionno") int optionno);
 	int delete(@Param("memberno") int memberno, @Param("sellno") int sellno, @Param("optionno") int optionno);
 	
+	int exists(@Param("memberno") int memberno, @Param("sellno") int sellno, @Param("optionno") int optionno); // 이미 db에 저장된 아이와 같은 아이가 잇는지 중복확인을 위한 메서드
+	List<CartVO> list(@Param("memberno") int memberno);
 }

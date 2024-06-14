@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="/resources/css/footer.css"/>
     <!-- Title -->
     <title>Shopper</title>
-    
   </head>
   <body>
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -60,7 +59,9 @@
 
             <!-- List group -->
             <ul class="list-group list-group-lg list-group-flush-x mb-6">
+            <c:set var="total" value="0" />
             <c:forEach var="vo" items="${list}">
+            <c:set var="total" value="${total + vo.price}"/>
               <li class="list-group-item">
                 <div class="row align-items-center">
                   <div class="col-3">
@@ -99,6 +100,10 @@
             </c:forEach>
               
             </ul>
+            <!-- 장바구니가 비었을 때 표시할 메시지 -->
+		    <div id="empty-cart-message" style="display: none;">
+		        <h5 class="text-center">장바구니에 담긴 상품이 없습니다</h5>
+		    </div>
 
             <!-- Footer -->
             <div class="row align-items-end justify-content-between mb-10 mb-md-0">
@@ -119,7 +124,7 @@
                     <div class="col-auto">
 
                       <!-- Button -->
-                      <button class="btn btn-sm btn-dark" type="submit">
+                      <button class="btn btn-sm btn-dark" id = "coupon_btn">
                         적용
                       </button>
 
@@ -133,7 +138,7 @@
 
               </div>
             </div>
-
+			
           </div>
           <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
 
@@ -142,13 +147,13 @@
               <div class="card-body">
                 <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
                   <li class="list-group-item d-flex">
-                    <span>Subtotal</span> <span class="ms-auto fs-sm">$89.00</span>
+                    <span>Subtotal</span> <span class="ms-auto fs-sm">${total }</span>
                   </li>
                   <li class="list-group-item d-flex">
-                    <span>Tax</span> <span class="ms-auto fs-sm">$00.00</span>
+                    <span>할인</span> <span class="ms-auto fs-sm">0</span>
                   </li>
                   <li class="list-group-item d-flex fs-lg fw-bold">
-                    <span>Total</span> <span class="ms-auto fs-sm">$89.00</span>
+                    <span>Total</span> <span class="ms-auto fs-sm">${total }</span>
                   </li>
                   <li class="list-group-item fs-sm text-center text-gray-500">
                     구매하시기를 원하신다면 아래의 버튼을 눌러주세요 *
@@ -177,30 +182,71 @@
     <!-- Theme JS -->
     <script src="/resources/js/board/theme.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-      $(document).ready(function() {
-        $('.remove-btn').click(function(event) {
-          event.preventDefault();
-          var sellno = $(this).data('sellno');
-          var optionno = $(this).data('optionno');
+    
+    <script>
+	    $(document).ready(function() {
+	        $('.remove-btn').click(function(event) {
+	            event.preventDefault();
+	            var sellno = $(this).data('sellno');
+	            var optionno = $(this).data('optionno');
+	            var listItem = $(this).closest('li.list-group-item');
+	
+	            $.ajax({
+	                url : '/cart/delete.do',
+	                type : 'POST',
+	                data : {
+	                    sellno : sellno,
+	                    optionno : optionno
+	                },
+	                success : function(response) {
+	                    alert('상품이 삭제되었습니다.');
+	                    listItem.remove();
+	
+	                    // 장바구니가 비었는지 확인
+	                    if ($('.list-group-item').length === 0) {
+	                        $('#empty-cart-message').show();
+	                    }
+	                },
+	                error : function(xhr, status, error) {
+	                    alert('삭제 중 오류가 발생했습니다.');
+	                }
+	            });
+	        });
+	
+	        // 페이지 로드 시 장바구니가 비었는지 확인
+	        if ($('.list-group-item').length === 0) {
+	            $('#empty-cart-message').show();
+	        }
+	    });
+	</script>
+     <script>
+        $(document).ready(function() {
+            $('#coupon_btn').click(function(event) {
+                event.preventDefault(); // 폼의 기본 제출 동작을 막음
 
-          $.ajax({
-            url: '/cart/delete.do',
-            type: 'POST',
-            data: {
-              sellno: sellno,
-              optionno: optionno
-            },
-            success: function(response) {
-              alert('상품이 삭제되었습니다.');
-              location.reload();
-            },
-            error: function(xhr, status, error) {
-              alert('삭제 중 오류가 발생했습니다.');
-            }
-          });
+                var couponCode = $('#cartCouponCode').val();
+                var memberNo = '${login.no}'; // 서버에서 login.no 값을 삽입해야 합니다.
+
+                $.ajax({
+                    url: '/couponUse',
+                    method: 'POST',
+                    data: {
+                        couponCode: couponCode,
+                        memberNo: memberNo
+                    },
+                    success: function(response) {
+                        // 서버로부터 성공적으로 응답을 받았을 때 실행할 코드
+                        alert('쿠폰이 성공적으로 적용되었습니다.');
+                        console.log(response); // 서버 응답을 콘솔에 출력
+                    },
+                    error: function(xhr, status, error) {
+                        // 요청이 실패했을 때 실행할 코드
+                        alert('쿠폰 적용에 실패했습니다. 다시 시도해주세요.');
+                        console.log(xhr, status, error); // 에러 정보를 콘솔에 출력
+                    }
+                });
+            });
         });
-      });
     </script>
   </body>
 </html>

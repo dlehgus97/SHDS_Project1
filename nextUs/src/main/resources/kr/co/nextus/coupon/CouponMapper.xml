@@ -41,5 +41,13 @@
 		SELECT (SELECT email FROM MEMBER WHERE no = #{memberno} )as memberEmail,status
 		FROM COUPON WHERE name=#{name}
 	</select>
+	
+	<!--  -->
+	<select id="findcou" parameterType="kr.co.nextus.coupon.CouponVO"
+		resultType="kr.co.nextus.coupon.CouponVO">
+		SELECT type, discount
+		FROM COUPON
+		WHERE name = #{name} and memberno = #{memberno} and type = 1
+	</select>
 
 </mapper>

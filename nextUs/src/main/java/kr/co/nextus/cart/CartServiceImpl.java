@@ -21,8 +21,8 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public List<CartVO> list(int memberno, int sellno, int optionno) {
-		List<CartVO> data = mapper.list(memberno, sellno, optionno);
+	public List<CartVO> list(int memberno) {
+		List<CartVO> data = mapper.list(memberno);
 		return data;
 	}
 
@@ -30,5 +30,11 @@ public class CartServiceImpl implements CartService {
     public int delete(int memberno, int sellno, int optionno) {
         return mapper.delete(memberno, sellno, optionno);
     }
+	
+	@Override
+	public boolean exists(int memberno, int sellno, int optionno) {
+	    return mapper.exists(memberno, sellno, optionno) > 0;
+	}
+	
 
 }

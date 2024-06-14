@@ -50,7 +50,7 @@
             </div>
             <div></div><div></div>
             <div class="header_right_object">
-            	<a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">장바구니</a>
+            	<a href="/cart/view.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">장바구니</a>
             </div>
             <div class="header_right_object">
             	<a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">찜목록</a>

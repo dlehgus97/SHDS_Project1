@@ -16,6 +16,8 @@ public interface CouponMapper {
 	List<CouponVO> list(CouponVO vo);
 	List<CouponVO> listAsName(CouponVO vo);
 	int count(CouponVO param);
+
+	CouponVO findcou(CouponVO vo);
 	
 	
 }

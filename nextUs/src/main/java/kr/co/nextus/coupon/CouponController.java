@@ -57,4 +57,19 @@ public class CouponController {
 	}
 	
 	
+	// 쿠폰사용시 - 구매자용
+	@PostMapping("/couponUse")
+	@ResponseBody
+	public CouponVO couponUse(@RequestParam("cuna") String cuna, @RequestParam("memberno") int memberno) {
+		CouponVO vo = new CouponVO();
+		vo.setName(cuna);
+		vo.setMemberno(memberno);
+		CouponVO coupon = service.findcou(vo);
+	    if (coupon != null) {
+	        return coupon;
+	    } else {
+	        return new CouponVO(); // 빈 객체 반환
+	    }
+	}
+	
 }

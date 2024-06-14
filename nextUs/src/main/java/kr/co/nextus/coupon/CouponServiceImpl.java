@@ -69,6 +69,11 @@ public class CouponServiceImpl implements CouponService {
 		
 		return map;
 	}
+	
+	@Override
+	public CouponVO findcou(CouponVO vo) {
+	    return mapper.findcou(vo); // Mapper에서 데이터를 가져옵니다.
+	}
 
 
 
