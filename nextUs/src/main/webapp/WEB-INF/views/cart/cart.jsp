@@ -152,7 +152,7 @@
                   
                   <c:forEach var="cou" items="${listuse}">
                   <li class="list-group-item d-flex">
-                    <span>할인</span> <span class="ms-auto fs-sm">${cou.discount}+${cou.type}</span><!-- type==1 -> (-)원 // type==2 -> x% -->
+                    <span>할인</span> <span class="ms-auto fs-sm">${cou.discount}+${cou.type}</span><!-- type==1 -> (-)원 // type==2 -> x%리 -->
                   </li>
                   </c:forEach>
                   
