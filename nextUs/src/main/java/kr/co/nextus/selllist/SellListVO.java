@@ -16,6 +16,9 @@ public class SellListVO {
 	private double rating_avg;
 	private int review_cnt;
 	private int status;
+	private int bronzeoptionno;
+	private int silveroptionno;
+	private int goldoptionno;
 	private String bronzecontent;
 	private String silvercontent;
 	private String goldcontent;

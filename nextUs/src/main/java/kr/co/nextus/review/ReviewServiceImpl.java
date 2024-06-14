@@ -56,8 +56,15 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public int update(ReviewVO vo, HttpServletRequest request) {
-		int r = mapper.update(vo);
-		return r;
+		return mapper.update(vo);
+
+	}
+	
+	
+	@Override
+	public int delete(int reviewno) {
+		 
+		return mapper.delete(reviewno);
 	}
 
 }

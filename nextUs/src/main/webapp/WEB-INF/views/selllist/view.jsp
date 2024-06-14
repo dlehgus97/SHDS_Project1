@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,8 @@
 <link rel="stylesheet" href="/resources/css/board/libs.bundle.css" />
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- 별점평균 정수형으로 변환하는 js -->
 <script type="text/javascript">
 var ratingAvg = ${vo.rating_avg};
@@ -42,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setDataValue(ratingDivs2, ratingAvgInt); // 두 번째 클래스 조합 요소들의 data-value 설정
 });
 </script>
+
 </head>
 <body>
 <%-- <h1> 판매글예시 </h1>
@@ -145,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     <!-- Label -->
                     <p class="mb-5">
-                      옵션: <strong><span id="sizeCaption">BRONZE</span></strong>
+                      옵션: <strong><span id="optionname">BRONZE</span></strong>
                     </p>
                     <!-- 옵션별 설명 -->
                     <p class="mb-5">
@@ -156,36 +161,43 @@ document.addEventListener("DOMContentLoaded", function() {
                     <!-- Radio -->
                     <div class="mb-2">
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioOne" value="${vo.bronzeoptionno }" data-toggle="form-caption" data-target="#sizeCaption" checked>
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioOne" value="${vo.bronzeoptionno }" data-toggle="form-caption" checked>
                         <label class="form-check-label" for="sizeRadioOne">BRONZE</label>
                       </div>
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioTwo" value="${vo.silveroptionno }" data-toggle="form-caption" data-target="#sizeCaption">
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioTwo" value="${vo.silveroptionno }" data-toggle="form-caption">
                         <label class="form-check-label" for="sizeRadioTwo">SILVER</label>
                       </div>
                       <div class="form-check form-check-inline form-check-size mb-2">
-                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioThree" value="${vo.goldoptionno }" data-toggle="form-caption" data-target="#sizeCaption">
+                        <input type="radio" class="form-check-input" name="optionno" id="sizeRadioThree" value="${vo.goldoptionno }" data-toggle="form-caption">
                         <label class="form-check-label" for="sizeRadioThree">GOLD</label>
                       </div>
                     </div>
                     <!-- 옵션마다 가격,설명 바뀌는 자바스크립트 -->
                     <script>
 					  document.addEventListener('DOMContentLoaded', function () {
+					    const optionnameElement = document.getElementById('optionname');
 					    const priceElement = document.getElementById('price');
 					    const descriptionElement = document.getElementById('optionDescription');
 					    const radios = document.querySelectorAll('input[name="optionno"]');
 					    const select = document.getElementById('optionSelect');
-					
+						
+					    const optionname = {
+					    		${vo.bronzeoptionno }: 'BRONZE',
+					    		${vo.silveroptionno }: 'SILVER',
+					    		${vo.goldoptionno }: 'GOLD'
+							    };
+					    
 					    const prices = {
-					      BRONZE: ${vo.bronzeprice},
-					      SILVER: ${vo.silverprice},
-					      GOLD: ${vo.goldprice}
+					    		${vo.bronzeoptionno }: ${vo.bronzeprice},
+					    		${vo.silveroptionno }: ${vo.silverprice},
+					    		${vo.goldoptionno }: ${vo.goldprice}
 					    };
 					
 					    const descriptions = {
-					      BRONZE: '${vo.bronzecontent}',
-					      SILVER: '${vo.silvercontent}',
-					      GOLD: '${vo.goldcontent}'
+					    		${vo.bronzeoptionno }: '${vo.bronzecontent}',
+					    		${vo.silveroptionno }: '${vo.silvercontent}',
+					    		${vo.goldoptionno }: '${vo.goldcontent}'
 					    };
 					
 					    function formatPrice(price) {
@@ -193,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					    }
 					
 					    function updatePriceAndDescription(option) {
+					   		optionnameElement.textContent = optionname[option];
 					      priceElement.textContent = formatPrice(prices[option]);
 					      descriptionElement.textContent = descriptions[option];
 					    }
@@ -256,11 +269,64 @@ document.addEventListener("DOMContentLoaded", function() {
 					</a>
 					&emsp;&emsp;
                     판매글 신고하기
-                    <a href="https://example.com" class="chat-link">
+                    </form>
+                    <!-- 신고 버튼 -->
+	                <a data-bs-toggle="collapse" href="#singoForm">
+	                  <img src="/resources/imgs/singo.jpg" alt="Image" width="30px" height="30px">
+	                </a>
+	            
+	                <!-- 신고 작성 폼 -->
+		            <!-- New Review -->
+		            <div class="collapse" id="singoForm">
+		
+		              <!-- Divider -->
+		              <hr class="my-8">
+		
+		              <!-- Form -->
+		              <form method="post" name="frm" action="/report/insert.do" enctype="multipart/form-data">
+		                <div class="row">
+		                  <div class="col-12 mb-6 text-center">
+							
+		        			<!-- Hidden field -->
+		        			<input type="hidden" name="sellno" value="${vo.sellno }">
+		        			<input type="hidden" name="memberno" value="${login.no }">
+		        			<input type="hidden" name="status" value=1>
+		                    <!-- Text -->
+		                    <p class="mb-1 fs-xs">
+		                      신고 내용을 작성해주세요
+		                    </p>
+		
+		                  </div>
+		                  <div class="col-12">
+		
+		                    <!-- 신고 내용 -->
+		                    <div class="form-group">
+		                      <label class="visually-hidden" for="reviewText">Review:</label>
+		                      <textarea class="form-control form-control-sm" name="content" id="reviewText" rows="5" placeholder="신고 사유를 상세히 작성해주세요 *" required></textarea>
+		                    </div>
+		
+		                  </div>
+		                  <div class="col-12 text-center">
+		
+		                    <!-- 신고 등록 -->
+		                    <button class="btn btn-outline-dark" type="submit">
+		                      판매글 신고하기
+		                    </button>
+		
+		                  </div>
+		                </div>
+		              </form>
+
+            </div>
+	                
+	                
+	                
+                    
+<!--                     <a href="https://example.com" class="chat-link">
 					    <img src="/resources/imgs/singo.jpg" alt="Image" width="30px" height="30px">
 					</a>
-                  </div>
-                </form>
+                  </div> -->
+                
 
               </div>
             </div>
@@ -603,7 +669,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             <!-- Reviews -->
             <div class="mt-8">
-			<<c:forEach var="vo" items="${review.list }">
+			<c:forEach var="review" items="${review.list }">
               <!-- Review -->
               <div class="review">
                 <div class="review-body">
@@ -625,7 +691,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="col-12">
 
                           <!-- Rating -->
-                          <div class="rating fs-sm text-dark" data-value="${vo.score }">
+                          <div class="rating fs-sm text-dark" data-value="${review.score }">
                             <div class="rating-item">
                               <i class="fas fa-star"></i>
                             </div>
@@ -648,20 +714,40 @@ document.addEventListener("DOMContentLoaded", function() {
 
                           <!-- 리뷰 작성자, 등록일자 -->
                           <span class="fs-xs text-muted">
-                            ${vo.writer }, ${vo.writedate }
+                            ${review.writer }, <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${review.writedate }" />&emsp;<c:if test="${login.no == review.writeno}"><a href="javascript:commentDel(${review.reviewno});">[삭제]</a></c:if>
                           </span>
+                          <!-- 댓글 삭제 js -->
+							<script type="text/javascript">
+								function commentDel(reviewno) {
+									$.ajax({
+							            url: '/review/delete.do',
+							            type: 'POST',
+							            data: {
+							              reviewno: reviewno,
+							              sellno: ${vo.sellno }
+							            },
+							            success: function(response) {
+							              alert('리뷰가 삭제되었습니다.');
+							              location.reload();
+							            },
+							            error: function(xhr, status, error) {
+							              alert('삭제 중 오류가 발생했습니다.');
+							            }
+							          });
+								}
+							</script>
 
                         </div>
                       </div>
 
                       <!-- 리뷰 제목 -->
                       <p class="mb-2 fs-lg fw-bold">
-                        ${vo.title }
+                        ${review.title }
                       </p>
 
                       <!-- 리뷰 내용 -->
                       <p class="text-gray-500">
-                        ${vo.text }
+                        ${review.text }
                       </p>
                     </div>
                   </div>
@@ -669,6 +755,7 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
               </c:forEach>
             </div>
+            
 
            
 			<!-- 페이지처리 -->

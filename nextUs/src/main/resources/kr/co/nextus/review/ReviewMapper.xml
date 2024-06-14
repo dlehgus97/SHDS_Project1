@@ -23,6 +23,11 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 리뷰 삭제 -->
+	<delete id="delete" parameterType="map">
+		DELETE FROM REVIEW WHERE reviewno = #{reviewno}
+	</delete>
+	
 	<!-- 판매글 별점평균, 리뷰수 업데이트 -->
 	<update id="update" parameterType="kr.co.nextus.review.ReviewVO">
 		UPDATE SELLLIST SET 
