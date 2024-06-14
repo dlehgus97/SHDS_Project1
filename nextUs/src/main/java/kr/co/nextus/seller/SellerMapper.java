@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.nextus.review.ReviewVO;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.selllist.SellListVO;
 
 // MyBatis mapper 인터페이스 정의
@@ -22,4 +23,8 @@ public interface SellerMapper {
 	List<SellListVO> getSellerSellList(int no);
 	
 	List<ReviewVO> getSellerReviews(int no);
+	
+	//판매자 승인
+	int insertSellerByAdmin(SellerRequestVO vo);
+
 }

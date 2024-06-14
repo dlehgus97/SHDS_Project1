@@ -3,6 +3,7 @@ package kr.co.nextus.seller;
 import java.util.List;
 
 import kr.co.nextus.review.ReviewVO;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.selllist.SellListVO;
 
 // 판매자 관련 로직을 추상화한 서비스 인터페이스
@@ -19,4 +20,7 @@ public interface SellerService {
 	List<SellListVO> getSellerSellList(int no);
 	// 판매자가 받은 리뷰들 가져오기
 	List<ReviewVO> getSellerReviews(int no);
+	
+	//seller승인
+	int registerSellerByAdmin(SellerRequestVO seller);
 }

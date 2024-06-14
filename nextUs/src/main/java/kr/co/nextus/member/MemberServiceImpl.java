@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -65,6 +66,12 @@ public class MemberServiceImpl implements MemberService {
             return false;
         }
     }
+	
+	@Override
+	@Transactional
+	public int sellerRegist(int no) {
+		return mapper.sellerRegist(no);
+	}
 	
 	//관리자
 	@Override

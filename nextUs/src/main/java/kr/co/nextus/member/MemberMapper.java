@@ -44,4 +44,12 @@ public interface MemberMapper {
 
     // 판매자 신고 건수 목록 조회
     List<MemberVO> sellerReportCountList(MemberVO param);
+    
+    //관리자
+  	int count(MemberVO param);
+  	List<MemberVO> list(MemberVO vo);
+  	List<MemberVO> listAtOnce(MemberVO vo);
+  	List<MemberVO> memberReportCountList(MemberVO param);
+  	List<MemberVO> sellerReportCountList(MemberVO param);
+  	int sellerRegist(int no);
 }

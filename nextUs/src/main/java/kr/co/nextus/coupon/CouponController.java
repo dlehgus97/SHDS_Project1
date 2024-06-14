@@ -28,7 +28,7 @@ public class CouponController {
 	@RequestMapping("/couponManagement")
 	public String couponManagement(CouponVO vo, Model model) {
 		model.addAttribute("map", service.list(vo));
-		return "admin/couponManagement";
+		return "admin/memberManagement/couponManagement";
 	}
 	
 	// 관리자에서하는겁니다요
@@ -36,7 +36,7 @@ public class CouponController {
 	@RequestMapping("/giveCoupon")
 	public String giveCoupon(MemberVO vo, Model model) {
 		model.addAttribute("memberlist", Memberservice.listAtOnce(vo));
-		return "admin/giveCoupon";
+		return "admin/memberManagement/giveCoupon";
 	}
 	
 	
@@ -45,7 +45,7 @@ public class CouponController {
 		model.addAttribute("coupon", service.createCoupon(vo,memberEmails));
 		
 		model.addAttribute("msg", "쿠폰이 정상적으로 발급되었습니다.");
-		model.addAttribute("url", "/giveCoupon");
+		model.addAttribute("url", "/memberManagement/giveCoupon");
 		return "common/alert";
 	}
 	
@@ -53,7 +53,7 @@ public class CouponController {
 	@RequestMapping("/couponMemberPopup")
 	public String couponMemberPopup(CouponVO vo,Model model,@RequestParam("data") String name) {
 		model.addAttribute("map", service.listAsName(vo,name));
-		return "admin/couponMemberPopup";
+		return "admin/memberManagement/couponMemberPopup";
 	}
 	
 	
