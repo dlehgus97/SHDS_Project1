@@ -6,49 +6,72 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	@Autowired
-	private MemberMapper mapper;
-	
-	@Override
-	public boolean regist(MemberVO vo) {
-		
-		return mapper.regist(vo) == 0 ? false : true;
-	}
+    @Autowired
+    private MemberMapper mapper; // MemberMapper 주입
 
-	@Override
-	public int emailCheck(String email) {
-		return mapper.emailCheck(email);
-	}
+    @Override
+    public boolean regist(MemberVO vo) {
+        return mapper.regist(vo) == 1; // 가입 성공 여부 반환
+    }
 
-	@Override
-	public MemberVO login(MemberVO vo) {
-		return mapper.login(vo);
-	}
-	
-	@Override
-	public MemberVO detail(MemberVO vo) {
-		return mapper.detail(vo);
-	}
+    @Override
+    public int emailCheck(String email) {
+        return mapper.emailCheck(email);
+    }
 
-	@Override
-	public int update(MemberVO vo) {
-		return mapper.update(vo);
-	}
-	
-	@Override
-	public boolean findid(MemberVO vo) {
-		
-		return mapper.findid(vo) == 0 ? false : true;
-	}
+    @Override
+    public MemberVO login(MemberVO vo) {
+        return mapper.login(vo);
+    }
 
+
+    @Override
+    public MemberVO detail(MemberVO vo) {
+        return mapper.detail(vo);
+    }
+    
+    @Override
+    public int update(MemberVO vo) {
+        return mapper.update(vo);
+    }
+
+    @Override
+    public boolean findid(MemberVO vo) {
+        return mapper.findid(vo) == 1; // 아이디 찾기 성공 여부 반환
+    }
+
+    @Override
+    public MemberVO findByEmail(String email) {
+        return mapper.findByEmail(email);
+    }
+
+    @Override
+    public boolean checkMemberExist(String email) {
+        // 실제 데이터베이스에서 회원을 조회하여 존재하는지 확인
+        // 예시로 직접 구현한 메서드 호출
+        return mapper.findByEmail(email)==null ? false : true;
+    } 
+    
+    public boolean insertMember(MemberVO vo) {
+        try {
+        	mapper.insertMember(vo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 	
-	
+	@Override
+	@Transactional
+	public int sellerRegist(int no) {
+		return mapper.sellerRegist(no);
+	}
 	
 	//관리자
 	@Override
@@ -100,5 +123,4 @@ public class MemberServiceImpl implements MemberService {
 		map.put("list", list);
 		return map;
 	}
-
 }

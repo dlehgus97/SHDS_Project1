@@ -10,7 +10,7 @@ public class SellerRequestVO {
 	private int no;
 	private int memberno;
 	private int file_no;
-	private String back;
+	private String bank;
 	private String account;
 	private Timestamp regdate;
 	

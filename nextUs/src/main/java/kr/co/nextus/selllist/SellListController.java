@@ -44,17 +44,15 @@ public class SellListController {
 	
 	
 	//관리자
-	@GetMapping("/productManagement.do")
-	public String List(SellListVO vo, Model model) {
-		model.addAttribute("selllist", sellListService.index(vo));
-		return "admin/productManagement";
-	}
+//	@GetMapping("/productManagement.do")
+//	public String List(SellListVO vo, Model model) {
+//		model.addAttribute("selllist", sellListService.index(vo));
+//		return "admin/productManagement/productManagement";
+//	}
 	@RequestMapping("/productManagement")
 	public String productManagement(SellListVO vo, Model model) {
-		System.out.println(1);
 		model.addAttribute("selllist", sellListService.index(vo));
-		System.out.println(2);
-		return "admin/productManagement";
+		return "admin/productManagement/productManagement";
 	}
 	
 }

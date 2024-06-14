@@ -3,52 +3,55 @@
 <mapper namespace="kr.co.nextus.member.MemberMapper">
 	<insert id="regist" parameterType="kr.co.nextus.member.MemberVO">
 		INSERT INTO MEMBER (
-		no, email, pwd, name,
-		nickname, gender, birthday, hp, zipcode,
-		addr1, addr2, regdate, state, seller,
-		profile_org, profile_real)
+			no, email, pwd, name,
+			nickname, gender, birthday, hp, zipcode,
+			addr1, addr2, regdate, state, seller,
+			profile_org, profile_real)
 		VALUES (
-		#{no}, #{email}, #{pwd}, #{name},
-		#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
-		#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
-		#{profile_org}, #{profile_real});
+			#{no}, #{email}, MD5(#{pwd}), #{name},
+			#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
+			#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
+			#{profile_org}, #{profile_real});
 		<selectKey order="AFTER" keyProperty="no" resultType="int">
-			SELECT
-			LAST_INSERT_ID()
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
 	<select id="emailCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE email=#{email}
 	</select>
-
-	<select id="login" parameterType="kr.co.nextus.member.MemberVO"
-		resultType="kr.co.nextus.member.MemberVO">
-		SELECT * FROM MEMBER WHERE email=#{email} AND
-		pwd=MD5(#{pwd})
+	
+	<select id="login" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT * FROM MEMBER WHERE email=#{email} AND pwd=MD5(#{pwd})
 	</select>
-
-	<select id="detail" parameterType="int"
-		resultType="kr.co.nextus.member.MemberVO">
-		SELECT * FROM MEMBER WHERE
-		no=#{no}
+	
+	<select id="detail" parameterType="int" resultType="kr.co.nextus.member.MemberVO" >
+		SELECT * FROM MEMBER WHERE no=#{no}
 	</select>
-
+	
+	<select id="findByEmail" parameterType="string" resultType="kr.co.nextus.member.MemberVO">
+        SELECT * FROM MEMBER WHERE email = #{email}
+    </select>
+    
+    <insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO">
+        INSERT INTO MEMBER (email)
+        VALUES (#{email})
+    </insert>
+	
 	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
 		UPDATE MEMBER SET
-		<if test="pwd != ''">
+			<if test="pwd != ''">
 			pwd = MD5(#{pwd}),
-		</if>
-		name = #{name},
-		gender = #{gender},
-		birthday = #{birthday},
-		hp = #{hp},
-		zipcode = #{zipcode},
-		addr1 = #{addr1},
-		addr2 = #{addr2}
+			</if>
+			name = #{name},
+			gender = #{gender},
+			birthday = #{birthday},
+			hp = #{hp},
+			zipcode = #{zipcode},
+			addr1 = #{addr1},
+			addr2 = #{addr2}	
 		WHERE no = #{no}
 	</update>
-
-
+	
 	<!-- ========== -->
 	<!-- 관리자 페이지 -->
 	<!-- ========== -->
@@ -131,6 +134,5 @@
 			</if>
 		</where>
 	</sql>
-	
 	
 </mapper>

@@ -46,7 +46,18 @@ document.addEventListener("DOMContentLoaded", function() {
     setDataValue(ratingDivs2, ratingAvgInt); // 두 번째 클래스 조합 요소들의 data-value 설정
 });
 </script>
-
+<script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // 버튼 클릭 이벤트 핸들러
+            document.getElementById("cart_add_btn").addEventListener("click", function(event) {
+                alert('장바구니에 담겼습니다');
+                // 폼을 실제로 전송하고 싶다면 아래 주석을 제거합니다.
+                // document.getElementById("cart_form").submit();
+                // 폼 전송을 막고 싶다면 아래 주석을 제거합니다.
+                // event.preventDefault();
+            });
+        });
+    </script>
 </head>
 <body>
 <%-- <h1> 판매글예시 </h1>
@@ -142,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
 
                 <!-- Form -->
-                <form method="get" name="frm" action="/cart/cart.do" enctype="multipart/form-data">
+                <form method="get" name="frm" action="/cart/insert.do" enctype="multipart/form-data">
                   	<!-- Hidden field -->
         			<input type="hidden" name="sellno" value="${vo.sellno }">
         			
@@ -231,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
                       <div class="col-12 col-lg">
 
                         <!-- Submit -->
-                        <button type="submit" class="btn w-100 btn-dark mb-2">
+                        <button type="submit" class="btn w-100 btn-dark mb-2" id="cart_add_btn">
                           장바구니에 담기
                         </button>
 

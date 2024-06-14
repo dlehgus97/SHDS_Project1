@@ -18,9 +18,9 @@
 					<li><a id="saleStatement" href="/saleStatement">매출 통계</a></li>
 				</ul>
 			</li>
-			<li><a id="sellerRegistManagement_M" href="/sellerRegistManagement">셀러관리</a>
+			<li><a id="sellerRequestManagement" href="/sellerRequestManagement">셀러관리</a>
 				<ul>
-					<li><a id="sellerRegistManagement" href="/sellerRegistManagement">셀러 등록 관리</a></li>
+					<li><a id="sellerRequestManagement" href="/sellerRequestManagement">셀러 등록 관리</a></li>
 					<li><a id="sellerBanManagement" href="/sellerBanManagement">셀러 제재 관리</a></li>
 				</ul>
 			</li>

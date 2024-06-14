@@ -14,46 +14,42 @@ public class AdminController {
 	public String adminMain() {
 		return "adminMain";
 	}
+	
 	@RequestMapping("/sellerSettlement")
 	public String sellerSettlement() {
-		return "admin/sellerSettlement";
+		return "admin/adjustManagement/sellerSettlement";
 	}
-
-	
 	@RequestMapping("/saleStatement")
 	public String saleStatement() {
-		return "admin/saleStatement";
+		return "admin/adjustManagement/saleStatement";
 	}
 
 
 	@RequestMapping("/refundRequest")
 	public String refundRequest() {
-		return "admin/refundRequest";
+		return "admin/refundManagement/refundRequest";
 	}
 	
 	
 	@RequestMapping("/notice")
 	public String notice() {
-		return "admin/notice";
+		return "admin/serviceCenter/notice";
 	}
 	@RequestMapping("/QnA")
 	public String QnA() {
-		return "admin/QnA";
+		return "admin/serviceCenter/QnA";
 	}
 	@RequestMapping("/FaQ")
 	public String FaQ() {
-		return "admin//FaQ";
+		return "admin/serviceCenter/FaQ";
 	}
 	@RequestMapping("/event")
 	public String event() {
-		return "admin/event";
+		return "admin/serviceCenter/event";
 	}
 	
 	
-	@RequestMapping("/report")
-	public String report() {
-		return "admin/report";
-	}
+	
 	
 	
 	

@@ -46,5 +46,13 @@
         account = #{account}, seller_rating_avg = #{seller_rating_avg}, review_cnt = #{seller_review_cnt}
         WHERE no = #{no}
     </update>
-
+    
+    <!-- 관리자 -->
+	<insert id="insertSellerByAdmin" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO">
+        INSERT INTO SELLER (no, info, category1, category2, bank, account, 
+        rating_avg, review_cnt)
+        VALUES (#{no}, '안녕하세요. 만나서 반갑습니다.', null, null, #{bank}, 
+        #{account}, 0, 0)
+    </insert>
+	
 </mapper>
