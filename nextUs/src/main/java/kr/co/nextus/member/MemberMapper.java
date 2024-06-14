@@ -30,20 +30,7 @@ public interface MemberMapper {
     // 네이버 회원 정보 저장
     int insertMember(MemberVO vo);
 
-    // 회원 목록의 총 개수
-    int count(MemberVO param);
-
-    // 회원 목록 조회
-    List<MemberVO> list(MemberVO vo);
-
-    // 일괄 처리된 회원 목록 조회
-    List<MemberVO> listAtOnce(MemberVO vo);
-
-    // 회원 신고 건수 목록 조회
-    List<MemberVO> memberReportCountList(MemberVO param);
-
-    // 판매자 신고 건수 목록 조회
-    List<MemberVO> sellerReportCountList(MemberVO param);
+  
     
     //관리자
   	int count(MemberVO param);
