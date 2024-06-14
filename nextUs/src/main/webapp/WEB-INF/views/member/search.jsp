@@ -17,28 +17,11 @@
     <link rel="stylesheet" href="/resources/css/footer.css"/>
     
     <style>
-    .btn { margin: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-    .btn:hover { background-color: #0056b3; }
+    .btn { padding: 30px 30px; background-color: #000000; color: white; border: none; cursor: pointer; }
+    .btn:hover { background-color: #333333; }
     .active { display: block; }
     </style>
     
-    <script>
-    function idSearchCheck() {
-        if ($("#email").val() == '' && $("#username").val() == '') {
-            alert("이메일이나 사용자 이름을 입력해 주세요");
-            $("#email").focus();
-            return false;
-        }
-    }
-    
-    function passwordSearchCheck() {
-        if ($("#email-password").val() == '') {
-            alert("이메일을 입력해 주세요");
-            $("#email-password").focus();
-            return false;
-        }
-    }
-    </script>
 </head> 
 <body>
     <div class="wrap">

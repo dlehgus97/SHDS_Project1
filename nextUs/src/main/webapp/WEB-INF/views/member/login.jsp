@@ -5,16 +5,20 @@
 <head> 
     <meta charset="utf-8">
     <title>로그인</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/reset.css"/>
     <link rel="stylesheet" href="/resources/css/style.css"/>
     <link rel="stylesheet" href="/resources/css/contents.css"/>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/footer.css"/>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+    
 
     <script>         
         $(document).ready(function() {
@@ -36,24 +40,13 @@
             var naverLogin = new naver.LoginWithNaverId({
                 clientId: "qNDkrOO7CvCTWUbSRCJS",
                 callbackUrl: "http://localhost:8090/member/callback",
-                isPopup: false,
+                isPopup: false, /* 팝업을 통한 연동처리 여부 */
                 loginButton: {color: "green", type: 3, height: 60}
             });
-            naverLogin.init();
 
-            naverLogin.getLoginStatus(function(status) {
-                if (status) {
-                    var email = naverLogin.user.getEmail();
-                    console.log("email: " + email);
-                    // 서버로 email을 전송하는 코드를 추가합니다.
-                } else {
-                    console.log("AccessToken이 유효하지 않습니다.");
-                }
-            });
+            naverLogin.init(); /* 설정정보를 초기화하고 연동을 준비 */
         });
     </script>
-    
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 </head> 
 <body>
     <div class="wrap">
@@ -72,12 +65,24 @@
                                     <li><label><input type="checkbox" name="reg1" id="reg1"/> 아이디저장</label></li>
                                 </ul>
                                 <div class="login_btn"><input type="submit" value="로그인" alt="로그인" /></div>
-                                <div id="naverIdLogin"></div>
                             </fieldset>
                             <div class="btnSet clear">
                                 <div>
                                     <a href="regist.do" class="btn">회원가입</a> 
                                     <a href="search.do" class="btn">이메일/비밀번호 찾기</a>
+                                </div>
+                            </div>
+                            <div class="social-group">
+                                <div>
+                                    <p>간편 로그인</p>
+                                    <!-- 카카오톡 간편로그인 -->
+                                    <a href="카카오톡_로그인_URL" class="social-login">
+                                        <img src="/resources/imgs/icons/kakao_login_medium_narrow.png" alt="카카오톡으로 간편 로그인" class="social-icon">
+                                    </a>
+                                    <!-- 네이버 간편로그인 -->
+                                    <a id="naverIdLogin" class="social-login">
+                                        <alt="네이버로 간편 로그인" class="social-icon">
+                                    </a>
                                 </div>
                             </div>
                         </div>

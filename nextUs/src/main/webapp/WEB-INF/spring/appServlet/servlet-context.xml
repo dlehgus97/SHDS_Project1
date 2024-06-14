@@ -36,8 +36,7 @@
     </beans:bean>
     
 	<context:component-scan base-package="kr.co.nextus" />
-    <!-- NaverLoginVO Class에 대한 Bean설정 추가 -->
-    <beans:bean id="naverLoginVO" class="kr.co.nextus.member.NaverLoginVO" />
+    
 
     
 

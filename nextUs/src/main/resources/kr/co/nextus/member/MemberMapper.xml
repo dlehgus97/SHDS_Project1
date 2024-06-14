@@ -28,6 +28,15 @@
 		SELECT * FROM MEMBER WHERE no=#{no}
 	</select>
 	
+	<select id="findByEmail" parameterType="string" resultType="kr.co.nextus.member.MemberVO">
+        SELECT * FROM MEMBER WHERE email = #{email}
+    </select>
+    
+    <insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO">
+        INSERT INTO MEMBER (email)
+        VALUES (#{email})
+    </insert>
+	
 	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
 		UPDATE MEMBER SET
 			<if test="pwd != ''">
