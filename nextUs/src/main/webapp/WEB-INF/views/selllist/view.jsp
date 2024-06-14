@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="mb-4" data-flickity='{"draggable": false, "fade": true}' id="productSlider">
 
                     <!-- Item -->
-                    <a href="#" data-bigpicture='{ "imgSrc": "/upload/board/1717978758514.jpg"}'>
+                    <a href="#" data-bigpicture='{ "imgSrc": "/upload/board/${vo.thumbnail_real}"}'>
                       <img src="/upload/board/1717978758514.jpg" alt="..." class="card-img-top">
                     </a>
                   </div>
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
 
                     <a class="fs-sm text-reset ms-2" href="#reviews">
-                      Reviews (${vo.rating_avg })
+                      Reviews (<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" />)
                     </a>
 
                   </div>
@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		                </div>
 		              </form>
 
-            </div>
+            		</div>
 	                
 	                
 	                
@@ -518,7 +518,19 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
       </div>
     </section>
-
+	
+	<!-- 페이지 로드 시 해시를 처리하여 특정 위치로 이동 -->
+	  <script>
+	    window.onload = function() {
+	      // 해시가 있는지 확인
+	      if (window.location.hash) {
+	        // 해시에서 ID를 가져오기
+	        var targetId = window.location.hash.substring(1);
+	        // 해당 ID를 가진 요소로 스크롤
+	        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+	      }
+	    };
+	  </script>
     <!-- REVIEWS -->
     <section class="pt-9 pb-11" id="reviews">
       <div class="container">
@@ -536,16 +548,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="dropdown mb-4 mb-md-0">
 
                   <!-- Toggle -->
-                  <a class="dropdown-toggle text-reset" data-bs-toggle="dropdown" href="#">
+                  <a class="dropdown-toggle text-reset" >
                     <strong>정렬기준: 최신순</strong>
                   </a>
 
-                  <!-- Menu -->
-                  <div class="dropdown-menu mt-3">
-                    <a class="dropdown-item" href="#!">최신순</a>
-                    <a class="dropdown-item" href="#!">별점높은순</a>
-                    <a class="dropdown-item" href="#!">별점낮은순</a>
-                  </div>
 
                 </div>
 
@@ -736,6 +742,60 @@ document.addEventListener("DOMContentLoaded", function() {
 							          });
 								}
 							</script>
+							
+                          <span class="fs-xs text-muted" style="position: absolute; right: 10px;">
+						  	신고하기
+						  	<!-- 신고 버튼 -->
+			                <a data-bs-toggle="collapse" href="#reviewsingoForm">
+			                  <img src="/resources/imgs/singo.jpg" alt="Image" width="20px" height="20px">
+			                </a>
+						  </span>
+						  
+						  <!-- 리뷰신고 작성 폼 -->
+			     
+				            <div class="collapse" id="reviewsingoForm">
+				
+				              <!-- Divider -->
+				              <hr class="my-8">
+				
+				              <!-- Form -->
+				              <form method="post" name="frm" action="/report/insert.do" enctype="multipart/form-data">
+				                <div class="row">
+				                  <div class="col-12 mb-6 text-center">
+									
+				        			<!-- Hidden field -->
+				        			<input type="hidden" name="reviewno" value="${review.reviewno }">
+				        			<input type="hidden" name="sellno" value="${vo.sellno }">
+				        			<input type="hidden" name="memberno" value="${login.no }">
+				        			<input type="hidden" name="status" value=1>
+				                    <!-- Text -->
+				                    <p class="mb-1 fs-xs">
+				                      신고 사유를 작성해주세요
+				                    </p>
+				
+				                  </div>
+				                  <div class="col-12">
+				
+				                    <!-- 신고 내용 -->
+				                    <div class="form-group">
+				                      <label class="visually-hidden" for="reviewText">Review:</label>
+				                      <textarea class="form-control form-control-sm" name="content" id="reviewText" rows="5" placeholder="신고 사유를 상세히 작성해주세요 *" required></textarea>
+				                    </div>
+				
+				                  </div>
+				                  <div class="col-12 text-center">
+				
+				                    <!-- 신고 등록 -->
+				                    <button class="btn btn-outline-dark" type="submit">
+				                      리뷰 신고하기
+				                    </button>
+				
+				                  </div>
+				                </div>
+				              </form>
+		
+		            		</div>
+                          
 
                         </div>
                       </div>
@@ -763,7 +823,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<ul class='paging'>
 					<c:if test="${review.prev }">
 						<li><a
-							href="view.do?no=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}">
+							href="view.do?no=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
 								<< </a></li>
 					</c:if>
 					<c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
@@ -772,17 +832,35 @@ document.addEventListener("DOMContentLoaded", function() {
 						</c:if>
 						<c:if test="${p != ReviewVO.page}">
 							<li><a
-								href='view.do?no=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}'>${p}</a></li>
+								href='view.do?no=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews'>${p}</a></li>
 						</c:if>
 					</c:forEach>
 					<c:if test="${review.next }">
 						<li><a
-							href="view.do?no=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}">
+							href="view.do?no=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
 								>> </a></li>
 					</c:if>
 				</ul>
 			</div>
-
+			<!-- 검색 -->
+			<div class="bbsSearch">
+				<form method="get" name="searchForm" id="searchForm" action="view.do#reviews">
+					<input type="hidden" name="no" value="${vo.sellno }">
+					<span class="srchSelect"> <select id="stype" name="searchType" class="dSelect" title="검색분류 선택">
+							<option value="all">전체</option>
+							<option value="title"
+								<c:if test="${ReviewVO.searchType == 'title'}">selected</c:if>>제목</option>
+							<option value="content"
+								<c:if test="${ReviewVO.searchType == 'content'}">selected</c:if>>내용</option>
+					</select>
+					</span> 
+					<span class="searchWord"> 
+						<input type="text" id="sval" name="searchWord" value="${ReviewVO.searchWord}" title="검색어 입력">
+						<input type="submit" id="" value="검색" title="검색">
+					</span>
+				</form>
+			</div>
+			
           </div>
         </div>
       </div>

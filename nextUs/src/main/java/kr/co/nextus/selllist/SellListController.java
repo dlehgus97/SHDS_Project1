@@ -35,6 +35,7 @@ public class SellListController {
 	
 	@GetMapping("/selllist/view.do")
 	public String detail(Model model, @RequestParam("no") int no, ReviewVO vo) {
+		vo.setNo(no);
 		SellListVO detail = sellListService.detail(no);
 		model.addAttribute("vo", detail);
 		model.addAttribute("review", reviewService.list(vo));

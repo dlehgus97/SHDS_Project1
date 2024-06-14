@@ -49,7 +49,7 @@
 	</sql>
 	
 	<!-- 카운트 -->
- 	<select id="count" parameterType="int" resultType="int">
+ 	<select id="count" parameterType="kr.co.nextus.review.ReviewVO" resultType="int">
 		SELECT COUNT(*) FROM REVIEW WHERE sellno=#{no}
 		<include refid="searchSql"/>
 	</select>

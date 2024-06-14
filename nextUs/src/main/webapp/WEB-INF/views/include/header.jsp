@@ -45,7 +45,7 @@
             </div>
             <c:if test="${!empty login }">
             <div class="header_right_object">
-            	<a href="" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">마이페이지</a>
+            	<a href="/mypage/orderlist.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">마이페이지</a>
             	<img src="" id="header_profile" alt="프로필">
             </div>
             <div></div><div></div>

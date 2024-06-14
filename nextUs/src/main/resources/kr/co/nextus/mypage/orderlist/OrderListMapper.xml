@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.mypage.orderlist.OrderListMapper">
+	<!-- 목록 -->
+	<select id="list" parameterType="kr.co.nextus.mypage.orderlist.OrderListVO" resultType="kr.co.nextus.mypage.orderlist.OrderListVO">
+		SELECT *,
+		(SELECT title FROM SELLLIST WHERE SELLLIST.sellno=BUYLIST.sellno) as selltitle
+		FROM BUYLIST WHERE memberno=#{memberno}
+	</select>
+
+	<select id="count" parameterType="kr.co.nextus.mypage.orderlist.OrderListVO" resultType="int">
+		SELECT COUNT(*) FROM BUYLIST WHERE memberno=#{memberno}
+	</select>
+</mapper>   
