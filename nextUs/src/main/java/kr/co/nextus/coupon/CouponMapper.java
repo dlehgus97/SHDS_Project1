@@ -3,6 +3,8 @@ package kr.co.nextus.coupon;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -16,8 +18,8 @@ public interface CouponMapper {
 	List<CouponVO> list(CouponVO vo);
 	List<CouponVO> listAsName(CouponVO vo);
 	int count(CouponVO param);
-
-	CouponVO findcou(CouponVO vo);
+	//리스트대상 할인,타입뽑아오기
+	List<CouponVO> listuse(CouponVO couponVO);
 	
 	
 }

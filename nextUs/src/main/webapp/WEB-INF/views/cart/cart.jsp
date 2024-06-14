@@ -149,9 +149,13 @@
                   <li class="list-group-item d-flex">
                     <span>Subtotal</span> <span class="ms-auto fs-sm">${total }</span>
                   </li>
+                  
+                  <c:forEach var="cou" items="${listuse}">
                   <li class="list-group-item d-flex">
-                    <span>할인</span> <span class="ms-auto fs-sm">0</span>
+                    <span>할인</span> <span class="ms-auto fs-sm">${cou.discount}+${cou.type}</span><!-- type==1 -> (-)원 // type==2 -> x% -->
                   </li>
+                  </c:forEach>
+                  
                   <li class="list-group-item d-flex fs-lg fw-bold">
                     <span>Total</span> <span class="ms-auto fs-sm">${total }</span>
                   </li>
@@ -224,15 +228,16 @@
             $('#coupon_btn').click(function(event) {
                 event.preventDefault(); // 폼의 기본 제출 동작을 막음
 
-                var couponCode = $('#cartCouponCode').val();
-                var memberNo = '${login.no}'; // 서버에서 login.no 값을 삽입해야 합니다.
+                var name = $('#cartCouponCode').val();
+                
+                console.log(name);
 
                 $.ajax({
                     url: '/couponUse',
                     method: 'POST',
                     data: {
-                        couponCode: couponCode,
-                        memberNo: memberNo
+                        name: name
+                       
                     },
                     success: function(response) {
                         // 서버로부터 성공적으로 응답을 받았을 때 실행할 코드

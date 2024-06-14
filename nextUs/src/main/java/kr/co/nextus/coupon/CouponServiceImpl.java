@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.nextus.cart.CartVO;
+
 
 
 
@@ -71,8 +73,8 @@ public class CouponServiceImpl implements CouponService {
 	}
 	
 	@Override
-	public CouponVO findcou(CouponVO vo) {
-	    return mapper.findcou(vo); // Mapper에서 데이터를 가져옵니다.
+	public List<CouponVO> listuse(CouponVO couponVO) {
+	    return mapper.listuse(couponVO); // Mapper에서 데이터를 가져옵니다.
 	}
 
 
