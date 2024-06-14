@@ -9,7 +9,7 @@
 <title>제재 내역 추가</title>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" href="../resources/css/admin/addbanPopup.css" />
-<script src="../resources/js/admin/memberStatus.js"></script>
+<!-- <script src="../resources/js/admin/memberStatus.js"></script> -->
 </head>
 <body>
 	<h2>제재 내역 추가</h2>

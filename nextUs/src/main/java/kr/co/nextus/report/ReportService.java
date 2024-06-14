@@ -11,7 +11,7 @@ import kr.co.nextus.review.ReviewVO;
 
 
 public interface ReportService {
-	
+	//관리자 페이지에서 동작
+	Map<String, Object> list(ReportVO vo);
 	int insert(ReportVO vo, HttpServletRequest request);
-	
 }

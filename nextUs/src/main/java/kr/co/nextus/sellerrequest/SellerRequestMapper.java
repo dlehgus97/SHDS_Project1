@@ -12,6 +12,9 @@ public interface SellerRequestMapper {
 	//쿠폰리스트 출력
 	List<SellerRequestVO> list(SellerRequestVO vo);
 	int count(SellerRequestVO param);
+	List<SellerRequestVO> detail(SellerRequestVO param);
+	int approve(SellerRequestVO vo);
+	boolean deny(SellerRequestVO vo);
 	
 	
 }

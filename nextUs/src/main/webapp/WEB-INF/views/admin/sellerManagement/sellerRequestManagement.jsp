@@ -11,6 +11,7 @@
 <link rel="stylesheet"
 	href="../resources/css/admin/sellerRegistManagement.css" />
 <script src="../resources/js/admin/memberStatus.js"></script>
+<script src="../resources/js/admin/sellerRegist.js"></script>
 <style>
 	#sellerRegistManagement{color:purple;}
 	#sellerRegistManagement_M{color:purple;}
@@ -51,7 +52,7 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th>번호</th>
+							<th>회원번호</th>
 							<th>이메일</th>
 							<th>닉네임</th>
 							<th>요청일자</th>
@@ -68,12 +69,12 @@
 							<c:forEach var="vo" items="${map.list}">
 								
 									<tr>
-										<td>${vo.no != null ? vo.no : '(미입력)'}</td>
+										<td>${vo.memberno != null ? vo.memberno : '(미입력)'}</td>
 										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 										<td>${vo.nickname != null ? vo.nickname : '(미입력)'}</td>
 										<td class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></td>
 										<td>
-											<button class="rev_button" type="button">상세보기</button>
+											<button class="rev_button" type="button"onclick="openPopup(event); return false;">상세보기</button>
 										</td>
 									</tr>
 								

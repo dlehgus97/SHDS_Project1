@@ -6,6 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import kr.co.nextus.member.MemberMapper;
+import kr.co.nextus.seller.SellerMapper;
 
 
 
@@ -15,6 +19,10 @@ public class SellerRequestServiceImpl implements SellerRequestService {
 
 	@Autowired
 	private SellerRequestMapper mapper;
+	@Autowired
+	private SellerMapper sellerMapper;
+	@Autowired
+	private MemberMapper MemberMapper;
 
 	
 	//관리자페이지에서 동작
@@ -45,6 +53,51 @@ public class SellerRequestServiceImpl implements SellerRequestService {
         map.put("isPrev", isPrev);
 		map.put("isNext", isNext);
 		return map;
+	}
+
+
+	@Override
+	public Map<String, Object> list(SellerRequestVO param, int no) {
+		param.setNo(no);
+        List<SellerRequestVO> list = mapper.detail(param); // 목록
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        
+
+		return map;
+	}
+
+
+	@Override
+	@Transactional
+	public int approve(SellerRequestVO vo, int memberno) {
+		int result = 0;
+		vo.setNo(memberno);
+
+		  try {
+		        result += mapper.approve(vo);
+		        System.out.println("AAA"+"1");
+		        result += sellerMapper.insertSellerByAdmin(vo);
+		        System.out.println("AAA"+"2");
+		        result += MemberMapper.sellerRegist(memberno);
+		        System.out.println("AAA"+"3");
+
+		    } catch (Exception e) {
+		        // 예외 처리 로직
+		        e.printStackTrace(); // 예외 상황 로깅 등
+		        result = 0; // 예외 발생 시 결과 초기화 또는 특정 값으로 설정
+		    }
+		  System.out.println(result);
+		  return result;
+	}
+	
+	@Override
+	public boolean deny(SellerRequestVO vo, int no) {
+		boolean result = false;
+		vo.setNo(no);
+		result = mapper.deny(vo);
+		return result;
 	}
 
 

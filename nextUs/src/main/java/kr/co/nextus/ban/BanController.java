@@ -24,7 +24,7 @@ public class BanController {
 		model.addAttribute("ban", service.add(vo,membernos));
 		
 		model.addAttribute("msg", "제재 성공");
-		model.addAttribute("url", "/addBanPopupMember");
+		model.addAttribute("url", "/memberManagement/addBanPopupMember");
 		return "common/alert";
 	}
 	
@@ -33,7 +33,7 @@ public class BanController {
 		model.addAttribute("ban", service.add(vo,membernos));
 		
 		model.addAttribute("msg", "제재 성공");
-		model.addAttribute("url", "/addBanPopupSeller");
+		model.addAttribute("url", "/sellerManagement/addBanPopupSeller");
 		return "common/alert";
 	}
 	
@@ -41,13 +41,13 @@ public class BanController {
 	@RequestMapping("/memberBanManagement")
 	public String memberBanManagement(BanVO vo, Model model) {
 		model.addAttribute("map", service.list(vo,0));
-		return "admin/memberBanManagement";
+		return "admin/memberManagement/memberBanManagement";
 	}
 	
 	@GetMapping("/sellerBanManagement.do")
 	@RequestMapping("/sellerBanManagement")
 	public String sellerBanManagement(BanVO vo, Model model) {
 		model.addAttribute("map", service.list(vo,1));
-		return "admin/sellerBanManagement";
+		return "admin/sellerManagement/sellerBanManagement";
 	}
 }

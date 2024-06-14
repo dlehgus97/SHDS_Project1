@@ -30,5 +30,7 @@ public interface MemberService {
 	Map<String, Object> list(MemberVO vo);
 	Map<String, Object> listAtOnce(MemberVO vo);
 	Map<String, Object> reportCountList(MemberVO vo,int isSeller);
+
+	int sellerRegist(int no);
 	
 }

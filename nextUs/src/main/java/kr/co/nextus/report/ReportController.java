@@ -39,4 +39,11 @@ public class ReportController {
 		}
 		return "common/alert";
 	}
+	
+	@GetMapping("/report.do")
+	@RequestMapping("/report")
+	public String memberStatus(ReportVO vo, Model model) {
+		model.addAttribute("map", service.list(vo));
+		return "admin/reports/report";
+	}
 }

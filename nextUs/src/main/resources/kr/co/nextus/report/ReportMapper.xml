@@ -11,8 +11,26 @@
 			(SELECT IF(#{reviewno}=0, (SELECT seller FROM SELLLIST WHERE sellno=#{sellno}), (SELECT writeno FROM REVIEW WHERE reviewno=#{reviewno})))
 		);
 	</insert>
-	
-
-	
-	
+	<!-- ========== -->
+	<!-- 관리자 페이지 -->
+	<!-- ========== -->
+	<!-- 리스트 10개씩 출력 -->
+	<select id="list" parameterType="kr.co.nextus.report.ReportVO" resultType="kr.co.nextus.report.ReportVO">
+	    SELECT
+	        REPORT.*,
+	        reporter.email AS reportermemberemail,
+	        reported.email AS reportedmemberemail
+	    FROM
+	        REPORT
+	    LEFT JOIN
+	        MEMBER AS reporter ON REPORT.memberno = reporter.no
+	    LEFT JOIN
+	        MEMBER AS reported ON REPORT.reportedmemberno = reported.no
+	    ORDER BY no
+	    LIMIT #{startIdx}, 10
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.report.ReportVO" resultType="int">
+		SELECT COUNT(*) FROM REPORT
+	</select>
 </mapper>   
