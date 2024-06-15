@@ -19,7 +19,7 @@ public interface CouponMapper {
 	List<CouponVO> listAsName(CouponVO vo);
 	int count(CouponVO param);
 	//리스트대상 할인,타입뽑아오기
-	List<CouponVO> listuse(CouponVO couponVO);
+	CouponVO listuse(CouponVO vo);
 	
 	
 }

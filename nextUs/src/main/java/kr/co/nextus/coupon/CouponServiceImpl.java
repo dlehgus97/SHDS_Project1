@@ -73,8 +73,8 @@ public class CouponServiceImpl implements CouponService {
 	}
 	
 	@Override
-	public CuoponVO listuse(CouponVO couponVO) {
-	    return mapper.listuse(couponVO); // Mapper에서 데이터를 가져옵니다.
+	public CouponVO listuse(CouponVO vo) {
+	    return mapper.listuse(vo); // Mapper에서 데이터를 가져옵니다.
 	}
 
 

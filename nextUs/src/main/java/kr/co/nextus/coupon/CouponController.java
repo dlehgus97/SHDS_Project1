@@ -63,18 +63,35 @@ public class CouponController {
 	// 쿠폰사용시 - 구매자용
 	@PostMapping("/couponUse")
 	@ResponseBody
-	public String couponUse(Model model, @RequestParam("name") String name, HttpServletRequest request) {
+	public CouponVO couponUse(Model model, @RequestParam("name") String name, HttpServletRequest request) {
 	    HttpSession sess = request.getSession();
 	    MemberVO login = (MemberVO) sess.getAttribute("login");
 	    int memberno = login.getNo();
 
-	    CouponVO couponVO = new CouponVO();
-	    couponVO.setName(name);
-	    couponVO.setMemberno(memberno);
+	    CouponVO vo = new CouponVO();
+	    vo.setName(name);
+	    vo.setMemberno(memberno);
 
-	    List<CouponVO> listuse = service.listuse(couponVO);
-	    model.addAttribute(listuse);
-	    return "/cart/cart";
+	    CouponVO coupon = service.listuse(vo);
+	    System.out.println("coupon컨트롤러 : "+coupon);// 여기에는 담겨있는거 확인
+	    model.addAttribute("coupon",coupon);
+	    return coupon;
 	}
+	
+//	@PostMapping("/couponUse")
+//	public String couponUse(Model model, @RequestParam("name") String name, HttpServletRequest request) {
+//	    HttpSession sess = request.getSession();
+//	    MemberVO login = (MemberVO) sess.getAttribute("login");
+//	    int memberno = login.getNo();
+//
+//	    CouponVO vo = new CouponVO();
+//	    vo.setName(name);
+//	    vo.setMemberno(memberno);
+//
+//	    CouponVO coupon = service.listuse(vo);
+//	    System.out.println("coupon컨트롤러 : "+coupon);// 여기에는 담겨있는거 확인
+//	    model.addAttribute("coupon",coupon);
+//	    return "/cart/cart";
+//	}
 	
 }

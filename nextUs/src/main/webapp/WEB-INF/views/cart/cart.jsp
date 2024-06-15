@@ -144,27 +144,27 @@
 
             <!-- Total -->
             <div class="card mb-7 bg-light">
-              <div class="card-body">
-                <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
-                  <li class="list-group-item d-flex">
-                    <span>Subtotal</span> <span class="ms-auto fs-sm">${total }</span>
-                  </li>
-                  
-                  <c:forEach var="cou" items="${listuse}">
-                  <li class="list-group-item d-flex">
-                    <span>할인</span> <span class="ms-auto fs-sm">${cou.discount}+${cou.type}</span><!-- type==1 -> (-)원 // type==2 -> x%리 -->
-                  </li>
-                  </c:forEach>
-                  
-                  <li class="list-group-item d-flex fs-lg fw-bold">
-                    <span>Total</span> <span class="ms-auto fs-sm">${total }</span>
-                  </li>
-                  <li class="list-group-item fs-sm text-center text-gray-500">
-                    구매하시기를 원하신다면 아래의 버튼을 눌러주세요 *
-                  </li>
-                </ul>
-              </div>
-            </div>
+			  <div class="card-body">
+			    <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+			      <li class="list-group-item d-flex">
+			        <span>Subtotal</span>
+			        <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }">${total }</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
+			      </li>
+			
+			      <ul id="couponList" class="list-group">
+			        <!-- 쿠폰 정보 추가 -->
+			      </ul>
+			
+			      <li class="list-group-item d-flex fs-lg fw-bold">
+			        <span>Total</span>
+			        <span id="total" class="ms-auto fs-sm">${total }</span>
+			      </li>
+			      <li class="list-group-item fs-sm text-center text-gray-500">
+			        구매하시기를 원하신다면 아래의 버튼을 눌러주세요 *
+			      </li>
+			    </ul>
+			  </div>
+			</div>
 
             <!-- Button -->
             <a class="btn w-100 btn-dark mb-2" href="checkout.html">구매하기</a>
@@ -239,11 +239,32 @@
                         name: name
                        
                     },
-                    success: function(response) {
+                    success: function(coupon) {
                         // 서버로부터 성공적으로 응답을 받았을 때 실행할 코드
                         alert('쿠폰이 성공적으로 적용되었습니다.');
-                        console.log(response); // 서버 응답을 콘솔에 출력
+                        console.log("쿠폰은" + coupon); // 서버 응답을 콘솔에 출력
+                        
+                        
+                        var subtotal = Math.floor(parseFloat($('#subtotal').data('subtotal'))); // data-subtotal 값을 가져와서 숫자로 변환 후 소수점 제거
+                        var discountValue = coupon.discount;
+                        if (coupon.type === 2) {
+                            // type이 2일 경우, discount를 비율로 계산
+                            discountValue = Math.floor(subtotal * (coupon.discount / 100));
+                        } else {
+                            discountValue = coupon.discount; // 소수점 제거
+                        }
+
+                        var couponHtml = '<li class="list-group-item d-flex">' +
+                            '<span>할인</span>' +
+                            '<span class="ms-auto fs-sm">' + discountValue + '</span>' +
+                            '</li>';
+                        $('#couponList').append(couponHtml);
+
+                        // Total 값을 업데이트
+                        var total = subtotal - discountValue;
+                        $('#total').text(Math.floor(total)); // 소수점 제거
                     },
+                    
                     error: function(xhr, status, error) {
                         // 요청이 실패했을 때 실행할 코드
                         alert('쿠폰 적용에 실패했습니다. 다시 시도해주세요.');

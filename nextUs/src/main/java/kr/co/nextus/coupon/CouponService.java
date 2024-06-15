@@ -16,6 +16,6 @@ public interface CouponService {
 	//쿠폰생성
 	boolean createCoupon(CouponVO vo, List<String> memberEmails);
 	
-	CouponVO listuse(CouponVO couponVO);
+	CouponVO listuse(CouponVO vo);
 	
 }
