@@ -48,5 +48,12 @@
 		FROM COUPON
 		WHERE name = #{name} and memberno = #{memberno} and status = 1
 	</select>
+	
+	<!-- 멤버에게 보여줄 쿠폰 리스트 -->
+	<select id="listToMember" parameterType="int" resultType="kr.co.nextus.coupon.CouponVO">
+		SELECT *
+		FROM COUPON
+		WHERE memberno = #{no} AND status = 1
+	</select>
 
 </mapper>

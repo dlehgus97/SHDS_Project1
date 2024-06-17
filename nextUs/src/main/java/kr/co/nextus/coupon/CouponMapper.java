@@ -21,5 +21,6 @@ public interface CouponMapper {
 	//리스트대상 할인,타입뽑아오기
 	CouponVO listuse(CouponVO vo);
 	
-	
+	//유저에게 보여주기 위함
+	List<CouponVO> listToMember(int no);
 }

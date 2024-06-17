@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
 <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -41,25 +42,44 @@
 			</div>
 			<div id="coupon_container" class="payment_border">
 				<h2>쿠폰</h2>
-				<!-- 쿠폰 정보 불러오기 필요-->
+				
 				<div id="coupon_detail">
 					<p style="font-weight: bold;">쿠폰</p>
 					<select id="coupon_select">
-						<option>-----선택------</option>
-						<option>가입 축하 쿠폰 ! (5%)</option>
 					</select>
+					<!-- 쿠폰 정보 불러오기-->
+					<script>
+						$(document).ready(function() {
+							$.ajax({
+								url: '/couponListToMember',
+								method: 'GET',
+								success: function(data) {
+									console.log('쿠폰 불러오기 성공', data);
+									//쿠폰 select에 넣어주기
+									const couponSelect = $('#coupon_select');
+                                    data.forEach(function(cvo) {
+                                        const option = new Option(cvo.name, cvo.no, cvo.discount, cvo.type);
+                                        couponSelect.append(option);
+                                    });
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+					                console.error('쿠폰 불러오기 실패', textStatus, errorThrown);
+					            }
+							});
+						});
+					</script>
 					<button id="coupon_confirm_button" onclick="confirmCoupon()">적용</button>
 					<script>
 						function confirmCoupon() {
-							// select 요소와 input 요소를 가져옴
-							const couponSelect = document.getElementById('coupon_select');
-							const appliedCouponInput = document.getElementById('applied_coupon');
-							
-							// 선택된 옵션의 텍스트를 가져옴
-							const selectedCoupon = couponSelect.value;
-							
-							// input 필드에 선택된 쿠폰을 설정
-							appliedCouponInput.value = selectedCoupon;
+							 // select 요소와 input 요소를 가져옴
+						    const couponSelect = document.getElementById('coupon_select');
+						    const appliedCouponInput = document.getElementById('applied_coupon');
+						    
+						    // 선택된 옵션의 텍스트를 가져옴
+						    const selectedCoupon = couponSelect.selectedOptions[0].text;
+						    
+						    // input 필드에 선택된 쿠폰을 설정
+						    appliedCouponInput.value = selectedCoupon;
 						}
 					</script>
 					<p style="font-weight: bold;">적용된 쿠폰</p>

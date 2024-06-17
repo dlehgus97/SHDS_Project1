@@ -18,4 +18,6 @@ public interface CouponService {
 	
 	CouponVO listuse(CouponVO vo);
 	
+	//유저용
+	List<CouponVO> listToMember(int no);
 }

@@ -59,6 +59,15 @@ public class CouponController {
 		return "admin/memberManagement/couponMemberPopup";
 	}
 	
+	//쿠폰 리스트
+	@GetMapping("/couponListToMember")
+	@ResponseBody
+	public List<CouponVO> couponList(HttpSession sess) {
+		List<CouponVO> couponList = service.listToMember(((MemberVO) sess.getAttribute("login")).getNo());
+		System.out.println(couponList);
+		System.out.println("리스트불러오기");
+		return couponList;
+	}
 	
 	// 쿠폰사용시 - 구매자용
 	@PostMapping("/couponUse")
