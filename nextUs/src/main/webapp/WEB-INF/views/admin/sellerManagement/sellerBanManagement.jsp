@@ -17,12 +17,10 @@
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-	<div class="container">
-		<div class="ad-menu">
-			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		</div>
-		<div class="m_right">
+<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 			<div class="header">
 			
 				<h2>샐러 제재 내역</h2>

@@ -12,12 +12,10 @@
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-	<div class="container">
-		<div class="ad-menu">
-			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		</div>
-		<div class="right">
+<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 			<div class="three_graph">
 				<div class="bg-wh main_graph">
 					<canvas id="line-chart" width="300" height="250"></canvas>

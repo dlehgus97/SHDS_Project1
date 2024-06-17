@@ -14,6 +14,10 @@ public class AdminController {
 	public String adminMain() {
 		return "adminMain";
 	}
+	@RequestMapping("/adminMenu")
+	public String adminMenu() {
+		return "admin/adminMenu";
+	}
 	
 	@RequestMapping("/sellerSettlement")
 	public String sellerSettlement() {

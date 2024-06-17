@@ -1,25 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>제목</title>
-<link rel="stylesheet" href="../resources/css/admin/adminMain.css" />
-<style>
-	#{color:purple;}
-	#{color:purple;}
-</style>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관리자 메인 페이지</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-	<div class="container">
-		<div class="ad-menu">
-			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		</div>
-		<div class="right">
-			<!-- 여기에 작성하세요 -->
-			
+	<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content">
+				<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
+				<!-- 여기에 작성해라 -->
+		
 		</div>
 	</div>
 </body>
