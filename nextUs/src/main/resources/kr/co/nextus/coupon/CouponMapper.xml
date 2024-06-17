@@ -42,13 +42,6 @@
 		FROM COUPON WHERE name=#{name}
 	</select>
 	
-	<!--  -->
-	<select id="listuse" parameterType="kr.co.nextus.coupon.CouponVO" resultType="kr.co.nextus.coupon.CouponVO">
-		SELECT type, discount
-		FROM COUPON
-		WHERE name = #{name} and memberno = #{memberno} and status = 1
-	</select>
-	
 	<!-- 멤버에게 보여줄 쿠폰 리스트 -->
 	<select id="listToMember" parameterType="int" resultType="kr.co.nextus.coupon.CouponVO">
 		SELECT *

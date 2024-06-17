@@ -44,135 +44,91 @@
     </nav>
 
     <!-- CONTENT -->
-    <section class="pt-7 pb-12">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-
-            <!-- Heading -->
-            <h3 class="mb-10 text-center">Shopping Cart</h3>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-md-7">
-
-            <!-- List group -->
-            <ul class="list-group list-group-lg list-group-flush-x mb-6">
-            <c:set var="total" value="0" />
-            <c:forEach var="vo" items="${list}">
-            <c:set var="total" value="${total + vo.price}"/>
-              <li class="list-group-item">
-                <div class="row align-items-center">
-                  <div class="col-3">
-		
-                    <!-- Image -->
-                    <a href="product.html">
-                       <img src="/upload/board/${vo.thumbnail_real }" id="썸네일">
-                    </a>
-
-                  </div>
-                  <div class="col">
-
-                    <!-- Title -->
-                    <div class="d-flex mb-2 fw-bold">
-                      <a class="text-body" href="product.html">${vo.title}</a> <span class="ms-auto">${vo.price}</span>
-                    </div>
-
-                    <!-- Text -->
-                    <p class="mb-7 fs-sm text-muted">
-                      ${vo.content}
-                    </p>
-
-                    <!--Footer -->
-                    <div class="d-flex align-items-center">
-
-                      <!-- Remove -->
-                      <a class="fs-xs text-gray-400 ms-auto remove-btn" href="#" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}">
-                        <i class="fe fe-x"></i> 삭제하기
-                      </a>
-
-                    </div>
-
-                  </div>
-                </div>
-              </li>
-            </c:forEach>
-              
-            </ul>
-            <!-- 장바구니가 비었을 때 표시할 메시지 -->
-		    <div id="empty-cart-message" style="display: none;">
-		        <h5 class="text-center">장바구니에 담긴 상품이 없습니다</h5>
-		    </div>
-
-            <!-- Footer -->
-            <div class="row align-items-end justify-content-between mb-10 mb-md-0">
-              <div class="col-12 col-md-7">
-
-                <!-- Coupon -->
-                <form class="mb-7 mb-md-0">
-                  <label class="form-label fs-sm fw-bold" for="cartCouponCode">
-                    Coupon code:
-                  </label>
-                  <div class="row row gx-5">
-                    <div class="col">
-
-                      <!-- Input -->
-                      <input class="form-control form-control-sm" id="cartCouponCode" type="text" placeholder="쿠폰코드를 입력하세요*">
-
-                    </div>
-                    <div class="col-auto">
-
-                      <!-- Button -->
-                      <button class="btn btn-sm btn-dark" id = "coupon_btn">
-                        적용
-                      </button>
-
-                    </div>
-                  </div>
-                </form>
-
-              </div>
-              <div class="col-12 col-md-auto">
-
-
-              </div>
-            </div>
-			
-          </div>
-          <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
-
-            <!-- Total -->
-            <div class="card mb-7 bg-light">
-			  <div class="card-body">
-			    <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
-			      <li class="list-group-item d-flex">
-			        <span>Subtotal</span>
-			        <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }">${total }</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
-			      </li>
-			
-			      <ul id="couponList" class="list-group">
-			        <!-- 쿠폰 정보 추가 -->
-			      </ul>
-			
-			      <li class="list-group-item d-flex fs-lg fw-bold">
-			        <span>Total</span>
-			        <span id="total" class="ms-auto fs-sm">${total }</span>
-			      </li>
-			      <li class="list-group-item fs-sm text-center text-gray-500">
-			        구매하시기를 원하신다면 아래의 버튼을 눌러주세요 *
-			      </li>
-			    </ul>
-			  </div>
-			</div>
-
-            <!-- Button -->
-            <a class="btn w-100 btn-dark mb-2" href="checkout.html">구매하기</a>
-
-          </div>
-        </div>
-      </div>
-    </section>
+	<section class="pt-7 pb-12">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-12">
+	
+	        <!-- Heading -->
+	        <h3 class="mb-10 text-center">Shopping Cart</h3>
+	
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="col-12 col-md-7">
+	
+	        <!-- List group -->
+	        <ul class="list-group list-group-lg list-group-flush-x mb-6">
+	          <c:set var="total" value="0" />
+	          <c:forEach var="vo" items="${list}">
+	            <c:set var="total" value="${total + vo.price}"/>
+	            <li class="list-group-item">
+	              <div class="row align-items-center">
+	                <div class="col-1">
+	                  <!-- Checkbox -->
+	                  <input type="checkbox" class="form-check-input product-checkbox" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}" data-thumbnail="${vo.thumbnail_real}" data-title="${vo.title}" data-price="${vo.price}" data-content="${vo.content}">
+	                </div>
+	                <div class="col-3">
+	                  <!-- Image -->
+	                  <a href="product.html">
+	                    <img src="/upload/board/${vo.thumbnail_real }" id="썸네일">
+	                  </a>
+	                </div>
+	                <div class="col">
+	                  <!-- Title -->
+	                  <div class="d-flex mb-2 fw-bold">
+	                    <a class="text-body" href="product.html">${vo.title}</a> <span class="ms-auto">${vo.price}</span>
+	                  </div>
+	
+	                  <!-- Text -->
+	                  <p class="mb-7 fs-sm text-muted">
+	                    ${vo.content}
+	                  </p>
+	
+	                  <!--Footer -->
+	                  <div class="d-flex align-items-center">
+	                    <!-- Remove -->
+	                    <a class="fs-xs text-gray-400 ms-auto remove-btn" href="#" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}">
+	                      <i class="fe fe-x"></i> 삭제하기
+	                    </a>
+	                  </div>
+	                </div>
+	              </div>
+	            </li>
+	          </c:forEach>
+	        </ul>
+	        <!-- 장바구니가 비었을 때 표시할 메시지 -->
+	        <div id="empty-cart-message" style="display: none;">
+	          <h5 class="text-center">장바구니에 담긴 상품이 없습니다</h5>
+	        </div>
+	      </div>
+	      <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
+	        <!-- Total -->
+	        <div class="card mb-7 bg-light">
+	          <div class="card-body">
+	            <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+	              <li class="list-group-item d-flex">
+	                <span>장바구니 총 금액</span>
+	                <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }">${total }</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
+	              </li>
+	              <li class="list-group-item d-flex fs-lg fw-bold">
+	                <span>선택상품 총 금액</span>
+	                <span id="total" class="ms-auto fs-sm">${total }</span>
+	              </li>
+	              <li class="list-group-item fs-sm text-center text-gray-500">
+	                구매하시기를 원하신다면<br>
+	                아래의 버튼을 눌러주세요 :)
+	              </li>
+	            </ul>
+	          </div>
+	        </div>
+	
+	        <!-- Button -->
+	        <a class="btn w-100 btn-dark mb-2" href="#" id="buy_btn">구매하기</a>
+	      </div>
+	    </div>
+	  </div>
+	</section>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
     
 
@@ -223,56 +179,71 @@
 	        }
 	    });
 	</script>
-     <script>
-        $(document).ready(function() {
-            $('#coupon_btn').click(function(event) {
-                event.preventDefault(); // 폼의 기본 제출 동작을 막음
-
-                var name = $('#cartCouponCode').val();
-                
-                console.log(name);
-
-                $.ajax({
-                    url: '/couponUse',
-                    method: 'POST',
-                    data: {
-                        name: name
-                       
-                    },
-                    success: function(coupon) {
-                        // 서버로부터 성공적으로 응답을 받았을 때 실행할 코드
-                        alert('쿠폰이 성공적으로 적용되었습니다.');
-                        console.log("쿠폰은" + coupon); // 서버 응답을 콘솔에 출력
-                        
-                        
-                        var subtotal = Math.floor(parseFloat($('#subtotal').data('subtotal'))); // data-subtotal 값을 가져와서 숫자로 변환 후 소수점 제거
-                        var discountValue = coupon.discount;
-                        if (coupon.type === 2) {
-                            // type이 2일 경우, discount를 비율로 계산
-                            discountValue = Math.floor(subtotal * (coupon.discount / 100));
-                        } else {
-                            discountValue = coupon.discount; // 소수점 제거
-                        }
-
-                        var couponHtml = '<li class="list-group-item d-flex">' +
-                            '<span>할인</span>' +
-                            '<span class="ms-auto fs-sm">' + discountValue + '</span>' +
-                            '</li>';
-                        $('#couponList').append(couponHtml);
-
-                        // Total 값을 업데이트
-                        var total = subtotal - discountValue;
-                        $('#total').text(Math.floor(total)); // 소수점 제거
-                    },
-                    
-                    error: function(xhr, status, error) {
-                        // 요청이 실패했을 때 실행할 코드
-                        alert('쿠폰 적용에 실패했습니다. 다시 시도해주세요.');
-                        console.log(xhr, status, error); // 에러 정보를 콘솔에 출력
-                    }
-                });
-            });
-        });
-    </script>
+	  <script>
+	    $(document).ready(function() {
+	      // 체크박스가 변경될 때마다 호출되는 함수
+	      function updateSelectedTotal() {
+	        let selectedTotal = 0;
+	        // 체크된 체크박스의 가격을 합산
+	        $(".product-checkbox:checked").each(function() {
+	          let price = parseFloat($(this).closest("li").find(".fw-bold .ms-auto").text());
+	          selectedTotal += price;
+	        });
+	        // 합산된 가격을 '선택상품 총 금액'에 표시 (소수점 제거)
+	        $("#total").text(Math.floor(selectedTotal));
+	      }
+	
+	      // 페이지 로드 시 초기화
+	      updateSelectedTotal();
+	
+	      // 체크박스 상태가 변경될 때마다 updateSelectedTotal 함수 호출
+	      $(".product-checkbox").change(updateSelectedTotal);
+	    });
+	  </script>
+	  <script>
+	        document.addEventListener("DOMContentLoaded", function() {
+	            document.getElementById("buy_btn").addEventListener("click", function(event) {
+	                event.preventDefault();
+	
+	                // 선택된 상품의 정보를 담을 배열
+	                var selectedProducts = [];
+	
+	                // 체크박스 선택된 항목을 찾기
+	                var checkboxes = document.querySelectorAll(".product-checkbox:checked");
+	                checkboxes.forEach(function(checkbox) {
+	                    var productInfo = {
+	                        sellno: checkbox.getAttribute("data-sellno"),
+	                        optionno: checkbox.getAttribute("data-optionno"),
+	                        thumbnail: checkbox.getAttribute("data-thumbnail"),
+	                        title: checkbox.getAttribute("data-title"),
+	                        price: checkbox.getAttribute("data-price"),
+	                        content: checkbox.getAttribute("data-content")
+	                    };
+	                    selectedProducts.push(productInfo);
+	                });
+	
+	                if (selectedProducts.length === 0) {
+	                    alert("구매할 상품을 선택해주세요.");
+	                    return;
+	                }
+	
+	                // 폼 데이터 생성
+	                var formData = new FormData();
+	                formData.append("selectedProducts", JSON.stringify(selectedProducts));
+	
+	                // AJAX 요청을 통해 서버로 데이터 전송
+	                var xhr = new XMLHttpRequest();
+	                xhr.open("POST", "/payment/paymentSelect", true);
+	                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	                xhr.onreadystatechange = function() {
+	                    if (xhr.readyState == 4 && xhr.status == 200) {
+	                        // 성공적으로 요청이 완료되었을 때 처리
+	                        window.location.href = "/payment/paymentSelect";
+	                    }
+	                };
+	                xhr.send(JSON.stringify({ selectedProducts: selectedProducts }));
+	            });
+	        });
+	    </script>
   </body>
 </html>
