@@ -1,6 +1,5 @@
 package kr.co.nextus.coupon;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,17 +22,17 @@ public class CouponController {
 
 	@Autowired
 	private CouponService service;
-	
+
 	@Autowired
 	private MemberService Memberservice;
-	
+
 	@GetMapping("/couponManagement")
 	@RequestMapping("/couponManagement")
 	public String couponManagement(CouponVO vo, Model model) {
 		model.addAttribute("map", service.list(vo));
 		return "admin/memberManagement/couponManagement";
 	}
-	
+
 	// 관리자에서하는겁니다요
 	@GetMapping("/giveCoupon")
 	@RequestMapping("/giveCoupon")
@@ -41,57 +40,20 @@ public class CouponController {
 		model.addAttribute("memberlist", Memberservice.listAtOnce(vo));
 		return "admin/memberManagement/giveCoupon";
 	}
-	
-	
+
 	@PostMapping("/giveCoupon.do")
-	public String giveCoupon(CouponVO vo,Model model, @RequestParam List<String> memberEmails) {
-		model.addAttribute("coupon", service.createCoupon(vo,memberEmails));
-		
+	public String giveCoupon(CouponVO vo, Model model, @RequestParam List<String> memberEmails) {
+		model.addAttribute("coupon", service.createCoupon(vo, memberEmails));
+
 		model.addAttribute("msg", "쿠폰이 정상적으로 발급되었습니다.");
 		model.addAttribute("url", "/memberManagement/giveCoupon");
 		return "common/alert";
 	}
-	
-	
+
 	@RequestMapping("/couponMemberPopup")
-	public String couponMemberPopup(CouponVO vo,Model model,@RequestParam("data") String name) {
-		model.addAttribute("map", service.listAsName(vo,name));
+	public String couponMemberPopup(CouponVO vo, Model model, @RequestParam("data") String name) {
+		model.addAttribute("map", service.listAsName(vo, name));
 		return "admin/memberManagement/couponMemberPopup";
 	}
-	
-	
-	// 쿠폰사용시 - 구매자용
-	@PostMapping("/couponUse")
-	@ResponseBody
-	public CouponVO couponUse(Model model, @RequestParam("name") String name, HttpServletRequest request) {
-	    HttpSession sess = request.getSession();
-	    MemberVO login = (MemberVO) sess.getAttribute("login");
-	    int memberno = login.getNo();
 
-	    CouponVO vo = new CouponVO();
-	    vo.setName(name);
-	    vo.setMemberno(memberno);
-
-	    CouponVO coupon = service.listuse(vo);
-	    System.out.println("coupon컨트롤러 : "+coupon);// 여기에는 담겨있는거 확인
-	    model.addAttribute("coupon",coupon);
-	    return coupon;
-	}
-	
-//	@PostMapping("/couponUse")
-//	public String couponUse(Model model, @RequestParam("name") String name, HttpServletRequest request) {
-//	    HttpSession sess = request.getSession();
-//	    MemberVO login = (MemberVO) sess.getAttribute("login");
-//	    int memberno = login.getNo();
-//
-//	    CouponVO vo = new CouponVO();
-//	    vo.setName(name);
-//	    vo.setMemberno(memberno);
-//
-//	    CouponVO coupon = service.listuse(vo);
-//	    System.out.println("coupon컨트롤러 : "+coupon);// 여기에는 담겨있는거 확인
-//	    model.addAttribute("coupon",coupon);
-//	    return "/cart/cart";
-//	}
-	
 }

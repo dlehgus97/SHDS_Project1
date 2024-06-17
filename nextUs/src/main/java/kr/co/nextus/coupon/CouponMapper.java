@@ -18,8 +18,7 @@ public interface CouponMapper {
 	List<CouponVO> list(CouponVO vo);
 	List<CouponVO> listAsName(CouponVO vo);
 	int count(CouponVO param);
-	//리스트대상 할인,타입뽑아오기
-	CouponVO listuse(CouponVO vo);
+	
 	
 	
 }
