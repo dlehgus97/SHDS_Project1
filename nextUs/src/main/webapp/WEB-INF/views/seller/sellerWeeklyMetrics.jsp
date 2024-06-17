@@ -228,11 +228,47 @@
                     <tbody>
                         <c:forEach var="orderCounts" items="${orderCounts}">
                             <tr>
-                                <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>
-                                <td>${orderCounts.daily_order_count}</td>
-                                <td>${orderCounts.daily_sales}</td>
-                                <td>${orderCounts.daily_refund_count}</td>
-                                <td>${orderCounts.daily_review_count}</td>
+                                <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>                            
+                                <td>
+							        <c:choose>
+							            <c:when test="${orderCounts.daily_order_count == 0}">
+							                -
+							            </c:when>
+							            <c:otherwise>
+							                ${orderCounts.daily_order_count}건
+							            </c:otherwise>
+							        </c:choose>
+							    </td>
+                                <td>
+							        <c:choose>
+							            <c:when test="${orderCounts.daily_sales == 0}">
+							                -
+							            </c:when>
+							            <c:otherwise>
+							                <fmt:formatNumber value="${orderCounts.daily_sales}" type="number" pattern="###,###"/>원
+							            </c:otherwise>
+							        </c:choose>
+							    </td>
+							    <td>
+							        <c:choose>
+							            <c:when test="${orderCounts.daily_refund_count == 0}">
+							                -
+							            </c:when>
+							            <c:otherwise>
+							                ${orderCounts.daily_refund_count}건
+							            </c:otherwise>
+							        </c:choose>
+							    </td>
+							    <td>
+							        <c:choose>
+							            <c:when test="${orderCounts.daily_review_count == 0}">
+							                -
+							            </c:when>
+							            <c:otherwise>
+							                ${orderCounts.daily_review_count}개
+							            </c:otherwise>
+							        </c:choose>
+							    </td>
                             </tr>
                         </c:forEach>
                     </tbody>

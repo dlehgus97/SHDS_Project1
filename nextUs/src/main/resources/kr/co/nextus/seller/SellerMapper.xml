@@ -57,11 +57,17 @@
 	    WHERE s.seller = #{no}
 	    ORDER BY r.writedate DESC
 	</select>
-	
+	<!-- 
     <update id="updateSeller" parameterType="kr.co.nextus.seller.SellerVO">
         UPDATE SELLER
         SET info = #{info}, category1 = #{category1}, category2 = #{category2}, bank = #{bank}, 
         account = #{account}, rating_avg = #{rating_avg}, review_cnt = #{review_cnt}
+        WHERE no = #{no}
+    </update>
+     -->
+    <update id="updateSeller" parameterType="kr.co.nextus.seller.SellerVO">
+        UPDATE SELLER
+        SET info = #{info}, category1 = #{category1}, category2 = #{category2}, bank = #{bank}, account = #{account}
         WHERE no = #{no}
     </update>
     
@@ -73,7 +79,7 @@
         #{account}, 0, 0)
     </insert>
     
-	
+	<!-- 최근 일주일 동안 날마다 주문 수, 매출액, 환불 수, 받은 리뷰 수 -->
 	<select id="getOrderAndReviewCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO" resultType="kr.co.nextus.seller.SellerVO">
 	    SELECT 
 	        dates.date AS date,
