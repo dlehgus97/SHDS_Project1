@@ -130,8 +130,9 @@ tbody tr:hover {
 				</div>
 			</div>
 		</div>
+		
 	</div>
-
+<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 
 
 

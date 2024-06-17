@@ -74,6 +74,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	 <script>
         // 현재 URL 가져오기
         const currentUrl = window.location.href;

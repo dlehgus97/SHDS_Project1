@@ -99,7 +99,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	
 	<script>
     function goToSellPage(sellno) {

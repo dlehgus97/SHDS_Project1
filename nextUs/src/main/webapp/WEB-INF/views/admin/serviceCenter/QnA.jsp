@@ -27,5 +27,7 @@
 			
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 </body>
+
 </html>

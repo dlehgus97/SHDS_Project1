@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>관리자 메인 페이지</title>
+<title>쿠폰지급</title>
 <script src="../resources/js/admin/memberStatus.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" type="text/css"
@@ -101,7 +101,7 @@ t1{font-size:20px;}
 			</div>
 		</div>
 	</div>
-
+<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 
 	<script>
 		$(document).ready(function() {
