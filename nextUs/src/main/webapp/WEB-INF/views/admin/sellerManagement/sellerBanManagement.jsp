@@ -56,7 +56,7 @@
 										<td>${vo.no != null ? vo.no : '(미입력)'}</td>
 										<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 										<td>${vo.content != null ? vo.content : '(미입력)'}</td>
-										<td class="date">~<fmt:formatDate pattern="yyyy-MM-dd" value="${vo.date}" /></td>
+										<td class="date">~ <fmt:formatDate pattern="yyyy-MM-dd" value="${vo.date}" /></td>
 	
 									</tr>
 								
@@ -66,11 +66,8 @@
 						</tbody>
 					</table>
 					<!-- paging -->
-				<div class="pagenate">
-                        <ul class='paging'>
-                        <c:if test="${map.prev }">
-                        	<li><a href="sellerBanManagement?page=${map.startPage-1 }"> << </a></li>
-                        </c:if>
+					 <!-- paging -->
+					<div class="pagenate">
                         <c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
                         	<c:if test="${p == BanVO.page}">
                             <li><a href='#;' class='current'>${p}</a></li>
@@ -79,12 +76,7 @@
                             <li><a href='sellerBanManagement?page=${p}'>${p}</a></li>
                             </c:if>
                         </c:forEach>
-                        <c:if test="${map.next }">
-                        	<li><a href="sellerBanManagement?page=${map.endPage+1 }"> >> </a></li>
-                        </c:if>
-                        </ul> 
-                    </div>
-                    
+                   	</div>
 				</div>
 
 			

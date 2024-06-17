@@ -84,6 +84,19 @@
 						</c:if>
 					</tbody>
 				</table>
+				<!-- paging -->
+                    <div class="pagenate">
+                        <c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
+                        	<c:if test="${p == SellListVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != SellListVO.page}">
+                            <li><a href='productManagement?page=${p}&searchType=${SellListVO.searchType}&searchWord=${SellListVO.searchWord}'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+
+
 
 			</div>
 		</div>

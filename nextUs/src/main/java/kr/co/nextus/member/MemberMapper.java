@@ -30,8 +30,7 @@ public interface MemberMapper {
     // 네이버 회원 정보 저장
     int insertMember(MemberVO vo);
 
-  
-    
+   
     //관리자
   	int count(MemberVO param);
   	List<MemberVO> list(MemberVO vo);

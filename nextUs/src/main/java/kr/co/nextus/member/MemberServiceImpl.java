@@ -68,9 +68,9 @@ public class MemberServiceImpl implements MemberService {
     }
 	
 	@Override
-	@Transactional
 	public int sellerRegist(int no) {
-		return mapper.sellerRegist(no);
+		mapper.sellerRegist(no);
+		return 1;
 	}
 	
 	//관리자

@@ -24,6 +24,13 @@
 		resultType="int">
 		SELECT COUNT(*) FROM SELLERREQUEST
 	</select>
+	
+	<!-- 미승인 건수 -->
+	<select id="countUnapproved" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO"
+		resultType="int">
+		SELECT COUNT(*) FROM SELLERREQUEST
+		WHERE state = 1;
+	</select>
 
 	<!-- 샐러등록 상세보기 -->
 	<select id="detail" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO"
