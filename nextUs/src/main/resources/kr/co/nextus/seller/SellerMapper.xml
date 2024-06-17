@@ -11,12 +11,30 @@
 
 	
     <select id="getSellerByNo" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
-        SELECT nickname, info, category1, category2, bank, account, rating_avg seller_rating_avg, review_cnt seller_review_cnt, profile_real
+        SELECT nickname, info, category1, category2, bank, account, rating_avg, review_cnt, profile_real
         FROM SELLER s
         INNER JOIN MEMBER m
         ON m.no = s.no
         WHERE m.no = #{no}
     </select>
+    
+	<select id="getSellerBuyList" parameterType="int" resultType="kr.co.nextus.buylist.BuyListVO">
+        select buyno, b.price, b.status, buydate, decidedate, nickname, title, o.optionrank, o.content
+		from BUYLIST b
+		inner join MEMBER m
+		on m.no = b.memberno
+		inner join SELLLIST s
+		on s.sellno = b.sellno
+		inner join P_OPTION o
+		on o.optionno=b.optionno
+		where b.sellerno=#{no};
+    </select>
+    
+    <update id="updateStatus" parameterType="map">
+        UPDATE BUYLIST
+        SET status = #{status} 
+        WHERE buyno = #{buyno}
+    </update>
 
 	<select id="getSellerSellList" parameterType="int" resultType="kr.co.nextus.selllist.SellListVO">
 		SELECT title, thumbnail_real, s.rating_avg rating_avg, s.review_cnt review_cnt, COUNT(pl.sellno) like_count
@@ -43,7 +61,7 @@
     <update id="updateSeller" parameterType="kr.co.nextus.seller.SellerVO">
         UPDATE SELLER
         SET info = #{info}, category1 = #{category1}, category2 = #{category2}, bank = #{bank}, 
-        account = #{account}, seller_rating_avg = #{seller_rating_avg}, review_cnt = #{seller_review_cnt}
+        account = #{account}, rating_avg = #{rating_avg}, review_cnt = #{review_cnt}
         WHERE no = #{no}
     </update>
     
@@ -54,5 +72,40 @@
         VALUES (#{no}, '안녕하세요. 만나서 반갑습니다.', null, null, #{bank}, 
         #{account}, 0, 0)
     </insert>
+    
+    <select id="getOrderCountsLastWeek" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
+        SELECT COUNT(*) AS daily_order_count, DATE(buydate) AS order_date
+        FROM BUYLIST
+        WHERE buydate >= CURDATE() - INTERVAL 7 DAY and sellerno=#{no}
+        GROUP BY DATE(buydate)
+        ORDER BY order_date DESC;
+    </select>
+    
+    <select id="getIncomeCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO">
+    	SELECT sum(price) AS daily_sales, DATE(buydate) AS sales_date
+		FROM BUYLIST
+		WHERE buydate >= CURDATE() - INTERVAL 7 DAY and sellerno=#{no}
+		GROUP BY DATE(buydate)
+		ORDER BY sales_date DESC;
+    </select>
+    
+    <select id="getRefundCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO">
+	    SELECT COUNT(*) AS daily_refund_count, DATE(date) AS refund_date
+		FROM REFUND r
+		INNER JOIN BUYLIST b
+		ON r.buyno=b.buyno
+		WHERE date >= CURDATE() - INTERVAL 7 DAY and sellerno=#{no}
+		GROUP BY DATE(refund_date)
+		ORDER BY refund_date desc;
+    </select>
 	
+	<select id="getReviewCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO">
+	    SELECT COUNT(*) AS daily_review_count, DATE(writedate) AS review_date
+		FROM REVIEW rv
+		INNER JOIN SELLLIST s
+		ON rv.sellno=s.sellno
+		WHERE writedate >= CURDATE() - INTERVAL 7 DAY and seller=6
+		GROUP BY DATE(review_date)
+		ORDER BY review_date desc;
+    </select>
 </mapper>

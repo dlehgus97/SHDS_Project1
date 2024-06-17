@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>판매자 프로필</title>
+    <title>판매자 주간 지표</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <base href="${pageContext.request.contextPath}/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -145,6 +145,49 @@
 		    font-family: FontAwesome;
 		    display: block;
 		}
+		
+		        .sidebar {
+            width: 200px;
+            min-width: 200px;
+            background-color: #404040;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        
+        .content {
+            display: flex;
+            flex-grow: 1;
+        }
+        
+        .main-content {
+            margin-left: 200px; /* 사이드바 너비 */
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        /* 리뷰 내용이 길 경우 ... 처리 */
+         .text-truncate {
+            display: block;
+            width: 200px; /* 원하는 너비로 설정 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left; /* 텍스트의 시작점을 동일하게 설정 */
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -160,78 +203,88 @@
     <div class="wrap">
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-        <div class="profile-container">
-            <img src="/profile-images/${seller.profile_real}" alt="프로필 사진" class="profile-picture">
-            <div class="store-info">
-                <div class="store-name">${seller.nickname}</div>
-                <div class="rating-container">
-                    <div class="average-rating">평균 별점: ${seller.rating_avg}</div>
-                    <div class="count-rating">리뷰 수: ${seller.review_cnt}</div>
-                </div>
+        <div class="content">
+            <div class="sidebar">
+                <a href="seller/sellerWeeklyMetrics">판매자 주간 지표</a>
+                <a href="seller/sellerBuyList">거래 관리</a>
+                <a href="seller/selllistManagement">판매글 관리</a>
+                <a href="seller/sellerReviews">리뷰 관리</a>
+                <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
-        </div>
-
-        <div class="profile">
-            <p><strong>전문가 한마디</strong><br>${seller.info}</p>
-            <br>
-            <p><strong>전문분야 1:</strong> ${seller.category1}</p>
-            <p><strong>전문분야 2:</strong> ${seller.category2}</p>
-        </div>
-
-        <h1>서비스</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>상품 사진</th>
-                    <th>상품 이름</th>
-                    <th>상품 평균별점</th>
-                    <th>상품 리뷰개수</th>
-                    <th>찜하기</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="sellproduct" items="${sellList}">
-                    <tr>
-                        <td><img src="/profile-images/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
-                        <td>${sellproduct.title}</td>
-                        <td>${sellproduct.rating_avg}</td>
-                        <td>${sellproduct.review_cnt}</td>
-                        <td>${sellproduct.like_count}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-
-        <h1>받은 리뷰</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>닉네임</th>
-                    <th>평점</th>
-                    <th>리뷰 제목</th>
-                    <th>리뷰 내용</th>
-                    <th>상품 제목</th>
-                    <th>상품 사진</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="review" items="${sellerReviews}">
-                    <tr>
-                        <td>${review.nickname}</td>
-                        <td>
-                            <div class="stars-outer">
-                                <div class="stars-inner" data-rating="${review.score}"></div>
-                            </div>
-                        </td>
-                        <td>${review.title}</td>
-                        <td>${review.text}</td>
-                        <td>${review.productTitle}</td>
-                        <td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-
+            <div class="main-content">
+            	<h1>주문</h1>
+		        <table>
+		            <thead>
+		                <tr>          
+		                    <th>주문발생날</th>
+		                    <th>주문 개수</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <c:forEach var="orderCounts" items="${orderCounts}">
+		                    <tr>
+								<td>${orderCounts.order_date}</td>            
+								<td>${orderCounts.daily_order_count}</td>
+		                    </tr>
+		                </c:forEach>
+		            </tbody>
+		        </table>
+		        
+		        <h1>매출</h1>
+		        <table>
+		            <thead>
+		                <tr>          
+		                    <th>매출발생날</th>
+		                    <th>매출액</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <c:forEach var="incomeCounts" items="${incomeCounts}">
+		                    <tr>
+								<td>${incomeCounts.sales_date}</td>            
+								<td>${incomeCounts.daily_sales}</td>
+		                    </tr>
+		                </c:forEach>
+		            </tbody>
+		        </table>
+		        
+		        <h1>환불</h1>
+		        <table>
+		            <thead>
+		                <tr>          
+		                    <th>환불일</th>
+		                    <th>환불 건수</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <c:forEach var="refundCounts" items="${refundCounts}">
+		                    <tr>
+								<td>${refundCounts.refund_date}</td>            
+								<td>${refundCounts.daily_refund_count}</td>
+		                    </tr>
+		                </c:forEach>
+		            </tbody>
+		        </table>
+		        
+		        <h1>리뷰</h1>
+		        <table>
+		            <thead>
+		                <tr>          
+		                    <th>리뷰 받은 날</th>
+		                    <th>리뷰 건수</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <c:forEach var="reviewCounts" items="${reviewCounts}">
+		                    <tr>
+								<td>${reviewCounts.review_date}</td>            
+								<td>${reviewCounts.daily_review_count}</td>
+		                    </tr>
+		                </c:forEach>
+		            </tbody>
+		        </table>
+            </div>
+		</div>
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body>

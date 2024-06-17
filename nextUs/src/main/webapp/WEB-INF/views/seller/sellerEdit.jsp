@@ -217,9 +217,10 @@
         
         <div class="content">
             <div class="sidebar">
-                <a href="seller/sellerMain">메인 페이지</a>
+                <a href="seller/sellerWeeklyMetrics">판매자 주간 지표</a>
+                <a href="seller/sellerBuyList">거래 관리</a>
                 <a href="seller/selllistManagement">판매글 관리</a>
-                <a href="seller/sellerReviews">리뷰 모음</a>
+                <a href="seller/sellerReviews">리뷰 관리</a>
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
