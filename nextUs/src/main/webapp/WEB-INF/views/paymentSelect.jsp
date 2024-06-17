@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,30 +21,98 @@
 			<div id="product_detail" class="payment_border">
 				<h2>주문 상품 정보</h2>
 				<!-- 주문 상품 상세 불러오기 필요-->
-				<img src="" alt="product_thumbnail">
-				<div>
-					<h2 id="product_title">하루 안에 로고 제작</h2>
-					<p>200,000원</p>
-					<p>시안 2개 / 수정무제한 / 명함200매(무료이벤트) + 로고전용폰트 + 응용이미지 + 원본파일(로고)</p>
-				</div>
+				<c:forEach var="cartVO" items="${selectedProducts }">
+					<div>
+					<!-- todo setting img file route -->
+						<img src="${cartVO.thumbnail_real }" alt="product_thumbnail">
+						<h2 id="product_title">${cartVO.title }</h2>
+						<p>${cartVO.price }</p>
+					<p>${cartVO.content }</p>
+					</div>
+				</c:forEach>
 			</div>
+			<script>
+				$(document).ready(function() {
+					// 서버에서 상품 정보를 받아와서 페이지에 표시
+					$.ajax({
+						url: '/payment/paymentSelect',
+						method: 'GET',
+						success: function(data) {
+							displaySelectedProducts(data.selectedProducts);
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							console.error('상품 정보를 불러오는데 실패했습니다.', textStatus, errorThrown);
+						}
+					});
+		
+					function displaySelectedProducts(products) {
+						var orderProductsDiv = document.getElementById("order_products");
+						orderProductsDiv.innerHTML = ""; // 기존 내용 제거
+		
+						products.forEach(function(product) {
+							var productDiv = document.createElement("div");
+							productDiv.classList.add("product_detail_item");
+		
+							var img = document.createElement("img");
+							img.src = product.thumbnail;
+							img.alt = product.title;
+		
+							var title = document.createElement("h2");
+							title.textContent = product.title;
+		
+							var price = document.createElement("p");
+							price.textContent = product.price + "원";
+		
+							var content = document.createElement("p");
+							content.textContent = product.content;
+		
+							productDiv.appendChild(img);
+							productDiv.appendChild(title);
+							productDiv.appendChild(price);
+							productDiv.appendChild(content);
+		
+							orderProductsDiv.appendChild(productDiv);
+						});
+					}
+				});
+			</script>
 			<div id="costomer_info_container" class="payment_border">
 				<h2>주문자 정보</h2>
 				<!-- 주문자 정보 불러오기 필요-->
 				<div id="info_detail">
 					<p style="font-weight: bold;">주문자 성함</p>
-					<input type="text" class="info_size" readonly><br>
+					<input type="text" id="memberName" class="info_size" readonly><br>
 					<p style="font-weight: bold;">휴대폰 번호</p>
-					<input type="text" class="info_size" size="80%" readonly><br>
+					<input type="text" id="memberHp"  class="info_size" size="80%" readonly><br>
 					<p style="font-weight: bold;">이메일</p>
-					<input type="text" class="info_size" size="80%" readonly><br>
+					<input type="text" id="memberEmail"  class="info_size" size="80%" readonly><br>
 					<p style="font-weight: bold;">주소</p>
-					<input type="text" class="info_size" size="80%" readonly>
+					<input type="text" id="memberAddr1"  class="info_size" size="80%" readonly><br>
+					<p style="font-weight: bold;">상세주소</p>
+					<input type="text" id="memberAddr2"  class="info_size" size="80%" readonly><br>
+					<button onclick="getBasicInfo()">기본 정보 불러오기</button>
+					<!-- script for get memberInfo -->
+					<script>
+                        function getBasicInfo() {
+                            // 서버에서 전달받은 값을 JavaScript 변수로 설정
+                            var loginName = '${login.name}';
+                            var loginHp = '${login.hp}';
+                            var loginEmail = '${login.email}';
+                            var loginAddr1 = '${login.addr1}';
+                            var loginAddr2 = '${login.addr2}';
+                            
+                            // 해당 변수를 input 필드에 설정
+                            $('#memberName').val(loginName);
+                            $('#memberHp').val(loginHp);
+                            $('#memberEmail').val(loginEmail);
+                            $('#memberAddr1').val(loginAddr1);
+                            $('#memberAddr2').val(loginAddr2);
+                        }
+                    </script>
 				</div>
 			</div>
 			<div id="coupon_container" class="payment_border">
 				<h2>쿠폰</h2>
-				
 				<div id="coupon_detail">
 					<p style="font-weight: bold;">쿠폰</p>
 					<select id="coupon_select">

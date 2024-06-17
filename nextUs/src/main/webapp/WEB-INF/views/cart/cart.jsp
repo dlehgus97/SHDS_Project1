@@ -125,7 +125,9 @@
 	        </div>
 	
 	        <!-- Button -->
-	        <a class="btn w-100 btn-dark mb-2" href="#" id="buy_btn">구매하기</a>
+	        <form id="buyForm" action="/payment/paymentSelect" method="post">
+	        	<button type="submit" class="btn w-100 btn-dark mb-2" id="buy_btn">구매하기</button>
+	        </form>
 	      </div>
 	    </div>
 	  </div>
@@ -215,7 +217,7 @@
 	                    var productInfo = {
 	                        sellno: checkbox.getAttribute("data-sellno"),
 	                        optionno: checkbox.getAttribute("data-optionno"),
-	                        thumbnail: checkbox.getAttribute("data-thumbnail"),
+	                        thumbnail_real: checkbox.getAttribute("data-thumbnail"),
 	                        title: checkbox.getAttribute("data-title"),
 	                        price: checkbox.getAttribute("data-price"),
 	                        content: checkbox.getAttribute("data-content")
@@ -228,21 +230,15 @@
 	                    return;
 	                }
 	
-	                // 폼 데이터 생성
-	                var formData = new FormData();
-	                formData.append("selectedProducts", JSON.stringify(selectedProducts));
-	
-	                // AJAX 요청을 통해 서버로 데이터 전송
-	                var xhr = new XMLHttpRequest();
-	                xhr.open("POST", "/payment/paymentSelect", true);
-	                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	                xhr.onreadystatechange = function() {
-	                    if (xhr.readyState == 4 && xhr.status == 200) {
-	                        // 성공적으로 요청이 완료되었을 때 처리
-	                        window.location.href = "/payment/paymentSelect";
-	                    }
-	                };
-	                xhr.send(JSON.stringify({ selectedProducts: selectedProducts }));
+	             	// hidden input에 JSON 데이터 삽입
+	                var input = document.createElement('input');
+	                input.type = 'hidden';
+	                input.name = 'selectedProducts';
+	                input.value = JSON.stringify(selectedProducts);
+	                document.getElementById('buyForm').appendChild(input);
+
+	                // 폼 제출
+	                document.getElementById('buyForm').submit();
 	            });
 	        });
 	    </script>

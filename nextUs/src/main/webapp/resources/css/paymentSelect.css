@@ -1,4 +1,7 @@
 @charset "UTF-8";
+input {
+
+}
 #p_container {
     display: flex;
     width: 100%;
@@ -28,6 +31,8 @@
 
 .info_size {
     width: 80%;
+    height: 30px;
+    font-size: 14px;
 }
 
 #coupon_confirm_button {
