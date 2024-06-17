@@ -213,14 +213,10 @@ public class SellerController {
         }
 
         int sellerNo = login.getNo(); // 로그인된 판매자의 번호
-        List<SellerVO> orderCounts = sellerService.getOrderCountsLastWeek(sellerNo);
-        List<SellerVO> incomeCounts = sellerService.getIncomeCountsLastWeek(sellerNo);
-        List<SellerVO> refundCounts = sellerService.getRefundCountsLastWeek(sellerNo);
-        List<SellerVO> reviewCounts = sellerService.getReviewCountsLastWeek(sellerNo);
+        
+        List<SellerVO> orderCounts = sellerService.getOrderAndReviewCountsLastWeek(sellerNo);
+
         model.addAttribute("orderCounts", orderCounts);
-        model.addAttribute("incomeCounts", incomeCounts);
-        model.addAttribute("refundCounts", refundCounts);
-        model.addAttribute("reviewCounts", reviewCounts);
 
         return "seller/sellerWeeklyMetrics";
     }

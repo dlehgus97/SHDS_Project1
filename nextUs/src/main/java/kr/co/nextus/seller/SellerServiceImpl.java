@@ -77,22 +77,7 @@ public class SellerServiceImpl implements SellerService {
 	
 	// 최근 일주일 주문 수, 매출액, 환불 수, 리뷰 수
     @Override
-    public List<SellerVO> getOrderCountsLastWeek(int no) {
-        return sellerMapper.getOrderCountsLastWeek(no);
-    }
-
-    @Override
-    public List<SellerVO> getIncomeCountsLastWeek(int no) {
-        return sellerMapper.getIncomeCountsLastWeek(no);
-    }
-
-    @Override
-    public List<SellerVO> getRefundCountsLastWeek(int no) {
-        return sellerMapper.getRefundCountsLastWeek(no);
-    }
-
-    @Override
-    public List<SellerVO> getReviewCountsLastWeek(int no) {
-        return sellerMapper.getReviewCountsLastWeek(no);
+    public List<SellerVO> getOrderAndReviewCountsLastWeek(int no) {
+        return sellerMapper.getOrderAndReviewCountsLastWeek(no);
     }
 }

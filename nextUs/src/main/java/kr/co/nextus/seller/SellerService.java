@@ -30,9 +30,5 @@ public interface SellerService {
 	//seller승인
 	int registerSellerByAdmin(SellerRequestVO seller);
 	
-	// 최근 일주일 주문 수, 매출액, 환불 수, 리뷰 수
-    List<SellerVO> getOrderCountsLastWeek(int sellerNo);
-    List<SellerVO> getIncomeCountsLastWeek(int sellerNo);
-    List<SellerVO> getRefundCountsLastWeek(int sellerNo);
-    List<SellerVO> getReviewCountsLastWeek(int sellerNo);
+    List<SellerVO> getOrderAndReviewCountsLastWeek(int sellerNo);
 }

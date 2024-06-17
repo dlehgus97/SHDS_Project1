@@ -39,11 +39,5 @@ public interface SellerMapper {
 	int insertSellerByAdmin(SellerRequestVO vo);
 	
 	// 최근 일주일 주문 수, 매출액, 환불 수, 리뷰 수
-	List<SellerVO> getOrderCountsLastWeek(int no);
-
-	List<SellerVO> getIncomeCountsLastWeek(int no);
-
-    List<SellerVO> getRefundCountsLastWeek(int no);
-
-    List<SellerVO> getReviewCountsLastWeek(int no);
+	List<SellerVO> getOrderAndReviewCountsLastWeek(int no);
 }

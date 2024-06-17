@@ -73,39 +73,47 @@
         #{account}, 0, 0)
     </insert>
     
-    <select id="getOrderCountsLastWeek" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
-        SELECT COUNT(*) AS daily_order_count, DATE(buydate) AS order_date
-        FROM BUYLIST
-        WHERE buydate >= CURDATE() - INTERVAL 7 DAY and sellerno=#{no}
-        GROUP BY DATE(buydate)
-        ORDER BY order_date DESC;
-    </select>
-    
-    <select id="getIncomeCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO">
-    	SELECT sum(price) AS daily_sales, DATE(buydate) AS sales_date
-		FROM BUYLIST
-		WHERE buydate >= CURDATE() - INTERVAL 7 DAY and sellerno=#{no}
-		GROUP BY DATE(buydate)
-		ORDER BY sales_date DESC;
-    </select>
-    
-    <select id="getRefundCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO">
-	    SELECT COUNT(*) AS daily_refund_count, DATE(date) AS refund_date
-		FROM REFUND r
-		INNER JOIN BUYLIST b
-		ON r.buyno=b.buyno
-		WHERE date >= CURDATE() - INTERVAL 7 DAY and sellerno=#{no}
-		GROUP BY DATE(refund_date)
-		ORDER BY refund_date desc;
-    </select>
 	
-	<select id="getReviewCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO">
-	    SELECT COUNT(*) AS daily_review_count, DATE(writedate) AS review_date
-		FROM REVIEW rv
-		INNER JOIN SELLLIST s
-		ON rv.sellno=s.sellno
-		WHERE writedate >= CURDATE() - INTERVAL 7 DAY and seller=6
-		GROUP BY DATE(review_date)
-		ORDER BY review_date desc;
-    </select>
+	<select id="getOrderAndReviewCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO" resultType="kr.co.nextus.seller.SellerVO">
+	    SELECT 
+	        dates.date AS date,
+	        COALESCE(orderCounts.daily_order_count, 0) AS daily_order_count,
+	        COALESCE(incomeCounts.daily_sales, 0) AS daily_sales,
+	        COALESCE(refundCounts.daily_refund_count, 0) AS daily_refund_count,
+	        COALESCE(reviewCounts.daily_review_count, 0) AS daily_review_count
+	    FROM (
+	        SELECT DATE_SUB(CURDATE(), INTERVAL seq.day DAY) AS date
+	        FROM (
+	            SELECT 0 AS day UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6
+	        ) seq
+	    ) dates
+	    LEFT JOIN (
+	        SELECT COUNT(*) AS daily_order_count, DATE(buydate) AS order_date
+	        FROM BUYLIST
+	        WHERE buydate >= CURDATE() - INTERVAL 7 DAY AND sellerno=#{no}
+	        GROUP BY DATE(buydate)
+	    ) orderCounts ON dates.date = orderCounts.order_date
+	    LEFT JOIN (
+	        SELECT SUM(price) AS daily_sales, DATE(buydate) AS sales_date
+	        FROM BUYLIST
+	        WHERE buydate >= CURDATE() - INTERVAL 7 DAY AND sellerno=#{no}
+	        GROUP BY DATE(buydate)
+	    ) incomeCounts ON dates.date = incomeCounts.sales_date
+	    LEFT JOIN (
+	        SELECT COUNT(*) AS daily_refund_count, DATE(r.date) AS refund_date
+	        FROM REFUND r
+	        INNER JOIN BUYLIST b ON r.buyno = b.buyno
+	        WHERE r.date >= CURDATE() - INTERVAL 7 DAY AND b.sellerno=#{no}
+	        GROUP BY DATE(r.date)
+	    ) refundCounts ON dates.date = refundCounts.refund_date
+	    LEFT JOIN (
+	        SELECT COUNT(*) AS daily_review_count, DATE(rv.writedate) AS review_date
+	        FROM REVIEW rv
+	        INNER JOIN SELLLIST s ON rv.sellno = s.sellno
+	        WHERE rv.writedate >= CURDATE() - INTERVAL 7 DAY AND s.seller = #{no}
+	        GROUP BY DATE(rv.writedate)
+	    ) reviewCounts ON dates.date = reviewCounts.review_date
+	    ORDER BY date DESC;
+	</select>
+	
 </mapper>

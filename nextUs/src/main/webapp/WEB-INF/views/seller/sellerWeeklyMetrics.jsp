@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -212,79 +214,31 @@
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
-            	<h1>주문</h1>
-		        <table>
-		            <thead>
-		                <tr>          
-		                    <th>주문발생날</th>
-		                    <th>주문 개수</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		                <c:forEach var="orderCounts" items="${orderCounts}">
-		                    <tr>
-								<td>${orderCounts.order_date}</td>            
-								<td>${orderCounts.daily_order_count}</td>
-		                    </tr>
-		                </c:forEach>
-		            </tbody>
-		        </table>
-		        
-		        <h1>매출</h1>
-		        <table>
-		            <thead>
-		                <tr>          
-		                    <th>매출발생날</th>
-		                    <th>매출액</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		                <c:forEach var="incomeCounts" items="${incomeCounts}">
-		                    <tr>
-								<td>${incomeCounts.sales_date}</td>            
-								<td>${incomeCounts.daily_sales}</td>
-		                    </tr>
-		                </c:forEach>
-		            </tbody>
-		        </table>
-		        
-		        <h1>환불</h1>
-		        <table>
-		            <thead>
-		                <tr>          
-		                    <th>환불일</th>
-		                    <th>환불 건수</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		                <c:forEach var="refundCounts" items="${refundCounts}">
-		                    <tr>
-								<td>${refundCounts.refund_date}</td>            
-								<td>${refundCounts.daily_refund_count}</td>
-		                    </tr>
-		                </c:forEach>
-		            </tbody>
-		        </table>
-		        
-		        <h1>리뷰</h1>
-		        <table>
-		            <thead>
-		                <tr>          
-		                    <th>리뷰 받은 날</th>
-		                    <th>리뷰 건수</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		                <c:forEach var="reviewCounts" items="${reviewCounts}">
-		                    <tr>
-								<td>${reviewCounts.review_date}</td>            
-								<td>${reviewCounts.daily_review_count}</td>
-		                    </tr>
-		                </c:forEach>
-		            </tbody>
-		        </table>
+                <h1>주간 통계</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>주문 수</th>
+                            <th>매출액</th>
+                            <th>환불 수</th>
+                            <th>리뷰</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="orderCounts" items="${orderCounts}">
+                            <tr>
+                                <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>
+                                <td>${orderCounts.daily_order_count}</td>
+                                <td>${orderCounts.daily_sales}</td>
+                                <td>${orderCounts.daily_refund_count}</td>
+                                <td>${orderCounts.daily_review_count}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
-		</div>
+        </div>
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body>
