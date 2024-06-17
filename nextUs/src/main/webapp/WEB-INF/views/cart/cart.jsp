@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/resources/css/contents.css"/>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/cart.css">
     <!-- Title -->
     <title>Shopper</title>
   </head>
@@ -71,7 +72,7 @@
 	                <div class="col-3">
 	                  <!-- Image -->
 	                  <a href="product.html">
-	                    <img src="/upload/board/${vo.thumbnail_real }" id="썸네일">
+	                    <img src="/upload/board/${vo.thumbnail_real }" id="thumbnail-img">
 	                  </a>
 	                </div>
 	                <div class="col">
