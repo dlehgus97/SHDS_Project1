@@ -126,7 +126,7 @@
 
                         <!-- Text -->
                         <p class="mb-0 fs-sm fw-bold">
-                          ${order.status == 1 ? '결제완료' : order.status == 2 ? '구매취소' : order.status == 3 ? '구매확정' : ''}
+                          ${order.status == 1 ? '결제완료' : order.status == 2 ? '환불 대기중' : order.status == 3 ? '환불 완료' : order.status == 4 ? '구매 확정' : ''}
                         </p>
 
                       </div>
@@ -165,14 +165,44 @@
                         </a>
 
                       </div>
+                      <script>
+						    document.addEventListener("DOMContentLoaded", function() {
+						        console.log("DOMContentLoaded event fired");
+						        var orderStatus = ${order.status}; // 서버로부터 전달된 order.status 값
+						        var purchaseButton = document.getElementById("purchase-button${order.buyno }");
+						
+						        console.log("orderStatus: " + orderStatus);
+						        
+						        if (orderStatus === 1) {
+						            console.log("Displaying purchase button");
+						            purchaseButton.style.display = "block";
+						        } else {
+						            console.log("Not displaying purchase button");
+						        }
+						        
+						        purchaseButton.addEventListener("click", function(event) {
+						            event.preventDefault(); // 기본 동작을 막음
+						            console.log("Purchase button clicked");
+						            var userConfirmed = confirm("구매를 확정하시겠습니까?");
+						            
+						            if (userConfirmed) {
+						                console.log("User confirmed purchase");
+						                window.location.href = "confirm.do?no=${order.buyno }";
+						            } else {
+						                console.log("User cancelled purchase");
+						            }
+						        });
+						    });
+						</script>
+                      
+                      
 					  <div class="col-6">
-
-                        <!-- Button -->
-                        <a class="btn btn-sm w-100 btn-outline-dark" href="#!">
-                          구매확정
-                        </a>
-                        
-                      </div>
+						    <!-- Button -->
+						    <button id="purchase-button${order.buyno }" class="btn btn-sm w-100 btn-primary" style="display: none;">
+						        구매확정
+						    </button>
+						</div>
+						
                   
                   	</div>
                 </div>

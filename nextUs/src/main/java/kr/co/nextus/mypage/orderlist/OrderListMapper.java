@@ -11,4 +11,6 @@ public interface OrderListMapper {
     
     int count(OrderListVO vo);
     
+    int update(OrderListVO vo);
+    
 }

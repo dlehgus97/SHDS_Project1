@@ -6,5 +6,6 @@ import java.util.Map;
 
 public interface OrderListService {
 	Map<String, Object> list(OrderListVO vo);
+	int update(OrderListVO vo);
 
 }

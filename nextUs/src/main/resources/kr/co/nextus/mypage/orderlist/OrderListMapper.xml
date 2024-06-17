@@ -11,4 +11,10 @@
 	<select id="count" parameterType="kr.co.nextus.mypage.orderlist.OrderListVO" resultType="int">
 		SELECT COUNT(*) FROM BUYLIST WHERE memberno=#{memberno}
 	</select>
+	
+	<update id="update" parameterType="kr.co.nextus.review.ReviewVO">
+		UPDATE BUYLIST SET 
+			status=4
+		WHERE buyno=#{buyno};
+	</update>
 </mapper>   

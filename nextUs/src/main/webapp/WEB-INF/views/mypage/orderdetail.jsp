@@ -17,6 +17,13 @@
 <link rel="stylesheet" href="/resources/css/board/libs.bundle.css" />
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
+<!-- 자체제작 css -->
+<style>
+        .refund-request {
+            text-align: right;
+            color: red;
+        }
+</style>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -191,7 +198,53 @@
                     </div>
                   </li>
                 </ul>
+                	<!-- 환불 버튼 -->
+	                <div class="refund-request" >
+				        <a data-bs-toggle="collapse" href="#refundForm">환불 요청</a>
+				    </div>
+                
+                	<!-- 환불 사유 작성 폼 -->
+		            <!-- New Review -->
+		            <div class="collapse" id="refundForm">
+		
+		              <!-- Divider -->
+		              <hr class="my-8">
+		
+		              <!-- Form -->
+		              <form method="post" name="frm" action="/refund/insert.do" enctype="multipart/form-data">
+		                <div class="row">
+		                  <div class="col-12 mb-6 text-center">
+							
+		        			<!-- Hidden field -->
+		        			<input type="hidden" name="buyno" value="${order.buyno }">
+		        			<input type="hidden" name="refund_amount" value="${order.price }">
+		                    <!-- Text -->
+		                    <p class="mb-1 fs-xs">
+		                      환불 사유
+		                    </p>
+		
+		                  </div>
+		                  <div class="col-12">
+		
+		                    <!-- 환불 내용 -->
+		                    <div class="form-group">
+		                      <label class="visually-hidden" for="reviewText">Review:</label>
+		                      <textarea class="form-control form-control-sm" name="content" id="reviewText" rows="5" placeholder="환불 사유를 상세히 작성해주세요 *" required></textarea>
+		                    </div>
+		
+		                  </div>
+		                  <div class="col-12 text-center">
+		
+		                    <!-- 신고 등록 -->
+		                    <button class="btn btn-outline-dark" type="submit">
+		                      환불 요청하기
+		                    </button>
+		
+		                  </div>
+		                </div>
+		              </form>
 
+            		</div>
               </div>
             </div>
 

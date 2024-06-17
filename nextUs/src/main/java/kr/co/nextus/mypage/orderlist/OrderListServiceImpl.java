@@ -42,5 +42,10 @@ public class OrderListServiceImpl implements OrderListService {
 		map.put("isNext", isNext);
 		return map;
 	}
+	
+	@Override
+	public int update(OrderListVO vo) {
+		return mapper.update(vo);
+	}
 
 }

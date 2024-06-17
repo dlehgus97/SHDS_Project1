@@ -38,5 +38,21 @@ public class OrderListController {
 		return "mypage/orderlist";
 	}
 	
+	@GetMapping("/mypage/confirm.do")
+	public String confirm(Model model, @RequestParam("no") int buyno, OrderListVO vo) {
+		
+		vo.setBuyno(buyno);
+		int r = orderListservice.update(vo);
+		if (r > 0) {
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "구매확정이 완료되었습니다.");
+			model.addAttribute("url", "/mypage/orderlist.do");
+		} else {
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "등록 오류");
+		}
+		return "common/alert";
+	}
+	
 	
 }
