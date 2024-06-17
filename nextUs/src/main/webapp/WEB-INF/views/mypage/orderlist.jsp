@@ -61,10 +61,10 @@
             <!-- Nav -->
             <nav class="mb-10 mb-md-0">
               <div class="list-group list-group-sm list-group-strong list-group-flush-x">
-                <a class="list-group-item list-group-item-action dropend-toggle active" href="orderlist.do?no=${login.no}">
+                <a class="list-group-item list-group-item-action dropend-toggle active" href="orderlist.do">
                   주문 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-wishlist.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="wishlist.do">
                   찜 목록
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="account-personal-info.html">
