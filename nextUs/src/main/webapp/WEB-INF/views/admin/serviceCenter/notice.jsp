@@ -99,43 +99,95 @@
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-<div class="page-container">
-		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
-				<!-- 여기에 작성해라 -->
-		
-            <div class="bg-wh service_div">
-                <div class="service_header">
-				    <h1 class="title_notice">공지사항</h1>
-				    <button class="button1" onclick="location.href='/register.do'; return false;">공지 등록</button>
+	<div class="wrap">
+		<div class="sub">
+			<div class="size">
+				<h3 class="sub_title">공지사항</h3>
+				<button class="button1" onclick="location.href='/notice/register.do'; return false;">공지 등록</button>
+				<div class="bbs">
+					<table class="list">
+						<p>
+							<span><strong>총 ${map.count }개</strong> | ${noticeVO.page }/${map.totalPage }페이지</span>
+						</p>
+						<caption>게시판 목록</caption>
+						<colgroup>
+							<col width="80px" />
+							<col width="*" />
+							<col width="100px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty map.list }">
+								<tr>
+									<td class="first" colspan="8">등록된 글이 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:forEach var="vo" items="${map.list }">
+								<tr>
+									<td>${vo.no }</td>
+									<td style="text-align: left;"><a
+										href="notice/adview.do?no=${vo.no}">${vo.title }</a></td>
+									<td class="date"><fmt:formatDate value="${vo.writedate }"
+											pattern="YYYY-MM-dd" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					
+					<!-- 페이지처리 -->
+					<div class="pagenate">
+						<ul class='paging'>
+							<c:if test="${map.prev }">
+								<li><a
+									href="notice.do?page=${map.startPage-1 }&searchType=${AdminVO.searchType}&searchWord=${AdminVO.searchWord}">
+										<< </a></li>
+							</c:if>
+							<c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
+								<c:if test="${p == AdminVO.page}">
+									<li><a href='#;' class='current'>${p}</a></li>
+								</c:if>
+								<c:if test="${p != AdminVO.page}">
+									<li><a
+										href='notice.do?page=${p}&searchType=${AdminVO.searchType}&searchWord=${AdminVO.searchWord}'>${p}</a></li>
+								</c:if>
+							</c:forEach>
+							<c:if test="${map.next }">
+								<li><a
+									href="notice.do?page=${map.endPage+1 }&searchType=${AdminVO.searchType}&searchWord=${AdminVO.searchWord}">
+										>> </a></li>
+							</c:if>
+						</ul>
+					</div>
+
+					<!-- 검색 -->
+					<div class="bbsSearch">
+						<form method="get" name="searchForm" id="searchForm"
+							action="notice.do">
+							<span class="srchSelect"> <select id="stype"
+								name="searchType" class="dSelect" title="검색분류 선택">
+									<option value="all">전체</option>
+									<option value="title"
+										<c:if test="${AdminVO.searchType == 'title'}">selected</c:if>>제목</option>
+									<option value="content"
+										<c:if test="${AdminVO.searchType == 'content'}">selected</c:if>>내용</option>
+							</select>
+							</span> 
+							<span class="searchWord"> 
+								<input type="text" id="sval" name="searchWord" value="${AdminVO.searchWord}" title="검색어 입력">
+								<input type="submit" id="" value="검색" title="검색">
+							</span>
+						</form>
+
+					</div>
 				</div>
-                <div class="paragraph">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="col-number">번호</th>
-                                <th class="col-title">제목</th>
-                                <th class="col-date">날짜</th>
-                                <th class="col-action"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="notice" items="${list}">
-                                <tr class = "no_row">
-                                    <td class="col-number2">${notice.no}</td>
-                                    <td class="col-title2">${notice.title}</td>
-                                    <td class="col-date2"><fmt:formatDate value="${notice.writedate}" pattern="yyyy-MM-dd HH:mm" /></td>
-                                    <td class="col-action">
-                                        <button class="delete-button" onclick="deleteNotice(${notice.no});">삭제하기</button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

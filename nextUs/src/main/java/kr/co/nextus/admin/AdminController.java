@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.member.MemberVO;
 
@@ -37,8 +38,6 @@ public class AdminController {
 	public String saleStatement() {
 		return "admin/adjustManagement/saleStatement";
 	}
-
-
 	@RequestMapping("/refundRequest")
 	public String refundRequest() {
 		return "admin/refundManagement/refundRequest";
@@ -49,30 +48,53 @@ public class AdminController {
 	
 	
 	@GetMapping("/notice.do")  // 공지사항 조회
-	public String notice(Model model) {
-		List<AdminVO> list = service.Listview();
-		model.addAttribute("list", list);
+	public String index(Model model, AdminVO vo) {
+		model.addAttribute("map", service.list(vo));
 		return "admin/serviceCenter/notice";
 	}
 	
-    @RequestMapping("/deleteNotice.do")
+	@GetMapping("/notice/adview.do") // 클리하여 들어가보기
+	public String view(Model model, AdminVO vo) {
+		model.addAttribute("vo", service.detail(vo, true));
+		return "admin/serviceCenter/adview";
+	}
+	
+	@GetMapping("/notice/adedit.do")//editㄱㄱ
+	public String edit(Model model, AdminVO vo) {
+		model.addAttribute("vo", service.detail(vo, false));
+		return "admin/serviceCenter/adedit";
+	}
+	
+    @RequestMapping("/notice/deleteNotice.do") // 삭제하기 버튼 누를시
     public String deleteNotice(@RequestParam("no") int no) {
         service.deleteNotice(no);
         return ("redirect:/notice.do");
     }
     
-    @RequestMapping("/register.do")
+    @RequestMapping("/notice/register.do") // 등록하기 폼에 넘어가기
     public String registnotice() {
         return "admin/serviceCenter/insertnotice";
     }
     
-    @RequestMapping("/insertnotice.do")
+    @RequestMapping("/notice/insertnotice.do")// 새로운 공지사항 등록하기 위함
     public String insertnotice(@RequestParam("title") String title, @RequestParam("content") String content) {
         service.insertnotice(title, content);
     	return ("redirect:/notice.do");
     }
     
-    
+    @PostMapping("/notice/adupdate.do")
+	public String update(Model model, AdminVO vo, MultipartFile file) {
+		int r = service.update(vo);
+		if (r > 0) {
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "정상적으로 수정되었습니다.");
+			model.addAttribute("url", "../notice.do");
+		} else {
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "등록 오류");
+		}
+		return "common/alert";
+	}
     
     
     
