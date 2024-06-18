@@ -1,6 +1,32 @@
 @charset "UTF-8";
 
-.thumbnail-img {
-	width: 150px;
-	height: auto;
+#thumbnail-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+#buy_btn {
+    font-size: 20px;
+    text-align: center;
+    
+}
+
+#delete-btn {
+	background-color: red;
+	color: white !important;
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-block;
+	font-weight: bold;
+}
+
+#delete-btn:hover {
+  	background-color: darkred;
+}
+
+.ms-auto{
+	font-size : 20px;
 }

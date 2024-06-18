@@ -11,12 +11,30 @@
 
 	
     <select id="getSellerByNo" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
-        SELECT nickname, info, category1, category2, bank, account, rating_avg seller_rating_avg, review_cnt seller_review_cnt, profile_real
+        SELECT nickname, info, category1, category2, bank, account, rating_avg, review_cnt, profile_real
         FROM SELLER s
         INNER JOIN MEMBER m
         ON m.no = s.no
         WHERE m.no = #{no}
     </select>
+    
+	<select id="getSellerBuyList" parameterType="int" resultType="kr.co.nextus.buylist.BuyListVO">
+        select buyno, b.price, b.status, buydate, decidedate, nickname, title, o.optionrank, o.content
+		from BUYLIST b
+		inner join MEMBER m
+		on m.no = b.memberno
+		inner join SELLLIST s
+		on s.sellno = b.sellno
+		inner join P_OPTION o
+		on o.optionno=b.optionno
+		where b.sellerno=#{no};
+    </select>
+    
+    <update id="updateStatus" parameterType="map">
+        UPDATE BUYLIST
+        SET status = #{status} 
+        WHERE buyno = #{buyno}
+    </update>
 
 	<select id="getSellerSellList" parameterType="int" resultType="kr.co.nextus.selllist.SellListVO">
 		SELECT title, thumbnail_real, s.rating_avg rating_avg, s.review_cnt review_cnt, COUNT(pl.sellno) like_count
@@ -39,11 +57,17 @@
 	    WHERE s.seller = #{no}
 	    ORDER BY r.writedate DESC
 	</select>
-	
+	<!-- 
     <update id="updateSeller" parameterType="kr.co.nextus.seller.SellerVO">
         UPDATE SELLER
         SET info = #{info}, category1 = #{category1}, category2 = #{category2}, bank = #{bank}, 
-        account = #{account}, seller_rating_avg = #{seller_rating_avg}, review_cnt = #{seller_review_cnt}
+        account = #{account}, rating_avg = #{rating_avg}, review_cnt = #{review_cnt}
+        WHERE no = #{no}
+    </update>
+     -->
+    <update id="updateSeller" parameterType="kr.co.nextus.seller.SellerVO">
+        UPDATE SELLER
+        SET info = #{info}, category1 = #{category1}, category2 = #{category2}, bank = #{bank}, account = #{account}
         WHERE no = #{no}
     </update>
     
@@ -54,5 +78,48 @@
         VALUES (#{no}, '안녕하세요. 만나서 반갑습니다.', null, null, #{bank}, 
         #{account}, 0, 0)
     </insert>
+    
+	<!-- 최근 일주일 동안 날마다 주문 수, 매출액, 환불 수, 받은 리뷰 수 -->
+	<select id="getOrderAndReviewCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO" resultType="kr.co.nextus.seller.SellerVO">
+	    SELECT 
+	        dates.date AS date,
+	        COALESCE(orderCounts.daily_order_count, 0) AS daily_order_count,
+	        COALESCE(incomeCounts.daily_sales, 0) AS daily_sales,
+	        COALESCE(refundCounts.daily_refund_count, 0) AS daily_refund_count,
+	        COALESCE(reviewCounts.daily_review_count, 0) AS daily_review_count
+	    FROM (
+	        SELECT DATE_SUB(CURDATE(), INTERVAL seq.day DAY) AS date
+	        FROM (
+	            SELECT 0 AS day UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6
+	        ) seq
+	    ) dates
+	    LEFT JOIN (
+	        SELECT COUNT(*) AS daily_order_count, DATE(buydate) AS order_date
+	        FROM BUYLIST
+	        WHERE buydate >= CURDATE() - INTERVAL 7 DAY AND sellerno=#{no}
+	        GROUP BY DATE(buydate)
+	    ) orderCounts ON dates.date = orderCounts.order_date
+	    LEFT JOIN (
+	        SELECT SUM(price) AS daily_sales, DATE(buydate) AS sales_date
+	        FROM BUYLIST
+	        WHERE buydate >= CURDATE() - INTERVAL 7 DAY AND sellerno=#{no}
+	        GROUP BY DATE(buydate)
+	    ) incomeCounts ON dates.date = incomeCounts.sales_date
+	    LEFT JOIN (
+	        SELECT COUNT(*) AS daily_refund_count, DATE(r.date) AS refund_date
+	        FROM REFUND r
+	        INNER JOIN BUYLIST b ON r.buyno = b.buyno
+	        WHERE r.date >= CURDATE() - INTERVAL 7 DAY AND b.sellerno=#{no}
+	        GROUP BY DATE(r.date)
+	    ) refundCounts ON dates.date = refundCounts.refund_date
+	    LEFT JOIN (
+	        SELECT COUNT(*) AS daily_review_count, DATE(rv.writedate) AS review_date
+	        FROM REVIEW rv
+	        INNER JOIN SELLLIST s ON rv.sellno = s.sellno
+	        WHERE rv.writedate >= CURDATE() - INTERVAL 7 DAY AND s.seller = #{no}
+	        GROUP BY DATE(rv.writedate)
+	    ) reviewCounts ON dates.date = reviewCounts.review_date
+	    ORDER BY date DESC;
+	</select>
 	
 </mapper>

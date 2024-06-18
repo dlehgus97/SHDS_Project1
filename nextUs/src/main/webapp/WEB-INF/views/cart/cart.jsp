@@ -34,7 +34,8 @@
               <li class="breadcrumb-item">
                 <a class="text-gray-400" href="/index.do">Home</a>
               </li>
-              <li class="breadcrumb-item active">
+              <li>&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+              <li>
                 Shopping Cart
               </li>
             </ol>
@@ -51,7 +52,7 @@
 	      <div class="col-12">
 	
 	        <!-- Heading -->
-	        <h3 class="mb-10 text-center">Shopping Cart</h3>
+	        <h3 class="mb-10 text-center">[Shopping Cart]</h3>
 	
 	      </div>
 	    </div>
@@ -71,14 +72,14 @@
 	                </div>
 	                <div class="col-3">
 	                  <!-- Image -->
-	                  <a href="product.html">
+	                  <a>
 	                    <img src="/upload/board/${vo.thumbnail_real }" id="thumbnail-img">
 	                  </a>
 	                </div>
 	                <div class="col">
 	                  <!-- Title -->
 	                  <div class="d-flex mb-2 fw-bold">
-	                    <a class="text-body" href="product.html">${vo.title}</a> <span class="ms-auto">${vo.price}</span>
+	                    <a class="text-body" href="../selllist/view.do?no=${vo.sellno }">${vo.title}</a> <span class="ms-auto">${vo.price}원</span>
 	                  </div>
 	
 	                  <!-- Text -->
@@ -89,8 +90,8 @@
 	                  <!--Footer -->
 	                  <div class="d-flex align-items-center">
 	                    <!-- Remove -->
-	                    <a class="fs-xs text-gray-400 ms-auto remove-btn" href="#" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}">
-	                      <i class="fe fe-x"></i> 삭제하기
+	                    <a class="fs-xs text-gray-400 ms-auto remove-btn" href="#" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}" id ="delete-btn">
+	                      삭제하기 <!-- <i class="fe fe-x"></i> 삭제 & id ="delete-btn" 추가 -->
 	                    </a>
 	                  </div>
 	                </div>
@@ -110,11 +111,11 @@
 	            <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
 	              <li class="list-group-item d-flex">
 	                <span>장바구니 총 금액</span>
-	                <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }">${total }</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
+	                <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }">${total }원</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
 	              </li>
 	              <li class="list-group-item d-flex fs-lg fw-bold">
 	                <span>선택상품 총 금액</span>
-	                <span id="total" class="ms-auto fs-sm">${total }</span>
+	                <span id="total" class="ms-auto fs-sm">${total }원</span>
 	              </li>
 	              <li class="list-group-item fs-sm text-center text-gray-500">
 	                구매하시기를 원하신다면<br>

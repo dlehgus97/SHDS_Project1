@@ -14,12 +14,10 @@
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-	<div class="container">
-		<div class="ad-menu">
-			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		</div>
-		<div class="right">
+<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 			<div class="bg-wh seller_div">
 				<h1 style="margin-left: 30px;margin-top: 10px;font-size:30px;">환불 요청 목록</h1>
 				<p class="NUM_1">&nbsp;6&nbsp;</p>
@@ -65,5 +63,6 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 </body>
 </html>

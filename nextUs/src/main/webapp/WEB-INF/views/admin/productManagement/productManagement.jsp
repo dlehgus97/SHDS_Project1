@@ -18,12 +18,10 @@
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
-	<div class="container">
-		<div class="ad-menu">
-			<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		</div>
-		<div class="right">
+<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 			<div class="bg-wh product_div">
 				<h1 style="margin-left: 30px; margin-top: 10px; font-size: 30px;">판매글
 					관리</h1>
@@ -101,7 +99,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	
 	<script>
     function goToSellPage(sellno) {

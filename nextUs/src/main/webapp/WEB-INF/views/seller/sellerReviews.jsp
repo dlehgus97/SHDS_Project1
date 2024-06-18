@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>판매자 리뷰 모음</title>
+    <title>리뷰 관리</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <base href="${pageContext.request.contextPath}/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -178,6 +178,16 @@
             padding: 20px;
             flex-grow: 1;
         }
+        
+        /* 리뷰 내용이 길 경우 ... 처리 */
+         .text-truncate {
+            display: block;
+            width: 200px; /* 원하는 너비로 설정 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left; /* 텍스트의 시작점을 동일하게 설정 */
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -195,9 +205,10 @@
 
         <div class="content">
             <div class="sidebar">
-                <a href="seller/sellerMain">메인 페이지</a>
+                <a href="seller/sellerWeeklyMetrics">판매자 주간 지표</a>
+                <a href="seller/sellerBuyList">거래 관리</a>
                 <a href="seller/selllistManagement">판매글 관리</a>
-                <a href="seller/sellerReviews">리뷰 모음</a>
+                <a href="seller/sellerReviews">리뷰 관리</a>
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
@@ -205,27 +216,27 @@
 		        <table>
 		            <thead>
 		                <tr>
-		                    <th>닉네임</th>
+		                    <th></th>             
+		                    <th>상품명</th>
 		                    <th>평점</th>
-		                    <th>리뷰 제목</th>
-		                    <th>리뷰 내용</th>
-		                    <th>상품 제목</th>
-		                    <th>상품 사진</th>
+		                    <th>닉네임</th>
+		                    <th>제목</th>
+		                    <th>내용</th>
 		                </tr>
 		            </thead>
 		            <tbody>
 		                <c:forEach var="review" items="${sellerReviews}">
 		                    <tr>
-		                        <td>${review.nickname}</td>
+		                    	<td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>                     
+		                        <td>${review.productTitle}</td>
 		                        <td>
 		                            <div class="stars-outer">
 		                                <div class="stars-inner" data-rating="${review.score}"></div>
 		                            </div>
 		                        </td>
+		                        <td>${review.nickname}</td>
 		                        <td>${review.title}</td>
-		                        <td>${review.text}</td>
-		                        <td>${review.productTitle}</td>
-		                        <td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>
+		                        <td><span class="text-truncate">${review.text}</td>                  
 		                    </tr>
 		                </c:forEach>
 		            </tbody>

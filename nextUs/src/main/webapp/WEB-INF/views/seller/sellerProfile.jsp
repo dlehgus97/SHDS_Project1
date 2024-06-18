@@ -165,8 +165,8 @@
             <div class="store-info">
                 <div class="store-name">${seller.nickname}</div>
                 <div class="rating-container">
-                    <div class="average-rating">평균 별점: ${seller.seller_rating_avg}</div>
-                    <div class="count-rating">리뷰 수: ${seller.seller_review_cnt}</div>
+                    <div class="average-rating">평균 별점: ${seller.rating_avg}</div>
+                    <div class="count-rating">리뷰 수: ${seller.review_cnt}</div>
                 </div>
             </div>
         </div>

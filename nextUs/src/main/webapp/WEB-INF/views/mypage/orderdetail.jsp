@@ -140,7 +140,7 @@
 
                         <!-- Text -->
                         <p class="mb-0 fs-sm fw-bold">
-                          ${order.status == 1 ? '결제완료' : order.status == 2 ? '구매취소' : order.status == 3 ? '구매확정' : ''}
+                          ${order.status == 1 ? '결제완료' : order.status == 2 ? '환불 대기중' : order.status == 3 ? '환불 완료' : order.status == 4 ? '구매 확정' : ''}
                         </p>
 
                       </div>
@@ -200,7 +200,9 @@
                 </ul>
                 	<!-- 환불 버튼 -->
 	                <div class="refund-request" >
-				        <a data-bs-toggle="collapse" href="#refundForm">환불 요청</a>
+				        <a data-bs-toggle="collapse" href="#refundForm">
+				        	${order.status == 1 ? '환불 요청' : ''}
+				        </a>
 				    </div>
                 
                 	<!-- 환불 사유 작성 폼 -->

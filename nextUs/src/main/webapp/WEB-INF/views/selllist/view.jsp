@@ -23,7 +23,7 @@
 <!-- 별점평균 정수형으로 변환하는 js -->
 <script type="text/javascript">
 var ratingAvg = ${vo.rating_avg};
-var ratingAvgInt = Math.floor(ratingAvg);
+var ratingAvgInt = Math.round(ratingAvg);
 console.log(ratingAvgInt);
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -74,10 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-0 fs-xs text-gray-400">
               <li class="breadcrumb-item">
-                <a class="text-gray-400" href="index.html">Home</a>
+                <a class="text-gray-400" href="index.html">Home > </a>
               </li>
               <li class="breadcrumb-item">
-                <a class="text-gray-400" href="shop.html">카테고리</a>
+                <a class="text-gray-400" href="shop.html">카테고리 > </a>
               </li>
               <li class="breadcrumb-item active">
                 ${vo.title }
@@ -149,7 +149,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 <!-- Price -->
                 <div class="mb-7">
-                  <span class="ms-1 fs-5 fw-bolder text-primary" id="price">${vo.bronzeprice }원</span>
+                  <span class="ms-1 fs-5 fw-bolder text-primary" id="price">
+                  <fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.bronzeprice }" />원
+                  </span>
                 </div>
 
                 <!-- Form -->
@@ -247,14 +249,68 @@ document.addEventListener("DOMContentLoaded", function() {
                         </button>
 
                       </div>
+                      
                       <div class="col-12 col-lg-auto">
 
-                        <!-- Wishlist -->
-                        <button class="btn btn-outline-dark w-100 mb-2" data-toggle="button">
-                          ♥
-                        </button>
+                      <!-- Wishlist -->
+					  <c:choose>
+					    <c:when test="${iswishlist == 0}">
+					      <a href="javascript:insertwishlist();" class="btn btn-outline-dark w-100 mb-2" role="button" style="background-color: white;">
+					        <img src="/resources/imgs/heart.png" alt="Image" width="30px" height="30px">
+					      </a>
+					    </c:when>
+					    <c:otherwise>
+					      <a href="javascript:deletewishlist();" class="btn btn-outline-dark w-100 mb-2" role="button" style="background-color: black;">
+					        <img src="/resources/imgs/heart.png" alt="Image" width="30px" height="30px">
+					      </a>
+					    </c:otherwise>
+					  </c:choose>
 
                       </div>
+                      <!-- 찜 등록 js -->
+							<script type="text/javascript">
+								function insertwishlist() {
+									$.ajax({
+							            url: '/wishlist/insert.do',
+							            type: 'POST',
+							            data: {
+							              memberno: ${login.no },
+							              sellno: ${vo.sellno }
+							            },
+							            success: function(response) {
+							              alert('찜 목록에 추가되었습니다.');
+							              location.reload();
+							            },
+							            error: function(xhr, status, error) {
+							              alert('추가 중 오류가 발생했습니다.');
+							            }
+							          });
+								}
+							</script>
+                      
+                    </div>
+                    
+                    <!-- 찜 삭제 js -->
+							<script type="text/javascript">
+								function deletewishlist() {
+									$.ajax({
+							            url: '/wishlist/delete.do',
+							            type: 'POST',
+							            data: {
+							              memberno: ${login.no },
+							              sellno: ${vo.sellno }
+							            },
+							            success: function(response) {
+							              alert('찜 목록에서 삭제되었습니다.');
+							              location.reload();
+							            },
+							            error: function(xhr, status, error) {
+							              alert('추가 중 오류가 발생했습니다.');
+							            }
+							          });
+								}
+							</script>
+                      
                     </div>
                     <style>
 					  #checkoutButton {
@@ -268,17 +324,12 @@ document.addEventListener("DOMContentLoaded", function() {
 					</style>
                     <div class="row gx-5 mb-7">
                     	<div class="col-12 col-lg">
-                    		<button type="submit" class="btn w-100 btn-dark mb-2"  id="checkoutButton">
-                          		결제하기
-                        	</button>
+								<a href="/chat?no=${vo.sellno }" class="btn w-100 btn-dark mb-2" id="checkoutButton">
+								    판매자와 1대1 채팅하기<img src="/resources/imgs/chatico.png" alt="Image" width="30px" height="30px">
+								</a>
                         </div>
                     </div>
-                    
-					판매자와 1대1 채팅
-					<a href="/chat?no=${vo.sellno }" class="chat-link">
-					    <img src="/resources/imgs/chatico.jpg" alt="Image" width="30px" height="30px">
-					</a>
-					&emsp;&emsp;
+
                     판매글 신고하기
                     </form>
                     <!-- 신고 버튼 -->
@@ -320,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		                  <div class="col-12 text-center">
 		
 		                    <!-- 신고 등록 -->
-		                    <button class="btn btn-outline-dark" type="submit">
+		                    <button class="btn btn-outline-dark" type="submit" style="background-color: gray;">
 		                      판매글 신고하기
 		                    </button>
 		
@@ -412,7 +463,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         <!-- List -->
                         <ul class="list-unstyled text-gray-500">
-                          <li>판매글 평균 평점: ${vo.rating_avg }점</li>
+                          <li>이 판매자의 평균 별점: <fmt:formatNumber value="${vo.rating_avg}" type="number" minFractionDigits="1" maxFractionDigits="1" />점</li>
                           <li>총 리뷰 수: ${vo.review_cnt }개</li>
                         </ul>
                       </div>
@@ -757,14 +808,14 @@ document.addEventListener("DOMContentLoaded", function() {
                           <span class="fs-xs text-muted" style="position: absolute; right: 10px;">
 						  	신고하기
 						  	<!-- 신고 버튼 -->
-			                <a data-bs-toggle="collapse" href="#reviewsingoForm">
+			                <a data-bs-toggle="collapse" href="#reviewsingoForm${review.reviewno}">
 			                  <img src="/resources/imgs/singo.jpg" alt="Image" width="20px" height="20px">
 			                </a>
 						  </span>
 						  
 						  <!-- 리뷰신고 작성 폼 -->
 			     
-				            <div class="collapse" id="reviewsingoForm">
+				            <div class="collapse" id="reviewsingoForm${review.reviewno}">
 				
 				              <!-- Divider -->
 				              <hr class="my-8">
@@ -797,7 +848,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				                  <div class="col-12 text-center">
 				
 				                    <!-- 신고 등록 -->
-				                    <button class="btn btn-outline-dark" type="submit">
+				                    <button class="btn btn-outline-dark" type="submit" style="background-color: gray;">
 				                      리뷰 신고하기
 				                    </button>
 				
