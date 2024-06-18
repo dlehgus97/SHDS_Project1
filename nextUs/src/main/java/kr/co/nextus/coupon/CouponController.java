@@ -48,7 +48,7 @@ public class CouponController {
 		model.addAttribute("coupon", service.createCoupon(vo,memberEmails));
 		
 		model.addAttribute("msg", "쿠폰이 정상적으로 발급되었습니다.");
-		model.addAttribute("url", "/memberManagement/giveCoupon");
+		model.addAttribute("url", "/giveCoupon");
 		return "common/alert";
 	}
 	

@@ -13,7 +13,7 @@ public class SellerRequestVO {
 	private String bank;
 	private String account;
 	private Timestamp regdate;
-	
+	private int state;//1승인전 0승인후 -1승인거부
 	
 	// 관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))

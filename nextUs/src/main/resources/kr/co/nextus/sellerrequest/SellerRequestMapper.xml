@@ -46,7 +46,7 @@
 	<!-- 승인 허락 -->
 	<update id="approve" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO">
 		UPDATE SELLERREQUEST SET
-		state = 2
+		state = 0
 		WHERE memberno = #{memberno}
 	</update>
 	
@@ -55,7 +55,7 @@
 	<!-- 승인 거부 -->
 	<update id="deny" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO">
 		UPDATE SELLERREQUEST SET
-		state = 0
+		state = -1
 		WHERE memberno = #{memberno}
 	</update>
 	
