@@ -61,8 +61,8 @@ public class SellerRequestServiceImpl implements SellerRequestService {
 
 	@Override
 	public Map<String, Object> list(SellerRequestVO param, int no) {
-		param.setNo(no);
-        List<SellerRequestVO> list = mapper.detail(param); // 목록
+		//param.setNo(no);
+        List<SellerRequestVO> list = mapper.detail(no); // 목록
         
         Map<String, Object> map = new HashMap<>();
         map.put("list", list);

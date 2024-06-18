@@ -33,13 +33,13 @@
 	</select>
 
 	<!-- 샐러등록 상세보기 -->
-	<select id="detail" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO"
+	<select id="detail" parameterType="int"
 		resultType="kr.co.nextus.sellerrequest.SellerRequestVO">
 		SELECT  m.email, m.nickname,
 		s.*
 		FROM SELLERREQUEST s
 		LEFT JOIN MEMBER m ON s.memberno = m.no
-		WHERE s.no = #{no} 
+		WHERE s.memberno = #{no} 
 	</select>
 	
 	

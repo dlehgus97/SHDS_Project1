@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 
+
 @Controller
 public class RefundController {
 
@@ -48,4 +49,12 @@ public class RefundController {
 		model.addAttribute("refundRequstMap", service.list(vo));
 		return "admin/refundManagement/refundRequest";
 	}
+	
+	
+	@RequestMapping("/refundPopup")
+	public String refundPopup(RefundVO vo,Model model,@RequestParam("no") int no) {
+		model.addAttribute("map", service.list(vo,no));
+		return "admin/refundManagement/refundPopup";
+	}
+	
 }

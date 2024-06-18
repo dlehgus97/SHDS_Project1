@@ -13,7 +13,7 @@ public interface SellerRequestMapper {
 	List<SellerRequestVO> list(SellerRequestVO vo);
 	int count(SellerRequestVO param);
 	int countUnapproved(SellerRequestVO param);
-	List<SellerRequestVO> detail(SellerRequestVO param);
+	List<SellerRequestVO> detail(int no);
 	int approve(SellerRequestVO vo);
 	boolean deny(SellerRequestVO vo);
 	
