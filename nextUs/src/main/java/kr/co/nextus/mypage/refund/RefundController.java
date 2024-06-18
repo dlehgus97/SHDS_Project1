@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.nextus.event.EventVO;
-import kr.co.nextus.member.MemberVO;
+
 
 @Controller
 public class RefundController {
@@ -38,5 +37,15 @@ public class RefundController {
 			model.addAttribute("msg", "등록 오류");
 		}
 		return "common/alert";
+	}
+	
+	
+
+	
+	@GetMapping("/refundRequest")
+	@RequestMapping("/refundRequest")
+	public String couponManagement(RefundVO vo, Model model) {
+		model.addAttribute("refundRequstMap", service.list(vo));
+		return "admin/refundManagement/refundRequest";
 	}
 }

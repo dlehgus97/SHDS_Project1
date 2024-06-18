@@ -16,7 +16,13 @@ public class BanServiceImpl implements BanService {
 
 	@Override
 	public Map<String, Object> list(BanVO param, int isSeller) {
-		int count = mapper.count(param); // 총개수
+		int count = 0;
+		if(isSeller==0) {
+			count = mapper.countMember(param); // 총개수
+		}else {
+			count = mapper.countSeller(param); // 총개수
+		}
+		
 		// 총페이지수
 		int totalPage = count / 10;
 		if (count % 10 > 0) totalPage++;

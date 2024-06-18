@@ -31,7 +31,7 @@
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.coupon.CouponVO"
 		resultType="int">
-		SELECT COUNT(*) FROM COUPON
+		SELECT COUNT(DISTINCT name) FROM COUPON
 	</select>
 
 

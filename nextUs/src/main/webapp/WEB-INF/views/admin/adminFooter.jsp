@@ -1,7 +1,7 @@
 <footer>
 	<div class="footer-area">
 		<p>
-			© Copyright 2024. "En Taro Tassadar!"
+			© Copyright Nextus. "En Taro Tassadar!"
 		</p>
 	</div>
 </footer>

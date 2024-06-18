@@ -16,4 +16,21 @@
 			status=2
 		WHERE buyno=#{buyno};
 	</update>
+	
+	
+	<!-- 리스트 -->
+	<select id="list" parameterType="kr.co.nextus.mypage.refund.RefundVO"
+		resultType="kr.co.nextus.mypage.refund.RefundVO">
+		SELECT r.*, m.email
+		FROM REFUND r
+		JOIN BUYLIST b ON r.buyno = b.buyno
+		JOIN MEMBER m ON b.memberno = m.no
+		ORDER BY r.state DESC, r.date ASC
+		LIMIT #{startIdx}, 10
+	</select>
+	<!-- 카운트 -->
+	<select id="count" parameterType="kr.co.nextus.mypage.refund.RefundVO"
+		resultType="int">
+		SELECT COUNT(*) FROM REFUND
+	</select>
 </mapper>   

@@ -3,47 +3,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>샐러 제재 내역</title>
-<link rel="stylesheet" href="../resources/css/admin/adminMain.css" />
-<link rel="stylesheet" href="../resources/css/admin/simpleTable.css" />
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관리자 메인 페이지</title>
+<script src="../resources/js/admin/memberStatus.js"></script>
+<link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+
+
 <script src="../resources/js/admin/memberBanManagement.js"></script>
 <style>
-#report {
-	color: purple;
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 18px;
+}
+
+tbody tr:hover {
+	background-color: #f1f1f1; /* 배경색 변경 */
+}
+
+.mybutton {
+	width: 250px;
+	font-size: 45px;
+	height: 45px;
+	font-weight: bold;
 }
 </style>
 </head>
 <body>
-<div class="page-container">
+	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
-			<div class="header">
 
-				<h2>신고접수내역</h2>
-			</div>
-			<div class="bg-wh Ban_div">
-				<table class="member_list">
-					<colgroup>
-						<col width="236px" />
-						<col width="306px" />
-						<col width="236px" />
-						<col width="276px" />
-						<col width="246px" />
-					</colgroup>
-					<thead>
-						<tr>
-							<th>이메일</th>
-							<th>신고자</th>
-							<th>글 유형</th>
-							<th>신고 날짜</th>
-							<th>상세내용</th>
-						</tr>
-					</thead>
-					<tbody>
+			<div class="main-content-inner">
+				<div class="row">
+					<div class="col-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h2>신고접수내역</h2>
+								<div class="data-tables datatable-dark">
+									<table id="dataTable3" class="text-center">
+										<thead class="text-capitalize">
+											<tr>
+												<th>이메일</th>
+												<th>신고자</th>
+												<th>글 유형</th>
+												<th>신고 날짜</th>
+												<th>상세내용</th>
+											</tr>
+										</thead>
+										<tbody>
 						<c:if test="${empty map.list}">
 							<tr>
 								<td class="first" colspan="8">신고내역이 없습니다.</td>
@@ -72,36 +93,47 @@
 							</c:forEach>
 						</c:if>
 					</tbody>
-				</table>
-
-
-				<!-- paging -->
-				<div class="pagenate">
-					<ul class='paging'>
-						<c:if test="${map.prev }">
-							<li><a
-								href="report.do?page=${map.startPage-1 }&searchType=${ReportVO.searchType}&searchWord=${ReportVO.searchWord}">
-									<< </a></li>
-						</c:if>
-						<c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
-							<c:if test="${p == ReportVO.page}">
-								<li><a href='#;' class='current'>${p}</a></li>
-							</c:if>
-							<c:if test="${p != ReportVO.page}">
-								<li><a
-									href='report.do?page=${p}&searchType=${ReportVO.searchType}&searchWord=${ReportVO.searchWord}'>${p}</a></li>
-							</c:if>
-						</c:forEach>
-						<c:if test="${map.next }">
-							<li><a
-								href="report.do?page=${map.endPage+1 }&searchType=${ReportVO.searchType}&searchWord=${ReportVO.searchWord}">
-									>> </a></li>
-						</c:if>
-					</ul>
+ 
+									</table>
+									<!-- paging -->
+									<div class="pagenate" style="margin-top: 10px;">
+										<c:forEach var="p" begin="${map.startPage}"
+											end="${map.endPage}">
+											<c:if test="${p == ReportVO.page}">
+												<li><a href='#;' class='current'>${p}</a></li>
+											</c:if>
+											<c:if test="${p != ReportVO.page}">
+												<li><a href='report?page=${p}'>${p}</a></li>
+											</c:if>
+										</c:forEach>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-
 			</div>
 		</div>
-		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+	</div>
+
+	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+
+
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+
+
+
+
+
 </body>
 </html>
