@@ -22,7 +22,7 @@
 
 
 <script src="../resources/js/admin/memberStatus.js"></script>
-<script src="../resources/js/admin/sellerRegist.js"></script>
+<script src="../resources/js/admin/refundPopup.js"></script>
 <style>
 table {
 	width: 100%;
@@ -40,6 +40,7 @@ tbody tr:hover {
 }
 .mybutton{
 margin-top:13px;
+width:100px;
 }
 </style>
 </head>
@@ -93,31 +94,26 @@ margin-top:13px;
 
 													<tr>
 														<td>${vo.buyno != null ? vo.buyno : '(미입력)'}</td>
-														<td>${vo.memberEmail != null ? vo.memberEmail : '(미입력)'}</td>
+														<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 
-														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:MM"
+														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd  HH:MM"
 																value="${vo.date}" /></td>
 																
 														<td>
-															<button class="btn btn-outline-primary mb-3 mybutton" type="button"
+															<button class="btn btn-outline-secondary mb-3 mybutton" type="button"
 																onclick="openPopup(event); return false;">상세보기</button>
 														</td>
 														
 														<td><c:choose>
-																<c:when test="${vo.state == 1}">
+																<c:when test="${vo.status == 2}">
 																	<button class="btn btn-rounded btn-danger mb-3 mybutton" type="button"
 																		onclick="openPopup(event); return false;">환불 대기중</button>
 																</c:when>
-																<c:when test="${vo.state == 0}">
+																<c:when test="${vo.status == 3}">
 																	<button class="btn btn-rounded btn-success mb-3 mybutton" type="button"
-																		onclick="openAnotherPopup(event); return false;">환불 완료
+																		onclick="openPopup(event); return false;">환불 완료
 																	</button>
 																</c:when>
-																<c:otherwise>
-																	<button class="btn btn-rounded btn-dark mb-3 mybutton" type="button"
-																		onclick="defaultAction(event); return false;">환불 거부
-																	</button>
-																</c:otherwise>
 															</c:choose></td>
 													</tr>
 

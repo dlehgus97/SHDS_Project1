@@ -175,16 +175,36 @@
         }
 
         .main-content {
-            margin-left: 200px; /* 사이드바 너비 */
+            margin-left: 150px;
+			margin-right: 150px;
             padding: 20px;
             flex-grow: 1;
-            display: flex;
+            /* display: flex; */
         }
 
         .chart-container, .table-container {
             flex: 1;
             padding: 20px;
             box-sizing: border-box;
+        }
+        
+ 		.mini-header {
+		    background-color: #4CAF50; /* 배경색 변경 */
+		    color: white; /* 텍스트 색상 변경 */
+		    padding: 15px 20px; /* 내부 여백 수정 */
+		    border-radius: 8px; /* 테두리 둥글게 만들기 */
+		    margin-bottom: 30px; /* 하단 마진 추가 */
+		    text-align: center;
+		    font-weight: bold;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+		}
+		
+		.mini-header span {
+		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
+		}
+		
+		.flex-container {
+            display: flex;
         }
 
         /* 리뷰 내용이 길 경우 ... 처리 */
@@ -238,24 +258,28 @@
                             label: '주문 수',
                             data: orderCountsData,
                             borderColor: 'rgba(75, 192, 192, 1)',
+                            yAxisID: 'y1',
                             fill: false
                         },
                         {
                             label: '매출액',
                             data: dailySalesData,
                             borderColor: 'rgba(255, 159, 64, 1)',
+                            yAxisID: 'y2',
                             fill: false
                         },
                         {
                             label: '환불 수',
                             data: dailyRefundCountsData,
                             borderColor: 'rgba(255, 99, 132, 1)',
+                            yAxisID: 'y1',
                             fill: false
                         },
                         {
                             label: '리뷰',
                             data: dailyReviewCountsData,
                             borderColor: 'rgba(54, 162, 235, 1)',
+                            yAxisID: 'y1',
                             fill: false
                         }
                     ]
@@ -270,11 +294,26 @@
                                 text: '날짜'
                             }
                         },
-                        y: {
-                            display: true,
+                        y1: {
+                            type: 'linear',
+                            position: 'left',
                             title: {
                                 display: true,
-                                text: '값'
+                                text: '주문 수, 환불 수, 리뷰 수'
+                            },
+                            ticks: {
+                                stepSize: 1  // 눈금 단위를 1로 설정
+                            }
+                        },
+                        y2: {
+                            type: 'linear',
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '매출액'
+                            },
+                            grid: {
+                                drawOnChartArea: false
                             }
                         }
                     }
@@ -284,6 +323,12 @@
     </script>
 </head>
 <body>
+    <%
+        int totalOrderCount = 0;
+        int totalSales = 0;
+        int totalRefundCount = 0;
+        int totalReviewCount = 0;
+    %>
     <div class="wrap">
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
@@ -296,6 +341,13 @@
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
+				<div class="mini-header">
+					<span>신규 주문: ${miniHeaderData.today_orders_count}</span>
+					<span>취소 주문: ${miniHeaderData.today_refund_count}</span>
+					<span>신규 채팅: ${miniHeaderData.new_chat}</span>
+					<span>정산 신청 가능: ${miniHeaderData.settlement_eligible}</span>
+				</div>
+				<div class="flex-container">
                 <div class="chart-container">
                     <canvas id="weeklyMetricsChart" width="400" height="200"></canvas>
                 </div>
@@ -312,8 +364,18 @@
                         </thead>
                         <tbody>
                             <c:forEach var="orderCounts" items="${orderCounts}">
+                                <c:set var="dailyOrderCount" value="${orderCounts.daily_order_count}" />
+                                <c:set var="dailySales" value="${orderCounts.daily_sales}" />
+                                <c:set var="dailyRefundCount" value="${orderCounts.daily_refund_count}" />
+                                <c:set var="dailyReviewCount" value="${orderCounts.daily_review_count}" />
+
+                                <c:set var="totalOrderCount" value="${totalOrderCount + dailyOrderCount}" scope="page" />
+                                <c:set var="totalSales" value="${totalSales + dailySales}" scope="page" />
+                                <c:set var="totalRefundCount" value="${totalRefundCount + dailyRefundCount}" scope="page" />
+                                <c:set var="totalReviewCount" value="${totalReviewCount + dailyReviewCount}" scope="page" />
+
                                 <tr>
-                                    <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>                            
+                                    <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${orderCounts.daily_order_count == 0}">
@@ -356,12 +418,22 @@
                                     </td>
                                 </tr>
                             </c:forEach>
+                            <tr>
+                                <td><strong>최근 7일 합계</strong></td>
+                                <td><strong>${totalOrderCount}건</strong></td>
+                                <td><strong><fmt:formatNumber value="${totalSales}" type="number" pattern="###,###"/>원</strong></td>
+                                <td><strong>${totalRefundCount}건</strong></td>
+                                <td><strong>${totalReviewCount}개</strong></td>
+                            </tr>
                         </tbody>
                     </table>
+                </div>
                 </div>
             </div>
         </div>
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body>
+
 </html>
+

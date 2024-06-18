@@ -34,10 +34,7 @@ tbody tr:hover {
 }
 
 .mybutton {
-	width: 250px;
-	font-size: 45px;
-	height: 45px;
-	font-weight: bold;
+	margin-top:13px;
 }
 </style>
 </head>
@@ -52,7 +49,7 @@ tbody tr:hover {
 					<div class="col-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								<h2>신고접수내역</h2>
+								<h2 class="header-title" style="font-size: 35px">신고접수내역</h2>
 								<div class="data-tables datatable-dark">
 									<table id="dataTable3" class="text-center">
 										<thead class="text-capitalize">
@@ -86,7 +83,7 @@ tbody tr:hover {
 										</c:choose></td>
 									<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${vo.date}" /></td>
-									<td><button class="del_button" type="button">상세내용보기</button></td>
+									<td><button class="btn btn-outline-secondary mb-3 mybutton" type="button">상세내용보기</button></td>
 								</tr>
 
 

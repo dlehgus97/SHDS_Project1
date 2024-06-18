@@ -80,4 +80,10 @@ public class SellerServiceImpl implements SellerService {
     public List<SellerVO> getOrderAndReviewCountsLastWeek(int no) {
         return sellerMapper.getOrderAndReviewCountsLastWeek(no);
     }
+    
+	// 미니 헤더
+    @Override
+    public SellerVO getMiniHeaderData(int no){
+    	return sellerMapper.getMiniHeaderData(no);
+    }
 }

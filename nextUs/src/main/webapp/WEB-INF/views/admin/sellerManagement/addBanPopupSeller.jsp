@@ -120,7 +120,7 @@ tbody tr:hover {
                                     name="content" id="example-text-input"style="width:100%;margin-left:0px">
 				               		제재 기간<input class="form-control" name="date" id="date"type="date">
 									<br>
-									<input type="submit"class="btn btn-secondary btn-lg btn-block"
+									<input type="submit"class="btn  btn-success btn-lg btn-block"
 									style="margin-left:-5px" id="banSubmit" value="등록하기">
 
 								</div>

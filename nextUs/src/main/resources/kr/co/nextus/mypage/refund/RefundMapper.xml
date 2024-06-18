@@ -21,11 +21,11 @@
 	<!-- 리스트 -->
 	<select id="list" parameterType="kr.co.nextus.mypage.refund.RefundVO"
 		resultType="kr.co.nextus.mypage.refund.RefundVO">
-		SELECT r.*, m.email
+		SELECT r.*, m.email,b.status
 		FROM REFUND r
 		JOIN BUYLIST b ON r.buyno = b.buyno
 		JOIN MEMBER m ON b.memberno = m.no
-		ORDER BY r.state DESC, r.date ASC
+		ORDER BY  FIELD(b.status,2,3), r.date ASC
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->
@@ -33,4 +33,16 @@
 		resultType="int">
 		SELECT COUNT(*) FROM REFUND
 	</select>
+	
+	<!-- 환불상태 상세보기 -->
+	<select id="detail" parameterType="int"
+		resultType="kr.co.nextus.mypage.refund.RefundVO">
+		SELECT r.*, m.email, s.title
+		FROM REFUND r
+		JOIN BUYLIST b ON r.buyno = b.buyno
+		JOIN MEMBER m ON b.memberno = m.no
+		JOIN SELLLIST s ON b.sellno = s.sellno
+		WHERE r.buyno = #{no} 
+	</select>
+	
 </mapper>   

@@ -32,6 +32,9 @@ tr{
 tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
+.mybutton{
+	margin-top:13px;
+}
 </style>
 </head>
 <body>
@@ -86,9 +89,9 @@ tbody tr:hover {
 																value="${vo.postdate}" /></td>
 														<td>${vo.view_cnt != null ? vo.view_cnt : '0'}</td>
 														<td>
-															<button class="rev_button" type="button"
+															<button class="btn btn-flat btn-secondary mb-3 mybutton" type="button"
 																onclick="goToSellPage(${vo.sellno})">판매글 보기</button>&emsp;&emsp;
-															<button class="del_button" type="button">삭제</button>
+															<button class="btn btn-flat btn-danger mb-3 mybutton" type="button">삭제</button>
 														</td>
 													</tr>
 

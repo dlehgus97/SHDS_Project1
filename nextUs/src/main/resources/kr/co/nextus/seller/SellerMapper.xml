@@ -79,6 +79,15 @@
         #{account}, 0, 0)
     </insert>
     
+    <!-- 신규 주문, 신규 환불, 신규 채팅, 정산신청 가능 수를 나타내는 미니 헤더 -->
+    <select id="getMiniHeaderData" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
+    	SELECT 
+		    (SELECT COUNT(*) FROM BUYLIST WHERE DATE(buydate) = CURRENT_DATE) AS today_orders_count,
+		    (SELECT COUNT(*) FROM REFUND WHERE DATE(date) = CURRENT_DATE) AS today_refund_count,
+		    (SELECT COUNT(*) FROM CHAT WHERE opno = 6 AND read_flag = 1) AS new_chat,
+		    (SELECT COUNT(*) FROM BUYLIST WHERE status = 4 AND sellerno = 6) AS settlement_eligible;
+    </select>
+    
 	<!-- 최근 일주일 동안 날마다 주문 수, 매출액, 환불 수, 받은 리뷰 수 -->
 	<select id="getOrderAndReviewCountsLastWeek" parameterType="kr.co.nextus.seller.SellerVO" resultType="kr.co.nextus.seller.SellerVO">
 	    SELECT 

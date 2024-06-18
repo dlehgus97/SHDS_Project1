@@ -15,5 +15,6 @@ public interface RefundService {
 	int insert(RefundVO vo, HttpServletRequest request);
 	int update(RefundVO vo);
 	Map<String, Object> list(RefundVO vo);
+	Map<String, Object> list(RefundVO vo, int no);
 	
 }

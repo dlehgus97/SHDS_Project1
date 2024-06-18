@@ -244,6 +244,21 @@
         .disabled-button:hover {
             background-color: #969696;
         }
+        
+		.mini-header {
+		    background-color: #4CAF50; /* 배경색 변경 */
+		    color: white; /* 텍스트 색상 변경 */
+		    padding: 15px 20px; /* 내부 여백 수정 */
+		    border-radius: 8px; /* 테두리 둥글게 만들기 */
+		    margin-bottom: 30px; /* 하단 마진 추가 */
+		    text-align: center;
+		    font-weight: bold;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+		}
+		
+		.mini-header span {
+		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
+		}
     </style>
     <script>
         $(document).ready(function() {
@@ -322,7 +337,6 @@
 <body>
     <div class="wrap">
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
-
         <div class="content">
             <div class="sidebar">
                 <a href="seller/sellerWeeklyMetrics">판매자 주간 지표</a>
@@ -332,6 +346,12 @@
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
+				<div class="mini-header">
+                    <span>신규 주문: ${miniHeaderData.today_orders_count}</span>
+					<span>취소 주문: ${miniHeaderData.today_refund_count}</span>
+					<span>신규 채팅: ${miniHeaderData.new_chat}</span>
+					<span>정산 신청 가능: ${miniHeaderData.settlement_eligible}</span>
+                </div>
             	<h1>거래 목록</h1>
 		        <table>
 		            <thead>

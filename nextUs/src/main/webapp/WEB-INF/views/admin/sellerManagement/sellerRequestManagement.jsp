@@ -22,7 +22,7 @@
 
 
 <script src="../resources/js/admin/memberStatus.js"></script>
-<script src="../resources/js/admin/sellerRegist.js"></script>
+<script src="../resources/js/admin/sellerRequest.js"></script>
 <style>
 table {
 	width: 100%;
@@ -36,6 +36,9 @@ tbody tr:hover {
 #date{
 	height:48px;
  	margin-top:2px;
+}
+.mybutton{
+margin-top:13px;
 }
 </style>
 </head>
@@ -96,7 +99,7 @@ tbody tr:hover {
 														<td class="date"><fmt:formatDate
 																pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></td>
 														<td>
-															<button class="rev_button" type="button"
+															<button class="btn btn-outline-secondary mb-3 mybutton" type="button"
 																onclick="openPopup(event); return false;">상세보기</button>
 														</td>
 													</tr>

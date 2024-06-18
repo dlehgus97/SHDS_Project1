@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.nextus.coupon.CouponVO;
 
 
 
@@ -63,5 +62,17 @@ public class RefundServiceImpl implements RefundService {
         map.put("isPrev", isPrev);
 		map.put("isNext", isNext);
 		return map;
+	}
+	
+	//환불 상세정보
+	@Override
+	public Map<String, Object> list(RefundVO vo, int no) {
+		 	List<RefundVO> list = mapper.detail(no); // 목록
+	        
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("list", list);
+	        
+
+			return map;
 	}
 }
