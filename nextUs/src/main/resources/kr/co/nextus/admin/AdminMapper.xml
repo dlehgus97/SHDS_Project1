@@ -12,8 +12,8 @@
     	</delete>
     	
     	<insert id="insertnotice">
-	        INSERT INTO NOTICE (no, title, content, writedate)
-	        VALUES ((SELECT COALESCE(MAX(no), 0) + 1 FROM NOTICE), #{title}, #{content}, NOW())<!-- 이부분 수정 -->
+	        INSERT INTO NOTICE (title, content, writedate)
+	        VALUES (#{title}, #{content}, NOW())<!-- 이부분 수정 -->
 	    </insert>
     			
 </mapper>   
