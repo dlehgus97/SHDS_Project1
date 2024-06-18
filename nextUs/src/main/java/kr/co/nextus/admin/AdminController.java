@@ -38,11 +38,7 @@ public class AdminController {
 	public String saleStatement() {
 		return "admin/adjustManagement/saleStatement";
 	}
-	@RequestMapping("/refundRequest")
-	public String refundRequest() {
-		return "admin/refundManagement/refundRequest";
-	}
-	
+
 	
 	
 	
