@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -57,13 +59,25 @@
                                     </li>
 							</ul>
 						</li>
+						
 						<li>
-							<a href="javascript:void(0)"aria-expanded="true"><i class="ti-layers-alt"></i><span>셀러관리</span></a>
+							<a href="javascript:void(0)"aria-expanded="true">
+							<i class="ti-layers-alt"></i>
+							<span>셀러관리</span><span>
+							<c:if test="${sellerRequestMap.countUnapproved > 0}">
+                				<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
+           					</c:if></span>
+							</a>
 							<ul class="collapse">
-								<li><a href="/sellerRequestManagement">셀러 등록 관리</a></li>
+								<li><a href="/sellerRequestManagement">셀러 등록 관리<span>
+								<c:if test="${sellerRequestMap.countUnapproved > 0}">
+                				<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
+           					</c:if></span></a></li>
 								<li><a href="/sellerBanManagement">셀러 제재 관리</a></li>
 							</ul>
 						</li>
+						
+						
 						<li><a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i><span>정산관리</span></a>
 							<ul class="collapse">
 								<li><a href="/sellerSettlement">판매자 정산 내역</a></li>
