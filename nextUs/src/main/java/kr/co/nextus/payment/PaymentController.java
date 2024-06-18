@@ -42,6 +42,13 @@ public class PaymentController {
         
         model.addAttribute("selectedProducts", selectedProducts);
         System.out.println(selectedProducts);
-        return "paymentSelect"; // paymentSelect.jsp로 포워딩
+        return "paymentSelect";
     }
+	
+	@PostMapping("/payment/paySuccess")
+	public String paySuccess(@RequestBody PaymentVO vo) {
+//		System.out.println(vo.getFullName());
+		System.out.println(vo.getPaymentId());
+		return "index.do";
+	}
 }

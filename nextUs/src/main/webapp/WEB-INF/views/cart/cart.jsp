@@ -36,7 +36,7 @@
               </li>
               <li>&nbsp;&nbsp;>&nbsp;&nbsp;</li>
               <li>
-                Shopping Cart
+                <a class="text-gray-400" href="/cart/view.do">Shopping Cart</a>
               </li>
             </ol>
 
