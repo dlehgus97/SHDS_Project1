@@ -92,8 +92,7 @@
         }
 
         table {
-            width: 80%;
-            margin: 0 auto 20px auto;
+            width: 100%;
             border-collapse: collapse;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -126,11 +125,11 @@
         }
 
         .stars-outer::before {
-		    content: "\f005 \f005 \f005 \f005 \f005";
-		    font-family: FontAwesome;
-		    color: #ccc;
-		    display: block;
-		}
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: FontAwesome;
+            color: #ccc;
+            display: block;
+        }
 
         .stars-inner {
             position: absolute;
@@ -143,12 +142,12 @@
         }
 
         .stars-inner::before {
-		    content: "\f005 \f005 \f005 \f005 \f005";
-		    font-family: FontAwesome;
-		    display: block;
-		}
-		
-		        .sidebar {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: FontAwesome;
+            display: block;
+        }
+
+        .sidebar {
             width: 200px;
             min-width: 200px;
             background-color: #404040;
@@ -169,20 +168,27 @@
         .sidebar a:hover {
             background-color: #575757;
         }
-        
+
         .content {
             display: flex;
             flex-grow: 1;
         }
-        
+
         .main-content {
             margin-left: 200px; /* 사이드바 너비 */
             padding: 20px;
             flex-grow: 1;
+            display: flex;
         }
-        
+
+        .chart-container, .table-container {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
         /* 리뷰 내용이 길 경우 ... 처리 */
-         .text-truncate {
+        .text-truncate {
             display: block;
             width: 200px; /* 원하는 너비로 설정 */
             white-space: nowrap;
@@ -191,12 +197,88 @@
             text-align: left; /* 텍스트의 시작점을 동일하게 설정 */
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
-            $('.stars-inner').each(function() {
-                var rating = $(this).data('rating');
-                var starPercentage = (rating / 5) * 100;
-                $(this).css('width', starPercentage + '%');
+            // 차트 데이터를 JSP에서 가져와서 자바스크립트 배열로 변환
+            var labels = [
+                <c:forEach var="orderCounts" items="${orderCounts}">
+                    '<fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/>',
+                </c:forEach>
+            ];
+            var orderCountsData = [
+                <c:forEach var="orderCounts" items="${orderCounts}">
+                    ${orderCounts.daily_order_count},
+                </c:forEach>
+            ];
+            var dailySalesData = [
+                <c:forEach var="orderCounts" items="${orderCounts}">
+                    ${orderCounts.daily_sales},
+                </c:forEach>
+            ];
+            var dailyRefundCountsData = [
+                <c:forEach var="orderCounts" items="${orderCounts}">
+                    ${orderCounts.daily_refund_count},
+                </c:forEach>
+            ];
+            var dailyReviewCountsData = [
+                <c:forEach var="orderCounts" items="${orderCounts}">
+                    ${orderCounts.daily_review_count},
+                </c:forEach>
+            ];
+
+            // 차트를 그리기 위해 Chart.js 사용
+            var ctx = document.getElementById('weeklyMetricsChart').getContext('2d');
+            var weeklyMetricsChart = new Chart(ctx, {
+                type: 'line', // 차트 유형: line, bar, etc.
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '주문 수',
+                            data: orderCountsData,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false
+                        },
+                        {
+                            label: '매출액',
+                            data: dailySalesData,
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            fill: false
+                        },
+                        {
+                            label: '환불 수',
+                            data: dailyRefundCountsData,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            fill: false
+                        },
+                        {
+                            label: '리뷰',
+                            data: dailyReviewCountsData,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '날짜'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '값'
+                            }
+                        }
+                    }
+                }
             });
         });
     </script>
@@ -214,65 +296,69 @@
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
-                <h1>주간 통계</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>날짜</th>
-                            <th>주문 수</th>
-                            <th>매출액</th>
-                            <th>환불 수</th>
-                            <th>리뷰</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="orderCounts" items="${orderCounts}">
+                <div class="chart-container">
+                    <canvas id="weeklyMetricsChart" width="400" height="200"></canvas>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
                             <tr>
-                                <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>                            
-                                <td>
-							        <c:choose>
-							            <c:when test="${orderCounts.daily_order_count == 0}">
-							                -
-							            </c:when>
-							            <c:otherwise>
-							                ${orderCounts.daily_order_count}건
-							            </c:otherwise>
-							        </c:choose>
-							    </td>
-                                <td>
-							        <c:choose>
-							            <c:when test="${orderCounts.daily_sales == 0}">
-							                -
-							            </c:when>
-							            <c:otherwise>
-							                <fmt:formatNumber value="${orderCounts.daily_sales}" type="number" pattern="###,###"/>원
-							            </c:otherwise>
-							        </c:choose>
-							    </td>
-							    <td>
-							        <c:choose>
-							            <c:when test="${orderCounts.daily_refund_count == 0}">
-							                -
-							            </c:when>
-							            <c:otherwise>
-							                ${orderCounts.daily_refund_count}건
-							            </c:otherwise>
-							        </c:choose>
-							    </td>
-							    <td>
-							        <c:choose>
-							            <c:when test="${orderCounts.daily_review_count == 0}">
-							                -
-							            </c:when>
-							            <c:otherwise>
-							                ${orderCounts.daily_review_count}개
-							            </c:otherwise>
-							        </c:choose>
-							    </td>
+                                <th>날짜</th>
+                                <th>주문 수</th>
+                                <th>매출액</th>
+                                <th>환불 수</th>
+                                <th>리뷰</th>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="orderCounts" items="${orderCounts}">
+                                <tr>
+                                    <td><fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/></td>                            
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${orderCounts.daily_order_count == 0}">
+                                                -
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${orderCounts.daily_order_count}건
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${orderCounts.daily_sales == 0}">
+                                                -
+                                            </c:when>
+                                            <c:otherwise>
+                                                <fmt:formatNumber value="${orderCounts.daily_sales}" type="number" pattern="###,###"/>원
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${orderCounts.daily_refund_count == 0}">
+                                                -
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${orderCounts.daily_refund_count}건
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${orderCounts.daily_review_count == 0}">
+                                                -
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${orderCounts.daily_review_count}개
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
