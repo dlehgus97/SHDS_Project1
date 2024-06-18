@@ -64,9 +64,16 @@
         }
 
         .main-content {
-            margin-left: 200px; /* 사이드바 너비 */
+            margin-left: 150px;
+			margin-right: 150px;
             padding: 20px;
             flex-grow: 1;
+        }
+        
+		h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #555;
         }
 
         .profile-container {
@@ -169,6 +176,21 @@
 		    background-color: #c82333; /* 빨간색 (더 진한) */
 		}
 		
+		.mini-header {
+		    background-color: #4CAF50; /* 배경색 변경 */
+		    color: white; /* 텍스트 색상 변경 */
+		    padding: 15px 20px; /* 내부 여백 수정 */
+		    border-radius: 8px; /* 테두리 둥글게 만들기 */
+		    margin-bottom: 30px; /* 하단 마진 추가 */
+		    text-align: center;
+		    font-weight: bold;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+		}
+		
+		.mini-header span {
+		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
+		}
+		
     </style>
 </head>
 <body>
@@ -185,6 +207,12 @@
             </div>
             
             <div class="main-content">
+				<div class="mini-header">
+                    <span>신규 주문: ${miniHeaderData.today_orders_count}</span>
+					<span>취소 주문: ${miniHeaderData.today_refund_count}</span>
+					<span>신규 채팅: ${miniHeaderData.new_chat}</span>
+					<span>정산 신청 가능: ${miniHeaderData.settlement_eligible}</span>
+                </div>
                 <h1>판매글 관리</h1>
                 <div class="product-grid">
                     <c:forEach var="sellproduct" items="${sellList}">

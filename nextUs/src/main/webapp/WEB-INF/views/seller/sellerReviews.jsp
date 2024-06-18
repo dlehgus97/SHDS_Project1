@@ -124,11 +124,11 @@
         }
 
         .stars-outer::before {
-		    content: "\f005 \f005 \f005 \f005 \f005";
-		    font-family: FontAwesome;
-		    color: #ccc;
-		    display: block;
-		}
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: FontAwesome;
+            color: #ccc;
+            display: block;
+        }
 
         .stars-inner {
             position: absolute;
@@ -141,12 +141,12 @@
         }
 
         .stars-inner::before {
-		    content: "\f005 \f005 \f005 \f005 \f005";
-		    font-family: FontAwesome;
-		    display: block;
-		}
-		
-		        .sidebar {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: FontAwesome;
+            display: block;
+        }
+
+        .sidebar {
             width: 200px;
             min-width: 200px;
             background-color: #404040;
@@ -167,20 +167,21 @@
         .sidebar a:hover {
             background-color: #575757;
         }
-        
+
         .content {
             display: flex;
             flex-grow: 1;
         }
-        
+
         .main-content {
-            margin-left: 200px; /* 사이드바 너비 */
+			margin-left: 150px;
+			margin-right: 150px;
             padding: 20px;
             flex-grow: 1;
         }
-        
+
         /* 리뷰 내용이 길 경우 ... 처리 */
-         .text-truncate {
+        .text-truncate {
             display: block;
             width: 200px; /* 원하는 너비로 설정 */
             white-space: nowrap;
@@ -188,6 +189,21 @@
             text-overflow: ellipsis;
             text-align: left; /* 텍스트의 시작점을 동일하게 설정 */
         }
+
+		.mini-header {
+		    background-color: #4CAF50; /* 배경색 변경 */
+		    color: white; /* 텍스트 색상 변경 */
+		    padding: 15px 20px; /* 내부 여백 수정 */
+		    border-radius: 8px; /* 테두리 둥글게 만들기 */
+		    margin-bottom: 30px; /* 하단 마진 추가 */
+		    text-align: center;
+		    font-weight: bold;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+		}
+		
+		.mini-header span {
+		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
+		}
     </style>
     <script>
         $(document).ready(function() {
@@ -212,37 +228,44 @@
                 <a href="seller/sellerEdit">셀러 정보 수정</a>
             </div>
             <div class="main-content">
-            	<h1>받은 리뷰</h1>
-		        <table>
-		            <thead>
-		                <tr>
-		                    <th></th>             
-		                    <th>상품명</th>
-		                    <th>평점</th>
-		                    <th>닉네임</th>
-		                    <th>제목</th>
-		                    <th>내용</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		                <c:forEach var="review" items="${sellerReviews}">
-		                    <tr>
-		                    	<td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>                     
-		                        <td>${review.productTitle}</td>
-		                        <td>
-		                            <div class="stars-outer">
-		                                <div class="stars-inner" data-rating="${review.score}"></div>
-		                            </div>
-		                        </td>
-		                        <td>${review.nickname}</td>
-		                        <td>${review.title}</td>
-		                        <td><span class="text-truncate">${review.text}</td>                  
-		                    </tr>
-		                </c:forEach>
-		            </tbody>
-		        </table>
+                <div class="mini-header">
+                    <span>신규 주문: ${miniHeaderData.today_orders_count}</span>
+					<span>취소 주문: ${miniHeaderData.today_refund_count}</span>
+					<span>신규 채팅: ${miniHeaderData.new_chat}</span>
+					<span>정산 신청 가능: ${miniHeaderData.settlement_eligible}</span>
+                </div>
+
+                <h1>리뷰 목록</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>상품명</th>
+                            <th>평점</th>
+                            <th>닉네임</th>
+                            <th>제목</th>
+                            <th>내용</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="review" items="${sellerReviews}">
+                            <tr>
+                                <td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>
+                                <td>${review.productTitle}</td>
+                                <td>
+                                    <div class="stars-outer">
+                                        <div class="stars-inner" data-rating="${review.score}"></div>
+                                    </div>
+                                </td>
+                                <td>${review.nickname}</td>
+                                <td>${review.title}</td>
+                                <td><span class="text-truncate">${review.text}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
-		</div>
+        </div>
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
 </body>

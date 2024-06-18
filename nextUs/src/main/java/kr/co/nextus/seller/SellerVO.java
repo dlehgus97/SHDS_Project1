@@ -39,4 +39,9 @@ public class SellerVO {
 	private int daily_sales;
 	private int daily_refund_count;
 	private int daily_review_count;
+	
+	private int today_orders_count;
+	private int today_refund_count;
+	private int new_chat;
+	private int settlement_eligible;
 }

@@ -40,4 +40,7 @@ public interface SellerMapper {
 	
 	// 최근 일주일 주문 수, 매출액, 환불 수, 리뷰 수
 	List<SellerVO> getOrderAndReviewCountsLastWeek(int no);
+	
+	// 미니 헤더
+	SellerVO getMiniHeaderData(int no);
 }

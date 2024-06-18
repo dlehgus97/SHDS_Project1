@@ -64,7 +64,8 @@
         }
 
         .main-content {
-            margin-left: 200px; /* 사이드바 너비 */
+            margin-left: 150px;
+			margin-right: 150px;
             padding: 20px;
             flex-grow: 1;
         }

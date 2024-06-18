@@ -30,5 +30,7 @@ public interface SellerService {
 	//seller승인
 	int registerSellerByAdmin(SellerRequestVO seller);
 	
-    List<SellerVO> getOrderAndReviewCountsLastWeek(int sellerNo);
+    List<SellerVO> getOrderAndReviewCountsLastWeek(int no);
+	// 미니 헤더
+    SellerVO getMiniHeaderData(int no);
 }

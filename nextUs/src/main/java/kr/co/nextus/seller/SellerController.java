@@ -69,6 +69,10 @@ public class SellerController {
         List<BuyListVO> buyList = sellerService.getSellerBuyList(sellerNo);
         model.addAttribute("buyList", buyList);
 
+        // Mini Header 데이터를 모델에 추가
+        SellerVO miniHeaderData = sellerService.getMiniHeaderData(sellerNo);
+        model.addAttribute("miniHeaderData", miniHeaderData);
+        
         return "seller/sellerBuyList";
     }
     
@@ -112,6 +116,10 @@ public class SellerController {
         List<SellListVO> sellList = sellerService.getSellerSellList(sellerNo);
         model.addAttribute("sellList", sellList);
 
+        // Mini Header 데이터를 모델에 추가
+        SellerVO miniHeaderData = sellerService.getMiniHeaderData(sellerNo);
+        model.addAttribute("miniHeaderData", miniHeaderData);
+        
         return "seller/selllistManagement";
     }
     
@@ -131,6 +139,10 @@ public class SellerController {
         List<ReviewVO> sellerReviews = sellerService.getSellerReviews(sellerNo);
         model.addAttribute("sellerReviews", sellerReviews);
 
+        // Mini Header 데이터를 모델에 추가
+        SellerVO miniHeaderData = sellerService.getMiniHeaderData(sellerNo);
+        model.addAttribute("miniHeaderData", miniHeaderData);
+        
         return "seller/sellerReviews";
     }
     
@@ -215,8 +227,11 @@ public class SellerController {
         int sellerNo = login.getNo(); // 로그인된 판매자의 번호
         
         List<SellerVO> orderCounts = sellerService.getOrderAndReviewCountsLastWeek(sellerNo);
-
         model.addAttribute("orderCounts", orderCounts);
+        
+        // Mini Header 데이터를 모델에 추가
+        SellerVO miniHeaderData = sellerService.getMiniHeaderData(sellerNo);
+        model.addAttribute("miniHeaderData", miniHeaderData);
 
         return "seller/sellerWeeklyMetrics";
     }
