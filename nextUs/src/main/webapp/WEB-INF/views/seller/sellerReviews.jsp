@@ -82,6 +82,26 @@
         .profile strong {
             font-size: 18px;
         }
+        
+        /* 정산신청 버튼 */
+        .enabled-button {
+            background-color: #4CAF50; /* 녹색 */
+            border: none;
+            color: white;
+            padding: 7px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .enabled-button:hover {
+            background-color: #45a049;
+        }
 
         h1 {
             text-align: center;
@@ -204,6 +224,24 @@
 		.mini-header span {
 		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
 		}
+		
+		#reportPopup {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        #reportPopup h2 {
+            margin-top: 0;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -244,6 +282,7 @@
                             <th>닉네임</th>
                             <th>제목</th>
                             <th>내용</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -259,6 +298,7 @@
                                 <td>${review.nickname}</td>
                                 <td>${review.title}</td>
                                 <td><span class="text-truncate">${review.text}</td>
+                                <td><button class="enabled-button" onclick="openReportPopup(${review.sellno}, ${review.reviewno}, ${review.seller})">신고</button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -267,5 +307,55 @@
         </div>
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
+    
+    <!-- 신고 팝업 창 HTML -->
+	<div id="reportPopup" style="display:none;">
+	    <form id="reportForm">
+	        <h2>신고 사유</h2>
+	        <textarea id="reportContent" name="content" placeholder="신고 사유를 입력하세요" required></textarea>
+	        <input type="hidden" id="reportSellno" name="sellno">
+	        <input type="hidden" id="reportReviewno" name="reviewno">
+	        <input type="hidden" id="reportMemberno" name="memberno">
+	        <input type="hidden" id="reportStatus" name="status" value="1">
+	        <button type="button" onclick="submitReport()">확인</button>
+	        <button type="button" onclick="closeReportPopup()">취소</button>
+	    </form>
+	</div>
 </body>
+<script>
+    function openReportPopup(sellno, reviewno, memberno) {
+        document.getElementById('reportSellno').value = sellno;
+        document.getElementById('reportReviewno').value = reviewno;
+        document.getElementById('reportMemberno').value = memberno;
+        document.getElementById('reportPopup').style.display = 'block';
+    }
+
+    function closeReportPopup() {
+        document.getElementById('reportPopup').style.display = 'none';
+    }
+
+    function submitReport() {
+        const reportForm = document.getElementById('reportForm');
+        const formData = new FormData(reportForm);
+
+        fetch('/seller/reportReview', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'success') {
+                alert('신고가 접수되었습니다.');
+                closeReportPopup();
+                location.reload();
+            } else {
+                alert('신고 접수에 실패했습니다.');
+            }
+        })
+        .catch(error => {
+        	console.error('Error:', error); // 실제 오류 메시지 출력
+            alert('신고 과정에서 오류가 발생했습니다.');
+        });
+    }
+</script>
 </html>

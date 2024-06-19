@@ -225,27 +225,27 @@
                 <c:forEach var="orderCounts" items="${orderCounts}">
                     '<fmt:formatDate value="${orderCounts.date}" pattern="yyyy-MM-dd"/>',
                 </c:forEach>
-            ];
+            ].reverse();
             var orderCountsData = [
                 <c:forEach var="orderCounts" items="${orderCounts}">
                     ${orderCounts.daily_order_count},
                 </c:forEach>
-            ];
+            ].reverse();
             var dailySalesData = [
                 <c:forEach var="orderCounts" items="${orderCounts}">
                     ${orderCounts.daily_sales},
                 </c:forEach>
-            ];
+            ].reverse();
             var dailyRefundCountsData = [
                 <c:forEach var="orderCounts" items="${orderCounts}">
                     ${orderCounts.daily_refund_count},
                 </c:forEach>
-            ];
+            ].reverse();
             var dailyReviewCountsData = [
                 <c:forEach var="orderCounts" items="${orderCounts}">
                     ${orderCounts.daily_review_count},
                 </c:forEach>
-            ];
+            ].reverse();
 
             // 차트를 그리기 위해 Chart.js 사용
             var ctx = document.getElementById('weeklyMetricsChart').getContext('2d');
