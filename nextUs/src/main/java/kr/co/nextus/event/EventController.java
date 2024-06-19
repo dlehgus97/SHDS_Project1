@@ -82,4 +82,72 @@ public class EventController {
 		}
 		return "common/alert";
 	}
+	
+	
+	//-------------------------------------------------------관리자----------------------------------------------
+	
+	@GetMapping("/adevent/index.do")
+	public String adindex(Model model, EventVO vo) {
+		model.addAttribute("map", service.list(vo));
+		return "adevent/index";
+	}
+	
+	@GetMapping("/adevent/write.do")
+	public String adwrite() {
+		return "adevent/write";
+	}
+	
+	@PostMapping("/adevent/insert.do")
+	public String adinsert(Model model, HttpServletRequest request, EventVO vo, MultipartFile file) {
+		HttpSession sess = request.getSession();
+		MemberVO login = (MemberVO)sess.getAttribute("login");
+		int r = service.insert(vo, file, request);
+		if (r > 0) {
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "정상적으로 저장되었습니다.");
+			model.addAttribute("url", "index.do");
+		} else {
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "등록 오류");
+		}
+		return "common/alert";
+	}
+	
+	@GetMapping("/adevent/view.do")
+	public String adview(Model model, EventVO vo) {
+		model.addAttribute("vo", service.detail(vo, true));
+		return "adevent/view";
+	}
+	@GetMapping("/adevent/edit.do")
+	public String adedit(Model model, EventVO vo) {
+		model.addAttribute("vo", service.detail(vo, false));
+		return "adevent/edit";
+	}
+	@PostMapping("/adevent/update.do")
+	public String adupdate(Model model, HttpServletRequest request, EventVO vo, MultipartFile file) {
+		int r = service.update(vo, file, request);
+		if (r > 0) {
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "정상적으로 수정되었습니다.");
+			model.addAttribute("url", "index.do");
+		} else {
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "등록 오류");
+		}
+		return "common/alert";
+	}
+
+	@GetMapping("/adevent/delete.do")
+	public String addelete(Model model, HttpServletRequest request, EventVO vo, MultipartFile file) {
+		int r = service.delete(vo, request);
+		if (r > 0) {
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "정상적으로 삭제되었습니다.");
+			model.addAttribute("url", "index.do");
+		} else {
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "등록 오류");
+		}
+		return "common/alert";
+	}
 }
