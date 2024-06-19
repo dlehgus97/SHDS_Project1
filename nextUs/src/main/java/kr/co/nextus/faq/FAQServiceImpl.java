@@ -18,7 +18,7 @@ public class FAQServiceImpl implements FAQService {
 	private FAQMapper mapper;
 	
 	@Override
-	public int insert(FAQVO vo, HttpServletRequest request) {
+	public int insert(FAQVO vo) {
 
 		int r = mapper.insert(vo);
 
@@ -26,14 +26,14 @@ public class FAQServiceImpl implements FAQService {
 	}
 	
 	@Override
-	public int update(FAQVO vo, HttpServletRequest request) {
+	public int update(FAQVO vo) {
 		int r = mapper.update(vo);
 		return r;
 	}
 
 	@Override
-	public int delete(FAQVO vo, HttpServletRequest request) {
-
+	public int delete(FAQVO vo) {
+		System.out.println("Deleting FAQ with no: " + vo.getNo());
 		return mapper.delete(vo.getNo());
 	}
 

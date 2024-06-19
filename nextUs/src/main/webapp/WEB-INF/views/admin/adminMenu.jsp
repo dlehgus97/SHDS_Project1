@@ -91,9 +91,9 @@
 						
 						<li><a href="javascript:void(0)" aria-expanded="true"><i class="ti-slice"></i><span>고객센터</span></a>
 							<ul class="collapse">
-								<li><a href="/notice">공지사항</a></li>
+								<li><a href="/notice.do">공지사항</a></li>
 								<li><a href="/QnA">고객센터(Q&A)</a></li>
-								<li><a href="/FaQ">자주 묻는 질문(FAQ)</a></li>
+								<li><a href="/adfaq/index.do">자주 묻는 질문(FAQ)</a></li>
 								<li><a href="/event">이벤트</a></li>
 							</ul>
 						</li>
