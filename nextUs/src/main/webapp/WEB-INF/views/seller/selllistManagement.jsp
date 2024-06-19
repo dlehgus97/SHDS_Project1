@@ -124,7 +124,7 @@
             height: auto;
             max-height: 200px;
             object-fit: cover;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #ddd; #가로선 생성
         }
 
         .product-details {
@@ -222,6 +222,7 @@
                                 <h3>${sellproduct.title}</h3>
                                 <p>평균 별점: ${sellproduct.rating_avg}</p>
                                 <p>리뷰 개수: ${sellproduct.review_cnt}</p>
+                                <p>조회수: ${sellproduct.view_cnt}</p>
                                 <p>찜하기: ${sellproduct.like_count}</p>
                             </div>
                             <div class="button-container">

@@ -234,7 +234,6 @@
 					<span>신규 채팅: ${miniHeaderData.new_chat}</span>
 					<span>정산 신청 가능: ${miniHeaderData.settlement_eligible}</span>
                 </div>
-
                 <h1>리뷰 목록</h1>
                 <table>
                     <thead>
