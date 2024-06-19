@@ -11,4 +11,6 @@ public interface SellListService {
 	//관리자
 	List<SellListVO> all(SellListVO vo);
 	Map index(SellListVO vo);
+	
+	boolean deleteSelllist(int sellno);
 }

@@ -1,4 +1,4 @@
-package kr.co.nextus.coupon;
+package kr.co.nextus.buylist;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,25 +7,22 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import kr.co.nextus.coupon.CouponVO;
 
 
 @Service
-public class CouponServiceImpl implements CouponService {
+public class BuyListServiceImpl implements BuyListService {
 
 	@Autowired
-	private CouponMapper mapper;
-
+	private BuyListMapper mapper;
 	
-	//관리자페이지에서 동작
-	//쿠폰 리스트 출력
 	@Override
-	public Map list(CouponVO param) {
+	public Map<String, Object> list(BuyListVO param) {
 		int count = mapper.count(param); // 총개수
         // 총페이지수
         int totalPage = count / 10;
         if (count % 10 > 0) totalPage++;
-        List<CouponVO> list = mapper.list(param); // 목록
+        List<BuyListVO> list = mapper.list(param); // 목록
         
         Map<String, Object> map = new HashMap<>();
         map.put("count", count);
@@ -45,34 +42,6 @@ public class CouponServiceImpl implements CouponService {
 		return map;
 	}
 
-
-	@Override
-	public boolean createCoupon(CouponVO vo,List<String> memberEmails) {
-		int result=0;
-		for(String m : memberEmails) {
-			vo.setMemberEmail(m);
-			result += mapper.createCoupon(vo);
-		}
-		return result == 0 ? false : true;
-	}
-
-
-	@Override
-	public Map listAsName(CouponVO param,String name) {
-		param.setName(name);
-		List<CouponVO> list = mapper.listAsName(param);
-
-		Map<String, Object> map = new HashMap<>();
-
-		map.put("list", list);
-
-		
-		return map;
-	}
-
-	@Override
-	public List<CouponVO> listToMember(int no) {
-		return mapper.listToMember(no);
-	}
+	
 
 }

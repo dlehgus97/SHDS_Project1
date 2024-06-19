@@ -23,7 +23,7 @@ public class SellerRequestController {
 	
 
 	
-	@GetMapping({"/sellerRequestManagement","/adminMenu"})
+	@GetMapping("/sellerRequestManagement")
 	@RequestMapping("/sellerRequestManagement")
 	public String sellerRequestManagement(SellerRequestVO vo, Model model) {
 		model.addAttribute("sellerRequestMap", service.list(vo));

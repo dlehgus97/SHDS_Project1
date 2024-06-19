@@ -59,4 +59,9 @@
 		SELECT COUNT(*) FROM SELLLIST
 		<include refid="searchSql"/>
 	</select>
+	
+	<!-- 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM SELLLIST WHERE sellno = #{sellno}
+    </delete>
 </mapper>   

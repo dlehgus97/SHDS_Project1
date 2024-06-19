@@ -78,12 +78,7 @@
 						</li>
 						
 						
-						<li><a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i><span>정산관리</span></a>
-							<ul class="collapse">
-								<li><a href="/sellerSettlement">판매자 정산 내역</a></li>
-								<li><a href="/saleStatement">매출 통계</a></li>
-							</ul>
-						</li>
+						<li><a href="/sellerSettlement"><i class="fa fa-calculator"></i> <span>판매자 정산 내역</span></a></li>
 						
 						<li><a href="/productManagement"><i class="fa fa-table"></i> <span>상품관리</span></a></li>
 						<li><a href="/refundRequest"><i class="fa fa-table"></i> <span>환불관리</span></a></li>

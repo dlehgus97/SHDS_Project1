@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nextus.member.MemberService;
 import kr.co.nextus.member.MemberVO;
+import kr.co.nextus.sellerrequest.SellerRequestService;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 
 @Controller
 public class CouponController {
@@ -27,21 +29,26 @@ public class CouponController {
 	@Autowired
 	private MemberService Memberservice;
 	
+	@Autowired
+	private SellerRequestService SRservice;
+
+	
+	// 관리자에서하는겁니다요
 	@GetMapping("/couponManagement")
 	@RequestMapping("/couponManagement")
-	public String couponManagement(CouponVO vo, Model model) {
+	public String couponManagement(CouponVO vo,SellerRequestVO vo2, Model model) {
 		model.addAttribute("map", service.list(vo));
+		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
 		return "admin/memberManagement/couponManagement";
 	}
 	
-	// 관리자에서하는겁니다요
 	@GetMapping("/giveCoupon")
 	@RequestMapping("/giveCoupon")
-	public String giveCoupon(MemberVO vo, Model model) {
+	public String giveCoupon(MemberVO vo,SellerRequestVO vo2, Model model) {
 		model.addAttribute("memberlist", Memberservice.listAtOnce(vo));
+		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
 		return "admin/memberManagement/giveCoupon";
 	}
-	
 	
 	@PostMapping("/giveCoupon.do")
 	public String giveCoupon(CouponVO vo,Model model, @RequestParam List<String> memberEmails) {

@@ -26,14 +26,17 @@ table {
 	border-collapse: collapse;
 	font-size: 18px;
 }
-tr{
-	height:45px;
+
+tr {
+	height: 45px;
 }
+
 tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
-.mybutton{
-	margin-top:13px;
+
+.mybutton {
+	margin-top: 13px;
 }
 </style>
 </head>
@@ -43,7 +46,7 @@ tbody tr:hover {
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
-			<div class="main-content-inner" style="background-color:#485465;">
+			<div class="main-content-inner" style="background-color: #485465;">
 				<div class="row">
 					<div class="col-12 mt-5">
 						<div class="card">
@@ -89,9 +92,11 @@ tbody tr:hover {
 																value="${vo.postdate}" /></td>
 														<td>${vo.view_cnt != null ? vo.view_cnt : '0'}</td>
 														<td>
-															<button class="btn btn-flat btn-secondary mb-3 mybutton" type="button"
-																onclick="goToSellPage(${vo.sellno})">판매글 보기</button>&emsp;&emsp;
-															<button class="btn btn-flat btn-danger mb-3 mybutton" type="button">삭제</button>
+															<button class="btn btn-flat btn-secondary mb-3 mybutton linkButton"
+															type="button" onclick="goToSellPage(${vo.sellno})" >
+															판매글 보기</button>&emsp;&emsp;
+															<button class="btn btn-flat btn-danger mb-3 mybutton deleteButton"
+																type="button">삭제</button>
 														</td>
 													</tr>
 
@@ -121,11 +126,64 @@ tbody tr:hover {
 				</div>
 			</div>
 		</div>
-<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
 
+	<script>
+    $().ready(function () {
+        $(".deleteButton").click(function () {
+            var button = event.target;
+            var tr = button.closest('tr');
+            var sellno = tr.cells[0].innerText.trim(); // 첫 번째 셀의 내용을 가져옴
+            
+            Swal.fire({
+                title: '글을 삭제하겠습니까?',
+                text: '다시 되돌릴 수 없습니다.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소',
+            }).then(result => {
+                if (result.isConfirmed) {
+                    var deleteUrl = '/deleteSelllist/' + sellno;
+                    
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'POST',
+                        success: function(response) {
+                            if (response === 'success') {
+                            	 Swal.fire('삭제가 완료되었습니다.', '판매자가 서운하겠어요~!', 'success')
+                                 .then(function() {
+                                     location.reload(); // 확인 버튼을 누를 때 페이지 새로고침
+                                 });
+                            } else {
+                                Swal.fire('삭제 실패', '다시 시도해주세요.', 'error');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire('삭제 실패', '다시 시도해주세요.', 'error');
+                        }
+                    });
+                }
+            });
+        });
+        
+        $(".linkButton").click(function () {
+        	 var button = event.target;
+             var tr = button.closest('tr');
+             var sellno = tr.cells[0].innerText.trim(); // 첫 번째 셀의 내용을 가져옴
+        	
+             window.open('/selllist/view.do?no=' + sellno, '_blank');
+        });
+    });
+	</script>
 
-
+	<!-- alertdesign -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	<!-- bootstrap -->
 	<script
 		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<script

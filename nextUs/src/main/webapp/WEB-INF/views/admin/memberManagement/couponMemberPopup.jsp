@@ -34,6 +34,13 @@
 	tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
+.status-before-use {
+    color: blue; /* 사용 전일 때 글자 색상 */
+}
+
+.status-used {
+    color: red; /* 사용함일 때 글자 색상 */
+}
 </style>
 </head>
 <body>
@@ -61,8 +68,9 @@
 									<c:forEach var="vo" items="${map.list}">
 										<tr>
 											<td>${vo.memberEmail != null ? vo.memberEmail : '(미입력)'}</td>
-											<td>${vo.status == 1?"사용 전":"사용함"}</td>
-											<!-- 여기 뭔가 표현 바꿔야할듯 -->
+											<td class="${vo.status == 1 ? 'status-before-use' : 'status-used'}">
+    											${vo.status == 1 ? '사용 전' : '사용함'}
+											</td>
 										</tr>
 
 									</c:forEach>

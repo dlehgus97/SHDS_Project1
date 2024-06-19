@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.member.MemberVO;
+import kr.co.nextus.sellerrequest.SellerRequestService;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 
 
 @Controller
@@ -24,20 +26,16 @@ public class AdminController {
 
 	@Autowired
 	private AdminService service;
+	@Autowired
+	private SellerRequestService SRservice;
 	
 	@RequestMapping("/adminMain")
-	public String adminMain() {
+	public String adminMain(SellerRequestVO vo, Model model) {
+		model.addAttribute("sellerRequestMap", SRservice.list(vo));
 		return "adminMain";
 	}
 	
-	@RequestMapping("/sellerSettlement")
-	public String sellerSettlement() {
-		return "admin/adjustManagement/sellerSettlement";
-	}
-	@RequestMapping("/saleStatement")
-	public String saleStatement() {
-		return "admin/adjustManagement/saleStatement";
-	}
+	
 
 	
 	

@@ -11,9 +11,9 @@ function openPopup(event) {
     
    			var no = tr.cells[0].innerText;
 			
-    		var popupUrl='/refundPopup.do'
+    		var popupUrl='/refundReceipt.do'
 
     		console.log(popupUrl+"?no=" +no);
-            window.open(popupUrl+"?no=" +no, "refundPopup", `width=${popupWidth},height=${popupHeight},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+            window.open(popupUrl+"?no=" +no, "refundReceipt", `width=${popupWidth},height=${popupHeight},left=${left},top=${top},resizable=yes,scrollbars=yes`);
             console.log('open');
 }

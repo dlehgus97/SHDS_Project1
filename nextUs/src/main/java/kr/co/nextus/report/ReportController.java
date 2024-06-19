@@ -17,33 +17,39 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.event.EventVO;
 import kr.co.nextus.member.MemberVO;
+import kr.co.nextus.seller.SellerService;
+import kr.co.nextus.sellerrequest.SellerRequestService;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 
 @Controller
 public class ReportController {
 
 	@Autowired
 	private ReportService service;
-	
+	@Autowired
+	private SellerRequestService SRservice;
+
 	@PostMapping("/report/insert.do")
 	public String insert(Model model, HttpServletRequest request, ReportVO vo) {
 		HttpSession sess = request.getSession();
-		MemberVO login = (MemberVO)sess.getAttribute("login");
+		MemberVO login = (MemberVO) sess.getAttribute("login");
 		int r = service.insert(vo, request);
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
-			model.addAttribute("url", "/selllist/view.do?no="+vo.getSellno());
+			model.addAttribute("url", "/selllist/view.do?no=" + vo.getSellno());
 		} else {
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "등록 오류");
 		}
 		return "common/alert";
 	}
-	
+
 	@GetMapping("/report.do")
 	@RequestMapping("/report")
-	public String memberStatus(ReportVO vo, Model model) {
+	public String memberStatus(ReportVO vo,SellerRequestVO vo2, Model model) {
 		model.addAttribute("map", service.list(vo));
+		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
 		return "admin/reports/report";
 	}
 }

@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.nextus.sellerrequest.SellerRequestService;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.util.SendMail;
 
 
@@ -34,10 +36,11 @@ public class MemberController {
 
 
     @Autowired
-
     private MemberService service; // MemberService 주입 설정 필요
 
-
+    @Autowired
+    private SellerRequestService SRservice;
+    
     @GetMapping("/member/login.do")
     public void login() {
 
@@ -277,21 +280,24 @@ public class MemberController {
     // 관리자에서하는겁니다요
     @GetMapping("/memberStatus.do")
     @RequestMapping("/memberStatus")
-    public String memberStatus(MemberVO vo, Model model) {
+    public String memberStatus(MemberVO vo, SellerRequestVO vo2,Model model) {
         model.addAttribute("map", service.list(vo));
+        model.addAttribute("sellerRequestMap", SRservice.list(vo2));
         return "admin/memberManagement/memberStatus";
     }
 
     @RequestMapping("/addBanPopupMember")
-    public String addBanPopupMember(MemberVO vo, Model model) {
+    public String addBanPopupMember(MemberVO vo, SellerRequestVO vo2,Model model) {
         model.addAttribute("map", service.reportCountList(vo, 0));
+        model.addAttribute("sellerRequestMap", SRservice.list(vo2));
         return "admin/memberManagement/addBanPopupMember";
 
     }
 
     @RequestMapping("/addBanPopupSeller")
-    public String addBanPopupSeller(MemberVO vo, Model model) {
+    public String addBanPopupSeller(MemberVO vo,SellerRequestVO vo2, Model model) {
         model.addAttribute("map", service.reportCountList(vo, 1));
+        model.addAttribute("sellerRequestMap", SRservice.list(vo2));
         return "admin/sellerManagement/addBanPopupSeller";
     }
 }

@@ -15,4 +15,7 @@ public interface SellListMapper {
     int count(SellListVO param);
 	List<SellListVO> all(SellListVO vo);
 	List<SellListVO> list2(SellListVO vo);
+
+
+	boolean delete(int sellno);
 }
