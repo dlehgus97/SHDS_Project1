@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +80,7 @@
 	                <div class="col">
 	                  <!-- Title -->
 	                  <div class="d-flex mb-2 fw-bold">
-	                    <a class="text-body" href="../selllist/view.do?no=${vo.sellno }">${vo.title}</a> <span class="ms-auto">${vo.price}원</span>
+	                    <a class="text-body" href="../selllist/view.do?no=${vo.sellno }">${vo.title}</a> <span class="ms-auto"><fmt:formatNumber value="${vo.price}" type="currency" currencySymbol=""/>원</span>
 	                  </div>
 	
 	                  <!-- Text -->
@@ -111,11 +112,12 @@
 	            <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
 	              <li class="list-group-item d-flex">
 	                <span>장바구니 총 금액</span>
-	                <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }">${total }원</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
+	                <span id="subtotal" class="ms-auto fs-sm" data-subtotal="${total }"><fmt:formatNumber value="${total}" type="currency" currencySymbol=""/>원</span> <!-- data-subtotal 속성 추가 및 소수점 제거 -->
 	              </li>
 	              <li class="list-group-item d-flex fs-lg fw-bold">
 	                <span>선택상품 총 금액</span>
-	                <span id="total" class="ms-auto fs-sm">${total }원</span>
+	                <span id="total" class="ms-auto fs-sm"><fmt:formatNumber value="${total}" type="currency" currencySymbol=""/></span>
+	                <span id="won">원</span>
 	              </li>
 	              <li class="list-group-item fs-sm text-center text-gray-500">
 	                구매하시기를 원하신다면<br>
@@ -184,25 +186,27 @@
 	    });
 	</script>
 	  <script>
-	    $(document).ready(function() {
-	      // 체크박스가 변경될 때마다 호출되는 함수
-	      function updateSelectedTotal() {
-	        let selectedTotal = 0;
-	        // 체크된 체크박스의 가격을 합산
-	        $(".product-checkbox:checked").each(function() {
-	          let price = parseFloat($(this).closest("li").find(".fw-bold .ms-auto").text());
-	          selectedTotal += price;
-	        });
-	        // 합산된 가격을 '선택상품 총 금액'에 표시 (소수점 제거)
-	        $("#total").text(Math.floor(selectedTotal));
-	      }
-	
-	      // 페이지 로드 시 초기화
-	      updateSelectedTotal();
-	
-	      // 체크박스 상태가 변경될 때마다 updateSelectedTotal 함수 호출
-	      $(".product-checkbox").change(updateSelectedTotal);
-	    });
+    	$(document).ready(function() {
+    		  // 체크박스가 변경될 때마다 호출되는 함수
+    		  function updateSelectedTotal() {
+    		    let selectedTotal = 0;
+    		    // 체크된 체크박스의 가격을 합산
+    		    $(".product-checkbox:checked").each(function() {
+    		      let priceText = $(this).closest("li").find(".fw-bold .ms-auto").text();
+    		      // 쉼표와 화폐 기호를 제거하고 숫자로 변환
+    		      let price = parseFloat(priceText.replace(/[^0-9.-]+/g,""));
+    		      selectedTotal += price;
+    		    });
+    		    // 합산된 가격을 '선택상품 총 금액'에 표시
+    		    $("#total").text(selectedTotal.toLocaleString());
+    		  }
+
+    		  // 페이지 로드 시 초기화
+    		  updateSelectedTotal();
+
+    		  // 체크박스 상태가 변경될 때마다 updateSelectedTotal 함수 호출
+    		  $(".product-checkbox").change(updateSelectedTotal);
+    		});
 	  </script>
 	  <script>
 	        document.addEventListener("DOMContentLoaded", function() {

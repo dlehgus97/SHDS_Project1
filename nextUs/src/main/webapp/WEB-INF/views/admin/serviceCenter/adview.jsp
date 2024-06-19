@@ -18,7 +18,13 @@
 	<link rel="stylesheet" href="/resources/css/reset.css"/>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<link rel="stylesheet" href="/resources/css/contents.css"/>
- 
+    <script>
+        function confirmDelete(no) {
+            if (confirm('삭제하시겠습니까?')) {
+                window.location.href = 'deleteNotice.do?no=' + no;
+            }
+        }
+    </script>
 </head> 
 <body>
     <div class="wrap">
@@ -38,7 +44,7 @@
                             <div class="fl_l">
                             	<a href="../notice.do" class="btn">목록</a>
                             	<a href="adedit.do?no=${vo.no}" class="btn">수정</a>
-                            	<a href="deleteNotice.do?no=${vo.no}" class="btn">삭제</a>
+                            	<a href="javascript:void(0);" onclick="confirmDelete(${vo.no})" class="btn">삭제</a>
                             </div>
                         </div>
                     </div>
