@@ -11,12 +11,12 @@ public class PaymentVO {
     private int totalAmount;
     private String currency;
     private String payMethod;
-//    private Customer customer;
+    private Customer customer;
 }
 
-//@Data
-//public class Customer {
-//    private String fullName;
-//    private String phoneNumber;
-//    private String email;
-//}
+@Data
+class Customer {
+    private String fullName;
+    private String phoneNumber;
+    private String email;
+}

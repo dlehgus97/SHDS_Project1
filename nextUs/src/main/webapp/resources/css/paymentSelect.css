@@ -1,6 +1,6 @@
 @charset "UTF-8";
-input {
-
+button {
+    transition: background-color 0.2s ease;
 }
 h3 {
 	display: block;
@@ -46,11 +46,35 @@ h3 {
     font-size: 14px;
 }
 
+#zipcode {
+	width: 10%;
+	height: 30px;
+    font-size: 14px;
+}
+
+#memberAddr1 {
+	width: 68%;
+	height: 30px;
+    font-size: 14px;
+}
+
+#call_userInfo, #set_addr {
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px #000 solid;
+    background-color: #fff;
+}
+
+#coupon_select {
+	top: 0px;
+    width: 150px;
+    height: 40px;
+}
+
 #coupon_confirm_button {
     background-color: #fff;
-    border-radius: 20px;
-    width: 60px;
-    height: 20px;
+    padding: 10px;
+    border: 1px #000 solid;
 }
 
 #payment_right_container {
@@ -72,10 +96,6 @@ h3 {
 }
 
 .products {
-	border-top: 1px solid gray;
-    border-right: 0px solid gray;
-    border-bottom: 1px solid gray;
-    border-left: 0px solid gray;
     display: flex;
     padding: 10px;
     align-items: center;
@@ -96,6 +116,8 @@ h3 {
     background-color: white;
     width: 80%;
     height: 50px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .thumbnail_container {

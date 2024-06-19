@@ -1,9 +1,9 @@
 package kr.co.nextus.payment;
 
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Mapper;
 
-@Service
-public interface PaymentService {
+@Mapper
+public interface PaymentMapper {
 	void insert(PaymentVO vo);
 	void couponUse(PaymentVO vo);
 }

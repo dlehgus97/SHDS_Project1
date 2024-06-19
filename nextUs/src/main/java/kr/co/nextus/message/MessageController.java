@@ -47,11 +47,12 @@ public class MessageController {
 		//채팅내역 가져와야하고
 		int myno = vo.getNo();
 		List<MessageVO> list = service.detail(chatno, myno);
+		model.addAttribute("sellno", list.get(0).getSellno());
+		list.remove(0);
 		model.addAttribute("list", list);
 		//프사 가져와야하고
 		//닉네임
 		//읽음처리
-		model.addAttribute("sellno", list.get(0).getSellno());
 		service.update(chatno, myno);
 		System.out.println(list);
 		System.out.println(chatno+"상대방");

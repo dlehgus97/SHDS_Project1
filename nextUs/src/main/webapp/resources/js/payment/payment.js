@@ -9,6 +9,43 @@ function getBasicInfo() {
     $('#memberAddr1').val(loginAddr1);
     $('#memberAddr2').val(loginAddr2);
 }
+// 마우스 오버 이벤트
+$(document).ready(function() {
+    // 모든 버튼 요소를 선택하고 마우스오버 이벤트 추가
+    $('button').hover(
+        function() {
+            // 마우스오버 시 수행할 작업 작성
+            console.log('Mouse over on button:', this);
+            $(this).css('background-color', '#f9dbff'); // 예: 배경색 변경
+        }, 
+        function() {
+            // 마우스가 버튼에서 벗어날 때 수행할 작업
+            $(this).css('background-color', 'white'); // 원래 배경색 복원
+        }
+    );
+});
+
+//주소 재설정
+function zipcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+            $('#zipcode').val(data.zonecode);
+            $('#memberAddr1').val(roadAddr);
+        }
+    }).open();
+}
 
 // <!-- 쿠폰 정보 불러오기-->
 $(document).ready(function() {
@@ -43,6 +80,7 @@ function confirmCoupon() {
     const selectedCoupon = selectedOption.text;
     const couponType = $(selectedOption).data('type');
     const couponDiscount = $(selectedOption).data('discount');
+    data.couponNo = selectedOption.value;
     
     // input 필드에 선택된 쿠폰을 설정
     appliedCouponInput.value = selectedCoupon;
@@ -64,6 +102,7 @@ function confirmCoupon() {
     total.textContent = (productPrice - discountPrice) + '원';
     
     // 총 결제 금액을 data 객체에 업데이트
+    // 현재는 결제금액을 100원으로 고정시키기 위해 업데이트 하지 않음
     //data.totalAmount = totalPrice;
 }
 
@@ -104,9 +143,10 @@ const data = {
 		fullName: "",
 		phoneNumber: "",
 		email: "",
-	}
+	},
+	couponNo: ""
 };
-/*
+
 async function requestPayment() {
 	// 입력 필드의 값을 data 객체에 설정
     data.customer.fullName = $('#memberName').val();
@@ -135,4 +175,4 @@ async function requestPayment() {
 		console.log(response.code);
 	}
 	
-}*/
+}

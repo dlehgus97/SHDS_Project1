@@ -21,8 +21,8 @@ import kr.co.nextus.cart.CartVO;
 @Controller
 public class PaymentController {
 
-//	@Autowired
-//	private PaymentService service;
+	@Autowired
+	private PaymentService service;
 	
 	//결제방식 선택화면
 	@GetMapping("/payment/paymentSelect")
@@ -46,9 +46,10 @@ public class PaymentController {
     }
 	
 	@PostMapping("/payment/paySuccess")
-	public String paySuccess(@RequestBody PaymentVO vo) {
-//		System.out.println(vo.getFullName());
+	@ResponseBody
+	public PaymentVO paySuccess(@RequestBody PaymentVO vo) {
+		System.out.println(vo.getCustomer().getFullName());
 		System.out.println(vo.getPaymentId());
-		return "index.do";
+		return vo;
 	}
 }

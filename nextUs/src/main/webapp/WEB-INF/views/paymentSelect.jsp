@@ -54,6 +54,7 @@
 		<div id="payment_left_container">
 			<div id="product_detail" class="payment_border">
 				<h2>주문 상품 정보</h2>
+				<hr style="margin: 10px 0;">
 				<!-- 주문 상품 상세 불러오기 필요-->
 				<c:forEach var="cartVO" items="${selectedProducts }">
 					<div class="products">
@@ -73,24 +74,28 @@
 							<p class="price">${cartVO.price }원</p>
 						</div>
 					</div>
+					<hr style="margin: 10px 0;">
 				</c:forEach>
 			</div>
 			<div id="costomer_info_container" class="payment_border">
 				<h2>주문자 정보</h2>
 				<!-- 주문자 정보 불러오기 필요-->
+				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 				<div id="info_detail">
 					<p style="font-weight: bold;">주문자 성함</p>
-					<input type="text" id="memberName" class="info_size" readonly><br>
-					<p style="font-weight: bold;">휴대폰 번호</p>
-					<input type="text" id="memberHp"  class="info_size" size="80%" readonly><br>
+					<input type="text" id="memberName" class="info_size"><br>
+					<p style="font-weight: bold;">휴대폰 번호 (- 제외 입력)</p>
+					<input type="text" id="memberHp"  class="info_size" size="80%"><br>
 					<p style="font-weight: bold;">이메일</p>
-					<input type="text" id="memberEmail"  class="info_size" size="80%" readonly><br>
+					<input type="text" id="memberEmail"  class="info_size" size="80%"><br>
 					<p style="font-weight: bold;">주소</p>
-					<input type="text" id="memberAddr1"  class="info_size" size="80%" readonly><br>
+					<input type="text" id="zipcode" readonly>
+					<input type="text" id="memberAddr1" readonly><br>
 					<p style="font-weight: bold;">상세주소</p>
-					<input type="text" id="memberAddr2"  class="info_size" size="80%" readonly><br>
-					<button onclick="getBasicInfo()">기본 정보 불러오기</button>
-					<!-- script for get memberInfo -->
+					<input type="text" id="memberAddr2"  class="info_size" size="80%"><br>
+					<button id="set_addr" onclick="zipcode()">주소 재설정</button>
+					<button id="call_userInfo" onclick="getBasicInfo()">기본 정보 불러오기</button>
+					<b>결제 전 주소를 한번 더 확인해주세요.</b>
 				</div>
 			</div>
 			<div id="coupon_container" class="payment_border">
