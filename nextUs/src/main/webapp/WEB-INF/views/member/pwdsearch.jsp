@@ -2,72 +2,149 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head> 
+<head>
     <meta charset="utf-8">
-    <title></title>
-    <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
+    <title>아이디 찾기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/resources/css/reset.css"/>
     <link rel="stylesheet" href="/resources/css/style.css"/>
     <link rel="stylesheet" href="/resources/css/contents.css"/>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/footer.css"/>
+    <style>
+        .sub {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .sub_title {
+            text-align: center;
+        }
+        .box {
+            text-align: center;
+        }
+        .id_search_form {
+            text-align: center;
+        }
+    </style>   
+    <script type="text/javascript">
+        function validateEmail(email) {
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        function validateForm() {
+            var email = $("#email").val();
+            if (!email) {
+                alert("이메일을 입력해주세요.");
+                return false;
+            } else if (!validateEmail(email)) {
+                alert("유효한 이메일 형식을 입력해주세요.");
+                return false;
+            }
+            return true;
+        }
+
+        function sendEmailVerification() {
+            if (!validateForm()) {
+                return;
+            }
+
+            var email = $("#email").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "/member/findAuth.do",
+                data: {
+                    email: email
+                },
+                success: function(response) {
+                    if (response.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '입력하신 이메일로 인증번호를 전송했습니다.',
+                            returnFocus: false
+                        });
+                        $("#verificationCodeArea").show();
+                        $("#result").text("이메일 인증 코드를 입력해주세요.");
+                        $("#emailVerificationButton").text("재인증 요청"); // 버튼 텍스트 변경
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '오류',
+                            text: response.error,
+                            returnFocus: false
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '서버 오류',
+                        text: '서버와의 통신 중 오류가 발생했습니다.',
+                        returnFocus: false
+                    });
+                }
+            });
+        }
+
+        function verifyCode() {
+            var code = $("#verificationCode").val();
+            var sessionCode = "<%= session.getAttribute("verificationCode") %>";
+
+            if (code === sessionCode) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '인증에 성공했습니다!',
+                    returnFocus: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "resPWD.do?email=" + $("#email").val();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '인증 실패',
+                    text: '잘못된 인증번호입니다.',
+                    returnFocus: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#verificationCode").val('');
+                        $("#verificationCode").focus();
+                    }
+                });
+            }
+        }
+    </script>
 </head>
 <body>
-	<div class="wrap">
-		<%@ include file="/WEB-INF/views/include/header.jsp" %>
-    
-	    <h2>아이디 찾기 - 이메일 인증</h2>
-	    
-	    <form id="emailForm">
-	        <label for="email">이메일:</label>
-	        <input type="email" id="email" name="email" required>
-	        <button type="button" onclick="sendEmailVerification()">이메일 인증 요청</button>
-	    </form>
-	    
-	    <div id="verificationCodeArea" style="display: none;">
-	        <label for="verificationCode">인증 코드:</label>
-	        <input type="text" id="verificationCode" name="verificationCode" required>
-	        <button type="button" onclick="verifyCode()">인증 확인</button>
-	    </div>
-	
-	    <div id="result"></div>
-	
-	    <script>
-	        function sendEmailVerification() {
-	            var email = document.getElementById('email').value;
-	
-	            // 이메일을 서버로 보내고 이메일로 인증 코드를 보내는 작업을 수행해야 합니다.
-	            // 여기서는 간단하게 콘솔에 인증 코드를 출력하는 것으로 대체합니다.
-	            var verificationCode = generateVerificationCode();
-	            console.log("인증 코드:", verificationCode);
-	
-	            // 이메일 인증 코드 입력 폼을 표시합니다.
-	            document.getElementById('verificationCodeArea').style.display = 'block';
-	        }
-	
-	        function generateVerificationCode() {
-	            // 간단하게 랜덤한 6자리 숫자로 인증 코드를 생성합니다.
-	            return Math.floor(100000 + Math.random() * 900000);
-	        }
-	
-	        function verifyCode() {
-	            var verificationCode = document.getElementById('verificationCode').value;
-	
-	            // 이메일로 전송된 인증 코드와 사용자가 입력한 코드를 비교합니다.
-	            // 여기서는 간단하게 콘솔에 출력하여 확인합니다.
-	            console.log("사용자가 입력한 인증 코드:", verificationCode);
-	
-	            // 여기에 서버로 인증 코드를 전송하여 확인하는 작업을 수행해야 합니다.
-	            // 인증이 성공하면 아이디를 찾는 프로세스를 진행하거나, 사용자에게 알려줍니다.
-	            // 인증이 실패하면 사용자에게 오류 메시지를 표시합니다.
-	        }
-	    </script>
-	      
-		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
-	</div>
+    <div class="wrap">
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
+        <div class="sub">
+            <h3 class="sub_title">아이디 찾기</h3>
+            <div class="box">
+                <fieldset class="id_search_form">
+                    <form id="idsearchForm" name="idsearchForm" onsubmit="return validateForm();">
+                        <ul>
+                            <li><input type="text" id="email" name="email" placeholder="이메일" value="${MemberVO.email != null ? MemberVO.email : ''}"></li>
+                        </ul>
+                        <div class="search_btn">
+                            <button type="button" id="emailVerificationButton" onclick="sendEmailVerification()">이메일 인증 요청</button>
+                        </div>
+                        <div id="verificationCodeArea" style="display: none;">
+                            <label for="verificationCode">인증 코드:</label>
+                            <input type="text" id="verificationCode" name="verificationCode" required>
+                            <button type="button" onclick="verifyCode()">인증 확인</button>
+                        </div>
+                        <div id="result"></div>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+        <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    </div>
 </body>
 </html>

@@ -18,7 +18,7 @@ public interface MemberService {
 
     int update(MemberVO vo);
 
-    boolean findid(MemberVO vo);
+    MemberVO findId(MemberVO vo);
 
     MemberVO findByEmail(String email);
 
@@ -32,5 +32,7 @@ public interface MemberService {
 	Map<String, Object> reportCountList(MemberVO vo,int isSeller);
 
 	int sellerRegist(int no);
+
+	
 	
 }

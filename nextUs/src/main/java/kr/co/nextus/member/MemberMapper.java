@@ -22,7 +22,7 @@ public interface MemberMapper {
     int update(MemberVO vo);
 
     // 아이디 찾기
-    int findid(MemberVO vo);
+    MemberVO findid(MemberVO vo);
 
     // 이메일로 회원 정보 조회
     MemberVO findByEmail(String email);

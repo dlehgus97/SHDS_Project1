@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>네이버 로그인 예제</title>
+<title>네이버 로그인</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script>
@@ -30,8 +30,9 @@ window.addEventListener('load', function () {
                 data: {"email": email, "nickname": nickName, "id": id},
                 dataType: 'text',
                 success: function(result) {
+                	console.log(result);
                     if (result === 'true') {
-                        location.href = "/index.do"; // 가입된 회원일 경우 메인 페이지로 이동
+                    	location.href = "/index.do"; // 가입된 회원일 경우 메인 페이지로 이동
                     } else if (result === 'false') {
                         alert('가입되지 않은 회원입니다');
                         location.href = '/member/login.do'; // 가입되지 않은 회원일 경우 회원가입 페이지로 이동

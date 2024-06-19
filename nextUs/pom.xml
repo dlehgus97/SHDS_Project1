@@ -239,6 +239,14 @@
 	    	<artifactId>spring-social-google</artifactId>
             <version>1.0.0.RELEASE</version>
     	</dependency>
+    	
+    	<!-- 이메일 -->
+    	<dependency>
+	    	<groupId>org.springframework</groupId>
+	    	<artifactId>spring-context-support</artifactId>
+            <version>5.2.25.RELEASE</version>
+    	</dependency>	
+    	
 </dependencies>
     <build>
         <plugins>

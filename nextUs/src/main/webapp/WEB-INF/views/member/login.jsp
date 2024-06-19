@@ -18,10 +18,16 @@
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/footer.css"/>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-    
-
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>         
         $(document).ready(function() {
+            // 페이지 로드 시, 쿠키에 저장된 아이디가 있는지 확인하여 입력 필드에 넣기
+            var savedEmail = getCookie("savedEmail");
+            if (savedEmail !== "") {
+                $("#email").val(savedEmail);
+                $("#reg1").prop("checked", true); // 체크박스 체크 상태로 만들기
+            }
+
             $("#board1").submit(function() {
                 if ($("#email").val() == '') {
                     alert("이메일을 입력해 주세요");
@@ -33,10 +39,18 @@
                     $("#pwd").focus();
                     return false;
                 }
+                // 아이디 저장 체크박스 확인 후 쿠키에 저장
+                if ($("#reg1").is(":checked")) {
+                    var email = $("#email").val();
+                    setCookie("savedEmail", email, 30); // 쿠키 유효기간을 30일로 설정
+                } else {
+                    deleteCookie("savedEmail"); // 체크 해제 시 쿠키 삭제
+                }
                 saveEmail();
                 return true;
             });
 
+            // 네이버 로그인 초기화
             var naverLogin = new naver.LoginWithNaverId({
                 clientId: "qNDkrOO7CvCTWUbSRCJS",
                 callbackUrl: "http://localhost:8090/member/callback",
@@ -45,8 +59,34 @@
             });
 
             naverLogin.init(); /* 설정정보를 초기화하고 연동을 준비 */
+
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return "";
+            }
+
+            function deleteCookie(name) {
+                document.cookie = name + '=; Max-Age=-99999999;';
+            }
         });
     </script>
+    
 </head> 
 <body>
     <div class="wrap">

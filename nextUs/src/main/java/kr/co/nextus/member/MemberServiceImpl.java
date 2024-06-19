@@ -41,8 +41,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean findid(MemberVO vo) {
-        return mapper.findid(vo) == 1; // 아이디 찾기 성공 여부 반환
+    public MemberVO findId(MemberVO vo) {
+    	return mapper.findid(vo);
+         // 결과가 null이 아니면 true 반환
     }
 
     @Override
