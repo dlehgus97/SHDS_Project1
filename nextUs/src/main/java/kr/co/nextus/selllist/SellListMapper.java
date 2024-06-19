@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface SellListMapper {
-    SellListVO detail(int no);
+	SellListVO detail(SellListVO vo);
     
     
     List<SellListVO> list(SellListVO vo);

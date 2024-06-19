@@ -46,18 +46,45 @@ document.addEventListener("DOMContentLoaded", function() {
     setDataValue(ratingDivs2, ratingAvgInt); // 두 번째 클래스 조합 요소들의 data-value 설정
 });
 </script>
-<script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function() {
-            // 버튼 클릭 이벤트 핸들러
-            document.getElementById("cart_add_btn").addEventListener("click", function(event) {
-                alert('장바구니에 담겼습니다');
-                // 폼을 실제로 전송하고 싶다면 아래 주석을 제거합니다.
-                // document.getElementById("cart_form").submit();
-                // 폼 전송을 막고 싶다면 아래 주석을 제거합니다.
-                // event.preventDefault();
-            });
-        });
-    </script>
+<!-- 폼 제출 js -->
+<script>
+
+	function addcart() {
+		if (${login == null}) {
+			if (confirm('로그인 후 이용 가능합니다. 로그인 하시겠습니까?')) {
+	            window.location.href = '/member/login.do';
+	        }
+    	} else {
+    		
+    		$.ajax({
+	            url: '/cart/checkcart.do',
+	            type: 'GET',
+	            data: {
+	            	sellno: ${vo.sellno},
+	            	optionno: getSelectedOptionValue()
+	            },
+	            success: function(response) {
+	            	if(response === 'success') {
+	            		alert('장바구니에 담겼습니다');
+	            	} else {
+	            		alert('이미 장바구니에 담긴 상품입니다.');
+	            	}
+	            	
+	                
+	            },
+	            error: function(xhr, status, error) {
+	            	alert('서버와의 통신에 문제가 발생했습니다.');
+	            }
+	          });
+    		
+    	}
+
+	}
+
+	
+</script>
+
+
 </head>
 <body>
 <%-- <h1> 판매글예시 </h1>
@@ -239,13 +266,30 @@ document.addEventListener("DOMContentLoaded", function() {
 					    updatePriceAndDescription('BRONZE');
 					  });
 					</script>
-                    
+					<!-- 선택된 옵션 값이 장바구니에 있는지 확인하기 위해 필요 -->
+					<script>
+					  function getSelectedOptionValue() {
+					    const selectedOption = document.querySelector('input[name="optionno"]:checked');
+					    if (selectedOption) {
+					      const selectedValue = selectedOption.value;
+					      console.log("Selected Option Value: " + selectedValue);
+					      return selectedValue;
+					    } else {
+					      console.log("No option selected.");
+					      return null;
+					    }
+					  }
+
+					</script>
+					
+					<!-- 로그인한 사용자와 이 글의 셀러가 같은 사람이 아니면 -->
+                    <c:if test="${vo.seller != login.no}">
                     <div class="row gx-5 mb-7">
                       <div class="col-12 col-lg">
 
                         <!-- Submit -->
-                        <button type="submit" class="btn w-100 btn-dark mb-2" id="cart_add_btn">
-                          장바구니에 담기
+                        <button type="button" class="btn w-100 btn-dark mb-2" id="cart_add_btn" onclick="addcart();">
+                          장바구니에 담기 ${login.no}
                         </button>
 
                       </div>
@@ -255,8 +299,8 @@ document.addEventListener("DOMContentLoaded", function() {
                       <!-- Wishlist -->
 					  <c:choose>
 					    <c:when test="${iswishlist == 0}">
-					      <a href="javascript:insertwishlist();" class="btn btn-outline-dark w-100 mb-2" role="button" style="background-color: white;">
-					        <img src="/resources/imgs/heart.png" alt="Image" width="30px" height="30px">
+					      <a href="javascript:insertwishlist();" class="btn btn-outline-dark w-100 mb-2" role="button" style="background-color: black;">
+					        <img src="/resources/imgs/heartwhite.png" alt="Image" width="30px" height="30px">
 					      </a>
 					    </c:when>
 					    <c:otherwise>
@@ -289,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function() {
 							</script>
                       
                     </div>
-                    
+                    </c:if>
                     <!-- 찜 삭제 js -->
 							<script type="text/javascript">
 								function deletewishlist() {
@@ -312,6 +356,9 @@ document.addEventListener("DOMContentLoaded", function() {
 							</script>
                       
                     </div>
+                    
+                    
+                    <c:if test="${vo.seller != login.no}">
                     <style>
 					  #checkoutButton {
 					    background-color: blue;
@@ -330,13 +377,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                     </div>
 
-                    판매글 신고하기
+                    
                     </form>
+                    판매글 신고하기
                     <!-- 신고 버튼 -->
 	                <a data-bs-toggle="collapse" href="#singoForm">
 	                  <img src="/resources/imgs/singo.jpg" alt="Image" width="30px" height="30px">
 	                </a>
-	            
+	            	</c:if>
 	                <!-- 신고 작성 폼 -->
 		            <!-- New Review -->
 		            <div class="collapse" id="singoForm">
@@ -463,8 +511,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         <!-- List -->
                         <ul class="list-unstyled text-gray-500">
-                          <li>이 판매자의 평균 별점: <fmt:formatNumber value="${vo.rating_avg}" type="number" minFractionDigits="1" maxFractionDigits="1" />점</li>
-                          <li>총 리뷰 수: ${vo.review_cnt }개</li>
+                          <li>이 판매자의 평균 별점: <fmt:formatNumber value="${vo.sellerrating_avg}" type="number" minFractionDigits="1" maxFractionDigits="1" />점</li>
+                          <li>총 리뷰 수: ${vo.sellerreview_cnt }개</li>
                         </ul>
                       </div>
                     </div>
@@ -591,6 +639,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	        // 해당 ID를 가진 요소로 스크롤
 	        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
 	      }
+	      
+	      const data = {
+	    		  memberno: "",
+	    		  sellno: ""
+	      }
 	    };
 	  </script>
     <!-- REVIEWS -->
@@ -600,22 +653,13 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="col-12">
 
             <!-- Heading -->
-            <h4 class="mb-10 text-center">리뷰</h4>
+            <h4 class="mb-10 text-center">리뷰 ${vo.isreview}</h4>
 
             <!-- Header -->
             <div class="row align-items-center">
               <div class="col-12 col-md-auto">
 
-                <!-- Dropdown -->
-                <div class="dropdown mb-4 mb-md-0">
 
-                  <!-- Toggle -->
-                  <a class="dropdown-toggle text-reset" >
-                    <strong>정렬기준: 최신순</strong>
-                  </a>
-
-
-                </div>
 
               </div>
               <div class="col-12 col-md text-md-center">
@@ -645,6 +689,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <strong class="fs-sm ms-2">Reviews (${vo.review_cnt })</strong>
 
               </div>
+              <c:if test="${vo.isreview > 0}">
               <div class="col-12 col-md-auto">
 
                 <!-- Button -->
@@ -654,6 +699,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 </a>
 
               </div>
+              </c:if>
+              
             </div>
 
             <!-- 리뷰 작성 폼 -->
@@ -939,6 +986,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	<!-- Theme JS -->
 	<script src="/resources/js/board/theme.bundle.js"></script>
+	
+	
 
 </body>
 </html>

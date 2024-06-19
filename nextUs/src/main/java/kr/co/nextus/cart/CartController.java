@@ -22,6 +22,17 @@ public class CartController {
 	@Autowired
 	private CartService service;
 	
+	@GetMapping("/cart/checkcart.do")
+	@ResponseBody
+	public String check(Model model, HttpServletRequest request, @RequestParam("sellno") int sellno, @RequestParam("optionno") int optionno) {
+		HttpSession sess = request.getSession();
+		MemberVO login = (MemberVO)sess.getAttribute("login");
+		int memberno = login.getNo();		
+		int r = service.check(memberno, sellno, optionno);
+		return r > 0 ? "fail" : "success";
+	}
+	
+	
 	@GetMapping("/cart/insert.do")
 	public String insert(Model model, HttpServletRequest request, @RequestParam("sellno") int sellno, @RequestParam("optionno") int optionno, RedirectAttributes redirectAttributes) {
 		HttpSession sess = request.getSession();

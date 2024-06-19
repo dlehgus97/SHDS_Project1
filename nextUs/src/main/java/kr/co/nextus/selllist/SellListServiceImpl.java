@@ -21,8 +21,8 @@ public class SellListServiceImpl implements SellListService {
 	}
 	
 	@Override
-	public SellListVO detail(int no) {
-		SellListVO data = mapper.detail(no);
+	public SellListVO detail(SellListVO vo) {
+		SellListVO data = mapper.detail(vo);
 		return data;
 	}
 	

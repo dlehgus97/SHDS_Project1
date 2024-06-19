@@ -33,9 +33,8 @@
     </delete>
     
      <!-- 중복확인용 -->
-    <select id="exists" parameterType="map" resultType="int">
-        SELECT COUNT(*) 
-        FROM CART 
+    <select id="check" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM CART 
         WHERE memberno = #{memberno} AND sellno = #{sellno} AND optionno = #{optionno}
     </select>
 	
