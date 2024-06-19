@@ -65,12 +65,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	            },
 	            success: function(response) {
 	            	if(response === 'success') {
-	            		alert('장바구니에 담겼습니다');
+	            		window.location.href = '/cart/insert.do?sellno='+${vo.sellno}+'&optionno='+getSelectedOptionValue();
+	            		if (confirm('상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?')) {
+	                        window.location.href = '/cart/view.do';
+	                    }
 	            	} else {
 	            		alert('이미 장바구니에 담긴 상품입니다.');
 	            	}
-	            	
-	                
 	            },
 	            error: function(xhr, status, error) {
 	            	alert('서버와의 통신에 문제가 발생했습니다.');
@@ -314,6 +315,11 @@ document.addEventListener("DOMContentLoaded", function() {
                       <!-- 찜 등록 js -->
 							<script type="text/javascript">
 								function insertwishlist() {
+									if (${login == null}) {
+										if (confirm('로그인 후 이용 가능합니다. 로그인 하시겠습니까?')) {
+								            window.location.href = '/member/login.do';
+								        }
+							    	} else {
 									$.ajax({
 							            url: '/wishlist/insert.do',
 							            type: 'POST',
@@ -329,6 +335,7 @@ document.addEventListener("DOMContentLoaded", function() {
 							              alert('추가 중 오류가 발생했습니다.');
 							            }
 							          });
+									}
 								}
 							</script>
                       

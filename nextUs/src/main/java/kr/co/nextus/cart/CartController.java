@@ -40,7 +40,7 @@ public class CartController {
 		int memberno = login.getNo();		
 		int r = service.insert(memberno, sellno, optionno);
 		
-		return "redirect: /selllist/view.do?no="+sellno;
+		return "";
 	}
 	
 	@GetMapping("/cart/view.do")
