@@ -8,11 +8,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.nextus.member.MemberMapper;
+
 @Service
 public class BanServiceImpl implements BanService {
 
 	@Autowired
 	private BanMapper mapper;
+	@Autowired
+	private MemberMapper memberMapper;
 
 	@Override
 	public Map<String, Object> list(BanVO param, int isSeller) {
@@ -22,7 +26,7 @@ public class BanServiceImpl implements BanService {
 		}else {
 			count = mapper.countSeller(param); // 총개수
 		}
-		
+		System.out.println("AAA"+count);
 		// 총페이지수
 		int totalPage = count / 10;
 		if (count % 10 > 0) totalPage++;
@@ -58,6 +62,7 @@ public class BanServiceImpl implements BanService {
 		for (int m : membernos) {
 			vo.setMemberno(m);
 			result += mapper.add(vo);
+			result += memberMapper.ban(m);
 		}
 		return result == 0 ? false : true;
 

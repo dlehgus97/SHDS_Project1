@@ -28,6 +28,11 @@
 <!-- modernizr css -->
 <script src="../resources/admin/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.header-area{
+	background-color:#485465;
+}
+</style>
 
 <title></title>
 </head>
@@ -41,12 +46,6 @@
                             <span></span>
                             <span></span>
                             <span></span>
-                        </div>
-                        <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
                         </div>
                     </div>
                     <!-- profile info & task notification -->
@@ -196,7 +195,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div></div>
 
 	
 	<!-- jquery latest version -->

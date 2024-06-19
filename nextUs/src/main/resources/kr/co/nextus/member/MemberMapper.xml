@@ -153,4 +153,11 @@
 		seller=1
 		WHERE no = #{no}
 	</update>
+	
+	<!-- 제재시 state1로 -->
+	<update id="ban" parameterType="int">
+		UPDATE MEMBER
+		SET state = 1
+		WHERE no = #{no}
+	</update>
 </mapper>

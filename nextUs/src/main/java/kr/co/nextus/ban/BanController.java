@@ -24,7 +24,7 @@ public class BanController {
 		model.addAttribute("ban", service.add(vo,membernos));
 		
 		model.addAttribute("msg", "제재 성공");
-		model.addAttribute("url", "/memberManagement/addBanPopupMember");
+		model.addAttribute("url", "/addBanPopupMember");
 		return "common/alert";
 	}
 	
@@ -33,7 +33,7 @@ public class BanController {
 		model.addAttribute("ban", service.add(vo,membernos));
 		
 		model.addAttribute("msg", "제재 성공");
-		model.addAttribute("url", "/sellerManagement/addBanPopupSeller");
+		model.addAttribute("url", "/addBanPopupSeller");
 		return "common/alert";
 	}
 	

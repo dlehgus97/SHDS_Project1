@@ -16,7 +16,7 @@
 <body>
 <div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
+		<div class="main-content" style="background-color:#485465;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 			<div class="bg-wh seller_div">
 				<h1 style="margin-left: 30px;margin-top:10px;font-size:30px;">판매자 정산 내역</h1><br>
@@ -55,7 +55,8 @@
 			</div>
 
 		</div>
+		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
-	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+	
 </body>
 </html>

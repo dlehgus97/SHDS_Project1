@@ -32,7 +32,9 @@ table {
 tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
-
+table tr{
+	height:46px;
+}
 .mybutton {
 	width: 250px;
 	font-size: 45px;
@@ -44,7 +46,7 @@ tbody tr:hover {
 <body>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
+		<div class="main-content" style="background-color:#485465;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">
@@ -54,7 +56,7 @@ tbody tr:hover {
 							<div class="card-body">
 								<div style="display: flex; justify-content: space-between;">
 
-									<h2>회원 제재 내역</h2>
+									<h1 class="header-title" style="font-size: 35px">회원 제재 내역</h1>
 									<button class="btn btn-outline-dark mb-3 mybutton"
 										onclick="openPopup('Member'); return false;">제재내역 추가</button>
 
@@ -93,16 +95,19 @@ tbody tr:hover {
 
 									</table>
 									<!-- paging -->
-									<div class="pagenate" style="margin-top: 10px;">
-										<c:forEach var="p" begin="${map.startPage}"
-											end="${map.endPage}">
-											<c:if test="${p == BanVO.page}">
-												<li><a href='#;' class='current'>${p}</a></li>
-											</c:if>
-											<c:if test="${p != BanVO.page}">
-												<li><a href='memberBanManagement?page=${p}'>${p}</a></li>
-											</c:if>
-										</c:forEach>
+									<div class="pagenate">
+										<ul class='paging'>
+											<c:forEach var="p" begin="${map.startPage}"
+												end="${map.endPage}">
+												<c:if test="${p == BanVO.page}">
+													<li><a href='#;' class='current'>${p}</a></li>
+												</c:if>
+												<c:if test="${p != BanVO.page}">
+													<li><a
+														href='memberBanManagement.do?page=${p}'>${p}</a></li>
+												</c:if>
+											</c:forEach>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -110,10 +115,10 @@ tbody tr:hover {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
 
-<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+
 
 
 	<script

@@ -11,12 +11,12 @@
 <body>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
+		<div class="main-content" style="background-color:#485465;">
 				<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 		
 		
 		</div>
-	</div>
 	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+	</div>
 </body>
 </html>

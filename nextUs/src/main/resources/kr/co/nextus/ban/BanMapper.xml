@@ -37,9 +37,15 @@
 	</select>
 	<!-- 카운트 -->
 	<select id="countMember" parameterType="kr.co.nextus.ban.BanVO" resultType="int">
-		SELECT COUNT(*) FROM BAN b INNER JOIN MEMBER m ON b.no = m.no WHERE m.seller =0
+		SELECT COUNT(*)
+		FROM BAN b
+		JOIN MEMBER m ON b.memberno = m.no
+		WHERE m.seller = 0;
 	</select>
 	<select id="countSeller" parameterType="kr.co.nextus.ban.BanVO" resultType="int">
-		SELECT COUNT(*) FROM BAN b INNER JOIN MEMBER m ON b.no = m.no WHERE m.seller =1
+		SELECT COUNT(*)
+		FROM BAN b
+		JOIN MEMBER m ON b.memberno = m.no
+		WHERE m.seller = 1;
 	</select>
 </mapper>

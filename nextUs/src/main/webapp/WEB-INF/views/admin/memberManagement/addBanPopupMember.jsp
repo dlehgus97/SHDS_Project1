@@ -58,9 +58,13 @@ tbody tr:hover {
         vertical-align: middle;
         text-align: center;
     }
-    .btn {
-        display: inline-block;
-    }
+.ban_lower {
+            position: fixed;
+            bottom: 0;
+            width:90%;
+            padding: 20px;
+            z-index: 1000;
+        }
 </style>
 </head>
 <body>
@@ -72,14 +76,14 @@ tbody tr:hover {
 						<h2 class="header-title" style="margin-top: -40px;">제재 내역 추가</h2>
 
 						<form method="get" name="searchForm" id="searchForm"
-							action="memberStatus.do" style="margin-top: -40px;">
+							action="addBanPopupMember.do" style="margin-top: -40px;margin-left:200px;">
 							<select name="searchType">
 								<option value="all">전체</option>
 								<option value="email">이메일</option>
 								<option value="nickname">닉네임</option>
 							</select> <input type="text" name="searchWord" /> <input type="submit"
 								class="btn btn-flat btn-secondary mb-3" style="font-size: 18px;"
-								value="Search!!">
+								value="검색">
 						</form>
 
 						<form method="post" name="banForm" id="banForm" action="BAN0.do">
@@ -106,7 +110,7 @@ tbody tr:hover {
 														value="${vo.regdate}" /></td>
 												<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
 												<td>
-													<button  class="btn btn-secondary mb-3" type="button">신고내역 보기</button>
+													<button  class="btn btn-outline-warning mb-3" style="margin-top:13px;" type="button">신고내역 보기</button>
 												</td>
 											</tr>
 										</c:forEach>
@@ -121,7 +125,7 @@ tbody tr:hover {
 				               		제재 기간<input class="form-control" name="date" id="date"type="date">
 									<br>
 									<input type="submit"class="btn  btn-success btn-lg btn-block"
-									style="margin-left:-5px" id="banSubmit" value="등록하기">
+									style="margin-left:-5px;" id="banSubmit" value="등록하기">
 
 								</div>
 							</div>
@@ -139,19 +143,24 @@ tbody tr:hover {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-	// Clickable row to toggle checkbox
-	$('.clickable-row').click(function(e) {
-		// Avoid triggering checkbox click when clicking inside the row
-		if (!$(e.target).is('input[type="checkbox"]')) {
-			let checkbox = $(this).find('input[type="checkbox"]');
-			checkbox.prop('checked', !checkbox.prop('checked'));
-		}
-	});
+    // Clickable row to toggle checkbox
+    $('.clickable-row').click(function(e) {
+        // Avoid triggering checkbox click when clicking inside the row
+        if (!$(e.target).is('input[type="checkbox"]') && !$(e.target).is('button')) {
+            let checkbox = $(this).find('input[type="checkbox"]');
+            checkbox.prop('checked', !checkbox.prop('checked'));
+        }
+    });
 
-	// Select all checkboxes when the header checkbox is clicked
-	$('#checkAll').click(function() {
-		$('input:checkbox').not(this).prop('checked', this.checked);
-	});
+    // Prevent row click event when button is clicked
+    $('.clickable-row button').click(function(e) {
+        e.stopPropagation();
+    });
+
+    // Select all checkboxes when the header checkbox is clicked
+    $('#checkAll').click(function() {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
 });
 </script>
 

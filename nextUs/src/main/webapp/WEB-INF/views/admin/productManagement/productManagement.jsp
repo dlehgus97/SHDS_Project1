@@ -43,7 +43,7 @@ tbody tr:hover {
 		<div class="main-content">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
-			<div class="main-content-inner">
+			<div class="main-content-inner" style="background-color:#485465;">
 				<div class="row">
 					<div class="col-12 mt-5">
 						<div class="card">
@@ -121,9 +121,8 @@ tbody tr:hover {
 				</div>
 			</div>
 		</div>
-
+<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
-	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 
 
 

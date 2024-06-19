@@ -47,20 +47,27 @@ table {
 	border-collapse: collapse;
 	font-size: 18px;
 }
+
 tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
+
 .checkbox {
 	transform: scale(1.5);
 }
+
 .center-align {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
     }
-    .btn {
-        display: inline-block;
-    }
+.ban_lower {
+            position: fixed;
+            bottom: 0;
+            width:90%;
+            padding: 20px;
+            z-index: 1000;
+        }
 </style>
 </head>
 <body>
@@ -72,14 +79,14 @@ tbody tr:hover {
 						<h2 class="header-title" style="margin-top: -40px;">제재 내역 추가</h2>
 
 						<form method="get" name="searchForm" id="searchForm"
-							action="addBanPopup.do" style="margin-top: -40px;">
+							action="addBanPopupSeller.do" style="margin-top: -40px;margin-left:200px;">
 							<select name="searchType">
 								<option value="all">전체</option>
 								<option value="email">이메일</option>
 								<option value="nickname">닉네임</option>
 							</select> <input type="text" name="searchWord" /> <input type="submit"
 								class="btn btn-flat btn-secondary mb-3" style="font-size: 18px;"
-								value="Search!!">
+								value="검색">
 						</form>
 
 						<form method="post" name="banForm" id="banForm" action="BAN1.do">
@@ -87,7 +94,9 @@ tbody tr:hover {
 								<table id="dataTable3" class="text-center">
 									<thead class="text-capitalize">
 										<tr>
-											<th><input type="checkbox" class="selectAll_button checkbox" name="select" id="checkAll"></th>
+											<th><input type="checkbox"
+												class="selectAll_button checkbox" name="select"
+												id="checkAll"></th>
 											<th>이메일</th>
 											<th>닉네임</th>
 											<th>가입일</th>
@@ -98,15 +107,16 @@ tbody tr:hover {
 									<tbody>
 										<c:forEach var="vo" items="${map.list }">
 											<tr class="clickable-row">
-												<td><input name="membernos" type="checkbox" class="checkbox"
-													value='${vo.no}'></td>
+												<td><input name="membernos" type="checkbox"
+													class="checkbox" value='${vo.no}'></td>
 												<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 												<td>${vo.nickname != null ? vo.nickname : '(미입력)'}</td>
 												<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 														value="${vo.regdate}" /></td>
 												<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
 												<td>
-													<button  class="btn btn-secondary mb-3" type="button">신고내역 보기</button>
+													<button class="btn btn-outline-warning mb-3" style="margin-top:13px;"type="button">신고내역
+														보기</button>
 												</td>
 											</tr>
 										</c:forEach>
@@ -116,12 +126,12 @@ tbody tr:hover {
 							</div>
 							<div class="ban_lower">
 								<div class="doBan" style="font-size: 20px;">
-                                    제재 사유<input class="form-control" type="text"
-                                    name="content" id="example-text-input"style="width:100%;margin-left:0px">
-				               		제재 기간<input class="form-control" name="date" id="date"type="date">
-									<br>
-									<input type="submit"class="btn  btn-success btn-lg btn-block"
-									style="margin-left:-5px" id="banSubmit" value="등록하기">
+									제재 사유<input class="form-control" type="text" name="content"
+										id="example-text-input" style="width: 100%; margin-left: 0px">
+									제재 기간<input class="form-control" name="date" id="date"
+										type="date"> <br> <input type="submit"
+										class="btn  btn-success btn-lg btn-block"
+										style="margin-left: -5px" id="banSubmit" value="등록하기">
 
 								</div>
 							</div>
@@ -136,24 +146,29 @@ tbody tr:hover {
 			</div>
 		</div>
 	</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-	// Clickable row to toggle checkbox
-	$('.clickable-row').click(function(e) {
-		// Avoid triggering checkbox click when clicking inside the row
-		if (!$(e.target).is('input[type="checkbox"]')) {
-			let checkbox = $(this).find('input[type="checkbox"]');
-			checkbox.prop('checked', !checkbox.prop('checked'));
-		}
-	});
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function() {
+	    // Clickable row to toggle checkbox
+	    $('.clickable-row').click(function(e) {
+	        // Avoid triggering checkbox click when clicking inside the row
+	        if (!$(e.target).is('input[type="checkbox"]') && !$(e.target).is('button')) {
+	            let checkbox = $(this).find('input[type="checkbox"]');
+	            checkbox.prop('checked', !checkbox.prop('checked'));
+	        }
+	    });
 
-	// Select all checkboxes when the header checkbox is clicked
-	$('#checkAll').click(function() {
-		$('input:checkbox').not(this).prop('checked', this.checked);
+	    // Prevent row click event when button is clicked
+	    $('.clickable-row button').click(function(e) {
+	        e.stopPropagation();
+	    });
+
+	    // Select all checkboxes when the header checkbox is clicked
+	    $('#checkAll').click(function() {
+	        $('input:checkbox').not(this).prop('checked', this.checked);
+	    });
 	});
-});
-</script>
+	</script>
 
 
 	<script

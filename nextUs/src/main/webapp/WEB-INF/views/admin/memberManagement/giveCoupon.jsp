@@ -43,7 +43,7 @@ t1{font-size:20px;}
 <body>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
+		<div class="main-content" style="background-color:#485465;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">
@@ -90,7 +90,7 @@ t1{font-size:20px;}
 
 									</div>
 									<br><br>
-									<input type="submit" class="btn btn-secondary btn-lg btn-block" value="쿠폰 지급">
+									<input type="submit" class="btn btn-success btn-lg btn-block" style="width:98%;" value="쿠폰 지급">
 								</form>
 
 
@@ -99,9 +99,9 @@ t1{font-size:20px;}
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
-<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+
 
 	<script>
 		$(document).ready(function() {

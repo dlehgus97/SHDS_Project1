@@ -41,7 +41,7 @@ tbody tr:hover {
 <body>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
+		<div class="main-content" style="background-color:#485465;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">
@@ -49,7 +49,7 @@ tbody tr:hover {
 					<div class="col-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								<h1>쿠폰 발급 내역</h1>
+								<h1 class="header-title" style="font-size: 35px">쿠폰 발급 내역</h1>
 								<div class="data-tables datatable-dark">
 									<table id="dataTable3" class="text-center">
 										<thead class="text-capitalize">
@@ -83,7 +83,7 @@ tbody tr:hover {
         														</c:otherwise>
 															</c:choose></td>
 														<td>
-															<button class="btn btn-secondary mb-3" type="button" 
+															<button class="btn btn-success mb-3" type="button" 
 															style="margin-top:13px;"onclick="openPopup(event); return false;">발급내역</button>
 														</td>
 													</tr>
@@ -122,8 +122,8 @@ tbody tr:hover {
 				</div>
 			</div>
 		</div>
-	</div>
 <%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+	</div>
 
 
 

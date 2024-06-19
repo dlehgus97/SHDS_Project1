@@ -38,4 +38,7 @@ public interface MemberMapper {
   	List<MemberVO> memberReportCountList(MemberVO param);
   	List<MemberVO> sellerReportCountList(MemberVO param);
   	int sellerRegist(int no);
+  	
+  	//제재시 state 1로 바꾸기
+  	int ban(int no);
 }

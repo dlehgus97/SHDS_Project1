@@ -19,23 +19,28 @@
 	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
-
+<link rel="stylesheet" href="../resources/css/admin/admincolor.css"/>
 <style>
 table {
 	width: 100%;
 	border-collapse: collapse;
 	font-size: 18px;
 }
+table tr{
+	height:46px;
+}
 
 tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
+
+
 </style>
 </head>
 <body>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content">
+		<div class="main-content" style="background-color:#485465;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">
@@ -54,7 +59,7 @@ tbody tr:hover {
 											<option value="nickname">닉네임</option>
 										</select> <input type="text" name="searchWord" /> <input type="submit"
 											class="btn btn-flat btn-secondary mb-3"
-											style="font-size: 18px;" value="Search!!">
+											style="font-size: 18px;" value="검색">
 									</form>
 								</div>
 								<div class="data-tables datatable-dark">
@@ -130,9 +135,9 @@ tbody tr:hover {
 				</div>
 			</div>
 		</div>
-		
+		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
-<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+
 
 
 
