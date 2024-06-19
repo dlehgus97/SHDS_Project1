@@ -73,14 +73,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-0 fs-xs text-gray-400">
-              <li class="breadcrumb-item">
-                <a class="text-gray-400" href="index.html">Home > </a>
+              <li>
+                <a class="text-gray-400" href="/index.do">Home > </a>
               </li>
-              <li class="breadcrumb-item">
-                <a class="text-gray-400" href="shop.html">카테고리 > </a>
+              <li>
+                <a class="text-gray-400" href="shop.html">&ensp; 카테고리 > </a>
               </li>
-              <li class="breadcrumb-item active">
-                ${vo.title }
+              <li>
+                &ensp;${vo.title }
               </li>
             </ol>
 

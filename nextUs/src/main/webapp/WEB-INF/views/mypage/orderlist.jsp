@@ -31,11 +31,11 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-0 fs-xs text-gray-400">
-              <li class="breadcrumb-item">
-                <a class="text-gray-400" href="index.html">Home</a>
+              <li>
+                <a class="text-gray-400" href="index.html">Home ></a>
               </li>
-              <li class="breadcrumb-item active">
-                마이페이지
+              <li>
+                &ensp; 마이페이지
               </li>
             </ol>
 
@@ -67,7 +67,7 @@
                 <a class="list-group-item list-group-item-action dropend-toggle " href="wishlist.do">
                   찜 목록
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-personal-info.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
                   내정보
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="account-address.html">

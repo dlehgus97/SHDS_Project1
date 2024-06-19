@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.mypage.pinfo.PinfoMapper">
+
+	<!-- 현재 개인정보 불러오기 -->
+	<select id="list" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+		SELECT * FROM MEMBER WHERE no=#{no}
+	</select>
+
+	<!-- 입력한 비밀번호가 기존 비밀번호와 일치하는지 확인하기 -->
+	<select id="check" parameterType="kr.co.nextus.member.MemberVO" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE no=#{no} AND pwd = MD5(#{pwd})
+	</select>
+	
+	<!-- 개인정보 업데이트 -->
+	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
+		UPDATE MEMBER SET
+		name = #{name},
+		gender = #{gender},
+		birthday = #{birthday},
+		hp = #{hp},
+		zipcode = #{zipcode},
+		addr1 = #{addr1},
+		addr2 = #{addr2}
+		WHERE no = #{no}
+	</update>
+	
+	<!-- 개인정보 업데이트 -->
+<!-- 	<update id="sellerRegist" parameterType="kr.co.nextus.member.MemberVO">
+		UPDATE MEMBER SET
+		seller=1
+		WHERE no = #{no}
+	</update> -->
+</mapper>

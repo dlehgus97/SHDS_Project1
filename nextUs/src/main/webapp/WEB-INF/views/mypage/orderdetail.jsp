@@ -220,6 +220,7 @@
 		        			<!-- Hidden field -->
 		        			<input type="hidden" name="buyno" value="${order.buyno }">
 		        			<input type="hidden" name="refund_amount" value="${order.price }">
+		        			<input type="hidden" name="state" value=1>
 		                    <!-- Text -->
 		                    <p class="mb-1 fs-xs">
 		                      환불 사유
