@@ -386,6 +386,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     
                     </form>
+                    </c:if>
+                    
+                    
+                    <c:if test="${login != null}">
                     판매글 신고하기
                     <!-- 신고 버튼 -->
 	                <a data-bs-toggle="collapse" href="#singoForm">
@@ -723,7 +727,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="col-12 mb-6 text-center">
 					
         			<!-- Hidden field -->
-        			<input type="hidden" name="no" value="${vo.sellno }">
+        			<input type="hidden" name="sellno" value="${vo.sellno }">
         			<input type="hidden" name="writeno" value="${login.no }">
                     <!-- Text -->
                     <p class="mb-1 fs-xs">
@@ -859,6 +863,7 @@ document.addEventListener("DOMContentLoaded", function() {
 								}
 							</script>
 							
+							<c:if test="${login != null}">
                           <span class="fs-xs text-muted" style="position: absolute; right: 10px;">
 						  	신고하기
 						  	<!-- 신고 버튼 -->
@@ -866,7 +871,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			                  <img src="/resources/imgs/singo.jpg" alt="Image" width="20px" height="20px">
 			                </a>
 						  </span>
-						  
+						  </c:if>
 						  <!-- 리뷰신고 작성 폼 -->
 			     
 				            <div class="collapse" id="reviewsingoForm${review.reviewno}">
@@ -931,43 +936,52 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
               </c:forEach>
             </div>
-            
-
-           
-			<!-- 페이지처리 -->
-			<div class="pagenate">
-				<ul class='paging'>
-					<c:if test="${review.prev }">
-						<li><a
-							href="view.do?no=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
-								<< </a></li>
-					</c:if>
-					<c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
-						<c:if test="${p == ReviewVO.page}">
-							<li><a href='#;' class='current'>${p}</a></li>
-						</c:if>
-						<c:if test="${p != ReviewVO.page}">
-							<li><a
-								href='view.do?no=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews'>${p}</a></li>
-						</c:if>
-					</c:forEach>
-					<c:if test="${review.next }">
-						<li><a
-							href="view.do?no=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
-								>> </a></li>
-					</c:if>
-				</ul>
-			</div>
+			
+			<!-- 페이지 처리 -->
+            <nav class="d-flex justify-content-center mt-10">
+              <ul class="pagination pagination-sm text-gray-400">
+              	<c:if test="${review.prev }">
+                <li class="page-item">
+                  <a class="page-link page-link-arrow" href="view.do?sellno=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
+                    <i class="fa fa-caret-left"></i>
+                  </a>
+                </li>
+                </c:if>
+                
+                <c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
+                	<c:if test="${p == reviewVO.page}">
+	                <li class="page-item active">
+	                  <a class="page-link" href="#">${p}</a>
+	                </li>
+	                </c:if>
+					
+					<c:if test="${p != reviewVO.page}">
+	                <li class="page-item">
+	                  <a class="page-link" href="view.do?sellno=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">${p}</a>
+	                </li>
+	                </c:if>
+	            </c:forEach>
+                
+                <c:if test="${review.next }">
+                <li class="page-item">
+                  <a class="page-link page-link-arrow" href="view.do?sellno=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
+                    <i class="fa fa-caret-right"></i>
+                  </a>
+                </li>
+                </c:if>
+              </ul>
+            </nav>
+			
 			<!-- 검색 -->
 			<div class="bbsSearch">
 				<form method="get" name="searchForm" id="searchForm" action="view.do#reviews">
-					<input type="hidden" name="no" value="${vo.sellno }">
+					<input type="hidden" name="sellno" value="${vo.sellno }">
 					<span class="srchSelect"> <select id="stype" name="searchType" class="dSelect" title="검색분류 선택">
 							<option value="all">전체</option>
 							<option value="title"
 								<c:if test="${ReviewVO.searchType == 'title'}">selected</c:if>>제목</option>
-							<option value="content"
-								<c:if test="${ReviewVO.searchType == 'content'}">selected</c:if>>내용</option>
+							<option value="text"
+								<c:if test="${ReviewVO.searchType == 'text'}">selected</c:if>>내용</option>
 					</select>
 					</span> 
 					<span class="searchWord"> 

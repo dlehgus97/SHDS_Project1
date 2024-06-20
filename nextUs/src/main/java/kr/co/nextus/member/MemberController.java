@@ -3,6 +3,7 @@ package kr.co.nextus.member;
 
 import java.io.Console;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -21,10 +22,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.nextus.report.ReportService;
+import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.util.SendMail;
@@ -38,6 +42,9 @@ public class MemberController {
     @Autowired
     private MemberService service; // MemberService 주입 설정 필요
 
+    @Autowired
+    private ReportService reportservice;
+    
     @Autowired
     private SellerRequestService SRservice;
     
@@ -287,17 +294,23 @@ public class MemberController {
     }
 
     @RequestMapping("/addBanPopupMember")
-    public String addBanPopupMember(MemberVO vo, SellerRequestVO vo2,Model model) {
+    public String addBanPopupMember(MemberVO vo,ReportVO vo2, Model model) {
         model.addAttribute("map", service.reportCountList(vo, 0));
-        model.addAttribute("sellerRequestMap", SRservice.list(vo2));
         return "admin/memberManagement/addBanPopupMember";
 
     }
-
+    
+    @RequestMapping(value = "/loadReportDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ReportVO> loadReportDetails(@RequestParam("email") String email,Model model) {
+        // 이메일을 기준으로 신고 내역을 조회하는 서비스 호출
+        List<ReportVO> reportDetails = reportservice.list(email);
+        return reportDetails;
+    }
+    
     @RequestMapping("/addBanPopupSeller")
-    public String addBanPopupSeller(MemberVO vo,SellerRequestVO vo2, Model model) {
+    public String addBanPopupSeller(MemberVO vo, Model model) {
         model.addAttribute("map", service.reportCountList(vo, 1));
-        model.addAttribute("sellerRequestMap", SRservice.list(vo2));
         return "admin/sellerManagement/addBanPopupSeller";
     }
 }

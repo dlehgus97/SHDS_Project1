@@ -9,6 +9,9 @@
 <title>관리자 메인 페이지</title>
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		<div class="main-content" style="background-color:#485465;">

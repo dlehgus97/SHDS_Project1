@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ReportVO {
+	private int no;
 	private int reviewno;
 	private int sellno;
 	private int memberno;

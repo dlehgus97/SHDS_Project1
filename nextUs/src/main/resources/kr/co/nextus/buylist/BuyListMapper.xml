@@ -11,19 +11,25 @@
 
 	<!-- 리스트 -->
 	<select id="list" parameterType="kr.co.nextus.buylist.BuyListVO"
-		resultType="kr.co.nextus.buylist.BuyListVO">
-		SELECT B.*, M.email AS sellerEmail
-		FROM BUYLIST B
-		JOIN MEMBER M ON B.sellerno = M.no
-		WHERE B.status IN (5, 6)
-		ORDER BY B.status ASC, B.decideDate DESC,B.buyno
-		LIMIT #{startIdx}, 10
-	</select>
+    resultType="kr.co.nextus.buylist.BuyListVO">
+    	SELECT B.*, M.email AS sellerEmail, S.account AS account
+   		FROM BUYLIST B
+    	JOIN MEMBER M ON B.sellerno = M.no
+    	JOIN SELLER S ON M.no = S.no
+    	WHERE B.status IN (5, 6)
+    	ORDER BY B.status ASC, B.decideDate DESC, B.buyno
+    	LIMIT #{startIdx}, 10
+</select>
 	<!-- 카운트 -->
 	<select id="count"
 		parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int">
 		SELECT COUNT(*) FROM BUYLIST
 	</select>
-
+	
+	<!-- 정산하기 -->
+	<update id="settle"
+		parameterType="int">
+		UPDATE BUYLIST SET status = '6' WHERE buyno = #{buyno} 
+	</update>
 
 </mapper>

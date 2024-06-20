@@ -39,6 +39,9 @@
 
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="main-content-inner">
 		<c:forEach var="vo" items="${map.list}">
 			<div class="row">

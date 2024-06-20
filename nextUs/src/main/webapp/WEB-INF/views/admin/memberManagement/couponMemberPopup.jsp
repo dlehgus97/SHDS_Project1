@@ -44,6 +44,9 @@
 </style>
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="col-lg-6 mt-5">
 		<div class="card">
 			<div class="card-body">

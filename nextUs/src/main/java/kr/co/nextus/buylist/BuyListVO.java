@@ -8,17 +8,25 @@ import lombok.Data;
 public class BuyListVO {
 	private int buyno;
 	private int memberno;
+	private int optionno;
 	private int price;
 	// 결제 상태
 	private int status;
+	private String paymentId;
 	private Timestamp buydate;
 	private Timestamp decidedate;
 	private int sellerno;
 	private int sellno;
+	//주문자 성함
+	private String name;
+	private String hp;
+	private String email;
+	private String addr1;
+	private String addr2;
+	private int isrevire;
 	// 판매글 번호
-	private int no;
 	private int discount;
-	private int optionno;
+	
 	// 상품명
 	private String title;
 	// 구매자 닉네임
@@ -39,6 +47,7 @@ public class BuyListVO {
 	private int startIdx; // limit 앞에 들어갈 시작인덱스값
 
 	private String sellerEmail;
+	private String account;
 
 	public BuyListVO() {
 			this.page = 1;

@@ -12,4 +12,6 @@ public interface BuyListService {
 	
 	//관리자 페이지에서 동작
 	Map<String, Object> list(BuyListVO vo);
+
+	boolean settle(int buyno);
 }

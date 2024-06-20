@@ -70,10 +70,10 @@
                 <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
                   내정보
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-address.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
                   문의 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-payment.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
                   보유 쿠폰
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle" href="#!">

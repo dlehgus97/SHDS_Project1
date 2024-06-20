@@ -21,7 +21,7 @@
 	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
 
 
-<script src="../resources/js/admin/memberBanManagement.js"></script>
+<script src="../resources/js/admin/reportPopup.js"></script>
 <style>
 table {
 	width: 100%;
@@ -39,6 +39,9 @@ tbody tr:hover {
 </style>
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		<div class="main-content" style="background-color:#485465;">
@@ -54,6 +57,7 @@ tbody tr:hover {
 									<table id="dataTable3" class="text-center">
 										<thead class="text-capitalize">
 											<tr>
+												<th>신고번호</th>
 												<th>이메일</th>
 												<th>신고자</th>
 												<th>글 유형</th>
@@ -70,6 +74,7 @@ tbody tr:hover {
 						<c:if test="${!empty map.list }">
 							<c:forEach var="vo" items="${map.list}">
 								<tr>
+									<td>${vo.no}</td>
 									<td>${vo.reportedmemberEmail != null ? vo.reportedmemberEmail : '(미입력)'}</td>
 									<td>${vo.reportermemberEmail != null ? vo.reportermemberEmail : '(미입력)'}</td>
 									<td><c:choose>
@@ -83,7 +88,8 @@ tbody tr:hover {
 										</c:choose></td>
 									<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${vo.date}" /></td>
-									<td><button class="btn btn-outline-secondary mb-3 mybutton" type="button">상세내용보기</button></td>
+									<td><button class="btn btn-outline-secondary mb-3 mybutton"
+										onclick="openPopup(event); return false;" type="button">상세내용보기</button></td>
 								</tr>
 
 

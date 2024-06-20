@@ -71,8 +71,9 @@
 							<ul class="collapse">
 								<li><a href="/sellerRequestManagement">셀러 등록 관리<span>
 								<c:if test="${sellerRequestMap.countUnapproved > 0}">
-                				<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
-           					</c:if></span></a></li>
+                					<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
+           						</c:if>
+           						</span></a></li>
 								<li><a href="/sellerBanManagement">셀러 제재 관리</a></li>
 							</ul>
 						</li>

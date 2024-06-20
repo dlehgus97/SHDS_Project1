@@ -119,7 +119,6 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			list=mapper.sellerReportCountList(param);
 		}
-		 
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list);
 		return map;

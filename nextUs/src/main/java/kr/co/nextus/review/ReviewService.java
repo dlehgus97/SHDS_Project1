@@ -14,6 +14,7 @@ public interface ReviewService {
 	Map<String, Object> list(ReviewVO vo);
 	int insert(ReviewVO vo, HttpServletRequest request);
 	int update(ReviewVO vo, HttpServletRequest request);
+	int updateisreview(ReviewVO vo);
 	int delete(int reviewno);
 	
 }
