@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
+
 public class SellListVO {
 	private int sellno;
 	private int seller;
+	private int loginno;
 	private String title;
 	private int price;
 	private String content;
@@ -28,6 +30,9 @@ public class SellListVO {
 	private String info;
 	private String thumbnail_real;
 	private int like_count;
+	private int isreview;
+	private int sellerrating_avg;
+	private int sellerreview_cnt;
 
 	// 관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))

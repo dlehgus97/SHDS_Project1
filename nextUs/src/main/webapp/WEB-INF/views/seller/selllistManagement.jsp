@@ -227,7 +227,7 @@
                             </div>
                             <div class="button-container">
 								<a href="" class="btn-edit">수정하기</a>
-								<a href="" class="btn-delete">삭제하기</a>
+								<button class="btn-delete" onclick="confirmDelete(${sellproduct.sellno})">삭제하기</button>
 							</div>
                         </div>
                     </c:forEach>
@@ -237,6 +237,33 @@
 
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
+	<script>
+        function confirmDelete(sellno) {
+            if (confirm("정말 삭제하시겠습니까?")) {
+                // 확인 버튼을 눌렀을 때, 삭제 요청을 서버로 보내는 AJAX 요청
+                $.ajax({
+                    url: '/seller/deleteSellList', // 삭제 처리를 담당하는 컨트롤러 매핑 URL
+                    type: 'POST',
+                    data: { sellno: sellno }, // 삭제할 판매글 번호를 전송
+                    success: function(response) {
+                        if (response === "success") {
+                            // 성공적으로 삭제되었을 경우, 화면에서 해당 판매글 제거
+                            alert("삭제되었습니다.");
+                            location.reload(); // 페이지 새로고침
+                        } else {
+                            alert("삭제 실패했습니다.");
+                        }
+                    },
+                    error: function() {
+                        alert("삭제 과정에서 오류가 발생했습니다.");
+                    }
+                });
+            } else {
+                // 취소 버튼을 눌렀을 때 아무 동작 없음
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>
 

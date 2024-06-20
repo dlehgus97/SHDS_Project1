@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import kr.co.nextus.buylist.BuyListVO;
+import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.review.ReviewVO;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.selllist.SellListVO;
@@ -26,8 +27,14 @@ public interface SellerMapper {
 	// 판매자의 판매글 목록 조회
 	List<SellListVO> getSellerSellList(int no);
 	
+	// 판매글 목록에서 판매글 삭제
+	void deleteSellerSellList(int sellno);
+	
 	// 판매자가 받은 리뷰들 조회
 	List<ReviewVO> getSellerReviews(int no);
+	
+	// 판매자가 받은 리뷰 신고
+	void reportReview(ReportVO report) throws Exception;
 	
 	// 판매자의 거래 내역 조회
 	List<BuyListVO> getSellerBuyList(int no);

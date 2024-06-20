@@ -46,16 +46,24 @@ public class SellListController {
 	
 	
 	@GetMapping("/selllist/view.do")
-	public String detail(Model model, HttpSession sess, @RequestParam("no") int no, ReviewVO vo, WishListVO wvo) {
+	public String detail(Model model, HttpSession sess, @RequestParam("no") int sellno, SellListVO vo, ReviewVO rvo, WishListVO wvo) {
 		MemberVO login = (MemberVO) sess.getAttribute("login");
-		vo.setNo(no);
-		wvo.setSellno(no);
-		wvo.setMemberno(login.getNo());
-		SellListVO detail = sellListService.detail(no);
+		rvo.setNo(sellno);
+		vo.setSellno(sellno);
+		wvo.setSellno(sellno);
 		
+		if(login == null) {
+			vo.setLoginno(0);
+			wvo.setMemberno(0);
+		} else {
+			vo.setLoginno(login.getNo());
+			wvo.setMemberno(login.getNo());
+		}
+
+		SellListVO detail = sellListService.detail(vo);
 		
 		model.addAttribute("vo", detail);
-		model.addAttribute("review", reviewService.list(vo));
+		model.addAttribute("review", reviewService.list(rvo));
 		model.addAttribute("iswishlist", wishListService.count(wvo));
 		return "/selllist/view";
 	}

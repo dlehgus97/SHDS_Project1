@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.member.MemberVO;
+import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.review.ReviewVO;
 import kr.co.nextus.selllist.SellListVO;
 
@@ -123,6 +125,25 @@ public class SellerController {
         return "seller/selllistManagement";
     }
     
+    // 판매글 삭제 메서드
+    @PostMapping("/deleteSellList")
+    @ResponseBody
+    public String deleteSellList(@RequestParam("sellno") int sellno, HttpSession sess, Model model) {
+        MemberVO login = (MemberVO) sess.getAttribute("login");
+        if (login == null || login.getSeller() != 1) {
+            // 로그인되지 않았거나 판매자가 아닌 경우 접근 불가
+            return "access_denied";
+        }
+
+        try {
+            sellerService.deleteSellerSellList(sellno);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+    
     // 판매자의 리뷰 관리 페이지를 보여주는 메서드
     @GetMapping("/sellerReviews")
     public String showSellerReviews(HttpSession sess, Model model) {
@@ -135,6 +156,7 @@ public class SellerController {
         }
 
         int sellerNo = login.getNo(); // 로그인된 판매자의 번호
+        
         // 여기에서 sellerService를 통해 리뷰 데이터를 가져오는 코드를 작성
         List<ReviewVO> sellerReviews = sellerService.getSellerReviews(sellerNo);
         model.addAttribute("sellerReviews", sellerReviews);
@@ -144,6 +166,36 @@ public class SellerController {
         model.addAttribute("miniHeaderData", miniHeaderData);
         
         return "seller/sellerReviews";
+    }
+    
+    // 판매자가 자신이 받은 리뷰 신고
+    @PostMapping("/reportReview")
+    @ResponseBody
+    public String reportReview(@RequestParam("sellno") int sellno,
+                               @RequestParam("reviewno") int reviewno,
+                               @RequestParam("memberno") int memberno,
+                               @RequestParam("content") String content,
+                               @RequestParam("status") int status,
+                               HttpSession sess) {
+        MemberVO login = (MemberVO) sess.getAttribute("login");
+        if (login == null || login.getSeller() != 1) {
+            return "access_denied";
+        }
+
+        ReportVO report = new ReportVO();
+        report.setSellno(sellno);
+        report.setReviewno(reviewno);
+        report.setMemberno(memberno);
+        report.setContent(content);
+        report.setStatus(status);
+
+        try {
+            sellerService.reportReview(report);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
     
     // 판매자의 판매자 정보 수정 페이지를 보여주는 메서드

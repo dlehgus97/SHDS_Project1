@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.nextus.buylist.BuyListVO;
+import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.review.ReviewVO;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.selllist.SellListVO;
@@ -49,8 +50,18 @@ public class SellerServiceImpl implements SellerService {
     }
     
     @Override
+    public void deleteSellerSellList(int sellno) {
+        sellerMapper.deleteSellerSellList(sellno);
+    }
+    
+    @Override
     public List<ReviewVO> getSellerReviews(int no) {
         return sellerMapper.getSellerReviews(no);
+    }
+    
+    @Override
+    public void reportReview(ReportVO report) throws Exception {
+        sellerMapper.reportReview(report);
     }
     
     @Override

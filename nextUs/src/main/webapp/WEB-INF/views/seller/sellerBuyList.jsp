@@ -147,7 +147,7 @@
 		    display: block;
 		}
 		
-		        .sidebar {
+		.sidebar {
             width: 200px;
             min-width: 200px;
             background-color: #404040;
@@ -175,8 +175,8 @@
         }
         
         .main-content {
-			margin-left: 150px;
-			margin-right: 150px;
+			margin-left: 100px;
+			margin-right: 100px;
             padding: 20px;
             flex-grow: 1;
         }
@@ -252,6 +252,8 @@
 		    padding: 15px 20px; /* 내부 여백 수정 */
 		    border-radius: 8px; /* 테두리 둥글게 만들기 */
 		    margin-bottom: 30px; /* 하단 마진 추가 */
+		    margin-right: 50px;
+		    margin-left: 50px;
 		    text-align: center;
 		    font-weight: bold;
 		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
@@ -366,7 +368,7 @@
 		                    <th>결제금액</th>
 		                    <th>구매확정일자</th>
 		                    <th>거래상태</th>
-		                    <th></th>
+		                    <th>정산신청</th>
 		                </tr>
 		            </thead>
 		            <tbody>
