@@ -30,10 +30,11 @@ public class ReviewController {
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		int r = service.insert(vo, request);
 		int n = service.update(vo, request);
-		if (r > 0 && n > 0) {
+		int m = service.updateisreview(vo);
+		if (r > 0 && n > 0 && m > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
-			model.addAttribute("url", "/selllist/view.do?no="+vo.getNo()+"#reviews");
+			model.addAttribute("url", "/selllist/view.do?no="+vo.getSellno()+"#reviews");
 		} else {
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "등록 오류");
@@ -44,7 +45,7 @@ public class ReviewController {
 	@PostMapping("/review/delete.do")
     @ResponseBody
 	public String delete(@RequestParam("reviewno") int reviewno, @RequestParam("sellno") int sellno, HttpServletRequest request, ReviewVO vo) {
-		vo.setNo(sellno);
+		vo.setSellno(sellno);
 		System.out.println(vo.getNo());
 		int r = service.delete(reviewno);
 		int n = service.update(vo, request);

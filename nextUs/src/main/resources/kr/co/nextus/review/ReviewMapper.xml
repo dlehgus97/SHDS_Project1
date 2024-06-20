@@ -5,7 +5,7 @@
 	<select id="list" parameterType="kr.co.nextus.review.ReviewVO" resultType="kr.co.nextus.review.ReviewVO">
 		SELECT *,
 		(SELECT nickname FROM MEMBER WHERE no=writeno) as writer 
-		FROM REVIEW WHERE sellno=#{no}
+		FROM REVIEW WHERE sellno=#{sellno}
 		<include refid="searchSql"/>
 		ORDER BY reviewno DESC
 		LIMIT #{startIdx}, 10
@@ -16,7 +16,7 @@
 		INSERT INTO REVIEW (
 			sellno, writeno, score, title, text, writedate
 		) VALUES (
-			#{no}, #{writeno}, #{score}, #{title}, #{text}, NOW() 
+			#{sellno}, #{writeno}, #{score}, #{title}, #{text}, NOW() 
 		)
 		<selectKey keyProperty="reviewno" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
@@ -31,8 +31,15 @@
 	<!-- 판매글 별점평균, 리뷰수 업데이트 -->
 	<update id="update" parameterType="kr.co.nextus.review.ReviewVO">
 		UPDATE SELLLIST SET 
-			rating_avg=(SELECT AVG(score) FROM REVIEW WHERE sellno=#{no}), review_cnt=(SELECT COUNT(*) FROM REVIEW WHERE sellno=#{no})
-		WHERE sellno=#{no};
+			rating_avg=(SELECT AVG(score) FROM REVIEW WHERE sellno=#{sellno}), review_cnt=(SELECT COUNT(*) FROM REVIEW WHERE sellno=#{sellno})
+		WHERE sellno=#{sellno};
+	</update>
+	
+	<!-- 리뷰작성여부 업데이트 -->
+	<update id="updateisreview" parameterType="kr.co.nextus.review.ReviewVO">
+		UPDATE BUYLIST SET 
+			isreview=1
+		WHERE sellno=#{sellno} AND memberno=#{writeno} ORDER BY isreview LIMIT 1;
 	</update>
 	
 	<sql id="searchSql">

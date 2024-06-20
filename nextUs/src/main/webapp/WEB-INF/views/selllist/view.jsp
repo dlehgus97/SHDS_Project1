@@ -723,7 +723,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="col-12 mb-6 text-center">
 					
         			<!-- Hidden field -->
-        			<input type="hidden" name="no" value="${vo.sellno }">
+        			<input type="hidden" name="sellno" value="${vo.sellno }">
         			<input type="hidden" name="writeno" value="${login.no }">
                     <!-- Text -->
                     <p class="mb-1 fs-xs">
