@@ -68,11 +68,8 @@ public class RefundServiceImpl implements RefundService {
 	@Override
 	public Map<String, Object> list(RefundVO vo, int no) {
 		 	List<RefundVO> list = mapper.detail(no); // 목록
-	        
 	        Map<String, Object> map = new HashMap<>();
 	        map.put("list", list);
-	        
-
 			return map;
 	}
 }

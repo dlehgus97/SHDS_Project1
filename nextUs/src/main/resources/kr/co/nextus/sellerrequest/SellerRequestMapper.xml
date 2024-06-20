@@ -16,7 +16,7 @@
 		FROM SELLERREQUEST
 		JOIN MEMBER ON SELLERREQUEST.memberno = MEMBER.no
 		WHERE SELLERREQUEST.state =1
-		ORDER BY no
+		ORDER BY no DESC
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->

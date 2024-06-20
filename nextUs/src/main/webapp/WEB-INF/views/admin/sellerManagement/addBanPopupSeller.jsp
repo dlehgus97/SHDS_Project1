@@ -71,6 +71,7 @@ tbody tr:hover {
 </style>
 </head>
 <body>
+
 	<div class="main-content-inner">
 		<div class="row">
 			<div class="col-12 mt-5">
@@ -115,7 +116,7 @@ tbody tr:hover {
 														value="${vo.regdate}" /></td>
 												<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
 												<td>
-													<button class="btn btn-outline-warning mb-3" style="margin-top:13px;"type="button">신고내역
+													<button class="btn btn-warning mb-3" style="margin-top:13px;"type="button">신고내역
 														보기</button>
 												</td>
 											</tr>

@@ -38,12 +38,12 @@
 
 	<!-- 판매자의 판매글 관리 페이지 -->
 	<select id="getSellerSellList" parameterType="int" resultType="kr.co.nextus.selllist.SellListVO">
-		SELECT s.sellno, s.title, s.thumbnail_real, s.rating_avg, s.review_cnt, COUNT(pl.sellno) AS like_count, s.view_cnt
+		SELECT s.sellno, s.title, s.thumbnail_real, s.rating_avg, s.review_cnt, COUNT(pl.sellno) AS like_count, s.view_cnt, s.price
 		FROM SELLLIST s
 		LEFT JOIN P_LIKE pl ON s.sellno = pl.sellno
 		INNER JOIN SELLER sr ON s.seller = sr.no
 		WHERE sr.no = #{no}
-		GROUP BY s.sellno, s.title, s.thumbnail_real, s.rating_avg, s.review_cnt, s.view_cnt;
+		GROUP BY s.sellno, s.title, s.thumbnail_real, s.rating_avg, s.review_cnt, s.view_cnt, s.price;
 	</select>
 	
 	<!-- 판매자의 판매글 관리 페이지 : 삭제 버튼 누르면 판매글 삭제됨 -->

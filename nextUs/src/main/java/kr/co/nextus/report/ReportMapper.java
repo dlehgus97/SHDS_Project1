@@ -11,5 +11,8 @@ public interface ReportMapper {
 	int insert(ReportVO vo);
 	public int count(ReportVO param);
 	List<ReportVO> list(ReportVO vo);
+	List<ReportVO> detail(int no);
+	List<ReportVO> detailList(String email);
+	
 	
 }

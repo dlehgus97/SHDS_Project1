@@ -62,4 +62,12 @@
 		UPDATE QnA SET readcnt=readcnt+1 WHERE no=#{no}
 	</update>
 	
+	<update id ="answer" parameterType = "map">
+		UPDATE QnA SET answer = #{answer}, answer_date = NOW() WHERE no = #{no};
+	</update>
+	
+	<update id="addelete" parameterType="int">
+		UPDATE QnA SET answer = null, answer_date =null WHERE no=#{no}
+	</update>
+	
 </mapper>

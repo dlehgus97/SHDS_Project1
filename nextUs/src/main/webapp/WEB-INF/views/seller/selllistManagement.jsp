@@ -76,64 +76,68 @@
             color: #555;
         }
 
-        .profile-container {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background-color: #e0e0e0;
-            border-radius: 8px;
-            max-width: 800px;
-            margin: 50px auto;
-        }
-
-        .profile-picture {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-right: 20px;
-        }
-
         .store-name {
             font-size: 24px;
             font-weight: bold;
             color: #333;
         }
 
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-around;
-        }
+		.product-grid {
+		    display: grid;
+		    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* 각 카드의 최소 너비를 260px, 최대 너비를 1fr로 설정 */
+		    gap: 20px;
+		    justify-items: center;
+		}
 
-        .product-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            width: calc(40% - 40px); /* 한 줄에 두 개의 상품 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
+		.product-card {
+		    width: 260px; /* 카드의 가로 길이를 260px로 고정 */
+    		height: 520px; /* 카드의 세로 길이를 520px로 고정 */
+		    background-color: white;
+		    border: 1px solid #ddd;
+		    border-radius: 8px;
+		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		    overflow: hidden;
+		    display: flex;
+		    flex-direction: column;
+		}
 
-        .product-card img {
-            width: 100%;
-            height: auto;
-            max-height: 200px;
+		.product-card img {
+		    width: 100%;
+		    height: 200px;
+		    object-fit: cover;
+		    border-top-left-radius: 8px;
+		    border-top-right-radius: 8px;
+		}
+        
+		.title-container {
+		    padding: 10px;
+		    font-size: 20px;
+		    font-weight: bold;
+		    color: #333;
+		    text-align: center;
+		    margin-top: 10px;
+		}
+        
+        /*
+		.product-picture {
+            width: 600px;
+            height: 600px;
+            border-radius: 10px;
+            margin-right: 20px;
             object-fit: cover;
-            border-bottom: 1px solid #ddd; #가로선 생성
         }
-
-        .product-details {
-            padding: 10px;
-            text-align: center;
-        }
+		*/
+		
+		.product-details {
+		    padding: 10px;
+		    flex-grow: 1;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: space-between;
+		}
 
         .product-details h3 {
-            font-size: 20px;
+            font-size: 25px;
             margin: 10px 0;
             color: #333;
         }
@@ -143,19 +147,28 @@
             margin: 5px 0;
             color: #666;
         }
+        
 		.button-container {
-		    margin-top: 10px;
+			width: 260px;
+			height: 60px;
+			display: flex;
+		    justify-content: space-between; /* 버튼을 컨테이너 내에서 좌우로 정렬 */
+		    align-items: center; /* 버튼을 세로 중앙 정렬 */
 		}
 
 		.btn-edit, .btn-delete {
 		    display: inline-block;
-		    padding: 8px 20px;
+		    width: 110px;
+		    height: 36px;
+		    /*padding: 8px 20px;*/
+		    margin: 10px;
 		    border-radius: 30px; /* 알약 모양으로 설정 */
 		    font-size: 16px;
 		    text-align: center;
 		    text-decoration: none;
 		    transition: background-color 0.3s;
-		    margin-right: 10px;
+		    line-height: 36px; /* 텍스트를 세로 중앙 정렬 */
+    		vertical-align: middle; /* 인라인 요소의 세로 정렬 방식 설정 */
 		}
 		
 		.btn-edit {
@@ -191,6 +204,40 @@
 		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
 		}
 		
+		.star-rating {
+            display: inline-block;
+            font-size: 24px; /* 별 사이의 공백을 제거하기 위해 0으로 설정 */
+            position: relative;
+        }
+
+        .star-rating .back-stars {
+            color: #d3d3d3; /* 회색 */
+            position: relative;
+            z-index: 1;
+        }
+
+        .star-rating .front-stars {
+            color: #f8ce0b; /* 금색 */
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            width: 0;
+		}
+		
+		.star-container{
+			display: flex;
+		}
+		
+		.star-container p {
+			font-size: 20px;
+			
+		}
+		
+		.review_cnt-container {
+			
+		}		
     </style>
 </head>
 <body>
@@ -217,18 +264,28 @@
                 <div class="product-grid">
                     <c:forEach var="sellproduct" items="${sellList}">
                         <div class="product-card">
-                            <img src="/profile-images/${sellproduct.thumbnail_real}" alt="상품 사진">
+                            <img class="product-picture" src="/upload/board/${sellproduct.thumbnail_real}" alt="상품 사진">
+                           	<div class="title-container">${sellproduct.title}</div>
+
                             <div class="product-details">
-                                <h3>${sellproduct.title}</h3>
-                                <p>평균 별점: ${sellproduct.rating_avg}</p>
-                                <p>리뷰 개수: ${sellproduct.review_cnt}</p>
-                                <p>조회수: ${sellproduct.view_cnt}</p>
-                                <p>찜하기: ${sellproduct.like_count}</p>
+                            	<p>찜하기: ${sellproduct.like_count}건    조회수: ${sellproduct.view_cnt}회</p>
+								<div class="star-container">
+									<div class="star-rating">
+							            <span class="back-stars">
+											&#9733;&#9733;&#9733;&#9733;&#9733; <!-- 빈 별 -->
+							            </span>
+							            <span class="front-stars" style="width: calc(${sellproduct.rating_avg} / 5 * 100%);">
+							                &#9733;&#9733;&#9733;&#9733;&#9733; <!-- 채워진 별 -->
+							            </span>
+							        </div>
+                                	<p>${sellproduct.rating_avg} (${sellproduct.review_cnt})</p>
+                 				</div>
+                                <p class=price">${sellproduct.price}원 ~</p>
                             </div>
-                            <div class="button-container">
+							<div class="button-container">
 								<a href="" class="btn-edit">수정하기</a>
 								<button class="btn-delete" onclick="confirmDelete(${sellproduct.sellno})">삭제하기</button>
-							</div>
+							</div>                           
                         </div>
                     </c:forEach>
                 </div>
@@ -237,33 +294,52 @@
 
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
+
 	<script>
-        function confirmDelete(sellno) {
-            if (confirm("정말 삭제하시겠습니까?")) {
-                // 확인 버튼을 눌렀을 때, 삭제 요청을 서버로 보내는 AJAX 요청
-                $.ajax({
-                    url: '/seller/deleteSellList', // 삭제 처리를 담당하는 컨트롤러 매핑 URL
-                    type: 'POST',
-                    data: { sellno: sellno }, // 삭제할 판매글 번호를 전송
-                    success: function(response) {
-                        if (response === "success") {
-                            // 성공적으로 삭제되었을 경우, 화면에서 해당 판매글 제거
-                            alert("삭제되었습니다.");
-                            location.reload(); // 페이지 새로고침
-                        } else {
-                            alert("삭제 실패했습니다.");
-                        }
-                    },
-                    error: function() {
-                        alert("삭제 과정에서 오류가 발생했습니다.");
-                    }
-                });
-            } else {
-                // 취소 버튼을 눌렀을 때 아무 동작 없음
-                return false;
-            }
-        }
-    </script>
+	    $(document).ready(function() {
+	        $('p.price').each(function() {
+	            var price = $(this).text();
+	            var formattedPrice = formatPrice(price);
+	            $(this).text(formattedPrice + '원');
+	        });
+	    }); // document.ready의 닫는 괄호 추가
+	
+	    function formatPrice(price) {
+	        return parseInt(price).toLocaleString('ko-KR');
+	    } // formatPrice 함수의 닫는 괄호 추가
+	
+	    function confirmDelete(sellno) {
+	        if (confirm("정말 삭제하시겠습니까?")) {
+	            // 확인 버튼을 눌렀을 때, 삭제 요청을 서버로 보내는 AJAX 요청
+	            $.ajax({
+	                url: '/seller/deleteSellList', // 삭제 처리를 담당하는 컨트롤러 매핑 URL
+	                type: 'POST',
+	                data: { sellno: sellno }, // 삭제할 판매글 번호를 전송
+	                success: function(response) {
+	                    if (response === "success") {
+	                        // 성공적으로 삭제되었을 경우, 화면에서 해당 판매글 제거
+	                        alert("삭제되었습니다.");
+	                        location.reload(); // 페이지 새로고침
+	                    } else {
+	                        alert("삭제 실패했습니다.");
+	                    }
+	                },
+	                error: function() {
+	                    alert("삭제 과정에서 오류가 발생했습니다.");
+	                }
+	            });
+	        } else {
+	            // 취소 버튼을 눌렀을 때 아무 동작 없음
+	            return false;
+	        }
+	    } // confirmDelete 함수의 닫는 괄호 추가
+	
+	    function setRating(rating) {
+	        const starWidth = (rating / 5) * 100;
+	        document.querySelector('.front-stars').style.width = `${starWidth}%`;
+	    }
+	</script>
+
 </body>
 </html>
 

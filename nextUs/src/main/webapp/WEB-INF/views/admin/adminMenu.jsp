@@ -64,30 +64,45 @@
 							<a href="javascript:void(0)"aria-expanded="true">
 							<i class="ti-layers-alt"></i>
 							<span>셀러관리</span><span>
-							<c:if test="${sellerRequestMap.countUnapproved > 0}">
+							<c:if test="${SRnew > 0}">
                 				<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
            					</c:if></span>
 							</a>
 							<ul class="collapse">
-								<li><a href="/sellerRequestManagement">셀러 등록 관리<span>
-								<c:if test="${sellerRequestMap.countUnapproved > 0}">
-                				<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
-           					</c:if></span></a></li>
+								<li><a href="/sellerRequestManagement"><span>셀러 등록 관리</span><span>
+								<c:if test="${SRnew > 0}">
+                					<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
+           						</c:if>
+           						</span></a></li>
 								<li><a href="/sellerBanManagement">셀러 제재 관리</a></li>
 							</ul>
 						</li>
 						
 						
-						<li><a href="/sellerSettlement"><i class="fa fa-calculator"></i> <span>판매자 정산 내역</span></a></li>
+						<li><a href="/sellerSettlement"><i class="fa fa-calculator"></i> <span>판매자 정산 내역</span>
+						<span>
+								<c:if test="${STnew > 0}">
+                					<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
+           						</c:if>
+           						</span>
+						
+						</a></li>
 						
 						<li><a href="/productManagement"><i class="fa fa-table"></i> <span>상품관리</span></a></li>
-						<li><a href="/refundRequest"><i class="fa fa-table"></i> <span>환불관리</span></a></li>
+						<li><a href="/refundRequest"><i class="fa fa-table"></i> <span>환불관리</span>
+						<span>
+								<c:if test="${RFnew > 0}">
+                					<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
+           						</c:if>
+           						</span>
+						
+						</a></li>
 						<li><a href="/report"><i class="fa fa-exclamation-triangle"></i> <span>신고접수내역</span></a></li>
 						
 						<li><a href="javascript:void(0)" aria-expanded="true"><i class="ti-slice"></i><span>고객센터</span></a>
 							<ul class="collapse">
 								<li><a href="/notice.do">공지사항</a></li>
-								<li><a href="/QnA">고객센터(Q&A)</a></li>
+								<li><a href="/adqna/index.do">고객센터(Q&A)</a></li>
 								<li><a href="/adfaq/index.do">자주 묻는 질문(FAQ)</a></li>
 								<li><a href="/adevent/index.do">이벤트</a></li>
 							</ul>

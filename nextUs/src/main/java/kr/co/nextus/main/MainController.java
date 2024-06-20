@@ -1,6 +1,7 @@
 package kr.co.nextus.main;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,8 @@ public class MainController {
 	@GetMapping("/index.do")
 	public String index(Model model, SellListVO vo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
-		List<SellListVO> list = sellListService.list(vo);
-		model.addAttribute("list", list);
+		Map<String, Object> list = sellListService.list(vo);
+		model.addAttribute("list", list.get("list"));
 		return "index";
 	}
 }

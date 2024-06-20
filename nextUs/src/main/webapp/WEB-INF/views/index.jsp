@@ -74,7 +74,7 @@
 									<div class="card-img">
 
 										<!-- Image -->
-										<a class="card-img" href="/selllist/view.do?no=${vo.sellno }"> <img
+										<a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }"> <img
 											class="card-img-top card-img-front"
 											src="/upload/board/1717978758514.jpg"
 											style="width: 90%; height: 250px; object-fit: cover;">
@@ -86,12 +86,12 @@
 
 										<!-- Category -->
 										<div class="fs-xs">
-											<a class="text-muted" href="/selllist/view.do?no=${vo.sellno }">카테고리? 별점? 중 뭐넣을까</a>
+											<a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno }">카테고리? 별점? 중 뭐넣을까</a>
 										</div>
 
 										<!-- Title -->
 										<div class="fw-bold">
-											<a class="text-body" href="/selllist/view.do?no=${vo.sellno }"> ${vo.title } </a>
+											<a class="text-body" href="/selllist/view.do?sellno=${vo.sellno }"> ${vo.title } </a>
 										</div>
 
 										<!-- Price -->

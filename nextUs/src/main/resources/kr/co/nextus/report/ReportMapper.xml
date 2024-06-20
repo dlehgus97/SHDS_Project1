@@ -17,20 +17,47 @@
 	<!-- 리스트 10개씩 출력 -->
 	<select id="list" parameterType="kr.co.nextus.report.ReportVO" resultType="kr.co.nextus.report.ReportVO">
 	    SELECT
-	        REPORT.*,
-	        reporter.email AS reportermemberemail,
-	        reported.email AS reportedmemberemail
+	        R.*,
+	        M1.email AS reportermemberemail,
+	        M2.email AS reportedmemberemail
 	    FROM
-	        REPORT
+	        REPORT R
 	    LEFT JOIN
-	        MEMBER AS reporter ON REPORT.memberno = reporter.no
+	        MEMBER AS M1 ON R.memberno = M1.no
 	    LEFT JOIN
-	        MEMBER AS reported ON REPORT.reportedmemberno = reported.no
-	    ORDER BY no
+	        MEMBER AS M2 ON R.reportedmemberno = M2.no
+	    ORDER BY no DESC
 	    LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->
 	<select id="count" parameterType="kr.co.nextus.report.ReportVO" resultType="int">
 		SELECT COUNT(*) FROM REPORT
+	</select>
+	
+	<!-- 신고접수내역에서 신고 상세보기 -->
+	<select id="detail" parameterType="int"
+		resultType="kr.co.nextus.report.ReportVO">
+		SELECT 
+    		R.*, 
+    		M1.email AS reportermemberemail, 
+   		 	M2.email AS reportedmemberemail
+		FROM 
+    		REPORT R
+		JOIN 
+    		MEMBER M1 ON R.memberno = M1.no
+		JOIN 
+    		MEMBER M2 ON R.reportedmemberno = M2.no
+		WHERE 
+       		R.no = #{no}
+	</select>
+	
+	<!-- 제제내역추가에서 신고내역 -->
+	<select id="detailList" parameterType="String"
+		resultType="kr.co.nextus.report.ReportVO">
+		SELECT R.date, R.content
+		FROM REPORT R
+		INNER JOIN MEMBER M ON R.reportedmemberno = M.no
+		WHERE M.email = #{email}
+
 	</select>
 </mapper>   

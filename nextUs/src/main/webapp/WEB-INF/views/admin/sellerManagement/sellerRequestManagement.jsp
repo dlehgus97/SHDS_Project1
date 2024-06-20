@@ -21,7 +21,6 @@
 	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
 
 
-<script src="../resources/js/admin/memberStatus.js"></script>
 <script src="../resources/js/admin/sellerRequest.js"></script>
 <style>
 table {
@@ -43,6 +42,9 @@ margin-top:13px;
 </style>
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		<div class="main-content" style="background-color:#485465;">

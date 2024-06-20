@@ -37,10 +37,9 @@ public class SellerRequestServiceImpl implements SellerRequestService {
         if (count % 10 > 0) totalPage++;
         List<SellerRequestVO> list = mapper.list(param); // 목록
         
-        int countUnapproved = mapper.countUnapproved(param);
+        
        
         Map<String, Object> map = new HashMap<>();
-        map.put("countUnapproved",countUnapproved);
         map.put("count", count);
         map.put("totalPage", totalPage);
         map.put("list", list);
@@ -101,6 +100,13 @@ public class SellerRequestServiceImpl implements SellerRequestService {
 		vo.setNo(no);
 		result = mapper.deny(vo);
 		return result;
+	}
+
+
+	@Override
+	public int NEW(SellerRequestVO vo) {
+		int countUnapproved = mapper.countUnapproved(vo);
+		return countUnapproved;
 	}
 
 

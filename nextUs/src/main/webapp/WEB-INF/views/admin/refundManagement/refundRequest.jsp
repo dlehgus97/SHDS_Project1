@@ -45,6 +45,9 @@ width:100px;
 </style>
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		<div class="main-content" style="background-color:#485465;">
@@ -111,7 +114,7 @@ width:100px;
 																</c:when>
 																<c:when test="${vo.status == 3}">
 																	<button class="btn btn-rounded btn-success mb-3 mybutton" type="button"
-																		onclick="openPopup(event); return false;">환불 완료
+																		onclick="openReciept(event); return false;">환불 완료
 																	</button>
 																</c:when>
 															</c:choose></td>

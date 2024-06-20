@@ -89,7 +89,7 @@
 		purchaseCount
 		FROM MEMBER
 		<include refid="searchSql" />
-		ORDER BY no
+		ORDER BY no DESC
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->
@@ -103,7 +103,7 @@
 		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
 		SELECT * FROM MEMBER
 		<!-- <include refid="searchSql"/> -->
-		ORDER BY no
+		ORDER BY no DESC
 	</select>
 
 	<!-- 누적 신고횟수 이메일,닉네임과 함께 출력 (멤버중에)-->

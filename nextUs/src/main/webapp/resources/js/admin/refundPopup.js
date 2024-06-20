@@ -1,4 +1,4 @@
-function openPopup(event) {
+function openReciept(event) {
 			var popupWidth = 900;
             var popupHeight = 720;
 			var screenWidth = window.screen.width;

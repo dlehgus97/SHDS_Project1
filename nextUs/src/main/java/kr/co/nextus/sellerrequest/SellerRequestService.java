@@ -15,5 +15,7 @@ public interface SellerRequestService {
 	
 	int approve(SellerRequestVO vo, int memberno);
 	boolean deny(SellerRequestVO vo, int no);
+	
+	int NEW(SellerRequestVO vo);
 
 }

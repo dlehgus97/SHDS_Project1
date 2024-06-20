@@ -18,7 +18,7 @@ public class QnAServiceImpl implements QnAService {
 	private QnAMapper mapper;
 	
 	@Override
-	public int insert(QnAVO vo, HttpServletRequest request) {
+	public int insert(QnAVO vo) {
 
 		int r = mapper.insert(vo);
 
@@ -26,20 +26,20 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public int update(QnAVO vo, HttpServletRequest request) {
+	public int update(QnAVO vo) {
 		int r = mapper.update(vo);
 		return r;
 	}
 
 	@Override
-	public int delete(QnAVO vo, HttpServletRequest request) {
+	public int delete(QnAVO vo) {
 		QnAVO data = mapper.detail(vo);
 
 		return mapper.delete(vo.getNo());
 	}
 	
 	@Override
-	public int reply(QnAVO vo, HttpServletRequest request) {
+	public int reply(QnAVO vo) {
 		int r = mapper.insert(vo);
 		return r;
 	}
@@ -77,6 +77,24 @@ public class QnAServiceImpl implements QnAService {
 		}
 		QnAVO data = mapper.detail(vo);
 		return data;
+	}
+	
+	@Override
+	public int answer(int no, String answer) {
+		Map<String,Object> map =new HashMap<>();
+		
+		map.put("no", no);
+		map.put("answer", answer);
+	    int result = mapper.answer(map);
+	    
+		return mapper.answer(map);
+	}
+	
+	@Override
+	public int addelete(int no) {
+		int data = mapper.addelete(no);
+
+		return mapper.addelete(no);
 	}
 
 }

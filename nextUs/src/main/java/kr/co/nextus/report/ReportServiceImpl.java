@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.nextus.notice.NoticeVO;
 import kr.co.nextus.review.ReviewVO;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 
 
 @Service
@@ -55,5 +56,21 @@ public class ReportServiceImpl implements ReportService {
 		map.put("isNext", isNext);
 		return map;
 	}
+
+	@Override
+	public Map<String, Object> list(ReportVO vo, int no) {
+        List<ReportVO> list = mapper.detail(no); 
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+		return map;
+	}
+
+	@Override
+	public List<ReportVO> list(String email) {
+		List<ReportVO> list = mapper.detailList(email); 
+
+		return list;
+	}
+	
 
 }

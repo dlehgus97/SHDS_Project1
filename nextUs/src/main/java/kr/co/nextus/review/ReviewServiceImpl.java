@@ -60,6 +60,11 @@ public class ReviewServiceImpl implements ReviewService {
 
 	}
 	
+	@Override
+	public int updateisreview(ReviewVO vo) {
+		return mapper.updateisreview(vo);
+
+	}
 	
 	@Override
 	public int delete(int reviewno) {

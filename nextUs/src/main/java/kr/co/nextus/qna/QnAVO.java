@@ -12,6 +12,8 @@ public class QnAVO {
 	private Timestamp write_date;
 	private int readcnt;
 	private int writer;
+	private String answer;
+	private Timestamp answer_date;
 	private String category;
 	
 	private String writer_name;

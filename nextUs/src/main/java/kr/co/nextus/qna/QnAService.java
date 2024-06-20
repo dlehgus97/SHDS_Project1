@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface QnAService {
-	int insert(QnAVO vo, HttpServletRequest request);
-	int reply(QnAVO vo, HttpServletRequest request);
-	int update(QnAVO vo, HttpServletRequest request);
-	int delete(QnAVO vo, HttpServletRequest request);
+	int insert(QnAVO vo);
+	int reply(QnAVO vo);
+	int update(QnAVO vo);
+	int delete(QnAVO vo);
 	Map<String, Object> list(QnAVO vo);
 	QnAVO detail(QnAVO vo, boolean isUpdate);
+	int answer(int no, String answer);
+	int addelete(int no);
+;
 }

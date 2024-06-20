@@ -61,19 +61,19 @@
             <!-- Nav -->
             <nav class="mb-10 mb-md-0">
               <div class="list-group list-group-sm list-group-strong list-group-flush-x">
-                <a class="list-group-item list-group-item-action dropend-toggle active" href="orderlist.do?no=${login.no}">
+                <a class="list-group-item list-group-item-action dropend-toggle active" href="orderlist.do">
                   주문 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="wishlist.do?no=${login.no}">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="wishlist.do">
                   찜 목록
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-personal-info.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
                   내정보
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-address.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
                   문의 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="account-payment.html">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
                   보유 쿠폰
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle" href="#!">
