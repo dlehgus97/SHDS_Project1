@@ -1,11 +1,6 @@
 package kr.co.nextus.admin;
 
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.nextus.member.MemberVO;
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 
@@ -28,10 +23,14 @@ public class AdminController {
 	private AdminService service;
 	@Autowired
 	private SellerRequestService SRservice;
+	@Autowired
+	private BuyListService BLservice;
 	
 	@RequestMapping("/adminMain")
-	public String adminMain(SellerRequestVO vo, Model model) {
-		model.addAttribute("sellerRequestMap", SRservice.list(vo));
+	public String adminMain(SellerRequestVO vo, BuyListVO vo2, Model model) {
+		model.addAttribute("SRnew", SRservice.NEW(vo));
+		model.addAttribute("STnew", BLservice.settleNEW(vo2));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo2));
 		return "adminMain";
 	}
 	

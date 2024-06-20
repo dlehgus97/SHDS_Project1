@@ -16,5 +16,9 @@ public interface BuyListMapper {
 	int count(BuyListVO param);
 
 	boolean settle(int buyno);
+
+	int Countsettle(BuyListVO vo);
+
+	int Countrefund(BuyListVO vo);
 	
 }

@@ -24,7 +24,7 @@
 		FROM BAN
 		JOIN MEMBER ON BAN.memberno = MEMBER.no
 		WHERE MEMBER.seller = 0
-		ORDER BY no
+		ORDER BY no DESC
 		LIMIT #{startIdx}, 10
 	</select>
 	<select id="sellerBanList" parameterType="kr.co.nextus.ban.BanVO" resultType="kr.co.nextus.ban.BanVO">
@@ -32,7 +32,7 @@
 		FROM BAN
 		JOIN MEMBER ON BAN.memberno = MEMBER.no
 		WHERE MEMBER.seller = 1
-		ORDER BY no
+		ORDER BY no DESC
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->

@@ -26,7 +26,7 @@
 	        MEMBER AS M1 ON R.memberno = M1.no
 	    LEFT JOIN
 	        MEMBER AS M2 ON R.reportedmemberno = M2.no
-	    ORDER BY no
+	    ORDER BY no DESC
 	    LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->

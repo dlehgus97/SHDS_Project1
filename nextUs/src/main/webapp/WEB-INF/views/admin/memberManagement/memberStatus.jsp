@@ -74,7 +74,6 @@ tbody tr:hover {
 												<th>이메일</th>
 												<th>닉네임</th>
 												<th>가입일</th>
-												<th>최근 구매일(확정)</th>
 												<th>누적 구매수</th>
 											</tr>
 										</thead>
@@ -94,9 +93,6 @@ tbody tr:hover {
 														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 																value="${vo.regdate}" /></td>
 
-														<!-- 최근구매일로 바꾸기 -->
-														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
-																value="${vo.regdate}" /></td>
 
 														<td>${vo.purchaseCount}</td>
 													</tr>

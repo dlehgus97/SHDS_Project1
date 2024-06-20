@@ -1,10 +1,7 @@
 package kr.co.nextus.buylist;
 
 
-import java.util.List;
 import java.util.Map;
-
-import kr.co.nextus.coupon.CouponVO;
 
 
 public interface BuyListService {
@@ -14,4 +11,7 @@ public interface BuyListService {
 	Map<String, Object> list(BuyListVO vo);
 
 	boolean settle(int buyno);
+
+	int settleNEW(BuyListVO vo);
+	int refundNEW(BuyListVO vo);
 }

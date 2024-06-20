@@ -31,5 +31,19 @@
 		parameterType="int">
 		UPDATE BUYLIST SET status = '6' WHERE buyno = #{buyno} 
 	</update>
+	
+	<!-- 정산필요 건수 -->
+	<select id="Countsettle" parameterType="kr.co.nextus.buylist.BuyListVO"
+		resultType="int">
+		SELECT COUNT(*) FROM BUYLIST
+		WHERE status = 5;
+	</select>
+	
+	<!-- 환불필요 건수 -->
+	<select id="Countrefund" parameterType="kr.co.nextus.buylist.BuyListVO"
+		resultType="int">
+		SELECT COUNT(*) FROM BUYLIST
+		WHERE status = 2;
+	</select>
 
 </mapper>
