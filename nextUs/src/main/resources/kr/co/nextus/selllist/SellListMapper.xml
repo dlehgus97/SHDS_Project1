@@ -52,7 +52,7 @@
 
 		FROM SELLLIST
 		<include refid="searchSql"/>
-		ORDER BY sellno
+		ORDER BY sellno DESC
 		LIMIT #{startIdx}, 10
 	</select>
 	<!-- 카운트 -->

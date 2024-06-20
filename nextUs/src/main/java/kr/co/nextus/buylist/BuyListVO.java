@@ -49,6 +49,7 @@ public class BuyListVO {
 	private int startIdx; // limit 앞에 들어갈 시작인덱스값
 
 	private String sellerEmail;
+	private String account;
 
 	public BuyListVO() {
 			this.page = 1;

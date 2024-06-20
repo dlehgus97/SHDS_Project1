@@ -27,7 +27,7 @@
 		resultType="kr.co.nextus.coupon.CouponVO">
 		SELECT * FROM COUPON
 		GROUP BY name
-		ORDER BY no
+		ORDER BY no DESC
 		LIMIT
 		#{startIdx}, 10
 	</select>

@@ -42,6 +42,25 @@ public class BuyListServiceImpl implements BuyListService {
 		return map;
 	}
 
+	@Override
+	public boolean settle(int buyno) {
+		boolean result = mapper.settle(buyno);
+		return result;
+	}
+
+	
+	@Override
+	public int settleNEW(BuyListVO vo) {
+		int Countsettle = mapper.Countsettle(vo);
+		return Countsettle;
+	}
+
+	@Override
+	public int refundNEW(BuyListVO vo) {
+		int Countrefund = mapper.Countrefund(vo);
+		return Countrefund;
+	}
+
 	
 	@Override
 	public void insert(List<BuyListVO> vos) {
