@@ -92,13 +92,11 @@ public class SellListServiceImpl implements SellListService {
 		return map;
 	}
 
-	@Override
-	public boolean deleteSelllist(int sellno) {
-		System.out.println("BBB"+sellno);
-		boolean result = mapper.delete(sellno);
-		System.out.println("BBB"+result);
-
-		return result;
-	}
+	@Override		
+	public boolean deleteSelllist(int sellno) {		
+		boolean result = mapper.delete(sellno);	
+		return result;	
+	}		
+			
 
 }

@@ -42,14 +42,14 @@ gap:20px;
 	 <div class="col-md-6 mt-5">
 			<div class="card">
 				<div class="card-body">
-					<h1 class="header-title" style="font-size:30px;">프로필</h1>
+					<h1 class="header-title" style="font-size:30px;">신고 상세내용</h1>
 					
 					<ul class="list-group" style="font-size:15px;">
 					<c:forEach var="vo" items="${map.list}">
-						이메일<li class="list-group-item">${vo.email != null ? vo.email : '(미입력)'} </li><br>
-						닉네임<li class="list-group-item">${vo.nickname != null ? vo.nickname : '(미입력)'}</li><br>
-						요청일자<li class="list-group-item"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></li><br>
-						첨부파일<li class="list-group-item">${vo.file_no != null ? vo.file_no : '(미입력)'}</li>
+						신고자 이메일<li class="list-group-item">${vo.reportermemberEmail != null ? vo.reportermemberEmail : '(미입력)'} </li><br>
+						글 작성자 이메일<li class="list-group-item">${vo.reportedmemberEmail != null ? vo.reportedmemberEmail : '(미입력)'}</li><br>
+						신고 날짜<li class="list-group-item"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.date}" /></li><br>
+						상세내용<li class="list-group-item">${vo.content != null ? vo.content : '(미입력)'}</li>
 					</c:forEach>
 					</ul>
 				</div>
@@ -59,24 +59,7 @@ gap:20px;
 
 	
 	
-	<div class="mydiv">
-
-		<form method="post" name="approve" id="approve" style="margin-left:40px;"
-			action="requestApprove.do">
-			<input name="memberno" type="hidden" value='${vo.memberno}'>
-			<input name="bank" type="hidden" value='${vo.bank}'> <input
-				name="account" type="hidden" value='${vo.account}'>
-			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
-			<input class="btn btn-success btn-lg btn-block" type="submit" id="approve" value="승인" style="width:195px;">
-		</form>
-		<br>
-		<form method="post" name="deny" id="deny" action="requestDeny.do">
-			<input name="no" type="hidden" value='${vo.no}'>
-			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
-			<input class="btn btn-danger btn-lg btn-block" type="submit" id="deny" value="승인거부" style="width:195px;">
-		</form>
-	</div>
-	<br>
+	
 	<button onclick="closePopup()" class="btn btn-secondary btn-lg btn-block" style="width:430px; margin-left:40px;'">닫기</button>
 
 

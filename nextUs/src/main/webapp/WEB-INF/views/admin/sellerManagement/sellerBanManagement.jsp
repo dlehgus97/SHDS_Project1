@@ -42,6 +42,9 @@ tbody tr:hover {
 </style>
 </head>
 <body>
+<div id="preloader">
+        <div class="loader"></div>
+    </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
 		<div class="main-content" style="background-color:#485465;">

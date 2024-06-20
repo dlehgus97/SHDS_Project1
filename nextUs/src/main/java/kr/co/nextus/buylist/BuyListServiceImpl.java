@@ -42,6 +42,12 @@ public class BuyListServiceImpl implements BuyListService {
 		return map;
 	}
 
+	@Override
+	public boolean settle(int buyno) {
+		boolean result = mapper.settle(buyno);
+		return result;
+	}
+
 	
 
 }

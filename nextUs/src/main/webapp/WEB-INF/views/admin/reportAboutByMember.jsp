@@ -28,56 +28,56 @@
 <script src="../resources/admin/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-.mydiv{
-display: flex;
-gap:20px;
+tr{
+height:40px;
+font-size:15px;
 }
-
+tbody tr:hover {
+	background-color: #f1f1f1; /* 배경색 변경 */
+}
 </style>
 </head>
 <body>
-<div id="preloader">
-        <div class="loader"></div>
-    </div>
-	 <div class="col-md-6 mt-5">
-			<div class="card">
-				<div class="card-body">
-					<h1 class="header-title" style="font-size:30px;">프로필</h1>
-					
-					<ul class="list-group" style="font-size:15px;">
-					<c:forEach var="vo" items="${map.list}">
-						이메일<li class="list-group-item">${vo.email != null ? vo.email : '(미입력)'} </li><br>
-						닉네임<li class="list-group-item">${vo.nickname != null ? vo.nickname : '(미입력)'}</li><br>
-						요청일자<li class="list-group-item"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></li><br>
-						첨부파일<li class="list-group-item">${vo.file_no != null ? vo.file_no : '(미입력)'}</li>
-					</c:forEach>
-					</ul>
+<div class="main-content-inner">
+				<div class="row">
+					<div class="col-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<div class="data-tables datatable-dark">
+									<table id="dataTable3" class="text-center" style="width:100%;">
+										<thead class="text-capitalize">
+											<tr>
+												<th>시간</th>
+												<th>신고내용</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:if test="${empty map.list}">
+												<tr>
+													<td class="first" colspan="8">신고 내역이 없습니다.</td>
+												</tr>
+											</c:if>
+											<c:if test="${!empty map.list }">
+												<c:forEach var="vo" items="${map.list}">
+													<tr>
+														<td class="date"><fmt:formatDate
+																pattern="yy-MM-dd HH:MM" value="${vo.date}" /></td>
+														<td>${vo.content != null ? vo.content : '(미입력)'}</td>
+													</tr>
+												</c:forEach>
+											</c:if>
+										</tbody>
+
+									</table>
+									
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-
-
-	
-	
-	<div class="mydiv">
-
-		<form method="post" name="approve" id="approve" style="margin-left:40px;"
-			action="requestApprove.do">
-			<input name="memberno" type="hidden" value='${vo.memberno}'>
-			<input name="bank" type="hidden" value='${vo.bank}'> <input
-				name="account" type="hidden" value='${vo.account}'>
-			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
-			<input class="btn btn-success btn-lg btn-block" type="submit" id="approve" value="승인" style="width:195px;">
-		</form>
-		<br>
-		<form method="post" name="deny" id="deny" action="requestDeny.do">
-			<input name="no" type="hidden" value='${vo.no}'>
-			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
-			<input class="btn btn-danger btn-lg btn-block" type="submit" id="deny" value="승인거부" style="width:195px;">
-		</form>
-	</div>
-	<br>
-	<button onclick="closePopup()" class="btn btn-secondary btn-lg btn-block" style="width:430px; margin-left:40px;'">닫기</button>
+			
+	<button onclick="closePopup()" class="btn btn-secondary btn-lg btn-block" style="width:90%; margin-left:40px;'">닫기</button>
 
 
 

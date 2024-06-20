@@ -76,27 +76,28 @@ public class SellListController {
 //		return "admin/productManagement/productManagement";
 //	}
 	
-	//관리자
-	@RequestMapping("/productManagement")
-	public String productManagement(SellListVO vo,SellerRequestVO vo2,Model model) {
-		model.addAttribute("selllist", sellListService.index(vo));
-		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
-		return "admin/productManagement/productManagement";
-	}
-	
-	//판매글삭제
-	@RequestMapping(value = "/deleteSelllist/{sellno}", method = RequestMethod.POST)
-    @ResponseBody
-	public String deleteSelllist(@PathVariable("sellno") int sellno) {
-		System.out.println("AAA실행은도ㅒㅆ음");
-		try {
-            sellListService.deleteSelllist(sellno);
-            return "success"; // 성공 시 success 문자열 반환
-        } catch (Exception e) {
-            return "error"; // 실패 시 error 문자열 반환
-        }
-		
-	}
+	// 관리자						
+	@RequestMapping("/productManagement")						
+	public String productManagement(SellListVO vo, SellerRequestVO vo2, Model model) {						
+		model.addAttribute("selllist", sellListService.index(vo));					
+		model.addAttribute("sellerRequestMap", SRservice.list(vo2));					
+		return "admin/productManagement/productManagement";					
+	}						
+							
+	// 판매글삭제						
+	@RequestMapping(value = "/deleteSelllist/{sellno}", method = RequestMethod.POST)						
+	@ResponseBody						
+	public String deleteSelllist(@PathVariable("sellno") int sellno) {						
+							
+		try {					
+			sellListService.deleteSelllist(sellno);				
+			return "success"; // 성공 시 success 문자열 반환				
+		} catch (Exception e) {					
+			return "error"; // 실패 시 error 문자열 반환				
+		}					
+							
+	}						
+
 	
 	
 }

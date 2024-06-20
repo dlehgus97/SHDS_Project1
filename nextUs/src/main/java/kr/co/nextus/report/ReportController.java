@@ -1,10 +1,8 @@
 package kr.co.nextus.report;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.nextus.event.EventVO;
 import kr.co.nextus.member.MemberVO;
-import kr.co.nextus.seller.SellerService;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 
@@ -52,4 +46,17 @@ public class ReportController {
 		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
 		return "admin/reports/report";
 	}
+	@RequestMapping("/reportDetailPopup")
+	public String reportDetailPopup(ReportVO vo,Model model,@RequestParam("no") int no) {
+		model.addAttribute("map", service.list(vo,no));
+		return "admin/reports/reportDetailPopup";
+	}
+	
+//	@RequestMapping("/reportAboutByMember")
+//	public String reportAboutByMember(ReportVO vo,Model model,@RequestParam("email") String email) {
+//		model.addAttribute("map", service.list(vo,email));
+//		return "admin/reportAboutByMember";
+//	}
+	
+	
 }
