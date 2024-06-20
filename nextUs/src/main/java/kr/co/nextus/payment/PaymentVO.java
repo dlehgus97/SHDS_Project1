@@ -12,6 +12,7 @@ public class PaymentVO {
     private String currency;
     private String payMethod;
     private Customer customer;
+    private Coupon coupon;
 }
 
 @Data
@@ -19,4 +20,10 @@ class Customer {
     private String fullName;
     private String phoneNumber;
     private String email;
+}
+
+@Data
+class Coupon {
+	private int couponNo;
+	private int discount;
 }

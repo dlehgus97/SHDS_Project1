@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.nextus.buylist.BuyListVO;
+
 @Mapper
 public interface CartMapper {
 	
@@ -16,5 +18,6 @@ public interface CartMapper {
 	int check(@Param("memberno") int memberno, @Param("sellno") int sellno, @Param("optionno") int optionno); // 이미 db에 저장된 아이와 같은 아이가 잇는지 중복확인을 위한 메서드
 	
 	List<CartVO> list(@Param("memberno") int memberno);
+	void delList(List<BuyListVO> vos);
 	
 }

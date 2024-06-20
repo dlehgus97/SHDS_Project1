@@ -19,4 +19,5 @@ public interface CouponService {
 	
 	//유저용
 	List<CouponVO> listToMember(int no);
+	void useCoupon(int couponno);
 }

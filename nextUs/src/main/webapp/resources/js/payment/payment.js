@@ -80,7 +80,7 @@ function confirmCoupon() {
     const selectedCoupon = selectedOption.text;
     const couponType = $(selectedOption).data('type');
     const couponDiscount = $(selectedOption).data('discount');
-    data.couponNo = selectedOption.value;
+    couponSelectedNo = selectedOption.value;
     
     // input 필드에 선택된 쿠폰을 설정
     appliedCouponInput.value = selectedCoupon;
@@ -133,8 +133,7 @@ const data = {
 	storeId: "store-eabaed12-5a6a-426a-9e92-39cbba427130",
 	// 채널 키 설정
 	channelKey: "channel-key-187b545b-54be-45df-bd07-bf6714a325f7",
-	paymentId: `${generateRandomString(12)}`,
-	//paymentId: `testlx19b6i7`,
+	paymentId: "",
 	orderName: "",
 	totalAmount: 100,
 	currency: "CURRENCY_KRW",
@@ -143,29 +142,59 @@ const data = {
 		fullName: "",
 		phoneNumber: "",
 		email: "",
-	},
-	couponNo: ""
+	}
 };
+
+var pI = generateRandomString(12);
+let couponSelectedNo = 0;
 
 async function requestPayment() {
 	// 입력 필드의 값을 data 객체에 설정
+	
+    
     data.customer.fullName = $('#memberName').val();
     data.customer.phoneNumber = $('#memberHp').val();
     data.customer.email = $('#memberEmail').val();
-    data.orderName = createOrderName();
+    data.paymentId = pI;
+    
+    var oN = createOrderName();
+    data.orderName = oN;
+    
+    //결제완료시에 보낼 값 정하기
+    const transformedProducts = products.map(product => {
+        return {
+            memberno: loginNo,
+            optionno: product.optionno,
+            price: product.price,
+            paymentId: pI,
+            buydate: "",
+            decidedate: 0,
+            sellno: product.sellno,
+            hp: $('#memberHp').val(),
+            email: $('#memberEmail').val(),
+            addr1: $('#memberAddr1').val(),
+            addr2: $('#memberAddr2').val(),
+            couponNo: couponSelectedNo,
+            orderName: product.title
+        };
+    });
     
 	console.log(data);
+	console.log('under');
+    console.log(transformedProducts);
 	const response = await PortOne.requestPayment(data);
 	console.log(response);
+
+    
 	
 	if (!response.hasOwnProperty('code')) {
 		$.ajax({
             url: '/payment/paySuccess',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(data),
+            data: JSON.stringify(transformedProducts),
             success: function(response) {
-                console.log('서버 응답:', response);
+                
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('요청 실패:', textStatus, errorThrown);

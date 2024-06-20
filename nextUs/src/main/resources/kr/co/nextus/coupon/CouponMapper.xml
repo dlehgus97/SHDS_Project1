@@ -55,5 +55,12 @@
 		FROM COUPON
 		WHERE memberno = #{no} AND status = 1
 	</select>
+	
+	<!-- 쿠폰 사용 -->
+	<update id="useCoupon" parameterType="int">
+	    UPDATE COUPON
+	    SET status = 0
+	    WHERE no = #{couponno}
+	</update>
 
 </mapper>

@@ -25,7 +25,9 @@ public class BuyListVO {
 	private String addr2;
 	private int isrevire;
 	// 판매글 번호
+	private int couponNo;
 	private int discount;
+	private String orderName;
 	
 	// 상품명
 	private String title;

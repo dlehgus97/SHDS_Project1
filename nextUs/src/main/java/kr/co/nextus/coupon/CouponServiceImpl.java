@@ -74,5 +74,10 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponVO> listToMember(int no) {
 		return mapper.listToMember(no);
 	}
+	
+	@Override
+	public void useCoupon(int couponno) {
+		mapper.useCoupon(couponno);
+	}
 
 }

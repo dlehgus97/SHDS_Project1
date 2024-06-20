@@ -15,10 +15,4 @@ public class PaymentServiceImp implements PaymentService {
 		mapper.insert(vo);
 	}
 
-	@Override
-	public void couponUse(PaymentVO vo) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

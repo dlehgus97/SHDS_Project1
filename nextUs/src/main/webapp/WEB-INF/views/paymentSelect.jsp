@@ -15,6 +15,7 @@
 <script src="/resources/js/payment/payment.js"></script>
 <script>
 	//서버에서 전달받은 값을 JavaScript 변수로 설정 개인정보 입력용
+	var loginNo = '${login.no}';
 	var loginName = '${login.name}';
 	var loginHp = '${login.hp}';
 	var loginEmail = '${login.email}';
@@ -22,8 +23,9 @@
 	var loginAddr2 = '${login.addr2}';
 	var sumPrice = 0;
 	var productTitles = [];
+	var products = [];
 	
-	// 모든 가격을 합산하는 함수
+	// 가격합산
 	function calculateTotalPrice() {
 	    var prices = document.querySelectorAll('.product_right_container .price');
 	    var total = 0;
@@ -42,6 +44,14 @@
 	 	// 각 상품 제목을 배열에 추가
 		<c:forEach var="cartVO" items="${selectedProducts}">
 			productTitles.push('${cartVO.title}');
+			products.push({
+                sellno: "${cartVO.sellno}",
+                optionno: "${cartVO.optionno}",
+                thumbnail_real: "${cartVO.thumbnail_real}",
+                title: "${cartVO.title}",
+                price: "${cartVO.price}",
+                content: "${cartVO.content}"
+            });
 		</c:forEach>
 	}
 </script>

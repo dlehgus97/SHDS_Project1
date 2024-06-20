@@ -22,4 +22,5 @@ public interface CouponMapper {
 	
 	//유저에게 보여주기 위함
 	List<CouponVO> listToMember(int no);
+	void useCoupon(int couponno);
 }

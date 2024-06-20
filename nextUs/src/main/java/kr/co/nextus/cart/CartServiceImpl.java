@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.selllist.SellListMapper;
 import kr.co.nextus.selllist.SellListVO;
 
@@ -36,4 +37,9 @@ public class CartServiceImpl implements CartService {
     public int delete(int memberno, int sellno, int optionno) {
         return mapper.delete(memberno, sellno, optionno);
     }
+	
+	@Override
+	public void delList(List<BuyListVO> vos) {
+		mapper.delList(vos);
+	}
 }

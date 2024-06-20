@@ -43,5 +43,8 @@ public class BuyListServiceImpl implements BuyListService {
 	}
 
 	
-
+	@Override
+	public void insert(List<BuyListVO> vos) {
+		mapper.insert(vos);
+	}
 }
