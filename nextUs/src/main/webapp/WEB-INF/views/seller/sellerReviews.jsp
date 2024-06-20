@@ -342,9 +342,11 @@
             method: 'POST',
             body: formData
         })
-        .then(response => response.text())
+        .then(response => response.text()) // fetch() 함수의 반환된 promise 객체를 처리, 응답(response)을 텍스트 형식으로 변환하여 반환
         .then(result => {
-            if (result === 'success') {
+        	console.log('Response from server:', result); // result 값을 콘솔에 출력
+        	
+            if (result === '"success"') {
                 alert('신고가 접수되었습니다.');
                 closeReportPopup();
                 location.reload();
