@@ -43,21 +43,19 @@
 	</update>
 	
 	<sql id="searchSql">
-		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					title LIKE '%${searchWord}%' OR text LIKE '%${searchWord}%'
+					AND title LIKE '%${searchWord}%' OR text LIKE '%${searchWord}%'
 				</if>
 				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
+					AND ${searchType} LIKE '%${searchWord}%'
 				</if>
 			</if>
-		</where>
 	</sql>
 	
 	<!-- 카운트 -->
  	<select id="count" parameterType="kr.co.nextus.review.ReviewVO" resultType="int">
-		SELECT COUNT(*) FROM REVIEW WHERE sellno=#{no}
+		SELECT COUNT(*) FROM REVIEW WHERE sellno=#{sellno}
 		<include refid="searchSql"/>
 	</select>
 	

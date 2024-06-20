@@ -939,7 +939,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<ul class='paging'>
 					<c:if test="${review.prev }">
 						<li><a
-							href="view.do?no=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
+							href="view.do?sellno=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
 								<< </a></li>
 					</c:if>
 					<c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
@@ -948,12 +948,12 @@ document.addEventListener("DOMContentLoaded", function() {
 						</c:if>
 						<c:if test="${p != ReviewVO.page}">
 							<li><a
-								href='view.do?no=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews'>${p}</a></li>
+								href='view.do?sellno=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews'>${p}</a></li>
 						</c:if>
 					</c:forEach>
 					<c:if test="${review.next }">
 						<li><a
-							href="view.do?no=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
+							href="view.do?sellno=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
 								>> </a></li>
 					</c:if>
 				</ul>
@@ -961,13 +961,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			<!-- 검색 -->
 			<div class="bbsSearch">
 				<form method="get" name="searchForm" id="searchForm" action="view.do#reviews">
-					<input type="hidden" name="no" value="${vo.sellno }">
+					<input type="hidden" name="sellno" value="${vo.sellno }">
 					<span class="srchSelect"> <select id="stype" name="searchType" class="dSelect" title="검색분류 선택">
 							<option value="all">전체</option>
 							<option value="title"
 								<c:if test="${ReviewVO.searchType == 'title'}">selected</c:if>>제목</option>
-							<option value="content"
-								<c:if test="${ReviewVO.searchType == 'content'}">selected</c:if>>내용</option>
+							<option value="text"
+								<c:if test="${ReviewVO.searchType == 'text'}">selected</c:if>>내용</option>
 					</select>
 					</span> 
 					<span class="searchWord"> 

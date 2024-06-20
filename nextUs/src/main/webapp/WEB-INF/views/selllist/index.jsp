@@ -13,7 +13,7 @@
 </head>
 <body>
 	<c:forEach var="vo" items="${list }">
-		<a href="/selllist/view.do?no=${vo.sellno }">들어가기</a>
+		<a href="/selllist/view.do?sellno=${vo.sellno }">들어가기</a>
 	</c:forEach>
 </body>
 </html>

@@ -46,7 +46,7 @@ public class SellListController {
 	
 	
 	@GetMapping("/selllist/view.do")
-	public String detail(Model model, HttpSession sess, @RequestParam("no") int sellno, SellListVO vo, ReviewVO rvo, WishListVO wvo) {
+	public String detail(Model model, HttpSession sess, @RequestParam("sellno") int sellno, SellListVO vo, ReviewVO rvo, WishListVO wvo) {
 		MemberVO login = (MemberVO) sess.getAttribute("login");
 		rvo.setSellno(sellno);
 		vo.setSellno(sellno);
