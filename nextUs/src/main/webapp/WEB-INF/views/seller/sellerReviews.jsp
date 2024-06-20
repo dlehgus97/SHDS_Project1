@@ -225,23 +225,115 @@
 		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
 		}
 		
+		/* 신고 팝업 창 스타일 */
 		#reportPopup {
-            display: none; /* 기본적으로 숨김 */
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        #reportPopup h2 {
-            margin-top: 0;
-        }
+		    display: none; /* 기본적으로 숨김 */
+		    position: fixed;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    width: 400px;
+		    max-width: 90%;
+		    background-color: #fff;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		    border-radius: 10px;
+		    z-index: 1000;
+		    padding: 20px;
+		    box-sizing: border-box;
+		}
+		
+		#reportPopup h2 {
+		    margin-top: 0;
+		    color: #333;
+		    font-size: 24px;
+		    text-align: center;
+		}
+		
+		#reportPopup textarea {
+		    width: 100%;
+		    height: 100px;
+		    margin: 10px 0;
+		    padding: 10px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		    font-size: 16px;
+		    box-sizing: border-box;
+		    resize: none;
+		}
+		
+		#reportPopup .button-container {
+		    display: flex;
+		    justify-content: space-between;
+		    margin-top: 20px;
+		}
+		
+		#reportPopup button {
+		    width: 48%;
+		    height: 40px;
+		    border: none;
+		    border-radius: 20px;
+		    font-size: 16px;
+		    cursor: pointer;
+		    transition: background-color 0.3s ease;
+		    color: white;
+		    background-color: #6c757d; /* 기본 배경색을 중간 회색으로 설정 */
+		}
+		
+		#reportPopup button[type="button"]:nth-child(1) {
+		    background-color: #343a40; /* 어두운 회색 */
+		}
+		
+		#reportPopup button[type="button"]:nth-child(2) {
+		    background-color: #6c757d; /* 중간 회색 */
+		}
+		
+		#reportPopup button[type="button"]:nth-child(1):hover {
+		    background-color: #495057; /* 어두운 회색 (hover) */
+		}
+		
+		#reportPopup button[type="button"]:nth-child(2):hover {
+		    background-color: #adb5bd; /* 밝은 회색 (hover) */
+		}
+		
+		/* 알림 팝업 창 스타일 */
+		#alertPopup {
+		    display: none; /* 기본적으로 숨김 */
+		    position: fixed;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    width: 300px;
+		    max-width: 90%;
+		    background-color: #fff;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		    border-radius: 10px;
+		    z-index: 1001;
+		    padding: 20px;
+		    text-align: center;
+		    box-sizing: border-box;
+		}
+		
+		#alertPopup p {
+		    margin: 0 0 20px;
+		    font-size: 16px;
+		    color: #333;
+		}
+		
+		#alertPopup button {
+		    width: 80px;
+		    height: 36px;
+		    border: none;
+		    border-radius: 18px;
+		    font-size: 16px;
+		    cursor: pointer;
+		    background-color: #6c757d;
+		    color: white;
+		    transition: background-color 0.3s ease;
+		}
+		
+		#alertPopup button:hover {
+		    background-color: #adb5bd; /* 밝은 회색 (hover) */
+		}
     </style>
     <script>
         $(document).ready(function() {
@@ -317,47 +409,70 @@
 	        <input type="hidden" id="reportReviewno" name="reviewno">
 	        <input type="hidden" id="reportMemberno" name="memberno">
 	        <input type="hidden" id="reportStatus" name="status" value="1">
-	        <button type="button" onclick="submitReport()">확인</button>
-	        <button type="button" onclick="closeReportPopup()">취소</button>
+			<div class="button-container">
+	            <button type="button" onclick="submitReport()">확인</button>
+	            <button type="button" onclick="closeReportPopup()">취소</button>
+	        </div>
 	    </form>
+	</div>
+	
+	<!-- 알림 팝업 창 HTML -->
+	<div id="alertPopup" style="display:none;">
+	    <p id="alertMessage">내용을 입력해주세요.</p>
+	    <button onclick="closeAlertPopup()">확인</button>
 	</div>
 </body>
 <script>
-    function openReportPopup(sellno, reviewno, memberno) {
-        document.getElementById('reportSellno').value = sellno;
-        document.getElementById('reportReviewno').value = reviewno;
-        document.getElementById('reportMemberno').value = memberno;
-        document.getElementById('reportPopup').style.display = 'block';
-    }
-
-    function closeReportPopup() {
-        document.getElementById('reportPopup').style.display = 'none';
-    }
-
-    function submitReport() {
-        const reportForm = document.getElementById('reportForm');
-        const formData = new FormData(reportForm);
-
-        fetch('/seller/reportReview', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text()) // fetch() 함수의 반환된 promise 객체를 처리, 응답(response)을 텍스트 형식으로 변환하여 반환
-        .then(result => {
-        	console.log('Response from server:', result); // result 값을 콘솔에 출력
-        	
-            if (result === '"success"') {
-                alert('신고가 접수되었습니다.');
-                closeReportPopup();
-                location.reload();
-            } else {
-                alert('신고 접수에 실패했습니다.');
-            }
-        })
-        .catch(error => {
-        	console.error('Error:', error); // 실제 오류 메시지 출력
-            alert('신고 과정에서 오류가 발생했습니다.');
-        });
-    }
+	function openReportPopup(sellno, reviewno, memberno) {
+	    document.getElementById('reportSellno').value = sellno;
+	    document.getElementById('reportReviewno').value = reviewno;
+	    document.getElementById('reportMemberno').value = memberno;
+	    document.getElementById('reportPopup').style.display = 'block';
+	}
+	
+	function closeReportPopup() {
+	    document.getElementById('reportPopup').style.display = 'none';
+	}
+	
+	function submitReport() {
+	    var content = document.getElementById("reportContent").value.trim();
+	    if (content === "") {
+	        showAlertPopup("내용을 입력해주세요.");
+	        return false;
+	    }
+	
+	    const reportForm = document.getElementById('reportForm');
+	    const formData = new FormData(reportForm);
+	
+	    fetch('/seller/reportReview', {
+	        method: 'POST',
+	        body: formData
+	    })
+	    .then(response => response.text()) // fetch() 함수의 반환된 promise 객체를 처리, 응답(response)을 텍스트 형식으로 변환하여 반환
+	    .then(result => {
+	        console.log('Response from server:', result); // result 값을 콘솔에 출력
+	        
+	        if (result === '"success"') {
+	            alert('신고가 접수되었습니다.');
+	            closeReportPopup();
+	            location.reload();
+	        } else {
+	            alert('신고 접수에 실패했습니다.');
+	        }
+	    })
+	    .catch(error => {
+	        console.error('Error:', error); // 실제 오류 메시지 출력
+	        alert('신고 과정에서 오류가 발생했습니다.');
+	    });
+	}
+	
+	function showAlertPopup(message) {
+	    document.getElementById("alertMessage").innerText = message;
+	    document.getElementById("alertPopup").style.display = "block";
+	}
+	
+	function closeAlertPopup() {
+	    document.getElementById("alertPopup").style.display = "none";
+	}
 </script>
 </html>

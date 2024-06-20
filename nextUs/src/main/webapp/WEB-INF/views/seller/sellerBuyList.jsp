@@ -175,8 +175,8 @@
         }
         
         .main-content {
-			margin-left: 100px;
-			margin-right: 100px;
+			margin-left: 0px;
+			margin-right: 0px;
             padding: 20px;
             flex-grow: 1;
         }
@@ -252,8 +252,8 @@
 		    padding: 15px 20px; /* 내부 여백 수정 */
 		    border-radius: 8px; /* 테두리 둥글게 만들기 */
 		    margin-bottom: 30px; /* 하단 마진 추가 */
-		    margin-right: 50px;
-		    margin-left: 50px;
+		    margin-right: 150px;
+		    margin-left: 150px;
 		    text-align: center;
 		    font-weight: bold;
 		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
