@@ -938,7 +938,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 			
 			<!-- 페이지 처리 -->
-            <nav class="d-flex justify-content-center justify-content-md-end mt-10">
+            <nav class="d-flex justify-content-center mt-10">
               <ul class="pagination pagination-sm text-gray-400">
               	<c:if test="${review.prev }">
                 <li class="page-item">

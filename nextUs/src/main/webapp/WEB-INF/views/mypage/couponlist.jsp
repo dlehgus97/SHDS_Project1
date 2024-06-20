@@ -13,17 +13,21 @@
 
 <link rel="stylesheet" href="/resources/css/reset.css" />
 <link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet" href="/resources/css/contents.css" />
 <!--부트스트랩 Libs CSS -->
 <link rel="stylesheet" href="/resources/css/board/libs.bundle.css" />
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	
-	<!-- BREADCRUMB -->
+	<!-- MODALS -->
+
+    <!-- BREADCRUMB -->
     <nav class="py-5">
       <div class="container">
         <div class="row">
@@ -51,7 +55,7 @@
           <div class="col-12 text-center">
 
             <!-- Heading -->
-            <h3 class="mb-10">찜 목록</h3>
+            <h3 class="mb-10">보유 쿠폰</h3>
 
           </div>
         </div>
@@ -68,7 +72,7 @@
                   찜 목록
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
-                  내정보
+                  내 정보 수정
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
                   문의 내역
@@ -83,68 +87,51 @@
             </nav>
 
           </div>
-          <div class="col-12 col-md-9 col-lg-8 offset-lg-1">
 
-            <!-- Products -->
-            <div class="row">
-            
-			<!-- 반복 시작 -->
-			<c:forEach var="wishlist" items="${wishlist}">
-              <!-- Item -->
-              <div class="col-6 col-md-4">
-                <div class="card mb-7">
-
-                  <!-- Image -->
-                  <div class="card-img">
-
-                    <!-- 찜 목록 삭제 -->
-                    <button id="deletewishlist${wishlist.sellno}" class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
-                      X
-                    </button>
-                    <script>
-					    document.addEventListener("DOMContentLoaded", function() {
-					        var purchaseButton = document.getElementById("deletewishlist${wishlist.sellno}");
-					        
-					        purchaseButton.addEventListener("click", function(event) {
-					            event.preventDefault(); // 기본 동작을 막음
-					            var userConfirmed = confirm("찜 목록에서 삭제하시겠습니까?");
-					            
-					            if (userConfirmed) {
-					                window.location.href = "deletewishlist.do?no=${wishlist.sellno}";
-					            }
-					        });
-					    });
-					</script>
-
-                    <!-- 상품 바로가기 -->
-                    <a href="/selllist/view.do?no=${wishlist.sellno}" class="btn btn-xs w-100 btn-dark card-btn" style="color: white;">
-                      상품 바로가기
-                    </a>
-
-                    <!-- Image -->
-                    <img class="card-img-top" src="/upload/board/${wishlist.thumbnail_real}" alt="...">
-
-                  </div>
-
-                  <!-- Body -->
-                  <div class="card-body fw-bold text-center">
-                    <a class="text-body" href="product.html">${wishlist.title}</a> <br>
-                    <span class="text-muted">
-                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${wishlist.price }" />원
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-				
-			<!-- 반복 끝 -->
-			</c:forEach>
-
-            </div>
-
+			<div class="col-12 col-md-9 col-lg-8 offset-lg-1">
+	            <div class="row">
+	              	<c:if test="${empty couponlist }">
+						<div>보유 쿠폰이 없습니다.</div>
+					</c:if>
+					
+					<c:forEach var="coupon" items="${couponlist }">
+					<div class="col-12 col-lg-6">
+					<!-- 반복 시작 -->
+	                <!-- Card -->
+	                	<div class="card card-lg bg-light mb-8" style="border: 2px solid black; border-radius: 8px;">
+		                  <div class="card-body">
+		
+		                    <!-- Heading -->
+		                    <h6 class="mb-6">
+		                      ${coupon.name }
+		                    </h6>
+		
+		                    <!-- Text -->
+		                    <p class="text-muted mb-0">
+		                    	<c:choose>
+								 	<c:when test="${coupon.type == 1}">
+								 		${coupon.discount }원 할인 쿠폰
+								 	</c:when>
+			    					<c:otherwise>
+			    						${coupon.discount }% 할인 쿠폰
+			    					</c:otherwise>
+			  					</c:choose>
+		                    </p>
+		
+		                  </div>
+	                	</div>
+	                </div>
+	                <!-- 반복 끝 -->
+	                </c:forEach>
+	
+	              </div>
+	            </div>
+	          </div>
+			
+			
+		
           </div>
         </div>
-      </div>
     </section>
 	
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
@@ -160,5 +147,6 @@
 	<!-- Theme JS -->
 	<script src="/resources/js/board/theme.bundle.js"></script>
 
+	
 </body>
 </html>

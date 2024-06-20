@@ -34,7 +34,7 @@ public class ReviewController {
 		if (r > 0 && n > 0 && m > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
-			model.addAttribute("url", "/selllist/view.do?no="+vo.getSellno()+"#reviews");
+			model.addAttribute("url", "/selllist/view.do?sellno="+vo.getSellno()+"#reviews");
 		} else {
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "등록 오류");

@@ -80,7 +80,7 @@
                 <a class="list-group-item list-group-item-action dropend-toggle " href="qna.do">
                   문의 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="coupon.do">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
                   보유 쿠폰
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle" href="#!">
