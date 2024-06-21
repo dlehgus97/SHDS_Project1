@@ -17,5 +17,6 @@ public interface QnAMapper {
 	int increaseReadcnt(int no);
 	int count(QnAVO vo);
 	int answer(Map<String, Object> map);
+	String answer_date(int no);
 	int addelete(int no);
 }

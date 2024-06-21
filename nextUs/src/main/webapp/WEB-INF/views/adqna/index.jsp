@@ -46,6 +46,7 @@
                                 <th>작성자</th>
                                 <th>카테고리</th>
                                 <th>작성일</th>
+                                <th>답변상태</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,6 +67,16 @@
                                 </td>
                                 <td>${vo.category }</td>
                                 <td class="date"><fmt:formatDate value="${vo.write_date }" pattern="YYYY-MM-dd"/></td>
+                                <td class="status">
+				                    <c:choose>
+				                        <c:when test="${empty vo.answer}">
+				                            답변대기
+				                        </c:when>
+				                        <c:otherwise>
+				                            답변완료
+				                        </c:otherwise>
+				                    </c:choose>
+				                </td>
                             </tr>
                        </c:forEach>
                         </tbody>
