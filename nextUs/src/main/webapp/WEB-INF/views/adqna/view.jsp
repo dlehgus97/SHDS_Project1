@@ -52,10 +52,8 @@
 $(document).ready(function() {
     $('.btn-reply').click(function(e) {
         e.preventDefault();
-        
         // 기존 답변 박스를 숨깁니다.
         $(this).closest('.answer-box').hide();
-
         if ($('#replyBox').length === 0) {
             var answerText = $(this).closest('.answer-box').find('.answer-text').text().trim();
             var replyBoxHtml = '<div id="replyBox">' +
@@ -81,17 +79,22 @@ $(document).ready(function() {
                         url: '/adqna/answer.do',
                         type: 'POST',
                         data: { answer: answer, no: no },
-                        success: function(answer) {
-                            alert('답변이 등록되었습니다.');
-                            $('#replyBox').remove();
-                            var answerBoxHtml = '<div class="answer-box">' +
-                                                '<div class="answer-text">' +'<div>답변 : </div>'+ answer.answer + '</div>' +
-                                                '<div class="btnSet">' +
-                                                '<a href="#" class="btn btn-reply">수정</a>' +
-                                                '<a href="#" class="btn btn-delete">삭제</a>' +
-                                                '</div>' +
-                                                '</div>';
-                            $('.cont').after(answerBoxHtml);
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                alert(response.message);
+                                $('#replyBox').remove();
+                                var answerBoxHtml = '<div class="answer-box">' +
+                                                    '<div class="answer-text">' + '<div>답변 : </div>' + answer + '</div>' +
+                                                    '<div class="answer-date">답변 시간: ' + response.answer_date + '</div>' + // 답변 시간 추가
+                                                    '<div class="btnSet">' +
+                                                    '<a href="#" class="btn btn-reply">수정</a>' +
+                                                    '<a href="#" class="btn btn-delete">삭제</a>' +
+                                                    '</div>' +
+                                                    '</div>';
+                                $('.cont').after(answerBoxHtml);
+                            } else {
+                                alert(response.message);
+                            }
                         },
                         error: function() {
                             alert('답변 등록에 실패했습니다.');
@@ -103,6 +106,7 @@ $(document).ready(function() {
             });
         }
     });
+});
 
     $('.btn-delete').click(function(e) {
         e.preventDefault();
@@ -139,26 +143,27 @@ $(document).ready(function() {
                             </dl>
                         </div>
                         <div class="cont">${vo.text }</div>                 
-                        <div class="btnSet clear">
-                            <!-- Answer Box -->
-                            <c:if test="${not empty vo.answer}">
-                                <div class="answer-box">
-                                    <div class="answer-text">${vo.answer}</div>
-                                    <div class="btnSet">
-                                        <a href="#" class="btn btn-reply">수정</a>
-                                        <a href="#" class="btn btn-delete">삭제</a>
-                                    </div>
-                                </div>
-                            </c:if>
-                            <!-- End of Answer Box -->
-                            <br>
-                            <div class="fl_l">
-                                <a href="index.do" class="btn">목록</a>
-                                <c:if test="${empty vo.answer}">
-                                    <a href="#" class="btn btn-reply">답변하기</a>
-                                </c:if>
-                            </div>
-                        </div>
+						<div class="btnSet clear">
+						    <!-- Answer Box -->
+						    <c:if test="${not empty vo.answer}">
+						        <div class="answer-box">
+						            <div class="answer-text">${vo.answer}</div>
+						            <div class="answer-date">답변 시간: ${vo.answer_date}</div> <!-- 답변 시간 표시 -->
+						            <div class="btnSet">
+						                <a href="#" class="btn btn-reply">수정</a>
+						                <a href="#" class="btn btn-delete">삭제</a>
+						            </div>
+						        </div>
+						    </c:if>
+						    <!-- End of Answer Box -->
+						    <br>
+						    <div class="fl_l">
+						        <a href="index.do" class="btn">목록</a>
+						        <c:if test="${empty vo.answer}">
+						            <a href="#" class="btn btn-reply">답변하기</a>
+						        </c:if>
+						    </div>
+						</div>
                     </div>
                 </div>
             </div>

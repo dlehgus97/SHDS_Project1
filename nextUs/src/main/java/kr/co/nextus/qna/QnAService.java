@@ -13,7 +13,7 @@ public interface QnAService {
 	int delete(QnAVO vo);
 	Map<String, Object> list(QnAVO vo);
 	QnAVO detail(QnAVO vo, boolean isUpdate);
-	int answer(int no, String answer);
+	Map<String, Object> answer(int no, String answer);
 	int addelete(int no);
 ;
 }

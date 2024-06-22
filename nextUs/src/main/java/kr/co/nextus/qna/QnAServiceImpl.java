@@ -80,14 +80,21 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public int answer(int no, String answer) {
-		Map<String,Object> map =new HashMap<>();
-		
-		map.put("no", no);
-		map.put("answer", answer);
+	public Map<String, Object> answer(int no, String answer) {
+	    Map<String, Object> map = new HashMap<>();
+	    
+	    map.put("no", no);
+	    map.put("answer", answer);
 	    int result = mapper.answer(map);
 	    
-		return mapper.answer(map);
+	    // 답변 작성 시간 조회
+	    String answer_date = mapper.answer_date(no);
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("result", result);
+	    response.put("answer_date", answer_date);
+	    
+	    return response;
 	}
 	
 	@Override

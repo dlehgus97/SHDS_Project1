@@ -45,4 +45,10 @@
 		WHERE r.buyno = #{no} 
 	</select>
 	
+	<!-- 환불하기 -->
+	<update id="settle"
+		parameterType="int">
+		UPDATE BUYLIST SET status = '3' WHERE buyno = #{buyno} 
+	</update>
+	
 </mapper>   

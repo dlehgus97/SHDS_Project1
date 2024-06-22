@@ -1,7 +1,6 @@
 package kr.co.nextus.sellerrequest;
 
 
-import java.util.List;
 import java.util.Map;
 
 

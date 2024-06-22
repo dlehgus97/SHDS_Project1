@@ -19,6 +19,7 @@
 	var loginName = '${login.name}';
 	var loginHp = '${login.hp}';
 	var loginEmail = '${login.email}';
+	var loginzipcode = '${login.zipcode}';
 	var loginAddr1 = '${login.addr1}';
 	var loginAddr2 = '${login.addr2}';
 	var sumPrice = 0;
@@ -33,9 +34,23 @@
 	        var price = parseFloat(priceElement.textContent.replace('원', '').trim());
 	        total += price;
 	    });
-	    document.getElementById('product_price').textContent = total + '원';
-	    document.getElementById('total_price').textContent = total + '원';
+	    updatePrices(total, 0);
 	}
+	
+	//콤마찍기
+	function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function updatePrices(pp, cd) {
+        const productPrice = pp;  // 실제 상품가격을 여기에 입력
+        const couponDiscount = cd; // 실제 쿠폰할인을 여기에 입력
+        const totalPrice = productPrice - couponDiscount; // 실제 총 결제금액 계산
+
+        document.getElementById('product_price').innerText = formatNumberWithCommas(productPrice) + '원';
+        document.getElementById('coupon_discount').innerText = formatNumberWithCommas(couponDiscount) + '원';
+        document.getElementById('total_price').innerText = formatNumberWithCommas(totalPrice) + '원';
+    }
 
 	// 페이지 로드 후 가격 합산 함수 호출
 	window.onload = function() {
@@ -105,7 +120,7 @@
 					<input type="text" id="memberAddr2"  class="info_size" size="80%"><br>
 					<button id="set_addr" onclick="zipcode()">주소 재설정</button>
 					<button id="call_userInfo" onclick="getBasicInfo()">기본 정보 불러오기</button>
-					<b>결제 전 주소를 한번 더 확인해주세요.</b>
+					<b style="color: red;">결제 전 주소를 한번 더 확인해주세요.</b>
 				</div>
 			</div>
 			<div id="coupon_container" class="payment_border">
@@ -116,9 +131,11 @@
 					</select>
 					
 					<button id="coupon_confirm_button" onclick="confirmCoupon()">적용</button>
+					<button id="coupon_undo_button" onclick="undoCoupon()">취소</button>
 					
 					<p style="font-weight: bold;">적용된 쿠폰</p>
 					<input type="text" id="applied_coupon" class="info_size" size="80%" readonly><br>
+					<b style="color: red;">쿠폰 사용 후 환불 시 쿠폰은 환불되지 않습니다.</b><br>
 				</div>
 			</div>
 		</div>

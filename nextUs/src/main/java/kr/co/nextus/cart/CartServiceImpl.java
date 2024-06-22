@@ -39,7 +39,7 @@ public class CartServiceImpl implements CartService {
     }
 	
 	@Override
-	public void delList(List<BuyListVO> vos) {
-		mapper.delList(vos);
+	public void delList(BuyListVO vo) {
+		mapper.delList(vo);
 	}
 }

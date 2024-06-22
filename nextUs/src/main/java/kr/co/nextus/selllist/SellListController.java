@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.event.EventVO;
 import kr.co.nextus.member.MemberVO;
 import kr.co.nextus.mypage.wishlist.WishListService;
@@ -43,7 +45,8 @@ public class SellListController {
 	private WishListService wishListService;
 	@Autowired
 	private SellerRequestService SRservice;
-	
+	@Autowired
+	private BuyListService BLservice;
 	
 	@GetMapping("/selllist/view.do")
 	public String detail(Model model, HttpSession sess, @RequestParam("sellno") int sellno, SellListVO vo, ReviewVO rvo, WishListVO wvo) {
@@ -78,9 +81,12 @@ public class SellListController {
 	
 	// 관리자						
 	@RequestMapping("/productManagement")						
-	public String productManagement(SellListVO vo, SellerRequestVO vo2, Model model) {						
+	public String productManagement(SellListVO vo, SellerRequestVO vo2,BuyListVO vo3,
+ Model model) {						
 		model.addAttribute("selllist", sellListService.index(vo));					
-		model.addAttribute("sellerRequestMap", SRservice.list(vo2));					
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));					
 		return "admin/productManagement/productManagement";					
 	}						
 							

@@ -46,10 +46,11 @@ gap:20px;
 					
 					<ul class="list-group" style="font-size:15px;">
 					<c:forEach var="vo" items="${map.list}">
-						이메일<li class="list-group-item">${vo.email != null ? vo.email : '(미입력)'} </li><br>
-						닉네임<li class="list-group-item">${vo.nickname != null ? vo.nickname : '(미입력)'}</li><br>
-						요청일자<li class="list-group-item"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></li><br>
-						첨부파일<li class="list-group-item">${vo.file_no != null ? vo.file_no : '(미입력)'}</li>
+						구매번호:<li class="list-group-item">${vo.email != null ? vo.email : '(미입력)'} </li><br>
+						번호:<li class="list-group-item">${vo.email != null ? vo.email : '(미입력)'} </li><br>
+						요청 금액<li class="list-group-item">${vo.nickname != null ? vo.nickname : '(미입력)'}</li><br>
+						요청 일자<li class="list-group-item"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.gdate}" /></li><br>
+						상세 내용<li class="list-group-item">${vo.content != null ? vo.content : '(미입력)'}</li>
 					</c:forEach>
 					</ul>
 				</div>
@@ -59,41 +60,20 @@ gap:20px;
 
 	
 	
-	<div class="mydiv">
-	<c:forEach var="vo" items="${map.list}">
-		<form method="post" name="approve" id="approve" style="margin-left:40px;"
-			action="requestApprove.do">
-			<input name="memberno" type="hidden" value='${vo.memberno}'>
-			<input name="bank" type="hidden" value='${vo.bank}'> <input
-				name="account" type="hidden" value='${vo.account}'>
-			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
-			<input class="btn btn-success btn-lg btn-block" type="submit" id="approve" value="승인" style="width:195px;">
-		</form>
-		<br>
-		<form method="post" name="deny" id="deny" action="requestDeny.do">
-			<input name="memberno" type="hidden" value='${vo.memberno}'>
-			
-			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
-			<input class="btn btn-danger btn-lg btn-block" type="submit" id="deny" value="승인거부" style="width:195px;">
-		</form>
-		</c:forEach>
-	</div>
-	<br>
 	<button onclick="closePopup()" class="btn btn-secondary btn-lg btn-block" style="width:430px; margin-left:40px;'">닫기</button>
 
 
 
 
-	
+
+
 	<script>
-        window.onbeforeunload = function() {
-            window.opener.location.reload();
-        };
-        
-        function closePopup() {
+		function closePopup() {
 			window.close();
 		}
-    </script>
+	</script>
+	
+	
 	<!-- jquery latest version -->
     <script src="../resources/admin/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->

@@ -1,7 +1,6 @@
 package kr.co.nextus.sellerrequest;
 
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
 
 
 
@@ -20,13 +21,20 @@ public class SellerRequestController {
 
 	@Autowired
 	private SellerRequestService service;
-	
+	@Autowired
+	private BuyListService BLservice;
+
+
 
 	
 	@GetMapping("/sellerRequestManagement")
 	@RequestMapping("/sellerRequestManagement")
-	public String sellerRequestManagement(SellerRequestVO vo, Model model) {
+	public String sellerRequestManagement(SellerRequestVO vo,
+			BuyListVO vo3, Model model) {
 		model.addAttribute("sellerRequestMap", service.list(vo));
+		model.addAttribute("SRnew", service.NEW(vo));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/sellerManagement/sellerRequestManagement";
 	}
 	

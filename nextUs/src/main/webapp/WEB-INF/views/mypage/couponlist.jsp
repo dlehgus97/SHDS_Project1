@@ -80,7 +80,7 @@
                 <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
                   보유 쿠폰
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle" href="#!">
+                <a class="list-group-item list-group-item-action dropend-toggle" href="withdrawal.do">
                   회원 탈퇴
                 </a>
               </div>

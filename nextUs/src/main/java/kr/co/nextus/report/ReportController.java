@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.member.MemberVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
@@ -22,6 +24,11 @@ public class ReportController {
 	private ReportService service;
 	@Autowired
 	private SellerRequestService SRservice;
+	@Autowired
+	private BuyListService BLservice;
+
+
+
 
 	@PostMapping("/report/insert.do")
 	public String insert(Model model, HttpServletRequest request, ReportVO vo) {
@@ -41,9 +48,11 @@ public class ReportController {
 
 	@GetMapping("/report.do")
 	@RequestMapping("/report")
-	public String memberStatus(ReportVO vo,SellerRequestVO vo2, Model model) {
+	public String memberStatus(ReportVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model) {
 		model.addAttribute("map", service.list(vo));
-		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/reports/report";
 	}
 	@RequestMapping("/reportDetailPopup")
