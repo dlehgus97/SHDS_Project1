@@ -46,6 +46,8 @@ public class MemberController {
     private BuyListService BLservice;
     
     
+    Map<String, String> verifyMap = new HashMap<>();
+    
     @GetMapping("/member/login.do")
     public void login() {
 
@@ -60,12 +62,20 @@ public class MemberController {
             model.addAttribute("msg", "이메일 비밀번호를 확인하세요.");
             model.addAttribute("url", "/member/login.do");
             return "common/alert";
-
+        } else if (login.getState() == 1) {
+            model.addAttribute("msg", "정지 회원입니다. 로그인이 제한됩니다.");
+            model.addAttribute("url", "/member/login.do");
+            return "common/alert";
+        } else if (login.getState() == 2) {
+            model.addAttribute("msg", "탈퇴된 회원입니다. 로그인이 제한됩니다.");
+            model.addAttribute("url", "/member/login.do");
+            return "common/alert";
         } else {
             sess.setAttribute("login", login);
             return "redirect:/index.do";
         }
     }
+
 
 
     @GetMapping("/member/logout.do")
@@ -150,7 +160,7 @@ public class MemberController {
         return "common/alert";
     }
 
-    //비밀번호 인증 이메일 전송
+  //비밀번호 인증 이메일 전송
     @PostMapping("/member/findAuth.do")
     @ResponseBody
     public Map<String, Object> findAuth(@RequestParam String email, HttpSession session) {
@@ -178,7 +188,6 @@ public class MemberController {
                     SendMail.sendMail(from, to, subject, content.toString());
                     // 성공적으로 메일을 보낸 경우
                     map.put("status", true);
-                    map.put("num", num);
                 } catch (Exception e) {
                     // 메일 전송 실패 시 처리
                     map.put("status", false);
@@ -189,7 +198,6 @@ public class MemberController {
                 map.put("status", false);
                 map.put("error", "입력하신 이메일과 일치하는 회원 정보가 없습니다.");
             }
-
         } else {
             // 회원이 존재하지 않는 경우 처리
             map.put("status", false);
@@ -199,49 +207,50 @@ public class MemberController {
     }
 
 
-//	    // 인증 코드 확인
+    @PostMapping("/member/verifyCode.do")
+    @ResponseBody
+    public Map<String, Object> verifyCode(@RequestParam String email, @RequestParam String code, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        String sessionEmail = (String) session.getAttribute("userEmail");
+        String sessionCode = (String) session.getAttribute("verificationCode");
 
-//	    @PostMapping("/member/verifyCode.do")
-
-//	    @ResponseBody
-
-//	    public Map<String, Object> verifyCode(@RequestParam String verificationCode, HttpSession session) {
-
-//	        Map<String, Object> response = new HashMap<>();
-
-//
-
-//	        String storedVerificationCode = (String) session.getAttribute("verificationCode");
-
-//	        String userEmail = (String) session.getAttribute("userEmail");
-
-//
-
-//	        if (storedVerificationCode != null && storedVerificationCode.equals(verificationCode)) {
-
-//	            // 인증 코드가 일치하는 경우
-
-//	            response.put("status", true);
-
-//	            session.removeAttribute("verificationCode"); // 세션에서 인증번호 삭제
-
-//	            session.setAttribute("authenticatedUser", userEmail); // 인증된 사용자 이메일 세션에 저장
-
-//	        } else {
-
-//	            // 인증 코드가 일치하지 않는 경우
-
-//	            response.put("status", false);
-
-//	            response.put("error", "인증 코드가 올바르지 않습니다.");
-
-//	        }
-
-//
-
-//	        return response;
-
-//	    }
+        if (sessionEmail != null && sessionCode != null && sessionEmail.equals(email) && sessionCode.equals(code)) {
+            map.put("status", true);
+        } else {
+            map.put("status", false);
+            map.put("error", "인증 코드가 올바르지 않습니다.");
+        }
+        return map;
+    }
+    
+    @PostMapping("/changePassword.do")
+    @ResponseBody
+    public Map<String, Object> changePassword(@RequestParam String newPassword, @RequestParam String userEmail) {
+        Map<String, Object> map = new HashMap<>();
+        
+        // 여기서는 간단히 userEmail을 HttpSession에서 가져온 것으로 가정합니다.
+        // 실제로는 세션에 사용자 정보가 저장되는 방식에 따라 다를 수 있습니다.
+        
+        // 예시로 간단하게 비밀번호를 업데이트하는 로직을 작성합니다.
+        // 실제로는 이 부분에 데이터베이스에서 비밀번호 업데이트를 수행하는 로직이 들어가야 합니다.
+        if (userEmail != null && !newPassword.isEmpty()) {
+            // updatePassword(userEmail, newPassword); // 이런 식으로 실제 DB에 저장된 비밀번호를 업데이트합니다.
+            
+            // 업데이트 성공 시
+        	service.updatePassword(userEmail, newPassword);
+            map.put("status", true);
+        } else {
+            map.put("status", false);
+            map.put("error", "비밀번호를 변경하는 도중 오류가 발생했습니다.");
+        }
+        
+        return map;
+    }
+    
+    @GetMapping("/member/changePassword.do")
+    public String showChangePasswordPage() {
+        return "member/changepwd"; // 비밀번호 변경 페이지의 뷰 이름
+    }
 
     @GetMapping("/member/pwdsearch.do")
     public String pwdSearch() {
@@ -276,11 +285,11 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/member/registCheck")
-    @ResponseBody
-    public String registCheck(String email) {
-        return service.checkMemberExist(email) + "";
-    }
+//    @GetMapping("/member/registCheck")
+//    @ResponseBody
+//    public String registCheck(String email) {
+//        return service.checkMemberExist(email) + "";
+//    }
 
     // 관리자에서하는겁니다요
     @GetMapping("/memberStatus.do")

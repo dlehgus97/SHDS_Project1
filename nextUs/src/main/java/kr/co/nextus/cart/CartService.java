@@ -14,5 +14,5 @@ public interface CartService {
 	int delete(int memberno, int sellno, int optionno);
 
 	List<CartVO> list(int memberno);
-	void delList(List<BuyListVO> vos);
+	void delList(BuyListVO vo);
 }

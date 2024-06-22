@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberVO findId(MemberVO vo) {
-    	return mapper.findid(vo);
+    	return mapper.findId(vo);
          // 결과가 null이 아니면 true 반환
     }
 
@@ -123,4 +123,13 @@ public class MemberServiceImpl implements MemberService {
 		map.put("list", list);
 		return map;
 	}
+
+    @Override
+    public void updatePassword(String email, String newPassword) {
+    	Map<String, String> map = new HashMap<>();
+    	map.put("pwd", newPassword);
+    	map.put("email", email);
+        mapper.updatePassword(map);
+    }
+	
 }

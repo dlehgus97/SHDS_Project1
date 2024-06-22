@@ -6,6 +6,7 @@ function getBasicInfo() {
     $('#memberName').val(loginName);
     $('#memberHp').val(loginHp);
     $('#memberEmail').val(loginEmail);
+    $('#zipcode').val(loginzipcode);
     $('#memberAddr1').val(loginAddr1);
     $('#memberAddr2').val(loginAddr2);
 }
@@ -85,7 +86,7 @@ function confirmCoupon() {
     // input 필드에 선택된 쿠폰을 설정
     appliedCouponInput.value = selectedCoupon;
     
-    const productPrice = parseFloat(document.getElementById('product_price').textContent.replace('원', '').trim());
+    const productPrice = parseFloat(document.getElementById('product_price').textContent.replace('원', '').replace(',','').trim());
     const couponDis = document.getElementById('coupon_discount');
     const total = document.getElementById('total_price');
     let discountPrice;
@@ -96,6 +97,7 @@ function confirmCoupon() {
         discountPrice = parseFloat(couponDiscount);
     }
 	console.log(discountPrice);
+	console.log(productPrice);
 	discountPrice = Math.floor(discountPrice);
 	console.log(discountPrice);
     couponDis.textContent = discountPrice + '원';
@@ -104,6 +106,25 @@ function confirmCoupon() {
     // 총 결제 금액을 data 객체에 업데이트
     // 현재는 결제금액을 100원으로 고정시키기 위해 업데이트 하지 않음
     //data.totalAmount = totalPrice;
+    updatePrices(productPrice, discountPrice);
+}
+
+function undoCoupon() {
+    // 적용된 쿠폰을 초기화
+    const appliedCouponInput = document.getElementById('applied_coupon');
+    appliedCouponInput.value = '';
+    couponSelectedNo = 0;
+
+    // 상품 가격을 다시 가져옴
+    const productPrice = parseFloat(document.getElementById('product_price').textContent.replace('원', '').replace(',','').trim());
+    
+    // 쿠폰 할인 금액과 총 가격을 초기화
+    const couponDis = document.getElementById('coupon_discount');
+    const total = document.getElementById('total_price');
+    
+    couponDis.textContent = '0원';  // 할인 금액을 0원으로 설정
+    total.textContent = productPrice + '원';  // 총 결제 금액을 원래 가격으로 설정
+    updatePrices(productPrice, 0);
 }
 
 function createOrderName() {

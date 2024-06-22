@@ -77,6 +77,12 @@ h3 {
     border: 1px #000 solid;
 }
 
+#coupon_undo_button {
+	background-color: #fff;
+    padding: 10px;
+    border: 1px #000 solid;
+}
+
 #payment_right_container {
     position: relative;
     width: 30%;
