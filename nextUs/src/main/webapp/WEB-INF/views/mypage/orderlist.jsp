@@ -68,7 +68,7 @@
                   찜 목록
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
-                  내정보
+                  내 정보 수정
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
                   문의 내역
@@ -208,14 +208,48 @@
                 </div>
               </div>
               </div>
+              </div>
               </c:forEach>
             </div>
             
           <!-- 페이지 처리 -->
+            <nav class="d-flex justify-content-center justify-content-md-end mt-10">
+              <ul class="pagination pagination-sm text-gray-400">
+              	<c:if test="${order.prev }">
+                <li class="page-item">
+                  <a class="page-link page-link-arrow" href="orderlist.do?page=${order.startPage-1 }">
+                    <i class="fa fa-caret-left"></i>
+                  </a>
+                </li>
+                </c:if>
+                
+                <c:forEach var="p" begin="${order.startPage}" end="${order.endPage}">
+                	<c:if test="${p == orderListVO.page}">
+	                <li class="page-item active">
+	                  <a class="page-link" href="#">${p}</a>
+	                </li>
+	                </c:if>
+					
+					<c:if test="${p != orderListVO.page}">
+	                <li class="page-item">
+	                  <a class="page-link" href="orderlist.do?page=${p}">${p}</a>
+	                </li>
+	                </c:if>
+	            </c:forEach>
+                
+                <c:if test="${order.next }">
+                <li class="page-item">
+                  <a class="page-link page-link-arrow" href="orderlist.do?page=${order.endPage+1 }">
+                    <i class="fa fa-caret-right"></i>
+                  </a>
+                </li>
+                </c:if>
+              </ul>
+            </nav>
+          
             
           </div>
         </div>
-      </div>
     </section>
 	
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>

@@ -12,5 +12,6 @@ public interface PinfoMapper {
 	MemberVO list(MemberVO vo);
 	int check(MemberVO vo);
 	int update(MemberVO vo);
+	int fileDelete(int no);
 
 }

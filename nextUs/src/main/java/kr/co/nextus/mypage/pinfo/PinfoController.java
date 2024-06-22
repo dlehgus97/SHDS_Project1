@@ -57,10 +57,10 @@ public class PinfoController {
 	}
 	
 	@PostMapping("/pinfo/update.do")
-	public String update(MemberVO vo, Model model, HttpSession sess) {
+	public String update(MemberVO vo, Model model, HttpSession sess, MultipartFile file, HttpServletRequest request) {
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		vo.setNo(login.getNo());
-		int r = pinfoService.update(vo);
+		int r = pinfoService.update(vo, file, request);
 		String msg = "";
 		String url = "/mypage/pinfo.do";
 		if (r > 0) {
