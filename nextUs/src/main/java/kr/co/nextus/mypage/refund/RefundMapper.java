@@ -16,5 +16,6 @@ public interface RefundMapper {
 	int count(RefundVO param);
 	List<RefundVO> list(RefundVO param);
 	List<RefundVO> detail(int no);
+	boolean refund(int buyno);
 
 }

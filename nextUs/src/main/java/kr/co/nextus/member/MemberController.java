@@ -1,22 +1,16 @@
 package kr.co.nextus.member;
 
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.report.ReportService;
 import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
@@ -47,6 +42,9 @@ public class MemberController {
     
     @Autowired
     private SellerRequestService SRservice;
+    @Autowired
+    private BuyListService BLservice;
+    
     
     @GetMapping("/member/login.do")
     public void login() {
@@ -287,14 +285,16 @@ public class MemberController {
     // 관리자에서하는겁니다요
     @GetMapping("/memberStatus.do")
     @RequestMapping("/memberStatus")
-    public String memberStatus(MemberVO vo, SellerRequestVO vo2,Model model) {
+    public String memberStatus(MemberVO vo, SellerRequestVO vo2,BuyListVO vo3,Model model) {
         model.addAttribute("map", service.list(vo));
-        model.addAttribute("sellerRequestMap", SRservice.list(vo2));
+        model.addAttribute("SRnew", SRservice.NEW(vo2));
+        model.addAttribute("STnew", BLservice.settleNEW(vo3));
+        model.addAttribute("RFnew", BLservice.refundNEW(vo3));
         return "admin/memberManagement/memberStatus";
     }
 
     @RequestMapping("/addBanPopupMember")
-    public String addBanPopupMember(MemberVO vo,ReportVO vo2, Model model) {
+    public String addBanPopupMember(MemberVO vo, Model model) {
         model.addAttribute("map", service.reportCountList(vo, 0));
         return "admin/memberManagement/addBanPopupMember";
 

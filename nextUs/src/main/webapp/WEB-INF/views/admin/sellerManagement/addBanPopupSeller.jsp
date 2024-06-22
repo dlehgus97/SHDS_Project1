@@ -8,67 +8,25 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="../resources/js/admin/memberStatus.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/themify-icons.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/metisMenu.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/slicknav.min.css">
-<!-- amchart css -->
-<link rel="stylesheet"
-	href="https://www.amcharts.com/lib/3/plugins/export/export.css"
-	type="text/css" media="all" />
+<link rel="stylesheet" href="../resources/admin/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/themify-icons.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/metisMenu.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/slicknav.min.css">
 <!-- others css -->
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/typography.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/default-css.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/typography.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/default-css.css">
 <link rel="stylesheet" href="../resources/admin/assets/css/styles.css">
-<link rel="stylesheet"
-	href="../resources/admin/assets/css/responsive.css">
+<link rel="stylesheet" href="../resources/admin/assets/css/responsive.css">
 <!-- modernizr css -->
 <script src="../resources/admin/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
-<link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
-<script src="../resources/js/admin/couponManagement.js"></script>
-<script src="../resources/js/admin/coupon.js"></script>
-<script src="../resources/js/admin/memberBanManagement.js"></script>
-<style>
-table {
-	width: 100%;
-	border-collapse: collapse;
-	font-size: 18px;
-}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../resources/js/admin/addBanPopupMember.js"></script>
+<link rel="stylesheet" href="../resources/css/admin/addbanPopup.css">
 
-tbody tr:hover {
-	background-color: #f1f1f1; /* 배경색 변경 */
-}
-
-.checkbox {
-	transform: scale(1.5);
-}
-
-.center-align {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-    }
-.ban_lower {
-            position: fixed;
-            bottom: 0;
-            width:90%;
-            padding: 20px;
-            z-index: 1000;
-        }
-</style>
 </head>
 <body>
 
@@ -80,7 +38,8 @@ tbody tr:hover {
 						<h2 class="header-title" style="margin-top: -40px;">제재 내역 추가</h2>
 
 						<form method="get" name="searchForm" id="searchForm"
-							action="addBanPopupSeller.do" style="margin-top: -40px;margin-left:200px;">
+							action="addBanPopupMember.do"
+							style="margin-top: -40px; margin-left: 200px;">
 							<select name="searchType">
 								<option value="all">전체</option>
 								<option value="email">이메일</option>
@@ -90,7 +49,7 @@ tbody tr:hover {
 								value="검색">
 						</form>
 
-						<form method="post" name="banForm" id="banForm" action="BAN1.do">
+						<form method="post" name="banForm" id="banForm" action="BAN0.do">
 							<div class="data-tables datatable-dark">
 								<table id="dataTable3" class="text-center">
 									<thead class="text-capitalize">
@@ -116,27 +75,62 @@ tbody tr:hover {
 														value="${vo.regdate}" /></td>
 												<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
 												<td>
-													<button class="btn btn-warning mb-3" style="margin-top:13px;"type="button">신고내역
-														보기</button>
+													<button class="btn btn-warning mb-3"
+														style="margin-top: 13px;"
+														onclick="loadReportDetails('${vo.email}'); return false;"
+														type="button">신고내역 보기</button>
 												</td>
 											</tr>
+
 										</c:forEach>
 									</tbody>
 								</table>
 
 							</div>
-							<div class="ban_lower">
-								<div class="doBan" style="font-size: 20px;">
+
+
+							<div class="ban_lower" style="display: flex;">
+								<div class="lower_div">
+									<div class="data-tables datatable-dark">
+										<table id="dataTable3" class="reportTable text-center"
+											style="width: 100%;">
+											<thead class="text-capitalize">
+												<tr>
+													<th>시간</th>
+													<th>신고내용</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:if test="${empty map2.list}">
+													<tr>
+														<td class="first" colspan="8">검색 내역이 없습니다.</td>
+													</tr>
+												</c:if>
+												<c:if test="${!empty map2.list }">
+													<c:forEach var="vo" items="${map2.list}">
+														<tr>
+															<td class="date"><fmt:formatDate
+																	pattern="yy-MM-dd HH:MM" value="" /></td>
+															<td></td>
+														</tr>
+													</c:forEach>
+												</c:if>
+											</tbody>
+
+										</table>
+
+									</div>
+								</div>
+								<div class="doBan lower_div" style="font-size: 20px;">
 									제재 사유<input class="form-control" type="text" name="content"
 										id="example-text-input" style="width: 100%; margin-left: 0px">
 									제재 기간<input class="form-control" name="date" id="date"
 										type="date"> <br> <input type="submit"
 										class="btn  btn-success btn-lg btn-block"
-										style="margin-left: -5px" id="banSubmit" value="등록하기">
+										style="margin-left: -5px;" id="banSubmit" value="등록하기">
 
 								</div>
 							</div>
-
 						</form>
 
 
@@ -147,40 +141,13 @@ tbody tr:hover {
 			</div>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-	$(document).ready(function() {
-	    // Clickable row to toggle checkbox
-	    $('.clickable-row').click(function(e) {
-	        // Avoid triggering checkbox click when clicking inside the row
-	        if (!$(e.target).is('input[type="checkbox"]') && !$(e.target).is('button')) {
-	            let checkbox = $(this).find('input[type="checkbox"]');
-	            checkbox.prop('checked', !checkbox.prop('checked'));
-	        }
-	    });
-
-	    // Prevent row click event when button is clicked
-	    $('.clickable-row button').click(function(e) {
-	        e.stopPropagation();
-	    });
-
-	    // Select all checkboxes when the header checkbox is clicked
-	    $('#checkAll').click(function() {
-	        $('input:checkbox').not(this).prop('checked', this.checked);
-	    });
-	});
-	</script>
 
 
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 </body>
 </html>

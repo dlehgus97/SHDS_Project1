@@ -72,4 +72,10 @@ public class RefundServiceImpl implements RefundService {
 	        map.put("list", list);
 			return map;
 	}
+	//환불해주기
+	@Override
+	public boolean refund(int buyno) {
+		boolean result = mapper.refund(buyno);
+		return false;
+	}
 }
