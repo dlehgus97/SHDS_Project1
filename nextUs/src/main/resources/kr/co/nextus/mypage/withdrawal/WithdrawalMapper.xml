@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nextus.mypage.withdrawal.WithdrawalMapper">
+    <update id="updateMemberState" parameterType="kr.co.nextus.mypage.withdrawal.WithdrawalVO">
+        UPDATE MEMBER SET state = #{state} WHERE no = #{memberno}
+    </update>
+    
+    <select id="check" parameterType="kr.co.nextus.member.MemberVO" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE no=#{no} AND pwd = MD5(#{pwd})
+	</select>
+</mapper>

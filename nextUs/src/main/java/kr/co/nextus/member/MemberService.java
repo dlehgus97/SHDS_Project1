@@ -25,6 +25,8 @@ public interface MemberService {
     boolean checkMemberExist(String email); // 존재하는 회원인지 확인
     
     boolean insertMember(MemberVO member);
+    
+    void updatePassword(String email, String newPassword);
 	
 	//관리자 페이지에서 동작
 	Map<String, Object> list(MemberVO vo);

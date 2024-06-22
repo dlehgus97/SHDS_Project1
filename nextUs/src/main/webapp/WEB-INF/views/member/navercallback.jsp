@@ -31,9 +31,9 @@ window.addEventListener('load', function () {
                 dataType: 'text',
                 success: function(result) {
                 	console.log(result);
-                    if (result === 'true') {
+                    if (result == '"true"') {
                     	location.href = "/index.do"; // 가입된 회원일 경우 메인 페이지로 이동
-                    } else if (result === 'false') {
+                    } else if (result == '"false"') {
                         alert('가입되지 않은 회원입니다');
                         location.href = '/member/login.do'; // 가입되지 않은 회원일 경우 회원가입 페이지로 이동
                     }
