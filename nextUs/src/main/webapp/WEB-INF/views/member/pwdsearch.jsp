@@ -91,40 +91,50 @@
         }
 
         function verifyCode() {
+            var email = $("#email").val();
             var code = $("#verificationCode").val();
-            var sessionCode = "<%= session.getAttribute("verificationCode") %>";
-
-            if (code === sessionCode) {
-                Swal.fire({
-                    icon: 'success',
-                    title: '인증에 성공했습니다!',
-                    returnFocus: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.href = "resPWD.do?email=" + $("#email").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "/member/verifyCode.do",
+                data: {
+                    email: email,
+                    code: code
+                },
+                success: function(response) {
+                    if (response.status) {
+                        // 인증 성공 시 세션에 이메일 저장
+                        sessionStorage.setItem("userEmail", email);
+                        
+                        // 비밀번호 변경 페이지로 이동
+                        window.location.href = '/member/changePassword.do';
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '오류',
+                            text: response.error,
+                            returnFocus: false
+                        });
                     }
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: '인증 실패',
-                    text: '잘못된 인증번호입니다.',
-                    returnFocus: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $("#verificationCode").val('');
-                        $("#verificationCode").focus();
-                    }
-                });
-            }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '서버 오류',
+                        text: '서버와의 통신 중 오류가 발생했습니다.',
+                        returnFocus: false
+                    });
+                }
+            });
         }
+        
     </script>
 </head>
 <body>
     <div class="wrap">
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
         <div class="sub">
-            <h3 class="sub_title">아이디 찾기</h3>
+            <h3 class="sub_title">비밀번호 찾기</h3>
             <div class="box">
                 <fieldset class="id_search_form">
                     <form id="idsearchForm" name="idsearchForm" onsubmit="return validateForm();">
@@ -137,7 +147,7 @@
                         <div id="verificationCodeArea" style="display: none;">
                             <label for="verificationCode">인증 코드:</label>
                             <input type="text" id="verificationCode" name="verificationCode" required>
-                            <button type="button" onclick="verifyCode()">인증 확인</button>
+                            <button id="verify_button" type="button" onclick="verifyCode()">인증 확인</button>
                         </div>
                         <div id="result"></div>
                     </form>
