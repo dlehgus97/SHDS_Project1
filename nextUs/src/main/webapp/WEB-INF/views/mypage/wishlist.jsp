@@ -68,7 +68,7 @@
                   찜 목록
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
-                  내정보
+                  내 정보 수정
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
                   문의 내역
@@ -98,7 +98,7 @@
                   <div class="card-img">
 
                     <!-- 찜 목록 삭제 -->
-                    <button id="deletewishlist${wishlist.sellno}" class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
+                    <button id="deletewishlist${wishlist.sellno}" style="width: 30px; height: 30px;" class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
                       X
                     </button>
                     <script>
@@ -117,7 +117,7 @@
 					</script>
 
                     <!-- 상품 바로가기 -->
-                    <a href="/selllist/view.do?no=${wishlist.sellno}" class="btn btn-xs w-100 btn-dark card-btn" style="color: white;">
+                    <a href="/selllist/view.do?sellno=${wishlist.sellno}" class="btn btn-xs w-100 btn-dark card-btn" style="color: white;">
                       상품 바로가기
                     </a>
 

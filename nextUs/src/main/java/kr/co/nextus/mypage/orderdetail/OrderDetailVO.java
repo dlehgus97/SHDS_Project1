@@ -17,5 +17,11 @@ public class OrderDetailVO {
 	private String sellthumbnail;
 	private String optionrank;
 	private String optioncontent;
+	private int discount;
+	private String name;
+	private String hp;
+	private String email;
+	private String addr1;
+	private String addr2;
 
 }

@@ -21,6 +21,35 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+<style type="text/css">
+.custom-card {
+  border: none;  /* 테두리 제거 */
+  background: url('/resources/imgs/coupon.png') no-repeat center center;  /* 배경 이미지 */
+  background-size: 130%;  /* 배경 이미지 크기 조정 */
+  background-color: transparent;  /* 배경색 투명 */
+}
+
+.custom-card h6 {
+  font-size: 1.5rem;  /* 제목 크기 */
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-family: "Nanum Pen Script", cursive;
+}
+
+.custom-card p {
+  font-size: 2.5rem;  /* 본문 크기 */
+  text-align: right;
+  padding-right: 60px;
+  color: purple;  /* 텍스트 색상 보라색 */
+  font-weight: bold;  /* 텍스트 굵게 */
+}
+
+</style>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -98,7 +127,7 @@
 					<div class="col-12 col-lg-6">
 					<!-- 반복 시작 -->
 	                <!-- Card -->
-	                	<div class="card card-lg bg-light mb-8" style="border: 2px solid black; border-radius: 8px;">
+	                	<div class="card card-lg mb-8 custom-card">
 		                  <div class="card-body">
 		
 		                    <!-- Heading -->
@@ -107,13 +136,13 @@
 		                    </h6>
 		
 		                    <!-- Text -->
-		                    <p class="text-muted mb-0">
+		                    <p class="mb-0">
 		                    	<c:choose>
 								 	<c:when test="${coupon.type == 1}">
-								 		${coupon.discount }원 할인 쿠폰
+								 		${coupon.discount }원
 								 	</c:when>
 			    					<c:otherwise>
-			    						${coupon.discount }% 할인 쿠폰
+			    						${coupon.discount }%
 			    					</c:otherwise>
 			  					</c:choose>
 		                    </p>
