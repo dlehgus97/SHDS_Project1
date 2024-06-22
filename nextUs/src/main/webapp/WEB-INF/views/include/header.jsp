@@ -24,7 +24,7 @@
     <div id="header_right_container">
         <div id="header_userinfo_menu">
             <c:if test="${!empty login && login.seller == 1}">
-                <a id="header_regist_seller" class="header_right_object" href="seller/sellerWeeklyMetrics">셀러 마이페이지</a>
+                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerWeeklyMetrics">셀러 마이페이지</a>
             </c:if>
             <c:if test="${!empty login && login.seller == 0}">
                 <button id="header_regist_seller" class="header_right_object">셀러등록</button>
