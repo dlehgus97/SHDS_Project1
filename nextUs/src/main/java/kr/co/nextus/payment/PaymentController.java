@@ -67,9 +67,14 @@ public class PaymentController {
 		//구매기록 insert
 		bService.insert(vos);
 		int couponNo = vos.get(0).getCouponNo();
-		//쿠폰사용처리
-		cService.useCoupon(couponNo);
+		//쿠폰사용처리 0 이면 쿠폰 적용 안됨
+		if (couponNo != 0) {
+			cService.useCoupon(couponNo);
+		}
 		//장바구니에서 제거
-		cartService.delList(vos);
+		for(BuyListVO vo : vos) {
+			cartService.delList(vo);
+		}
+		
 	}
 }

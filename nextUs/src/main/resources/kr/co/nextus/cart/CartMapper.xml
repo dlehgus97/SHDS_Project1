@@ -38,11 +38,8 @@
         WHERE memberno = #{memberno} AND sellno = #{sellno} AND optionno = #{optionno}
     </select>
     
-    <delete id="delList" parameterType="java.util.List">
-	    DELETE FROM CART WHERE (memberno, sellno, optionno) IN
-	    <foreach collection="list" item="item" open="(" separator="),(" close=")">
-	        #{item.memberno}, #{item.sellno}, #{item.optionno}
-	    </foreach>
+    <delete id="delList" parameterType="kr.co.nextus.buylist.BuyListVO">
+	    DELETE FROM CART WHERE memberno = #{memberno} AND sellno = #{sellno} AND optionno = #{optionno}
 	</delete>
 	
 </mapper>   
