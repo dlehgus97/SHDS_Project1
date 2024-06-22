@@ -9,7 +9,6 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>관리자 메인 페이지</title>
-<script src="../resources/js/admin/memberStatus.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
@@ -42,6 +41,9 @@ margin-top:13px;
 width:100px;
 }
 </style>
+
+
+
 </head>
 <body>
 <div id="preloader">
@@ -82,7 +84,7 @@ width:100px;
 												<th>이메일</th>
 												<th>요청일자</th>
 												<th>금액</th>
-												<th>내용</th>
+												
 												<th>상태</th>
 											</tr>
 										</thead>
@@ -103,15 +105,11 @@ width:100px;
 														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd  HH:MM"
 																value="${vo.date}" /></td>
 														<td><fmt:formatNumber value="${vo.refund_amount}" type="number" groupingUsed="true" />원</td>
-														<td>
-															<button class="btn btn-outline-secondary mb-3 mybutton" type="button"
-																onclick="openDetail(event); return false;">상세보기</button>
-														</td>
-														
+																										
 														<td><c:choose>
 																<c:when test="${vo.status == 2}">
-																	<button class="btn btn-rounded btn-danger mb-3 mybutton refundbutton"
-																	type="button" >환불 대기중</button>
+																	<button class="btn btn-rounded btn-danger mb-3 mybutton"
+																	onclick="openDetail(event); return false;" type="button" >환불 대기중</button>
 																</c:when>
 																<c:when test="${vo.status == 3}">
 																	<button class="btn btn-rounded btn-success mb-3 mybutton" type="button"
@@ -151,71 +149,7 @@ width:100px;
 		</div>
 	<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
 	</div>
-	
-<script>
-    $().ready(function () {
-        $(".refundbutton").click(function () {
-            var button = event.target;
-            var tr = button.closest('tr');
-            var buyno = tr.cells[0].innerText.trim(); // 첫 번째 셀의 내용을 가져옴
-            var refund_amount = tr.cells[3].innerText.trim(); // 가격
-            
-            //토스트
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'center-center',
-                showConfirmButton: false,
-                timer: 2500,
-                timerProgressBar: true,
-                
-              })
-   
-              Swal.fire({
-            	    title: '환불하시겠습니까?',
-            	    html: '금액: ' + refund_amount,
-            	    icon: 'info',
-            	    showCancelButton: true,
-            	    confirmButtonColor: '#4fd900',
-            	    cancelButtonColor: '#3085d6',
-            	    confirmButtonText: '환불하기',
-            	    cancelButtonText: '취소',
-            	}).then(result => {
-            	    if (result.isConfirmed) {
-            	        var refundURL = '/refund/' + buyno;
-            	        
-            	        Toast.fire({
-            	            icon: 'success',
-            	            title: '~환불중입니다~'
-            	        }).then(() => {
-            	            // 토스트가 사라진 후 AJAX 요청을 진행합니다.
-            	            $.ajax({
-            	                url: refundURL,
-            	                type: 'POST',
-            	                success: function(response) {
-            	                    if (response === 'success') {
-            	                        Swal.fire('환불이 완료되었습니다.', '지갑이 배고프대요~!', 'success')
-            	                        .then(function() {
-            	                            location.reload(); // 확인 버튼을 누를 때 페이지 새로고침
-            	                        });
-            	                    } else {
-            	                        Swal.fire('정산 실패', 'error:code1', 'error');
-            	                    }
-            	                },
-            	                error: function(xhr, status, error) {
-            	                    Swal.fire('정산 실패', 'error:code2', 'error');
-            	                }
-            	            });
-            	        });
-            	    }
-            	});
-        });
-        
-       
-    });
-</script>
-<!-- alertdesign -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
 
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>

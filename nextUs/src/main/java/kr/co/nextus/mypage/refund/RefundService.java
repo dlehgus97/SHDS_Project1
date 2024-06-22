@@ -14,5 +14,5 @@ public interface RefundService {
 	Map<String, Object> list(RefundVO vo, int no);
 	
 	//환불하기
-	boolean refund(int buyno);
+	boolean refund(RefundVO vo);
 }

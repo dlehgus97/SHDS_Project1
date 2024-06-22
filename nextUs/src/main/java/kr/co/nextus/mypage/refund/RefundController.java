@@ -62,18 +62,23 @@ public class RefundController {
 	}
 
 	// 환불하기
-	@RequestMapping(value = "/refund/{buyno}", method = RequestMethod.POST)
-	@ResponseBody
-	public String refund(@PathVariable("buyno") int buyno) {
+	@PostMapping("/refund.do")
+	public String refund(Model model,RefundVO vo,
+						@RequestParam("buyno") int buyno,
+	                    @RequestParam("refundno") int refundno,
+	                    @RequestParam("reply") String reply) {
 
-		try {
-			service.refund(buyno);
-			return "success"; // 성공 시 success 문자열 반환
-		} catch (Exception e) {
-			return "error"; // 실패 시 error 문자열 반환
-		}
+	    vo.setBuyno(buyno);
+	    vo.setRefundno(refundno);
+	    vo.setReply(reply);
 
+		model.addAttribute("refund",service.refund(vo));
+		model.addAttribute("msg", "환불 완료!");
+		return "common/alertThenClose";
+	    
 	}
+	
+	
 	//환불상세보기
 	@RequestMapping("/refundDetailPopup")
 	public String refundDetailPopup(RefundVO vo,Model model,@RequestParam("no") int no) {

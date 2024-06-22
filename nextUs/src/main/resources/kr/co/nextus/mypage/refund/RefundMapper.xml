@@ -46,9 +46,14 @@
 	</select>
 	
 	<!-- 환불하기 -->
-	<update id="settle"
-		parameterType="int">
+	<update id="refund" parameterType="int">
 		UPDATE BUYLIST SET status = '3' WHERE buyno = #{buyno} 
+	</update>
+	
+	<!-- 환불하기 -->
+	<update id="refund2" parameterType="kr.co.nextus.mypage.refund.RefundVO">
+			UPDATE REFUND SET reply = #{reply},refundDate = NOW() 
+			WHERE refundno = #{refundno} 
 	</update>
 	
 </mapper>   
