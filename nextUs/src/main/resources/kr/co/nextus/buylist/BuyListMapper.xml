@@ -52,5 +52,21 @@
 		SELECT COUNT(*) FROM BUYLIST
 		WHERE status = 2;
 	</select>
+	
+	<!-- 최근 7일 구매 -->
+	<select id="seven_days_sales"
+	parameterType="kr.co.nextus.buylist.BuyListVO"
+	resultType="kr.co.nextus.buylist.BuyListVO">
+	<![CDATA[
+SELECT DATE(decidedate) AS date,
+       SUM(price) AS totalprice
+FROM BUYLIST
+WHERE status = 6
+  AND decidedate >= NOW() - INTERVAL 7 DAY
+  AND decidedate <= NOW()
+GROUP BY DATE(decidedate)
+ORDER BY DATE(decidedate) ASC
+]]>
+	</select>
 
 </mapper>

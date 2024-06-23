@@ -30,7 +30,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 .header-area{
-	background-color:#485465;
+	background-color:white;
 }
 </style>
 

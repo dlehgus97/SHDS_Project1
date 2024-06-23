@@ -66,4 +66,13 @@ public class BuyListServiceImpl implements BuyListService {
 	public void insert(List<BuyListVO> vos) {
 		mapper.insert(vos);
 	}
+
+	@Override
+	public Map<String, Object> seven_days_sales(BuyListVO vo) {
+		List<BuyListVO> list = mapper.seven_days_sales(vo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("seven_days_sales", list);
+		return map;
+	}
 }

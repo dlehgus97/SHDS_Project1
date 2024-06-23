@@ -26,11 +26,17 @@ public class AdminController {
 	@Autowired
 	private BuyListService BLservice;
 	
+	
+	
+	
+	
 	@RequestMapping("/adminMain")
 	public String adminMain(SellerRequestVO vo, BuyListVO vo2, Model model) {
 		model.addAttribute("SRnew", SRservice.NEW(vo));
 		model.addAttribute("STnew", BLservice.settleNEW(vo2));
 		model.addAttribute("RFnew", BLservice.refundNEW(vo2));
+		
+		model.addAttribute("sales",BLservice.seven_days_sales(vo2));
 		return "adminMain";
 	}
 	

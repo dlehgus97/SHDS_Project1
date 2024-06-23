@@ -48,6 +48,10 @@ public class BuyListVO {
 	private int page; // 사용자가 요청한 페이지 번호
 	private int startIdx; // limit 앞에 들어갈 시작인덱스값
 
+	//최근7일 내역볼때
+	private int totalprice;
+	private Timestamp date;
+	
 	private String sellerEmail;
 	private String account;
 
