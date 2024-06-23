@@ -10,8 +10,12 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+<link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+
 	<link rel="stylesheet" href="/resources/css/reset.css"/>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<link rel="stylesheet" href="/resources/css/contents.css"/>
@@ -40,17 +44,24 @@
     function goSave() {
     	oEditors.getById['content'].exec('UPDATE_CONTENTS_FIELD',[]);
     	$("#frm").submit();
+    }function goBack() {
+        history.back();
     }
     </script>
 </head> 
 <body>
-    <div class="wrap">
-        <%@ include file="/WEB-INF/views/include/header.jsp" %>
-        <div class="sub">
-            <div class="size">
-                <h3 class="sub_title">자주하는질문 등록하기</h3>
+    <div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content" style="background-color: #485465;">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
+
+			<div class="main-content-inner">
+				<div class="row">
+					<div class="col-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+									<h1 class="header-title" style="font-size: 35px">FaQ 작성</h1>
     
-                <div class="bbs">
                 <form method="post" name="frm" id="frm" action="insert.do" enctype="multipart/form-data" >
                     <table class="board_write">
                         <tbody>
@@ -70,12 +81,13 @@
                     </table>
                     <div class="btnSet"  style="text-align:right;">
                         <a class="btn" href="javascript:goSave();">저장 </a>
+                        <a class="btn" href="javascript:goBack();">취소 </a>
                     </div>
                     </form>
                 </div>
             </div>
-        </div>
-		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+        </div></div></div></div>
+		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
     </div>
 </body> 
 </html>

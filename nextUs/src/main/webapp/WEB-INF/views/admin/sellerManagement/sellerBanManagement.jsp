@@ -57,7 +57,7 @@ tbody tr:hover {
 							<div class="card-body">
 								<div style="display: flex; justify-content: space-between;">
 
-									<h2>샐러 제재 내역</h2>
+									<h1 class="header-title" style="font-size: 35px">샐러 제재 내역</h1>
 									<button class="btn btn-outline-dark mb-3 mybutton"
 										onclick="openPopup('Seller'); return false;">제재내역 추가</button>
 
