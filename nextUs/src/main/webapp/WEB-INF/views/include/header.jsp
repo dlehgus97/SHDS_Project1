@@ -12,31 +12,73 @@
 <div id="header_container">
     <div id="header_left_container">
 	    <div id="header_menu_container">
-            <img id="header_menu_button" src="../resources/imgs/icons/grid.svg" alt="menu">
+	    
+        <!-- 카테고리 -->
+		<!-- NAVBAR -->
+     	<nav class="navbar navbar-expand-lg navbar-light">
+      		<div class="container">
+      		<!-- Toggler -->
+		        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		          <span class="navbar-toggler-icon"></span>
+		        </button>
+		        
+		    	<!-- Collapse -->
+        		<div class="collapse navbar-collapse" id="navbarCollapse">
+					
+			        <!-- Nav -->
+		          <ul class="navbar-nav mx-auto">
+		            <li class="nav-item dropdown">
+    		
+            			<!-- Toggle -->
+              			<a class="nav-link" data-bs-toggle="dropdown" href="#"><img id="header_menu_button" src="../resources/imgs/icons/grid.svg" alt="menu" width="100px" height="100px"></a>
+    
+			            <!-- Menu -->
+			              <div class="dropdown-menu">
+			                <div class="card card-lg" style="flex-direction: row-reverse;">
+			                  <div class="card-body">
+			                    <ul class="list-styled fs-sm">
+			                    <li class="list-styled-item">
+						          <h5>Front-End</h5>
+						        </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/html.do">- HTML</a>
+			                      </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/css.do">- CSS</a>
+			                      </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/javascript.do">- JavaScript</a>
+			                      </li>
+			                       	<li class="list-styled-item">
+							          
+							        </li>
+			                    <li class="list-styled-item">
+						          <h5>Back-End</h5>
+						        </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/java.do">- Java</a>
+			                      </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/cplusplus.do">- C++</a>
+			                      </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/c.do">- C</a>
+			                      </li>
+			                      <li class="list-styled-item">
+			                        <a class="list-styled-link" href="/category/python.do"> - Python</a>
+			                      </li>
+			                    </ul>
+			                  </div>
+			                </div>
+			              </div>
+			    
+			            </li>
+			          </ul>
+			        </div>
+ 			      </div>
+			    </nav>
             <a id="header_event" href="/event/index.do">이벤트</a>
 	    </div>
-	    
-		<!-- 카테고리 -->
-		<div class="category-container">
-		    <button id="categoryButton" class="category-button">
-		        <img src="../resources/imgs/category.png" alt="카테고리" class="button-image">
-		    </button>
-		    <div id="categoryMenu" class="category-menu" style="display: none;">
-		        <div class="category-section">
-		            <h3>[Front-End]</h3>
-		            <button class="category-item" onclick="location.href='/category/html'">HTML</button>
-		            <button class="category-item" onclick="location.href='/category/css'">CSS</button>
-		            <button class="category-item" onclick="location.href='/category/javascript'">JavaScript</button>
-		        </div>
-		        <div class="category-section">
-		            <h3>[Back-End]</h3>
-		            <button class="category-item" onclick="location.href='/category/java'">Java</button>
-		            <button class="category-item" onclick="location.href='/category/cplusplus'">C++</button>
-		            <button class="category-item" onclick="location.href='/category/c'">C</button>
-		            <button class="category-item" onclick="location.href='/category/python'">Python</button>
-		        </div>
-		    </div>
-		</div>	    
     </div>
     <div id="header_logo_container">
     	<a href="/index.do">
