@@ -24,24 +24,21 @@
 			<p>ex) 개발의 경우, 개발 기술이 적용 된 결과물 예시 혹은 적용된 상세 기술</p><br>
 			<p>포트폴리오의 경우 .pdf 파일로 업로드 해주시기 바랍니다. (최대 크기 20mb)</p>
 			<p>
-				포트폴리오의 용량이 초과하는 경우 추가로 포트폴리오 내에, 블로그, notion 등의 링크를 추가해주시면 
+				포트폴리오의 용량이 초과하는 경우 추가로 링크 혹은 내용을 추가해주시면 
 				넥서스의 담당 직원이 추가 확인 후 심사에 포함합니다.
 			</p>
-			<p>심사완료는 영업일 기준 최대 7일이 소요될 수 있으며, 특별한 경우엔 연장될 수 있습니다.</p>
-			<p>셀러신청의 경우 자사의 방향과 맞지 않거나, 부적절한 기술이 포함 된 경우 등록이 거부될 수 있습니다.</p>
+			<p>심사완료는 영업일 기준 최대 7일이 소요될 수 있으며, 특수한 경우엔 연장될 수 있습니다.</p>
+			<p>셀러신청의 경우 자사의 방향과 맞지 않거나, 부적절한 기술 및 내용이 포함 된 경우 등록이 거부될 수 있습니다.</p>
 			<div id="warn_confirm_container">
-				<input id="warn_confirm" type="checkbox">위 사항을 인지했습니다.
+				<input id="warn_confirm" type="checkbox"><b>위 사항을 인지했습니다.</b>
 			</div>
 		</div>
 		<div id="regist_content_container">
 			<img id="reg_logo" src="../resources/imgs/nexus2.png" alt="logo">
 			<p>당신의 역량을 알려주세요!</p>
-			<form>
-				<div>
-					<input type="text" name="email" placeholder="이메일"><button type="button" id="email_confirm">인증하기</button>
-				</div>
-				<div>
-					<input type="text" id="email_confirm_num" placeholder="인증번호 입력"><button type="button" id="email_num_button">인증확인</button>
+			<form id="regist_form">
+				<div id="text_area">
+					<textarea name="details" id="details" placeholder="신청 이유나 추가 정보를 입력하세요."></textarea>
 				</div>
 				<div>
 					<select name="bank" id="bank" required>
@@ -53,12 +50,59 @@
 					<input type="text" id="account" name="account" placeholder="계좌번호">
 				</div>
 				<div>
-					<input type="file" name="file" id="file">
+					<div class="filebox">
+					    <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+					    <label for="file">파일찾기</label> 
+					    <input type="file" id="file">
+					</div>
 				</div>
+				<button type="submit" id="submit">제출</button>
 			</form>
 		</div>
 	</div>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+
+<script>
+	$(document).ready(function() {
+	    $('#regist_form').on('submit', function(event) {
+	        if (!$('#warn_confirm').is(':checked')) {
+	            alert('안내 사항을 인지했는지 확인해주세요.');
+	            event.preventDefault(); // 폼 전송을 막음
+	            return;
+	        }
+	
+	        var fileInput = $('#file')[0];
+	        if (fileInput.files.length > 0) {
+	            var fileSize = fileInput.files[0].size; // 파일 크기 (바이트 단위)
+	            var maxSize = 20 * 1024 * 1024; // 최대 크기 20MB (바이트 단위)
+	
+	            if (fileSize > maxSize) {
+	                alert('파일 크기가 20MB를 초과합니다.');
+	                event.preventDefault(); // 폼 전송을 막음
+	            }
+	        }
+	    });
+	});
+	
+	$("#file").on('change',function(){
+	  var fileName = $("#file").val();
+	  $(".upload-name").val(fileName);
+	});
+	
+	$(document).ready(function() {
+	    // 모든 버튼 요소를 선택하고 마우스오버 이벤트 추가
+	    $('button').hover(
+	        function() {
+	            // 마우스오버 시 수행할 작업 작성
+	            $(this).css('background-color', '#f9dbff'); // 예: 배경색 변경
+	        }, 
+	        function() {
+	            // 마우스가 버튼에서 벗어날 때 수행할 작업
+	            $(this).css('background-color', 'white'); // 원래 배경색 복원
+	        }
+	    );
+	});
+</script>
 </body>
 </html>
