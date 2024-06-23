@@ -39,7 +39,7 @@
             <a href="">연혁</a>
             <a href="">Very</a>
             <a href="/faq/index.do">자주하는 질문</a>
-            <a href="">오시는길</a>
+            <a href="/notice/map.do">오시는길</a>
             <a href="">Easy</a>
         </div>
     </div>
