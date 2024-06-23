@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>nexTus</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -163,6 +163,19 @@
 					startSlider();
 				});
 	</script>
+	
+	<!-- 카테고리 -->
+	<script>
+	    document.getElementById('categoryButton').addEventListener('click', function() {
+	        var categoryMenu = document.getElementById('categoryMenu');
+	        if (categoryMenu.style.display === 'none') {
+	            categoryMenu.style.display = 'block';
+	        } else {
+	            categoryMenu.style.display = 'none';
+	        }
+	    });
+	</script>
+
 	<!-- 부트스트랩 js -->
 	<!-- Map (replace the API key to enable) -->
 	<script

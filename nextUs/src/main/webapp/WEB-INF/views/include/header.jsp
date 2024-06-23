@@ -15,6 +15,28 @@
             <img id="header_menu_button" src="../resources/imgs/icons/grid.svg" alt="menu">
             <a id="header_event" href="/event/index.do">이벤트</a>
 	    </div>
+	    
+		<!-- 카테고리 -->
+		<div class="category-container">
+		    <button id="categoryButton" class="category-button">
+		        <img src="../resources/imgs/category.png" alt="카테고리" class="button-image">
+		    </button>
+		    <div id="categoryMenu" class="category-menu" style="display: none;">
+		        <div class="category-section">
+		            <h3>[Front-End]</h3>
+		            <button class="category-item" onclick="location.href='/category/html'">HTML</button>
+		            <button class="category-item" onclick="location.href='/category/css'">CSS</button>
+		            <button class="category-item" onclick="location.href='/category/javascript'">JavaScript</button>
+		        </div>
+		        <div class="category-section">
+		            <h3>[Back-End]</h3>
+		            <button class="category-item" onclick="location.href='/category/java'">Java</button>
+		            <button class="category-item" onclick="location.href='/category/cplusplus'">C++</button>
+		            <button class="category-item" onclick="location.href='/category/c'">C</button>
+		            <button class="category-item" onclick="location.href='/category/python'">Python</button>
+		        </div>
+		    </div>
+		</div>	    
     </div>
     <div id="header_logo_container">
     	<a href="/index.do">
