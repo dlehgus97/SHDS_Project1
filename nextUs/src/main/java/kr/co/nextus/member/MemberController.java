@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.nextus.buylist.BuyListService;
 import kr.co.nextus.buylist.BuyListVO;
@@ -284,7 +285,46 @@ public class MemberController {
             }
         }
     }
+    
+    @GetMapping("/member/kakaocallback")
+    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (code != null) {
+            String access_Token = service.getAccessToken(code); // 인증 코드로 Access Token 요청
+            HashMap<String, Object> userInfo = service.getUserInfo(access_Token); // Access Token으로 사용자 정보 요청
+            
+            // 카카오 사용자 정보를 DB에 저장하거나 기존 회원 여부 확인
+            boolean isExistingMember = service.processKakaoLogin(userInfo);
 
+            if (isExistingMember) {
+                // 기존 회원이라면 세션에 사용자 정보 저장
+                MemberVO loginMember = new MemberVO(); // 예시로 MemberVO 객체 생성
+                loginMember.setEmail((String) userInfo.get("email")); // 카카오에서 받은 이메일 정보 사용
+                loginMember.setName((String) userInfo.get("nickname")); // 카카오에서 받은 닉네임 정보 사용
+                // 로그인 처리 메소드 예시 (실제 로그인 로직은 service.login(vo)와 같이 구현되어야 함)
+                MemberVO login = service.findByEmail(loginMember.getEmail()); // 로그인 처리 메소드 호출
+                
+                if (login == null) {
+                    // 로그인 실패 처리
+                    redirectAttributes.addFlashAttribute("msg", "로그인에 실패하였습니다.");
+                    return "redirect:/login/error";
+                } else {
+                    // 정상 로그인 처리
+                    session.setAttribute("login", login); // 세션에 로그인 정보 저장
+                    return "redirect:/index.do"; // 메인 페이지로 리다이렉트
+                }
+            } else {
+                // 신규 회원이라면 회원가입 페이지로 이동하거나 추가적인 처리
+                redirectAttributes.addFlashAttribute("userInfo", userInfo); // 사용자 정보를 Flash 속성에 담아서 전달
+                return "redirect:/member/regist.do"; // 회원 등록 페이지로 이동
+            }
+        } else {
+            // 카카오 로그인 실패 시 처리
+            return "redirect:/login/error"; // 에러 페이지로 리다이렉트
+        }
+    }
+
+
+    
 //    @GetMapping("/member/registCheck")
 //    @ResponseBody
 //    public String registCheck(String email) {

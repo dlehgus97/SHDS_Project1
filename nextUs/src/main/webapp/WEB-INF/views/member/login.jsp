@@ -18,7 +18,18 @@
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/footer.css"/>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <style>
+        .social-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .social-group img {
+            height: 60px;
+        }
+    </style>
     <script>         
         $(document).ready(function() {
             // 페이지 로드 시, 쿠키에 저장된 아이디가 있는지 확인하여 입력 필드에 넣기
@@ -84,17 +95,7 @@
             function deleteCookie(name) {
                 document.cookie = name + '=; Max-Age=-99999999;';
             }
-
-            // 카카오 로그인 초기화
-            Kakao.init('265c623ea9e9ac2c92eb2a25f35d5fb1'); // 여기에 카카오 앱 키를 입력하세요.
-            Kakao.isInitialized();
         });
-
-        function loginWithKakao() {
-            Kakao.Auth.authorize({ 
-                redirectUri: 'http://localhost:8090/kakaocallback' // 여기에 리다이렉트 URI를 입력하세요.
-            }); 
-        }
     </script>
 </head> 
 <body>
@@ -122,17 +123,14 @@
                                 </div>
                             </div>
                             <div class="social-group">
-                                <div>
-                                    <p>간편 로그인</p>
-                                    <!-- 카카오톡 간편로그인 -->
-                                    <div class="col-lg-12 text-center mt-3">
-                                        <img alt="카카오로그인" src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" onclick="loginWithKakao()">
-                                    </div>
-                                    <!-- 네이버 간편로그인 -->
-                                    <a id="naverIdLogin" class="social-login">
-                                        <img alt="네이버로 간편 로그인" class="social-icon">
-                                    </a>
-                                </div>
+                                <!-- 카카오톡 간편로그인 -->
+                                <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=2acf526c8960600ac4bb86eac6ea31ab&redirect_uri=http://localhost:8090/member/kakaocallback&response_type=code">
+                                    <img src="/resources/imgs/icons/kakao_login_medium_narrow.png" alt="카카오 로그인">
+                                </a>
+                                <!-- 네이버 간편로그인 -->
+                                <a id="naverIdLogin" class="social-login">
+                                    <img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 로그인" class="social-icon">
+                                </a>
                             </div>
                         </div>
                     </div>

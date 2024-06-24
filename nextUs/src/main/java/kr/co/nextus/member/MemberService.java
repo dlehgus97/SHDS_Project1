@@ -1,5 +1,6 @@
 package kr.co.nextus.member;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -27,6 +28,10 @@ public interface MemberService {
     boolean insertMember(MemberVO member);
     
     void updatePassword(String email, String newPassword);
+    
+    String getAccessToken(String authorize_code);
+    HashMap<String, Object> getUserInfo(String access_Token);
+    boolean processKakaoLogin(HashMap<String, Object> userInfo);
 	
 	//관리자 페이지에서 동작
 	Map<String, Object> list(MemberVO vo);
