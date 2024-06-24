@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.nextus.category.CategoryVO;
+
 
 
 @Service
@@ -46,7 +48,23 @@ public class SellListServiceImpl implements SellListService {
 		SellListVO data = mapper.detail(vo);
 		return data;
 	}
-	
+	// 판매글 등록 - 셀러, 제목, 내용 등
+	@Override
+    public void insertSellList(SellListVO sellListVO) {
+        mapper.insertSellList(sellListVO);
+    }
+	/*
+	// 판매글 등록 - 카테고리
+	@Override
+	public void registerCategory(CategoryVO categoryVO) {
+		mapper.registerCategory(categoryVO);
+	}
+	// 판매글 등록 - 옵션
+    @Override
+    public void registerOption(SellListVO sellListVO) {
+        mapper.registerOption(sellListVO);
+    }
+	*/
 	
 	//관리자
 	@Override
