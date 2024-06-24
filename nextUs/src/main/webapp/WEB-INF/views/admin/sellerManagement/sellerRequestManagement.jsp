@@ -47,7 +47,7 @@ margin-top:13px;
     </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content" style="background-color:#485465;">
+		<div class="main-content" style="background-color:#f0fffe;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">

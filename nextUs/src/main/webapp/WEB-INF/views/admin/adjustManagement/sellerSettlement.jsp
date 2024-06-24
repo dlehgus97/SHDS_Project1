@@ -43,7 +43,7 @@ tbody tr:hover {
     </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content" style="background-color: #485465;">
+		<div class="main-content" style="background-color: #f0fffe;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">
@@ -156,7 +156,7 @@ tbody tr:hover {
             
               Swal.fire({
             	    title: '정산하시겠습니까?',
-            	    html: '금액: ' + price + '원<br>계좌번호: ' + account,
+            	    html: '금액: ' + price + '<br>계좌번호: ' + account,
             	    icon: 'info',
             	    showCancelButton: true,
             	    confirmButtonColor: '#4fd900',

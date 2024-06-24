@@ -46,7 +46,7 @@ t1{font-size:20px;}
     </div>
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content" style="background-color:#485465;">
+		<div class="main-content" style="background-color:#f0fffe;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 
 			<div class="main-content-inner">
@@ -142,16 +142,15 @@ t1{font-size:20px;}
 
 
 
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+
+
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 
 
 

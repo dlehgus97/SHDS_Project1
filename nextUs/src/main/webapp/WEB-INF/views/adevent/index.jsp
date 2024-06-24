@@ -55,7 +55,7 @@ justify-content: center;
 
 	<div class="page-container">
 		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
-		<div class="main-content" style="background-color: #485465;">
+		<div class="main-content" style="background-color: #f0fffe;">
 			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
 			<!-- CONTENT -->
 			<div class="all">
@@ -66,7 +66,10 @@ justify-content: center;
 
 								<!-- Heading -->
 								<h3 class="mb-7 text-center">EVENT</h3>
-
+								<div style="text-align: right;">
+									<button class="btn btn-info mb-3"
+										onclick="location.href='write.do'">글작성</button>
+								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -96,55 +99,51 @@ justify-content: center;
 								</div>
 							</c:forEach>
 						</div>
-						<div class="btnSet" style="text-align: right;">
-							<a class="btn" href="write.do">글작성 </a>
-							<!--<c:if test="${!empty login}">-->
-							<!--</c:if>-->
-						</div>
+
 					</div>
 				</div>
 			</div>
 			<div class="pagenate clear">
-					<ul class='paging'>
-						<c:if test="${map.prev }">
-							<li><a
-								href="index.do?page=${map.startPage-1 }&searchType=${eventVO.searchType}&searchWord=${eventVO.searchWord}">
-									<< </a></li>
+				<ul class='paging'>
+					<c:if test="${map.prev }">
+						<li><a
+							href="index.do?page=${map.startPage-1 }&searchType=${eventVO.searchType}&searchWord=${eventVO.searchWord}">
+								<< </a></li>
+					</c:if>
+					<c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
+						<c:if test="${p == eventVO.page}">
+							<li><a href='#;' class='current'>${p}</a></li>
 						</c:if>
-						<c:forEach var="p" begin="${map.startPage}" end="${map.endPage}">
-							<c:if test="${p == eventVO.page}">
-								<li><a href='#;' class='current'>${p}</a></li>
-							</c:if>
-							<c:if test="${p != eventVO.page}">
-								<li><a
-									href='index.do?page=${p}&searchType=${eventVO.searchType}&searchWord=${eventVO.searchWord}'>${p}</a></li>
-							</c:if>
-						</c:forEach>
-						<c:if test="${map.next }">
+						<c:if test="${p != eventVO.page}">
 							<li><a
-								href="index.do?page=${map.endPage+1 }&searchType=${eventVO.searchType}&searchWord=${eventVO.searchWord}">
-									>> </a></li>
+								href='index.do?page=${p}&searchType=${eventVO.searchType}&searchWord=${eventVO.searchWord}'>${p}</a></li>
 						</c:if>
-					</ul>
-				</div>
+					</c:forEach>
+					<c:if test="${map.next }">
+						<li><a
+							href="index.do?page=${map.endPage+1 }&searchType=${eventVO.searchType}&searchWord=${eventVO.searchWord}">
+								>> </a></li>
+					</c:if>
+				</ul>
+			</div>
 
-				<div class="bbsSearch" style="height:60px;">
-					<form method="get" name="searchForm" id="searchForm"
-						action="index.do">
-						<span class="srchSelect"> <select id="stype"
-							name="searchType" class="dSelect" title="검색분류 선택">
-								<option value="all">전체</option>
-								<option value="title"
-									<c:if test="${eventVO.searchType == 'title'}">selected</c:if>>제목</option>
-								<option value="content"
-									<c:if test="${eventVO.searchType == 'content'}">selected</c:if>>내용</option>
-						</select>
-						</span> <span class="searchWord"> <input type="text" id="sval"
-							name="searchWord" value="${eventVO.searchWord}" title="검색어 입력"><br>
-							<input type="submit" id="" value="검색" title="검색">
-						</span>
-					</form>
-				</div>
+			<div class="bbsSearch" style="height: 60px;">
+				<form method="get" name="searchForm" id="searchForm"
+					action="index.do">
+					<span class="srchSelect"> <select id="stype"
+						name="searchType" class="dSelect" title="검색분류 선택">
+							<option value="all">전체</option>
+							<option value="title"
+								<c:if test="${eventVO.searchType == 'title'}">selected</c:if>>제목</option>
+							<option value="content"
+								<c:if test="${eventVO.searchType == 'content'}">selected</c:if>>내용</option>
+					</select>
+					</span> <span class="searchWord"> <input type="text" id="sval"
+						name="searchWord" value="${eventVO.searchWord}" title="검색어 입력"><br>
+						<input type="submit" id="" value="검색" title="검색">
+					</span>
+				</form>
+			</div>
 		</div>
 
 		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>

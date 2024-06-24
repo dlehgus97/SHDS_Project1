@@ -5,16 +5,24 @@
 <head> 
     <meta charset="utf-8">
     <title></title>
-    <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
-	<link rel="stylesheet" href="/resources/css/reset.css"/>
-	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<link rel="stylesheet" href="/resources/css/contents.css"/>
+<META name="viewport"
+	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+
+<link rel="stylesheet" href="/resources/css/reset.css" />
+<link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet" href="/resources/css/contents.css" />
     <script src="/smarteditor/js/HuskyEZCreator.js"></script>
 	<script>
 	var oEditors = [];
@@ -86,11 +94,22 @@
 
 </head> 
 <body>
-    <div class="wrap">
-        <%@ include file="/WEB-INF/views/include/header.jsp" %>
-        <div class="sub">
-            <div class="size">
-                <h3 class="sub_title">이벤트 등록</h3>
+<div id="preloader">
+	<div class="loader"></div>
+</div>
+
+   <div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content" style="background-color:#f0fffe;">
+				<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
+                
+    
+			<div class="main-content-inner">
+				<div class="row">
+					<div class="col-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+							<h1 class="header-title" style="font-size: 35px">이벤트 작성</h1>
     
                 <div class="bbs">
                 <form method="post" name="frm" id="frm" action="insert.do" enctype="multipart/form-data" >
@@ -129,7 +148,7 @@
                                 <textarea name="content" id="content" style="width:100%;"></textarea>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height:50px;">
                             <th>첨부파일</th>
                             <td>
                                 <input type="file" name="file" id="file" class="wid100"/>
@@ -144,8 +163,15 @@
                     </form>
                 </div>
             </div>
-        </div>
-		<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+        </div></div></div></div></div>
+		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
     </div>
+    <!-- bootstrap -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>    
+    
 </body> 
 </html>

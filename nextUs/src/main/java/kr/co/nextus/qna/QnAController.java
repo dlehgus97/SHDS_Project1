@@ -12,11 +12,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
+import kr.co.nextus.sellerrequest.SellerRequestService;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
+
 @Controller
 public class QnAController {
 
 	@Autowired
 	private QnAService service;
+	@Autowired
+	private SellerRequestService SRservice;
+	@Autowired
+	private BuyListService BLservice;
+
 	
 	@GetMapping("/qna/index.do")
 	public String index(Model model, QnAVO vo) {
@@ -101,23 +111,33 @@ public class QnAController {
 	//----------------------------------------관리자------------------------------------
 	
 	@GetMapping("/adqna/index.do")
-	public String adindex(Model model, QnAVO vo) {
+	public String adindex(Model model, QnAVO vo,SellerRequestVO vo2, BuyListVO vo3) {
 		model.addAttribute("map", service.list(vo));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "adqna/index";
 	}
 	
 	
 	@GetMapping("/adqna/view.do")
-	public String adview(Model model, QnAVO vo) {
+	public String adview(Model model, QnAVO vo,SellerRequestVO vo2, BuyListVO vo3) {
 		model.addAttribute("vo", service.detail(vo, true));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "adqna/view";
 	}
 
 	@PostMapping("/adqna/answer.do")
 	@ResponseBody
-	public Map<String, Object> adanswer(@RequestParam("no") int no, @RequestParam("answer") String answer) {
+	public Map<String, Object> adanswer(@RequestParam("no") int no, 
+			@RequestParam("answer") String answer, Model model,
+			SellerRequestVO vo2, BuyListVO vo3) {
 	    Map<String, Object> response = new HashMap<>();
-	    
+	    model.addAttribute("SRnew", SRservice.NEW(vo2));
+	    model.addAttribute("STnew", BLservice.settleNEW(vo3));
+	    model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 	    Map<String, Object> result = service.answer(no, answer);
 	    if ((int) result.get("result") > 0) {
 	        response.put("status", "success");
@@ -132,8 +152,12 @@ public class QnAController {
 	}
 	
 	@PostMapping("/adqna/delete.do")
-	public String addelete(Model model, @RequestParam("no") int no) {
+	public String addelete(Model model, @RequestParam("no") int no
+			,SellerRequestVO vo2, BuyListVO vo3) {
 		int r = service.addelete(no);
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 삭제되었습니다.");

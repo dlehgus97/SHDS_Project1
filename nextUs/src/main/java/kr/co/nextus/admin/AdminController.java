@@ -47,20 +47,30 @@ public class AdminController {
 	
 	
 	@GetMapping("/notice.do")  // 공지사항 조회
-	public String index(Model model, AdminVO vo) {
+	public String index(Model model, AdminVO vo,SellerRequestVO vo2, BuyListVO vo3) {
 		model.addAttribute("map", service.list(vo));
+		
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/serviceCenter/notice";
 	}
 	
 	@GetMapping("/notice/adview.do") // 클리하여 들어가보기
-	public String view(Model model, AdminVO vo) {
+	public String view(Model model, AdminVO vo,SellerRequestVO vo2, BuyListVO vo3) {
 		model.addAttribute("vo", service.detail(vo, true));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/serviceCenter/adview";
 	}
 	
 	@GetMapping("/notice/adedit.do")//editㄱㄱ
-	public String edit(Model model, AdminVO vo) {
+	public String edit(Model model, AdminVO vo,SellerRequestVO vo2, BuyListVO vo3) {
 		model.addAttribute("vo", service.detail(vo, false));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/serviceCenter/adedit";
 	}
 	
@@ -71,8 +81,11 @@ public class AdminController {
     }
     
     @RequestMapping("/notice/register.do") // 등록하기 폼에 넘어가기
-    public String registnotice() {
-        return "admin/serviceCenter/insertnotice";
+    public String registnotice(Model model,SellerRequestVO vo2, BuyListVO vo3) {
+    	model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+    	return "admin/serviceCenter/insertnotice";
     }
     
     @RequestMapping("/notice/insertnotice.do")// 새로운 공지사항 등록하기 위함
@@ -97,21 +110,6 @@ public class AdminController {
     
     
     
-	
-	@RequestMapping("/QnA")
-	public String QnA() {
-		return "admin/serviceCenter/QnA";
-	}
-	@RequestMapping("/FaQ")
-	public String FaQ() {
-		return "admin/serviceCenter/FaQ";
-	}
-	@RequestMapping("/event")
-	public String event() {
-		return "admin/serviceCenter/event";
-	}
-	
-	
 	
 	
 	
