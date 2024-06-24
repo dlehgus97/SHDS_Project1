@@ -19,6 +19,7 @@
 		gender = #{gender},
 		birthday = #{birthday},
 		hp = #{hp},
+		pwd = MD5(#{pwd}),
 		zipcode = #{zipcode},
 		addr1 = #{addr1},
 		addr2 = #{addr2}
