@@ -16,4 +16,9 @@ public interface BuyListMapper {
 
 	int Countrefund(BuyListVO vo);
 	List<BuyListVO> seven_days_sales(BuyListVO vo);
+	
+	//adminMain
+	int total_sales(BuyListVO vo);
+	int today_sales(BuyListVO vo);
+	List<BuyListVO> MVP(BuyListVO vo);
 }

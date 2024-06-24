@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.nextus.coupon.CouponVO;
 
 
 @Service
@@ -66,13 +65,21 @@ public class BuyListServiceImpl implements BuyListService {
 	public void insert(List<BuyListVO> vos) {
 		mapper.insert(vos);
 	}
-
+	
+	//adminMain
 	@Override
 	public Map<String, Object> seven_days_sales(BuyListVO vo) {
 		List<BuyListVO> list = mapper.seven_days_sales(vo);
+		List<BuyListVO> MVP = mapper.MVP(vo);
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("seven_days_sales", list);
+		map.put("total_sales",  mapper.total_sales(vo));
+		map.put("today_sales",  mapper.today_sales(vo));
+		map.put("MVP", MVP);
 		return map;
 	}
+
+
 }

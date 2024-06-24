@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.buylist.BuyListService;
 import kr.co.nextus.buylist.BuyListVO;
+import kr.co.nextus.member.MemberService;
+import kr.co.nextus.member.MemberVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 
@@ -25,18 +27,23 @@ public class AdminController {
 	private SellerRequestService SRservice;
 	@Autowired
 	private BuyListService BLservice;
+	@Autowired
+	private MemberService MBservice;
 	
 	
 	
 	
 	
 	@RequestMapping("/adminMain")
-	public String adminMain(SellerRequestVO vo, BuyListVO vo2, Model model) {
+	public String adminMain(SellerRequestVO vo, BuyListVO vo2, MemberVO vo3,Model model) {
 		model.addAttribute("SRnew", SRservice.NEW(vo));
 		model.addAttribute("STnew", BLservice.settleNEW(vo2));
 		model.addAttribute("RFnew", BLservice.refundNEW(vo2));
 		
+
+		//그래프 그리는 용도
 		model.addAttribute("sales",BLservice.seven_days_sales(vo2));
+		model.addAttribute("members",MBservice.seven_days_members(vo3));
 		return "adminMain";
 	}
 	

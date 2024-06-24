@@ -53,6 +53,7 @@
 		WHERE status = 2;
 	</select>
 	
+	
 	<!-- 최근 7일 구매 -->
 	<select id="seven_days_sales"
 	parameterType="kr.co.nextus.buylist.BuyListVO"
@@ -68,5 +69,25 @@ GROUP BY DATE(decidedate)
 ORDER BY DATE(decidedate) ASC
 ]]>
 	</select>
-
+	<!-- adminMain -->
+	<select id="total_sales" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int" >
+	SELECT SUM(price) as total_salses FROM BUYLIST WHERE status = 6
+	</select>
+	<!-- adminMain -->
+	<select id="today_sales" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int" >
+	SELECT SUM(price) AS today_sales FROM BUYLIST WHERE status = 6 AND DATE(decidedate) = CURDATE();
+	</select>
+	<!-- adminMain -->
+	<select id="MVP" parameterType="kr.co.nextus.buylist.BuyListVO"
+		resultType="kr.co.nextus.buylist.BuyListVO">
+		SELECT m.nickname AS MVP_nickname, SUM(b.price) AS MVP_total
+		FROM BUYLIST b
+		JOIN MEMBER m ON b.sellerno = m.no
+		WHERE b.status = 6
+		GROUP BY m.nickname
+		ORDER BY MVP_total DESC
+		LIMIT 1
+	</select>
+	
+	
 </mapper>

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import kr.co.nextus.qna.QnAVO;
 
 public interface MemberService {
 
@@ -39,6 +38,11 @@ public interface MemberService {
 	Map<String, Object> reportCountList(MemberVO vo,int isSeller);
 
 	int sellerRegist(int no);
+
+	//adminMain
+	Map<String, Object> seven_days_members(MemberVO vo);
+
+
 
 	
 	

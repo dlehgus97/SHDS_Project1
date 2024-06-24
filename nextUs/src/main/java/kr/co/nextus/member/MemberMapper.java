@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.co.nextus.buylist.BuyListVO;
+
 @Mapper
 public interface MemberMapper {
 
@@ -45,4 +47,9 @@ public interface MemberMapper {
   	
   	//제재시 state 1로 바꾸기
   	int ban(int no);
+
+	List<BuyListVO> seven_days_members(MemberVO vo);
+
+	int total_members(MemberVO vo);
+	int today_members(MemberVO vo);
 }

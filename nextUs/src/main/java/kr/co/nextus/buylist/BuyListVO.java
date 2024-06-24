@@ -52,6 +52,11 @@ public class BuyListVO {
 	private int totalprice;
 	private Timestamp date;
 	
+	private String MVP_nickname;
+	private int MVP_total;
+	private int total_sales;
+	private int today_sales;
+	
 	private String sellerEmail;
 	private String account;
 
