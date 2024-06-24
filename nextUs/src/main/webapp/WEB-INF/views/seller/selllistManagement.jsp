@@ -114,7 +114,7 @@
 		    font-size: 20px;
 		    font-weight: bold;
 		    color: #333;
-		    text-align: center;
+		    /*text-align: center;*/
 		    margin-top: 10px;
 		}
         
@@ -129,7 +129,7 @@
 		*/
 		
 		.product-details {
-		    padding: 10px;
+		    padding: 20px;
 		    flex-grow: 1;
 		    display: flex;
 		    flex-direction: column;
@@ -141,11 +141,16 @@
             margin: 10px 0;
             color: #333;
         }
-
+/*
         .product-details p {
             font-size: 16px;
             margin: 5px 0;
             color: #666;
+        }
+*/     
+        .product-details .price {
+        	font-size: 30px;
+        	font-weight: bold;
         }
         
 		.button-container {
@@ -161,8 +166,8 @@
 		    width: 110px;
 		    height: 36px;
 		    /*padding: 8px 20px;*/
-		    margin: 10px;
-		    border-radius: 30px; /* 알약 모양으로 설정 */
+		    margin: 12px;
+		    border-radius: 12px; /* 모서리 둥글게 */
 		    font-size: 16px;
 		    text-align: center;
 		    text-decoration: none;
@@ -233,11 +238,7 @@
 		.star-container p {
 			font-size: 20px;
 			
-		}
-		
-		.review_cnt-container {
-			
-		}		
+		}	
     </style>
 </head>
 <body>

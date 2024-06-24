@@ -75,15 +75,15 @@
                   찜 목록
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
-                  내정보
+                  내 정보 수정
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="qna.do">
+                <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
                   문의 내역
                 </a>
                 <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
                   보유 쿠폰
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle" href="#!">
+                <a class="list-group-item list-group-item-action dropend-toggle" href="withdrawal.do">
                   회원 탈퇴
                 </a>
               </div>
@@ -261,20 +261,16 @@
                 <!-- List group -->
                 <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
                   <li class="list-group-item d-flex">
-                    <span>Subtotal</span>
-                    <span class="ms-auto">$128.00</span>
+                    <span>상품 금액</span>
+                    <span class="ms-auto"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.discount + order.price }" /> 원 </span>
                   </li>
                   <li class="list-group-item d-flex">
-                    <span>Tax</span>
-                    <span class="ms-auto">$0.00</span>
-                  </li>
-                  <li class="list-group-item d-flex">
-                    <span>Shipping</span>
-                    <span class="ms-auto">$8.00</span>
+                    <span>쿠폰 할인액</span>
+                    <span class="ms-auto"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.discount }" /> 원</span>
                   </li>
                   <li class="list-group-item d-flex fs-lg fw-bold">
-                    <span>Total</span>
-                    <span class="ms-auto">$136.00</span>
+                    <span>결제 금액</span>
+                    <span class="ms-auto"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.price }" /> 원</span>
                   </li>
                 </ul>
 
@@ -286,7 +282,7 @@
               <div class="card-body">
 
                 <!-- Heading -->
-                <h6 class="mb-7">판매자 정보:</h6>
+                <h6 class="mb-7">배송지:</h6>
 
                 <!-- Content -->
                 <div class="row">
@@ -294,15 +290,12 @@
 
                     <!-- Heading -->
                     <p class="mb-4 fw-bold">
-                      Billing Address:
+                      주소:
                     </p>
 
                     <p class="mb-7 mb-md-0 text-gray-500">
-                      Daniel Robinson, <br>
-                      3997 Raccoon Run, <br>
-                      Kingston, 45644, <br>
-                      United States, <br>
-                      6146389574
+                      ${order.addr1 }, <br>
+                      ${order.addr2 } <br>
                     </p>
 
                   </div>
@@ -310,37 +303,13 @@
 
                     <!-- Heading -->
                     <p class="mb-4 fw-bold">
-                      Shipping Address:
+                      주문자 정보:
                     </p>
 
                     <p class="mb-7 mb-md-0 text-gray-500">
-                      Daniel Robinson, <br>
-                      3997 Raccoon Run, <br>
-                      Kingston, 45644, <br>
-                      United States, <br>
-                      6146389574
-                    </p>
-
-                  </div>
-                  <div class="col-12 col-md-4">
-
-                    <!-- Heading -->
-                    <p class="mb-4 fw-bold">
-                      Shipping Method:
-                    </p>
-
-                    <p class="mb-7 text-gray-500">
-                      Standart Shipping <br>
-                      (5 - 7 days)
-                    </p>
-
-                    <!-- Heading -->
-                    <p class="mb-4 fw-bold">
-                      Payment Method:
-                    </p>
-
-                    <p class="mb-0 text-gray-500">
-                      Debit Mastercard
+                      ${order.name }, <br>
+                      ${order.hp }, <br>
+                      ${order.email } <br>
                     </p>
 
                   </div>

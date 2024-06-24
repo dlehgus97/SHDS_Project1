@@ -6,21 +6,21 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title></title>
-<META name="viewport"
-	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>자주 묻는 질문</title>
+<META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
-<link rel="stylesheet" href="/resources/css/reset.css" />
-<link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/reset.css"/>
+<link rel="stylesheet" href="/resources/css/style.css"/>
+<link rel="stylesheet" href="/resources/css/contents.css"/>
 <link rel="stylesheet" href="/resources/css/contents.css" />
 
 <!--부트스트랩 Libs CSS -->
@@ -33,23 +33,48 @@
             return confirm('삭제하시겠습니까?');
         }
 </script>
+<style>
+.bg{
+background-color:white;
+border-radius:5px;
+}
+.mb-3{
+width:100px;
+font-size:25px;
+}
+</style>
 </head>
 <body>
-	<div class="wrap">
-		<%@ include file="/WEB-INF/views/include/header.jsp"%>
+<div id="preloader">
+		<div class="loader"></div>
+	</div>
+	<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content" style="background-color: #485465;">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
+			
 		<!-- CONTENT -->
 		<section class="pt-7 pb-12">
-			<div class="container">
-				<div class="row justify-content-center">
+			<div class="container bg">
+				<div class="row justify-content-center" >
 					<div class="col-12 col-lg-10 col-xl-8">
 
 						<!-- Heading -->
-						<h3 class="mb-10 text-center">Frequently Asked Questionss</h3>
-						<p><span><strong>총 ${map.count }개</strong>  |  ${FAQVO.page }/${map.totalPage }페이지</span></p>
-						<div class="btnSet" style="text-align: right;">
-							<a href="/adfaq/write.do" class="btn btn-primary">FAQ작성</a>
-						</div>
-						<c:if test="${empty map.list }">
+						<h1 class="header-title text-center" style="font-size: 35px">자주 묻는 질문</h1>
+
+							<div style="display: flex; justify-content: space-between;">
+
+								<p>
+									<span><strong>총 ${map.count }개</strong> | ${FAQVO.page }/${map.totalPage }페이지</span>
+								</p>
+								<div class="btnSet" style="text-align: right;margin-top:-10px;">
+									<a href="/adfaq/write.do" 
+									style="width:130px;"
+									class="btn btn-info mb-3">FAQ작성</a>
+								</div>
+
+							</div>
+							<c:if test="${empty map.list }">
 							<div>등록된 글이 없습니다.</div>
 						</c:if>
 						<c:forEach var="vo" items="${map.list }">
@@ -69,10 +94,10 @@
 													A. ${vo.answer }
 												</p>
 												<span class="btnSet" style="float: right; margin-left: 5px;">
-												    <a href="/adfaq/delete.do?no=${vo.no }" class="btn btn-primary" onclick="return confirmDelete();">삭제</a>
+												    <a href="/adfaq/delete.do?no=${vo.no }" class="btn btn-danger mb-3" onclick="return confirmDelete();">삭제</a>
 												</span>
 												<span class="btnSet" style="float: right; margin-left: 5px;">
-												    <a href="/adfaq/edit.do?no=${vo.no }" class="btn btn-primary">수정</a>
+												    <a href="/adfaq/edit.do?no=${vo.no }" class="btn btn-success mb-3">수정</a>
 												</span>
 											</div>
 										</div>
@@ -127,8 +152,8 @@
 				</div>
 			</div>
 		</section>
-		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
+		<%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+</div>
 		<!-- JAVASCRIPT -->
 		<!-- Map (replace the API key to enable) -->
 		<script
@@ -140,5 +165,16 @@
 		<!-- Theme JS -->
 		<script src="/resources/js/board/theme.bundle.js"></script>
 	</div>
+	
+	<!-- alertdesign -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- bootstrap -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>	
+    
 </body>
 </html>

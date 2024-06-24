@@ -72,4 +72,12 @@ public class RefundServiceImpl implements RefundService {
 	        map.put("list", list);
 			return map;
 	}
+	//환불해주기
+	@Override
+	public boolean refund(RefundVO vo) {
+		boolean result1 = mapper.refund(vo.getBuyno());
+		boolean result2 = mapper.refund2(vo);
+		boolean result = result1 && result2;
+		return result;
+	}
 }

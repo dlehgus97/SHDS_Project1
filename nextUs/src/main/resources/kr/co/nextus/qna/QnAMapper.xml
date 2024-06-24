@@ -62,9 +62,17 @@
 		UPDATE QnA SET readcnt=readcnt+1 WHERE no=#{no}
 	</update>
 	
-	<update id ="answer" parameterType = "map">
-		UPDATE QnA SET answer = #{answer}, answer_date = NOW() WHERE no = #{no};
+	<update id="answer" parameterType="map">
+	    UPDATE QnA 
+	    SET answer = #{answer}, answer_date = NOW() 
+	    WHERE no = #{no};
 	</update>
+	
+	<select id="answer_date" parameterType="int" resultType="String">
+	    SELECT DATE_FORMAT(answer_date, '%Y-%m-%d %H:%i:%s') AS answer_date
+	    FROM QnA 
+	    WHERE no = #{no};
+	</select>
 	
 	<update id="addelete" parameterType="int">
 		UPDATE QnA SET answer = null, answer_date =null WHERE no=#{no}

@@ -1,7 +1,7 @@
 package kr.co.nextus.qna;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import kr.co.nextus.member.MemberVO;
 
 @Controller
 public class QnAController {
@@ -115,18 +114,21 @@ public class QnAController {
 	}
 
 	@PostMapping("/adqna/answer.do")
-	public String adanswer(Model model, @RequestParam("no") int no, @RequestParam("answer") String answer) {
-
-		int r = service.answer(no, answer);
-		if (r > 0) {
-			model.addAttribute("cmd", "move");
-			model.addAttribute("msg", "정상적으로 수정되었습니다.");
-			model.addAttribute("url", "index.do");
-		} else {
-			model.addAttribute("cmd", "back");
-			model.addAttribute("msg", "등록 오류");
-		}
-		return"common/alert";
+	@ResponseBody
+	public Map<String, Object> adanswer(@RequestParam("no") int no, @RequestParam("answer") String answer) {
+	    Map<String, Object> response = new HashMap<>();
+	    
+	    Map<String, Object> result = service.answer(no, answer);
+	    if ((int) result.get("result") > 0) {
+	        response.put("status", "success");
+	        response.put("message", "정상적으로 등록되었습니다.");
+	        response.put("answer_date", result.get("answer_date")); // 답변 작성 시간 추가
+	    } else {
+	        response.put("status", "error");
+	        response.put("message", "등록 오류");
+	    }
+	    
+	    return response;
 	}
 	
 	@PostMapping("/adqna/delete.do")

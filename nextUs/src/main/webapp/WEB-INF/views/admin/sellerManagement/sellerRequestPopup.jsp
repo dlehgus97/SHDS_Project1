@@ -60,7 +60,7 @@ gap:20px;
 	
 	
 	<div class="mydiv">
-
+	<c:forEach var="vo" items="${map.list}">
 		<form method="post" name="approve" id="approve" style="margin-left:40px;"
 			action="requestApprove.do">
 			<input name="memberno" type="hidden" value='${vo.memberno}'>
@@ -71,10 +71,12 @@ gap:20px;
 		</form>
 		<br>
 		<form method="post" name="deny" id="deny" action="requestDeny.do">
-			<input name="no" type="hidden" value='${vo.no}'>
+			<input name="memberno" type="hidden" value='${vo.memberno}'>
+			
 			<!-- 얘는 안보이게 no를 action에 넘겨주려고 -->
 			<input class="btn btn-danger btn-lg btn-block" type="submit" id="deny" value="승인거부" style="width:195px;">
 		</form>
+		</c:forEach>
 	</div>
 	<br>
 	<button onclick="closePopup()" class="btn btn-secondary btn-lg btn-block" style="width:430px; margin-left:40px;'">닫기</button>
@@ -82,15 +84,16 @@ gap:20px;
 
 
 
-
-
+	
 	<script>
-		function closePopup() {
+        window.onbeforeunload = function() {
+            window.opener.location.reload();
+        };
+        
+        function closePopup() {
 			window.close();
 		}
-	</script>
-	
-	
+    </script>
 	<!-- jquery latest version -->
     <script src="../resources/admin/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->

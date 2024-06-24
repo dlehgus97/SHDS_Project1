@@ -6,19 +6,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
-    <meta charset="utf-8">
-    <title></title>
-    <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<meta charset="utf-8">
+<title>고객센터 QnA</title>
+<META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 	
-	<link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/header.css">
-	<link rel="stylesheet" href="/resources/css/reset.css"/>
-	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<link rel="stylesheet" href="/resources/css/contents.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/resources/css/reset.css"/>
+<link rel="stylesheet" href="/resources/css/style.css"/>
+<link rel="stylesheet" href="/resources/css/contents.css"/>
 
     <style>
         .answer-box {
@@ -36,7 +40,7 @@
             flex: 1;
         }
 
-        .answer-box .btnSet {
+      .answer-box .btnSet {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -47,15 +51,78 @@
             width: fit-content;
         }
     </style>
+</head> 
+<body>
+
+	<div id="preloader">
+		<div class="loader"></div>
+	</div>
+
+	<div class="page-container">
+		<%@ include file="/WEB-INF/views/admin/adminMenu.jsp"%>
+		<div class="main-content" style="background-color: #485465;">
+			<%@ include file="/WEB-INF/views/admin/adminHeader.jsp"%>
+
+			<div class="main-content-inner">
+				<div class="row">
+					<div class="col-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+
+
+								<h1 class="header-title" style="font-size: 35px">고객센터(QnA)</h1>
+								<div class="bbs">
+									<div class="view">
+										<div class="title">
+											<dl>
+												<dt>${vo.title }</dt>
+												<dd class="date">
+													작성일 :
+													<fmt:formatDate value="${vo.write_date }"
+														pattern="yyyy-MM-dd HH:mm:ss" />
+												</dd>
+											</dl>
+										</div>
+										<div class="cont">${vo.text }</div>
+										<div class="btnSet clear">
+											<!-- Answer Box -->
+											<c:if test="${not empty vo.answer}">
+												<div class="answer-box">
+													<div class="answer-text">${vo.answer}</div>
+													<div class="answer-date">답변 시간: ${vo.answer_date}</div>
+													<!-- 답변 시간 표시 -->
+													<div class="btnSet">
+														<a href="#" class="btn btn-reply">수정</a> <a href="#"
+															class="btn btn-delete">삭제</a>
+													</div>
+												</div>
+											</c:if>
+											<!-- End of Answer Box -->
+											<br>
+											<div class="fl_l">
+												<c:if test="${empty vo.answer}">
+													<a href="#" class="btn btn-reply">답변하기</a>
+												</c:if>
+												<a href="index.do" class="btn">목록</a>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><%@ include file="/WEB-INF/views/admin/adminFooter.jsp"%>
+	</div>
 
 <script>
 $(document).ready(function() {
     $('.btn-reply').click(function(e) {
         e.preventDefault();
-        
         // 기존 답변 박스를 숨깁니다.
         $(this).closest('.answer-box').hide();
-
         if ($('#replyBox').length === 0) {
             var answerText = $(this).closest('.answer-box').find('.answer-text').text().trim();
             var replyBoxHtml = '<div id="replyBox">' +
@@ -81,17 +148,22 @@ $(document).ready(function() {
                         url: '/adqna/answer.do',
                         type: 'POST',
                         data: { answer: answer, no: no },
-                        success: function(answer) {
-                            alert('답변이 등록되었습니다.');
-                            $('#replyBox').remove();
-                            var answerBoxHtml = '<div class="answer-box">' +
-                                                '<div class="answer-text">' +'<div>답변 : </div>'+ answer.answer + '</div>' +
-                                                '<div class="btnSet">' +
-                                                '<a href="#" class="btn btn-reply">수정</a>' +
-                                                '<a href="#" class="btn btn-delete">삭제</a>' +
-                                                '</div>' +
-                                                '</div>';
-                            $('.cont').after(answerBoxHtml);
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                alert(response.message);
+                                $('#replyBox').remove();
+                                var answerBoxHtml = '<div class="answer-box">' +
+                                                    '<div class="answer-text">' + '<div>답변 : </div>' + answer + '</div>' +
+                                                    '<div class="answer-date">답변 시간: ' + response.answer_date + '</div>' + // 답변 시간 추가
+                                                    '<div class="btnSet">' +
+                                                    '<a href="#" class="btn btn-reply">수정</a>' +
+                                                    '<a href="#" class="btn btn-delete">삭제</a>' +
+                                                    '</div>' +
+                                                    '</div>';
+                                $('.cont').after(answerBoxHtml);
+                            } else {
+                                alert(response.message);
+                            }
                         },
                         error: function() {
                             alert('답변 등록에 실패했습니다.');
@@ -103,6 +175,7 @@ $(document).ready(function() {
             });
         }
     });
+});
 
     $('.btn-delete').click(function(e) {
         e.preventDefault();
@@ -121,49 +194,17 @@ $(document).ready(function() {
             }
         });
     });
-});
+
 </script>
-</head> 
-<body>
-    <div class="wrap">
-        <%@ include file="/WEB-INF/views/include/header.jsp" %>
-        <div class="sub">
-            <div class="size">
-                <h3 class="sub_title">고객센터(QnA)</h3>
-                <div class="bbs">
-                    <div class="view">
-                        <div class="title">
-                            <dl>
-                                <dt>${vo.title }</dt>
-                                <dd class="date">작성일 : <fmt:formatDate value="${vo.write_date }" pattern="yyyy-MM-dd HH:mm:ss"/> </dd>
-                            </dl>
-                        </div>
-                        <div class="cont">${vo.text }</div>                 
-                        <div class="btnSet clear">
-                            <!-- Answer Box -->
-                            <c:if test="${not empty vo.answer}">
-                                <div class="answer-box">
-                                    <div class="answer-text">${vo.answer}</div>
-                                    <div class="btnSet">
-                                        <a href="#" class="btn btn-reply">수정</a>
-                                        <a href="#" class="btn btn-delete">삭제</a>
-                                    </div>
-                                </div>
-                            </c:if>
-                            <!-- End of Answer Box -->
-                            <br>
-                            <div class="fl_l">
-                                <a href="index.do" class="btn">목록</a>
-                                <c:if test="${empty vo.answer}">
-                                    <a href="#" class="btn btn-reply">답변하기</a>
-                                </c:if>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%@ include file="/WEB-INF/views/include/footer.jsp" %>
-    </div>
+
+	<!-- alertdesign -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- bootstrap -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>	    
 </body> 
 </html>

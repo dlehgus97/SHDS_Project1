@@ -9,7 +9,6 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>관리자 메인 페이지</title>
-<script src="../resources/js/admin/memberStatus.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
@@ -21,7 +20,6 @@
 	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
 
 
-<script src="../resources/js/admin/memberStatus.js"></script>
 <script src="../resources/js/admin/refundPopup.js"></script>
 <style>
 table {
@@ -43,6 +41,9 @@ margin-top:13px;
 width:100px;
 }
 </style>
+
+
+
 </head>
 <body>
 <div id="preloader">
@@ -63,7 +64,7 @@ width:100px;
 
 								</div>
 								<form method="get" name="searchForm" id="searchForm"
-									action="sellerRequestManagement.do">
+									action="refundRequest.do">
 									<select name="searchType">
 										<option value="all">전체</option>
 										<option value="email">이메일</option>
@@ -82,7 +83,8 @@ width:100px;
 												<th>구매번호</th>
 												<th>이메일</th>
 												<th>요청일자</th>
-												<th>내용</th>
+												<th>금액</th>
+												
 												<th>상태</th>
 											</tr>
 										</thead>
@@ -99,18 +101,15 @@ width:100px;
 														<td>${vo.buyno != null ? vo.buyno : '(미입력)'}</td>
 														<td>${vo.email != null ? vo.email : '(미입력)'}</td>
 
+
 														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd  HH:MM"
 																value="${vo.date}" /></td>
-																
-														<td>
-															<button class="btn btn-outline-secondary mb-3 mybutton" type="button"
-																onclick="openPopup(event); return false;">상세보기</button>
-														</td>
-														
+														<td><fmt:formatNumber value="${vo.refund_amount}" type="number" groupingUsed="true" />원</td>
+																										
 														<td><c:choose>
 																<c:when test="${vo.status == 2}">
-																	<button class="btn btn-rounded btn-danger mb-3 mybutton" type="button"
-																		onclick="openPopup(event); return false;">환불 대기중</button>
+																	<button class="btn btn-rounded btn-danger mb-3 mybutton"
+																	onclick="openDetail(event); return false;" type="button" >환불 대기중</button>
 																</c:when>
 																<c:when test="${vo.status == 3}">
 																	<button class="btn btn-rounded btn-success mb-3 mybutton" type="button"
@@ -153,17 +152,11 @@ width:100px;
 
 
 
-
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 
 
 

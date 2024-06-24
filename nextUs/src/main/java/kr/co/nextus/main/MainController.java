@@ -26,6 +26,7 @@ public class MainController {
 	public String index(Model model, SellListVO vo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		Map<String, Object> list = sellListService.list(vo);
+		
 		model.addAttribute("list", list.get("list"));
 		return "index";
 	}

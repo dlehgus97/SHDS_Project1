@@ -15,4 +15,6 @@ public interface BuyListService {
 
 	int settleNEW(BuyListVO vo);
 	int refundNEW(BuyListVO vo);
+	
+	Map<String, Object> seven_days_sales(BuyListVO vo);
 }

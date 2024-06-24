@@ -20,6 +20,15 @@
 
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
+
+
+
+<style>
+    .section-bg-light-purple,
+    .section-bg-light-purple * {
+        background-color: #F8F8FF;
+    }
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -36,22 +45,129 @@
 			<button class="arrow right">&#9654;</button>
 		</div>
 	</div>
+	
 
-	<!-- TOP SELLERS -->
+
+	<!-- 실시간 인기 서비스 -->
+	<section class="py-12 section-bg-light-purple">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
+
+					<!-- Heading -->
+					<h2 class="mb-4 text-center">실시간 인기 서비스 <img src="/resources/imgs/hot.png" alt="인기 서비스 이미지" width="40" height="40" style="margin-right: 10px; margin-bottom: 10px"></h2>
+					
+
+					<!-- Nav -->
+					<div class="nav justify-content-center mb-10">
+						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">카테고리 1</a> 
+						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">카테고리 2</a> 
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">카테고리 3</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="topSellersTab">
+					<div class="row">
+						<c:forEach var="vo" items="${list }">
+							<!-- 반복 시작 -->
+							<div class="col-6 col-md-4 col-lg-3 card-bg-light-purple">
+								<!-- Card -->
+								<div class="card mb-7">
+
+									<!-- Badge -->
+							        <c:choose>
+									    <c:when test="${vo.view_cnt >= 1000}">
+									        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+									            조회수 1000+
+									        </div>
+									    </c:when>
+									    <c:when test="${vo.review_cnt >= 100}">
+									        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+									            리뷰 100+
+									        </div>
+									    </c:when>
+									</c:choose>
+
+									
+
+									<!-- Image -->
+									<div class="card-img">
+
+										<!-- Image -->
+										<a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }"> <img
+											class="card-img-top card-img-front"
+											src="/upload/board/${vo.thumbnail_real}"
+											style="width: 90%; height: 250px; object-fit: cover;">
+										</a>
+									</div>
+
+									<!-- Body -->
+									<div class="card-body px-0">
+
+										<!-- Category -->
+										<div class="fs-xs">
+											<a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno }">
+												<div class="col-auto">
+							                    <div class="rating fs-xs text-dark" data-value="<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" />">
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                    </div>
+							
+							                  </div>
+											</a>
+										</div>
+
+										<!-- Title -->
+										<div class="fw-bold">
+											<a class="text-body" href="/selllist/view.do?sellno=${vo.sellno }"> ${vo.title } </a>
+										</div>
+
+										<!-- Price -->
+										<div class="fw-bold text-muted"><fmt:formatNumber value="${vo.price}" type="number" groupingUsed="true" />원</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<!-- 반복 끝 -->
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- 신규 등록 서비스 -->
 	<section class="py-12">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
 
 					<!-- Heading -->
-					<h2 class="mb-4 text-center">Top month Sellers</h2>
+					<h2 class="mb-4 text-center">신규 등록 서비스 <img src="/resources/imgs/new.png" alt="신규 등록 이미지" width="50" height="40" style="margin-right: 10px; margin-bottom: 10px"></h2>
+					
 
 					<!-- Nav -->
 					<div class="nav justify-content-center mb-10">
-						<a class="nav-link active" href="#topSellersTab"
-							data-bs-toggle="tab">Women</a> <a class="nav-link"
-							href="#topSellersTab" data-bs-toggle="tab">Men</a> <a
-							class="nav-link" href="#topSellersTab" data-bs-toggle="tab">Kids</a>
+						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">카테고리 1</a> 
+						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">카테고리 2</a> 
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">카테고리 3</a>
 					</div>
 
 				</div>
@@ -109,6 +225,114 @@
 			</div>
 		</div>
 	</section>
+	
+	<!-- TOP SELLERS -->
+	<section class="py-10 section-bg-light-purple">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md-10 col-lg-8 col-xl-2 col-xl-6">
+
+					<!-- Heading -->
+					<h2 class="mb-4 text-center">NEXTUS 셀러 순위</h2>
+					
+
+					<!-- Nav -->
+					<div class="nav justify-content-center mb-10">
+						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">카테고리 1</a> 
+						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">카테고리 2</a> 
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">카테고리 3</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="topSellersTab">
+					<div class="row">
+						<c:forEach var="vo" items="${list }">
+							<!-- 반복 시작 -->
+							<div class="col-6 col-md-4 col-lg-3 card-bg-light-purple">
+								<!-- Card -->
+								<div class="card mb-7">
+
+									<!-- Badge -->
+							        <c:choose>
+									    <c:when test="${vo.view_cnt >= 1000}">
+									        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+									            조회수 1000+
+									        </div>
+									    </c:when>
+									    <c:when test="${vo.review_cnt >= 100}">
+									        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+									            리뷰 100+
+									        </div>
+									    </c:when>
+									</c:choose>
+
+									
+
+									<!-- Image -->
+									<div class="card-img">
+
+										<!-- Image -->
+										<a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }"> <img
+											class="card-img-top card-img-front"
+											src="/upload/board/${vo.thumbnail_real}"
+											style="width: 90%; height: 250px; object-fit: cover;">
+										</a>
+									</div>
+
+									<!-- Body -->
+									<div class="card-body px-0">
+
+										<!-- Category -->
+										<div class="fs-xs">
+											<a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno }">
+												<div class="col-auto">
+							                    <div class="rating fs-xs text-dark" data-value="<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" />">
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                    </div>
+							
+							                  </div>
+											</a>
+										</div>
+
+										<!-- Title -->
+										<div class="fw-bold">
+											<a class="text-body" href="/selllist/view.do?sellno=${vo.sellno }"> ${vo.title } </a>
+										</div>
+
+										<!-- Price -->
+										<div class="fw-bold text-muted"><fmt:formatNumber value="${vo.price}" type="number" groupingUsed="true" />원</div>
+
+									</div>
+
+								</div>
+
+							</div>
+							<!-- 반복 끝 -->
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 
 	<!-- JAVASCRIPT -->

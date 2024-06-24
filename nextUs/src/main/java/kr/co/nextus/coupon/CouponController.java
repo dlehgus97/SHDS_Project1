@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.nextus.buylist.BuyListService;
+import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.member.MemberService;
 import kr.co.nextus.member.MemberVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
@@ -31,22 +33,29 @@ public class CouponController {
 	
 	@Autowired
 	private SellerRequestService SRservice;
-
+	@Autowired
+	private BuyListService BLservice;
 	
 	// 관리자에서하는겁니다요
 	@GetMapping("/couponManagement")
 	@RequestMapping("/couponManagement")
-	public String couponManagement(CouponVO vo,SellerRequestVO vo2, Model model) {
+	public String couponManagement(CouponVO vo,SellerRequestVO vo2,BuyListVO vo3,
+ Model model) {
 		model.addAttribute("map", service.list(vo));
-		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/memberManagement/couponManagement";
 	}
 	
 	@GetMapping("/giveCoupon")
 	@RequestMapping("/giveCoupon")
-	public String giveCoupon(MemberVO vo,SellerRequestVO vo2, Model model) {
+	public String giveCoupon(MemberVO vo,SellerRequestVO vo2,BuyListVO vo3,
+ Model model) {
 		model.addAttribute("memberlist", Memberservice.listAtOnce(vo));
-		model.addAttribute("sellerRequestMap", SRservice.list(vo2));
+		model.addAttribute("SRnew", SRservice.NEW(vo2));
+		model.addAttribute("STnew", BLservice.settleNEW(vo3));
+		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
 		return "admin/memberManagement/giveCoupon";
 	}
 	

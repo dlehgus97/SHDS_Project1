@@ -131,7 +131,7 @@
                 <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
                   보유 쿠폰
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle" href="#!">
+                <a class="list-group-item list-group-item-action dropend-toggle" href="withdrawal.do">
                   회원 탈퇴
                 </a>
               </div>
@@ -187,7 +187,7 @@
                     <label class="form-label" for="accountPassword">
                       현재 비밀번호 *
                     </label>
-                    <input class="form-control form-control-sm" id="pwd" name="pwd" type="password" placeholder="Current Password *" required>
+                    <input class="form-control form-control-sm" id="pwd" name="pwd" type="password" placeholder="Current Password *">
                   </div>
 
                 </div>
@@ -196,9 +196,9 @@
                   <!-- 새 비밀번호 -->
                   <div class="form-group">
                     <label class="form-label" for="AccountNewPassword">
-                      새 비밀번호 *
+                      새 비밀번호
                     </label>
-                    <input class="form-control form-control-sm" id="newpwd" name="newpwd" type="password" placeholder="New Password *" required>
+                    <input class="form-control form-control-sm" id="newpwd" name="newpwd" type="password" placeholder="New Password *">
                   </div>
 
                 </div>
@@ -217,83 +217,88 @@
 
 
                 <div class="col-12 col-lg-6">
-
-                  <!-- 생년월일 -->
-                  <div class="form-group">
-
-                    <!-- Label -->
-                    <label class="form-label">생년월일 ${member.birthday }</label>
-					
-			        <script>
-				        var member = {
-				            birthday: '${member.birthday}'
-				        };
+				  <!-- 생년월일 -->
+				  <div class="form-group">
+				    <!-- Label -->
+				    <label class="form-label">생년월일 ${member.birthday }</label>
+				    
+				    <script>
+				      var member = {
+				        birthday: '${member.birthday}'
+				      };
 				    </script>
-                    <!-- Inputs -->
-                    <div class="row gx-5">
-
-                      <div class="form-groupbirth">
-                     
-			            <select id="year">
-			                <!-- 년도 옵션 추가 -->
-			                <!-- 년도 넣기 -->
-			                <script>
-			                    var startYear = 1930;
-			                    var endYear = new Date().getFullYear();
-			                    for (var year = startYear; year <= endYear; year++) {
-			                        document.write('<option value="' + year + '">' + year + '년'+'</option>');
-			                    }
-			                    
-			                 	// 기본값 설정
-			                    var defaultYear = member.birthday.split('-')[0];
-			                 	console.log(defaultYear);
-			                    document.getElementById('year').value = defaultYear;
-			                
-			                </script>
-			            </select>
-			
-			            <select id="month">
-			                <!-- 월 옵션 추가 -->
-							<script>
-					            for (var month = 1; month <= 12; month++) {
-			                        document.write('<option value="' + month.toString().padStart(2, '0') + '">' + month + '월' +'</option>');
-			                    }
-			                	var defaultMonth = member.birthday.split('-')[1];
-			                	console.log(defaultMonth);
-			                	document.getElementById('month').value = defaultMonth.padStart(2, '0');
-			            	</script>
-			            </select>
-			            
-			
-			
-			            <select id="day">
-			                <!-- 일 옵션 추가 -->
-			                <script>
-			                    for (var day = 1; day <= 31; day++) {
-			                        document.write('<option value="' + day.toString().padStart(2, '0') + '">' + day + '일' +'</option>');
-			                    }
-			                 	// 기본값 
-			                    var defaultDay = member.birthday.split('-')[2];
-			                    console.log(defaultDay);
-			                    document.getElementById('day').value = defaultDay.padStart(2, '0');
-			                </script>
-			            </select>
-			        </div>
-			        
-			        <!-- 년,월,일을 합쳐서 형식에 맞게 전송 -->
-			        <input type="hidden" id="birthday" name="birthday">
-			        <script>
-				        var year = document.getElementById('year').value;
-			            var month = document.getElementById('month').value;
-			            var day = document.getElementById('day').value;
-			        	var birthdate = year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0');
-			        	document.getElementById('birthday').value = birthdate;
-			        	console.log(birthdate);
-			        </script>
-			        
-      				</div>
-                  </div>
-                </div>
+				    <!-- Inputs -->
+				    <div class="row gx-5">
+				      <div class="form-groupbirth">
+				        <select id="year">
+				          <!-- 년도 옵션 추가 -->
+				          <!-- 년도 넣기 -->
+				          <script>
+				            var startYear = 1930;
+				            var endYear = new Date().getFullYear();
+				            for (var year = startYear; year <= endYear; year++) {
+				              document.write('<option value="' + year + '">' + year + '년'+'</option>');
+				            }
+				            
+				            // 기본값 설정
+				            var defaultYear = member.birthday.split('-')[0];
+				            document.addEventListener('DOMContentLoaded', function() {
+				              document.getElementById('year').value = defaultYear;
+				            });
+				          </script>
+				        </select>
+				
+				        <select id="month">
+				          <!-- 월 옵션 추가 -->
+				          <script>
+				            for (var month = 1; month <= 12; month++) {
+				              document.write('<option value="' + month.toString().padStart(2, '0') + '">' + month + '월' +'</option>');
+				            }
+				            var defaultMonth = member.birthday.split('-')[1];
+				            document.addEventListener('DOMContentLoaded', function() {
+				              document.getElementById('month').value = defaultMonth.padStart(2, '0');
+				            });
+				          </script>
+				        </select>
+				
+				        <select id="day">
+				          <!-- 일 옵션 추가 -->
+				          <script>
+				            for (var day = 1; day <= 31; day++) {
+				              document.write('<option value="' + day.toString().padStart(2, '0') + '">' + day + '일' +'</option>');
+				            }
+				            // 기본값 설정
+				            var defaultDay = member.birthday.split('-')[2];
+				            document.addEventListener('DOMContentLoaded', function() {
+				              document.getElementById('day').value = defaultDay.padStart(2, '0');
+				            });
+				          </script>
+				        </select>
+				      </div>
+				      
+				      <!-- 년,월,일을 합쳐서 형식에 맞게 전송 -->
+				      <input type="hidden" id="birthday" name="birthday">
+				      <script>
+				        function updateBirthday() {
+				          var year = document.getElementById('year').value;
+				          var month = document.getElementById('month').value;
+				          var day = document.getElementById('day').value;
+				          var birthdate = year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0');
+				          document.getElementById('birthday').value = birthdate;
+				        }
+				
+				        document.getElementById('year').addEventListener('change', updateBirthday);
+				        document.getElementById('month').addEventListener('change', updateBirthday);
+				        document.getElementById('day').addEventListener('change', updateBirthday);
+				        
+				        // 초기값 설정
+				        document.addEventListener('DOMContentLoaded', function() {
+				          updateBirthday();
+				        });
+				      </script>
+				    </div>
+				  </div>
+				</div>
                 
                 <div class="col-12 col-lg-6">
 
@@ -373,14 +378,82 @@
                 </div>
                 
                 <!-- 프로필 사진 수정 -->
-                <div class="col-12">
-               	  <div class="form-group">
-                	<label class="form-label" for="accountFirstName">
-                      프로필 사진 수정 *
-                    </label>
-                    <input class="form-control form-control-sm" type="file" name="file" id="file"/>
+				<div class="col-12">
+				  <div class="form-group" style="position: relative; display: inline-block;">
+				    <label class="form-label" for="accountFirstName">
+				      프로필 사진 수정
+				    </label>
+				    
+				    <!-- Image -->
+				    <img id="profileImage" class="card-img-top" src="/upload/board/${member.profile_real}" alt="..." 
+				         style="width: 300px; height: 300px; object-fit: cover; display: block; margin-top: 10px;"
+				         onerror="this.onerror=null;this.src='/resources/imgs/default_profile.png';">
+				    
+				    <!-- Delete Button -->
+				     <button id="deleteButton" type="button" style="position: absolute; top: 60px; right: 40px; background: black; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; display: none; cursor: pointer;">X</button>
+				
+				    <input class="form-control form-control-sm" type="file" name="file" id="file" style="margin-top: 10px; width: 120%;"/>
 				  </div>
 				</div>
+				
+				<input type="hidden" id="isprofile" name="isprofile" value="">
+				
+				<script>
+				  document.addEventListener('DOMContentLoaded', function() {
+				    var fileInput = document.getElementById('file');
+				    var profileImage = document.getElementById('profileImage');
+				    var deleteButton = document.getElementById('deleteButton');
+				    var isProfileInput = document.getElementById('isprofile');
+				    var profileForm = document.getElementById('profileForm');
+				
+				    if (fileInput) {
+				      fileInput.addEventListener('change', function(event) {
+				        var file = event.target.files[0];
+				        if (file) {
+				          var reader = new FileReader();
+				          reader.onload = function(e) {
+				            profileImage.src = e.target.result;
+				            deleteButton.style.display = 'block';
+				            isProfileInput.value = 'uploaded';
+				          }
+				          reader.readAsDataURL(file);
+				        }
+				      });
+				    }
+				
+				    if (deleteButton) {
+				      deleteButton.addEventListener('click', function(event) {
+				        event.preventDefault(); // 기본 동작(폼 제출)을 막음
+				        profileImage.src = '/resources/imgs/default_profile.png';
+				        fileInput.value = '';
+				        this.style.display = 'none';
+				        isProfileInput.value = 'none';
+				      });
+				    }
+				
+				    if (profileForm) {
+				      profileForm.addEventListener('submit', function(event) {
+				        var profileImageSrc = profileImage.src;
+				        if (profileImageSrc.includes('default_profile.png')) {
+				          isProfileInput.value = 'none';
+				        } else {
+				          isProfileInput.value = 'uploaded';
+				        }
+				      });
+				    }
+				
+				    window.onload = function() {
+				      var profileImageSrc = profileImage.src;
+				      if (profileImageSrc && !profileImageSrc.includes('default_profile.png')) {
+				        deleteButton.style.display = 'block';
+				        isProfileInput.value = 'uploaded';
+				      } else {
+				        isProfileInput.value = 'none';
+				      }
+				    };
+				  });
+				</script>
+				
                 <div class="col-12">
 
                   <!-- 제출버튼 -->
@@ -389,7 +462,7 @@
                   
 
                 </div>
-              
+              </div>
             </form>
           </div>
         </div>
@@ -412,11 +485,10 @@
 	<!-- 폼 제출 js -->
 	<script type="text/javascript">
 		function checkpwd() {
-			if ($("#pwd").val() != '') {
+			if ($("#newpwd").val() != '') {
 				var reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
-	    		if ($("#pwd").val().match(reg) == null || $("#newpwd").val().match(reg) == null) {
+	    		if ($("#newpwd").val().match(reg) == null) {
 	    			alert('비밀번호는 영문+숫자 조합으로 8자이상 입력하세요');
-	    			$("#pwd").val('');
 	    			$("#newpwd").val('');
 	    			return;
 	    		}

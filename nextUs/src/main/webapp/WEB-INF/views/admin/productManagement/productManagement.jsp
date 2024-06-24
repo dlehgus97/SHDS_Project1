@@ -9,7 +9,6 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>관리자 메인 페이지</title>
-<script src="../resources/js/admin/memberStatus.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
@@ -178,7 +177,7 @@ tbody tr:hover {
              var tr = button.closest('tr');
              var sellno = tr.cells[0].innerText.trim(); // 첫 번째 셀의 내용을 가져옴
         	
-             window.open('/selllist/view.do?no=' + sellno, '_blank');
+             window.open('/selllist/view.do?sellno=' + sellno, '_blank');
         });
     });
 	</script>

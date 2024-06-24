@@ -1,6 +1,8 @@
 package kr.co.nextus.member;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -22,13 +24,15 @@ public interface MemberMapper {
     int update(MemberVO vo);
 
     // 아이디 찾기
-    MemberVO findid(MemberVO vo);
+    MemberVO findId(MemberVO vo);
 
     // 이메일로 회원 정보 조회
     MemberVO findByEmail(String email);
 
     // 네이버 회원 정보 저장
     int insertMember(MemberVO vo);
+    
+    int updatePassword(Map map);
 
    
     //관리자

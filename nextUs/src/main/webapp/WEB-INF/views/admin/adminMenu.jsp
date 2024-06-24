@@ -69,7 +69,7 @@
            					</c:if></span>
 							</a>
 							<ul class="collapse">
-								<li><a href="/sellerRequestManagement"><span>셀러 등록 관리</span><span>
+								<li><a href="/sellerRequestManagement">셀러 등록 관리<span>
 								<c:if test="${SRnew > 0}">
                 					<img src="../resources/imgs/alarm.png" alt="New" style="width:16px;height:16px;"/>
            						</c:if>

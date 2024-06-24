@@ -16,6 +16,11 @@
 	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
 		UPDATE MEMBER SET
 		name = #{name},
+		nickname = #{nickname},
+		email = #{email},
+		<if test="newpwd != ''">
+		pwd = MD5(#{newpwd}),
+		</if>
 		gender = #{gender},
 		birthday = #{birthday},
 		hp = #{hp},
@@ -23,7 +28,16 @@
 		zipcode = #{zipcode},
 		addr1 = #{addr1},
 		addr2 = #{addr2}
+		<if test="profile_org != null">
+		, profile_org=#{profile_org}
+		, profile_real=#{profile_real}
+		</if> 
 		WHERE no = #{no}
+	</update>
+	
+	<!-- 파일 삭제 -->
+	<update id="fileDelete" parameterType="int">
+		UPDATE MEMBER SET profile_org=null, profile_real=null WHERE no=#{no}
 	</update>
 	
 	<!-- 개인정보 업데이트 -->

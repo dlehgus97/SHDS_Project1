@@ -15,4 +15,5 @@ public interface BuyListMapper {
 	int Countsettle(BuyListVO vo);
 
 	int Countrefund(BuyListVO vo);
+	List<BuyListVO> seven_days_sales(BuyListVO vo);
 }

@@ -15,6 +15,14 @@ public class OrderListVO {
 	private int sellerno;
 	private int sellno;
 	private String selltitle;
+	
+	public OrderListVO() {
+		this.page = 1;
+	}
+	
+	public int getStartIdx() {
+		return (page-1) * 10;
+	}
 
 
 

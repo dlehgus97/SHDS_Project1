@@ -1,12 +1,8 @@
 package kr.co.nextus.mypage.refund;
 
-import java.util.List;
+
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import kr.co.nextus.notice.NoticeVO;
-import kr.co.nextus.review.ReviewVO;
 
 
 
@@ -17,4 +13,6 @@ public interface RefundService {
 	Map<String, Object> list(RefundVO vo);
 	Map<String, Object> list(RefundVO vo, int no);
 	
+	//환불하기
+	boolean refund(RefundVO vo);
 }

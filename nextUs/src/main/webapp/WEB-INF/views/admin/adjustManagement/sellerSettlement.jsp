@@ -68,7 +68,7 @@ tbody tr:hover {
 										<tbody>
 											<c:if test="${empty map.list}">
 												<tr>
-													<td class="first" colspan="8">발급된 쿠폰이 없습니다.</td>
+													<td class="first" colspan="8">정산 내역이 없습니다.</td>
 												</tr>
 											</c:if>
 											<c:if test="${!empty map.list }">
@@ -81,7 +81,7 @@ tbody tr:hover {
 																value="${vo.buydate}" /></td>
 														<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 																value="${vo.decidedate}" /></td>
-														<td><fmt:formatNumber value="${vo.price}" type="number" groupingUsed="true" /></td>
+														<td><fmt:formatNumber value="${vo.price}" type="number" groupingUsed="true" />원</td>
 														<td>${vo.account}</td>
 														<td><c:choose>
 																<c:when test="${vo.status == 5}">
