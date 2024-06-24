@@ -142,4 +142,13 @@
 	    ORDER BY date DESC;
 	</select>
 	
+	<select id="find]MemberNo" parameterType="int" resultType="java.lang.Integer">
+        SELECT state FROM SELLERLIST WHERE no = #{memberNo}
+    </select>
+    
+    <insert id="insertSeller1" parameterType="kr.co.nextus.seller.SellerVO">
+        INSERT INTO SELLERREQUEST (memberno,file_name, bank, account,  regdate, state)
+        VALUES (#{no}, #{filename} , #{bank}, #{account}, now(), 1)
+    </insert>
+	
 </mapper>

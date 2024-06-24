@@ -97,4 +97,14 @@ public class SellerServiceImpl implements SellerService {
     public SellerVO getMiniHeaderData(int no){
     	return sellerMapper.getMiniHeaderData(no);
     }
+    
+    @Override
+    public Integer getSellerState(int memberNo) {
+        return sellerMapper.findMemberNo(memberNo);
+    }
+    
+    @Override
+    public void registerSeller1(SellerVO vo) {
+        sellerMapper.insertSeller1(vo);
+    }
 }
