@@ -27,7 +27,7 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@GetMapping("/index.do")
+	@GetMapping({"/index.do","/"})
 	public String index(Model model, SellListVO vo, CategoryVO catevo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		Map<String, Object> list = sellListService.list(vo);

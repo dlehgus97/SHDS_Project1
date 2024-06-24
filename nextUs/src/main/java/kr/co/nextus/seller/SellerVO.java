@@ -47,5 +47,6 @@ public class SellerVO {
 	
 	// 셀러등록을 위한
 	private String details;
-	private String filename;
+	private String file_real;
+	private String file_org;
 }

@@ -3,6 +3,10 @@ package kr.co.nextus.seller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.review.ReviewVO;
@@ -41,5 +45,6 @@ public interface SellerService {
     
     Integer getSellerState(int memberNo);
     
-    void registerSeller1(SellerVO vo);
+    void insertSellerReq(SellerVO vo, MultipartFile file, HttpServletRequest request);
+    List<SellerRequestVO> reqList(int no);
 }
