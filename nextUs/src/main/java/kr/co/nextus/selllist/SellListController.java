@@ -1,6 +1,7 @@
 package kr.co.nextus.selllist;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,6 +49,16 @@ public class SellListController {
 	@Autowired
 	private BuyListService BLservice;
 	
+	@GetMapping("/selllist/index.do")
+	public String list(Model model, HttpSession sess, @RequestParam("categoryno") int categoryno, SellListVO vo) {
+		vo.setCategoryno(categoryno);
+		vo.setDepth(2);
+		Map<String, Object> list = sellListService.list(vo);
+		
+		model.addAttribute("vo", list);
+		return "/selllist/index";
+	}
+
 	@GetMapping("/selllist/view.do")
 	public String detail(Model model, HttpSession sess, @RequestParam("sellno") int sellno, SellListVO vo, ReviewVO rvo, WishListVO wvo) {
 		MemberVO login = (MemberVO) sess.getAttribute("login");
@@ -70,6 +81,8 @@ public class SellListController {
 		model.addAttribute("iswishlist", wishListService.count(wvo));
 		return "/selllist/view";
 	}
+	
+	
 	
 	
 	//관리자

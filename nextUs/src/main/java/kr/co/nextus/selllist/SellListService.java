@@ -6,6 +6,7 @@ import java.util.Map;
 
 public interface SellListService {
 	Map<String, Object> list(SellListVO vo);
+	
 	SellListVO detail(SellListVO vo);
 	
 	//관리자
