@@ -146,9 +146,13 @@
         SELECT state FROM SELLERLIST WHERE no = #{memberNo}
     </select>
     
-    <insert id="insertSeller1" parameterType="kr.co.nextus.seller.SellerVO">
-        INSERT INTO SELLERREQUEST (memberno,file_name, bank, account,  regdate, state)
-        VALUES (#{no}, #{filename} , #{bank}, #{account}, now(), 1)
+    <insert id="insertSellerReq" parameterType="kr.co.nextus.seller.SellerVO">
+        INSERT INTO SELLERREQUEST (memberno, details, bank, account,  regdate, state, file_org, file_real)
+        VALUES (#{no}, #{bank}, #{details} #{account}, now(), 1, #{file_org}, #{file_real})
     </insert>
+    
+    <select id="reqList" parameterType="int" resultType="kr.co.nextus.sellerrequest.SellerRequestVO">
+    	SELECT * FROM SELLERREQUEST WHERE memberno = #{no}
+    </select>
 	
 </mapper>

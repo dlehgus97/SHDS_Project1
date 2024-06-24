@@ -9,11 +9,15 @@ import lombok.Data;
 public class SellerRequestVO {
 	private int no;
 	private int memberno;
-	private int file_no;
+	private String details;
 	private String bank;
 	private String account;
 	private Timestamp regdate;
 	private int state;//1승인전 0승인후 -1승인거부
+	
+	// 셀러등록을 위한
+	private String file_real;
+	private String file_org;
 	
 	// 관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))
