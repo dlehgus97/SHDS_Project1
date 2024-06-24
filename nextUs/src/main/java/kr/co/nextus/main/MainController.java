@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.nextus.category.CategoryService;
+import kr.co.nextus.category.CategoryVO;
 import kr.co.nextus.event.EventService;
 import kr.co.nextus.selllist.SellListService;
 import kr.co.nextus.selllist.SellListVO;
@@ -22,12 +24,16 @@ public class MainController {
 	@Autowired
 	private SellListService sellListService;
 	
+	@Autowired
+	private CategoryService categoryService;
+	
 	@GetMapping("/index.do")
-	public String index(Model model, SellListVO vo) {
+	public String index(Model model, SellListVO vo, CategoryVO catevo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		Map<String, Object> list = sellListService.list(vo);
-		
+		List<CategoryVO> catelist = categoryService.list(catevo);
 		model.addAttribute("list", list.get("list"));
+		model.addAttribute("cate", catelist);
 		return "index";
 	}
 }

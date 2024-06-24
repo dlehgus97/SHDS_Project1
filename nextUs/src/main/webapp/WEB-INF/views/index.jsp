@@ -24,6 +24,7 @@
 
 
 <style>
+	.bg-purple {background-color: #d3d3d3;}
     .section-bg-light-purple,
     .section-bg-light-purple * {
         background-color: #F8F8FF;
@@ -46,6 +47,139 @@
 		</div>
 	</div>
 	
+	
+	 <!-- 카테고리 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-purple border-bottom">
+      <div class="container">
+    
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+    
+          <!-- 웹 -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item dropdown">
+    
+              <!-- Toggle -->
+              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">웹</a>
+    
+              <!-- 홈페이지 -->
+              <div class="dropdown-menu" style="margin-top: 24px;">
+                <div class="card card-lg">
+                  <div class="card-body">
+                    <ul class="list-styled fs-sm">
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index.html">- 홈페이지</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-classic.html">- UI, 퍼블리싱</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-fashion.html">- 검색최적화</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-boxed.html">- 애널리틱스</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          
+          <!-- 모바일 -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item dropdown">
+    
+              <!-- Toggle -->
+              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">모바일</a>
+    
+              <!-- Menu -->
+              <div class="dropdown-menu" style="margin-top: 24px;">
+                <div class="card card-lg">
+                  <div class="card-body">
+                    <ul class="list-styled fs-sm">
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index.html">- 안드로이드</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-classic.html">- iOS</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-fashion.html">- 기타</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          
+          <!-- 인공지능 -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item dropdown">
+    
+              <!-- Toggle -->
+              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">인공지능</a>
+    
+              <!-- Menu -->
+              <div class="dropdown-menu" style="margin-top: 24px;">
+                <div class="card card-lg">
+                  <div class="card-body">
+                    <ul class="list-styled fs-sm">
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index.html">- 생성형 AI</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-classic.html">- 머신러닝, 딥러닝</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          
+          <!-- Nav -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item dropdown">
+    
+              <!-- Toggle -->
+              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">기타</a>
+    
+              <!-- Menu -->
+              <div class="dropdown-menu" style="margin-top: 24px;">
+                <div class="card card-lg">
+                  <div class="card-body">
+                    <ul class="list-styled fs-sm">
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index.html">- 보안</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-classic.html">- QA</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-fashion.html">- 기술지원</a>
+                      </li>
+                      <li class="list-styled-item">
+                        <a class="list-styled-link" href="./index-boxed.html">- 파일변환</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          
+          
+        </div>
+      </div>
+    </nav>
+	
 
 
 	<!-- 실시간 인기 서비스 -->
@@ -60,9 +194,10 @@
 
 					<!-- Nav -->
 					<div class="nav justify-content-center mb-10">
-						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">카테고리 1</a> 
-						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">카테고리 2</a> 
-						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">카테고리 3</a>
+						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">웹</a> 
+						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">모바일</a> 
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">인공지능</a>
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">기타</a>
 					</div>
 
 				</div>
@@ -165,9 +300,10 @@
 
 					<!-- Nav -->
 					<div class="nav justify-content-center mb-10">
-						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">카테고리 1</a> 
-						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">카테고리 2</a> 
-						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">카테고리 3</a>
+						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">웹</a> 
+						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">모바일</a> 
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">인공지능</a>
+						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">기타</a>
 					</div>
 
 				</div>
