@@ -33,6 +33,12 @@
 		SELECT COUNT(*) FROM BUYLIST
 	</select>
 	
+	<!-- 정산 필요&완료 카운트 5,6 -->
+	<select id="countallsettle"
+		parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int">
+		SELECT COUNT(*) FROM BUYLIST WHERE status = 5 OR status = 6
+	</select>
+	
 	<!-- 정산하기 -->
 	<update id="settle"
 		parameterType="int">

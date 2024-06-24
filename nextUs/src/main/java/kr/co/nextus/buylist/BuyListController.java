@@ -24,7 +24,7 @@ public class BuyListController {
 
 	@RequestMapping("/sellerSettlement")
 	public String sellerSettlement(BuyListVO vo, SellerRequestVO vo2,BuyListVO vo3,Model model) {
-		model.addAttribute("map", service.list(vo));
+		model.addAttribute("map", service.settlelist(vo));
 		model.addAttribute("SRnew", SRservice.NEW(vo2));
 		model.addAttribute("STnew", BLservice.settleNEW(vo3));
 		model.addAttribute("RFnew", BLservice.refundNEW(vo3));

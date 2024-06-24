@@ -32,7 +32,9 @@ table {
 tbody tr:hover {
 	background-color: #f1f1f1; /* 배경색 변경 */
 }
-
+table tr{
+	height:46px;
+}
 .mybutton {
 	width: 250px;
 	font-size: 45px;
