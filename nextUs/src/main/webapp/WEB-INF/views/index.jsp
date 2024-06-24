@@ -73,7 +73,7 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 홈페이지</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=5">- 홈페이지</a>
                       </li>
                       <li class="list-styled-item">
                         <a class="list-styled-link" href="./index-classic.html">- UI, 퍼블리싱</a>

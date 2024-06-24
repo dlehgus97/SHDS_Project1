@@ -3,8 +3,31 @@
 <mapper namespace="kr.co.nextus.selllist.SellListMapper">
 	<!-- 목록 -->
 	<select id="list" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
-		SELECT *
-		FROM SELLLIST
+		SELECT * FROM SELLLIST 
+		JOIN SELLCATEGORY ON SELLLIST.sellno = SELLCATEGORY.sellno 
+		JOIN CATEGORYLIST ON SELLCATEGORY.categoryno = CATEGORYLIST.categoryno
+		<where>
+        <if test="depth == 1">
+            CATEGORYLIST.nested = #{nested}
+        </if>
+        <if test="depth == 2">
+            CATEGORYLIST.categoryno = #{categoryno}
+            <if test="searchWord != null">
+                AND SELLLIST.title LIKE '%${searchWord}%'
+            </if>
+        </if>
+    	</where>
+		ORDER BY
+        <choose>
+            <when test="order != null">
+                #{order} DESC
+            </when>
+            <otherwise>
+                SELLLIST.sellno DESC
+            </otherwise>
+        </choose>
+    	LIMIT #{startIdx}, 10
+		
 	</select>
 	<!-- 상세 -->
 	<select id="detail" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">

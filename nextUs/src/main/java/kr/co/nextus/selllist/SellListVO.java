@@ -33,7 +33,12 @@ public class SellListVO {
 	private int isreview;
 	private int sellerrating_avg;
 	private int sellerreview_cnt;
-
+	private int categoryno;
+	private String categoryname;
+	private int nested;
+	private String order;
+	private int depth;
+	
 	// 관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))
 	private String searchType;

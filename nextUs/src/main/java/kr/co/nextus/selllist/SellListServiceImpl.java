@@ -29,6 +29,7 @@ public class SellListServiceImpl implements SellListService {
         map.put("count", count);
         map.put("totalPage", totalPage);
         map.put("list", list);
+        map.put("categoryno", param.getCategoryno());
         
         // 하단에 페이징처리
         int endPage = (int)(Math.ceil(param.getPage()/10.0)*10);
@@ -42,6 +43,7 @@ public class SellListServiceImpl implements SellListService {
 		map.put("isNext", isNext);
 		return map;
 	}
+	
 	
 	@Override
 	public SellListVO detail(SellListVO vo) {
