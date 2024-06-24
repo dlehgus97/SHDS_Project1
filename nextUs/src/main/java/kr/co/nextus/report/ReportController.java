@@ -60,12 +60,6 @@ public class ReportController {
 		model.addAttribute("map", service.list(vo,no));
 		return "admin/reports/reportDetailPopup";
 	}
-	
-//	@RequestMapping("/reportAboutByMember")
-//	public String reportAboutByMember(ReportVO vo,Model model,@RequestParam("email") String email) {
-//		model.addAttribute("map", service.list(vo,email));
-//		return "admin/reportAboutByMember";
-//	}
-	
+
 	
 }

@@ -27,9 +27,13 @@
 <script src="../resources/js/admin/addBanPopupMember.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/addbanPopup.css">
 <style>
+.text-gray {
+    color: #CCCCCC;
+}
 
-
-
+.text-black {
+    color: black;
+}
 </style>
 
 </head>
@@ -65,6 +69,7 @@
 											<th>닉네임</th>
 											<th>가입일</th>
 											<th>누적 신고횟수</th>
+											<th>누적 제재횟수</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -78,6 +83,7 @@
 												<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 														value="${vo.regdate}" /></td>
 												<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
+												<td>${vo.bancount != null ? vo.bancount : '0'}</td>
 												<td>
 													<button class="btn btn-warning mb-3"
 														style="margin-top: 13px;"
@@ -98,6 +104,10 @@
 									<div class="data-tables datatable-dark">
 										<table id="dataTable3" class="reportTable text-center"
 											style="width: 100%;">
+											<colgroup>
+												<col style="width: 40%;">
+												<col style="width: 60%;">
+											</colgroup>
 											<thead class="text-capitalize">
 												<tr>
 													<th>시간</th>
@@ -126,9 +136,9 @@
 									</div>
 								</div>
 								<div class="doBan lower_div" style="font-size: 20px;">
-									제재 사유<input class="form-control" type="text" name="content"
+									&emsp;제재 사유&emsp;<input class="form-control" type="text" name="content"
 										id="example-text-input" style="width: 100%; margin-left: 0px">
-									제재 기간<input class="form-control" name="date" id="date"
+									&emsp;제재 기간&emsp;<input class="form-control" name="date" id="date"
 										type="date"> <br> <input type="submit"
 										class="btn  btn-success btn-lg btn-block"
 										style="margin-left: -5px;" id="banSubmit" value="등록하기">
@@ -146,7 +156,14 @@
 		</div>
 	</div>
 
+<script>
+    window.onbeforeunload = function() {
+        window.opener.location.reload();
+    };
 
+
+    
+</script>
 
 
 

@@ -114,30 +114,66 @@
 		ORDER BY no DESC
 	</select>
 
-	<!-- 누적 신고횟수 이메일,닉네임과 함께 출력 (멤버중에)-->
 	<select id="memberReportCountList"
-		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
-		SELECT m.no , m.email, m.nickname,
-		m.regdate, COUNT(r.no) AS reportcount
-		FROM MEMBER m
-		LEFT JOIN REPORT r ON m.no = r.reportedmemberno
-		<include refid="searchSql2" /> AND m.seller=0
-		GROUP BY m.no, m.email, m.nickname, m.regdate
-		HAVING reportcount > 0;
-		</select>
+        parameterType="kr.co.nextus.member.MemberVO" 
+        resultType="kr.co.nextus.member.MemberVO">
+    SELECT 
+        m.no, 
+        m.email, 
+        m.nickname, 
+        m.regdate, 
+        COALESCE(reportCounts.reportcount, 0) AS reportcount,
+        COALESCE(banCounts.bancount, 0) AS bancount
+    FROM 
+        MEMBER m
+    LEFT JOIN 
+        (SELECT reportedmemberno, COUNT(*) AS reportcount
+         FROM REPORT
+         GROUP BY reportedmemberno) reportCounts ON m.no = reportCounts.reportedmemberno
+    LEFT JOIN 
+        (SELECT memberno, COUNT(*) AS bancount
+         FROM BAN
+         GROUP BY memberno) banCounts ON m.no = banCounts.memberno
+    <include refid="searchSql2" /> 
+    WHERE 
+        m.seller = 0
+    GROUP BY 
+        m.no, m.email, m.nickname, m.regdate
+    HAVING 
+        reportcount > 0;
+</select>
+
 		
 	<!-- 누적 신고횟수 이메일,닉네임과 함께 출력 (샐러중에)-->
 	<select id="sellerReportCountList"
-		parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
-		SELECT m.no , m.email, m.nickname,
-		m.regdate, COUNT(r.no) AS reportcount
-		FROM MEMBER m
-		LEFT JOIN REPORT r ON m.no = r.reportedmemberno
-		<include refid="searchSql2" /> AND m.seller=1
-		GROUP BY m.no, m.email, m.nickname, m.regdate
-		HAVING reportcount > 0;
+        parameterType="kr.co.nextus.member.MemberVO" 
+        resultType="kr.co.nextus.member.MemberVO">
+    SELECT 
+        m.no, 
+        m.email, 
+        m.nickname, 
+        m.regdate, 
+        COALESCE(reportCounts.reportcount, 0) AS reportcount,
+        COALESCE(banCounts.bancount, 0) AS bancount
+    FROM 
+        MEMBER m
+    LEFT JOIN 
+        (SELECT reportedmemberno, COUNT(*) AS reportcount
+         FROM REPORT
+         GROUP BY reportedmemberno) reportCounts ON m.no = reportCounts.reportedmemberno
+    LEFT JOIN 
+        (SELECT memberno, COUNT(*) AS bancount
+         FROM BAN
+         GROUP BY memberno) banCounts ON m.no = banCounts.memberno
+    <include refid="searchSql2" /> 
+    WHERE 
+        m.seller = 1
+    GROUP BY 
+        m.no, m.email, m.nickname, m.regdate
+    HAVING 
+        reportcount > 0;
+</select>
 
-	</select>
 	<!-- SEARCHSQL2 -->
 	<sql id="searchSql2">
 		<where>

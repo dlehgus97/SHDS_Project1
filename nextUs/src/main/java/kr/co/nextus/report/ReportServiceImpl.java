@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.nextus.notice.NoticeVO;
-import kr.co.nextus.review.ReviewVO;
-import kr.co.nextus.sellerrequest.SellerRequestVO;
+
 
 
 @Service
@@ -70,6 +68,16 @@ public class ReportServiceImpl implements ReportService {
 		List<ReportVO> list = mapper.detailList(email); 
 
 		return list;
+	}
+
+	@Override
+	public boolean changeStatus(List<Integer> membernos) {
+		int result = 0;
+		for(int m :membernos) {
+			result += mapper.changeStatus(m);
+		}
+		
+		return false;
 	}
 	
 
