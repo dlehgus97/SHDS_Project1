@@ -10,23 +10,27 @@ function loadReportDetails(email) {
             console.log(reportDetails);
             if(reportDetails.length > 0) {
             	reportDetails.forEach(function(report) {
-            		 var date = new Date(report.date);
-                     var formattedDate = date.toLocaleDateString('ko-KR', {
-                         year: '2-digit',
-                         month: '2-digit',
-                         day: '2-digit'
-                     });
-                     var formattedTime = date.toLocaleTimeString('ko-KR', {
-                         hour: '2-digit',
-                         minute: '2-digit'
-                     });
-                     
-                    var row = '<tr>' +
-                                '<td class="date">' +  formattedDate + ' ' + formattedTime  + '</td>' +
-                                '<td>' + report.content + '</td>' +
-                              '</tr>';
-                    tableBody.append(row);
-                });
+            	    var date = new Date(report.date);
+            	    var formattedDate = date.toLocaleDateString('ko-KR', {
+            	        year: '2-digit',
+            	        month: '2-digit',
+            	        day: '2-digit'
+            	    });
+            	    var formattedTime = date.toLocaleTimeString('ko-KR', {
+            	        hour: '2-digit',
+            	        minute: '2-digit'
+            	    });
+
+            	    // Set text color based on report status
+            	    var textColorClass = report.status === 0 ? 'text-gray' : 'text-black';
+					console.log(report.status);
+            	    var row = '<tr>' +
+            	                '<td class="date ' + textColorClass + '">' +  formattedDate + ' ' + formattedTime  + '</td>' +
+            	                '<td class="' + textColorClass + '">' + report.content + '</td>' +
+            	              '</tr>';
+            	    tableBody.append(row);
+            	});
+
             } else {
                 var row = '<tr><td class="first" colspan="2">검색 내역이 없습니다.</td></tr>';
                 tableBody.append(row);

@@ -27,8 +27,9 @@ tbody tr:hover {
 }
 
 .lower_div {
-	width: 50%; /* Each inner div takes 50% width */
-	/* Include padding and border in width calculation */
-	padding: 5px; /* Optional: Add padding */
-	margin-left: 15px;
+	width: 55%; /* Each inner div takes 50% width */
+}
+.doBan{
+	margin:left:3px;
+	
 }

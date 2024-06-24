@@ -50,4 +50,9 @@ public interface SellerMapper {
 	
 	// 미니 헤더
 	SellerVO getMiniHeaderData(int no);
+	
+	Integer findMemberNo(int memberNo);
+	
+	void insertSeller1(SellerVO vo);
+	
 }

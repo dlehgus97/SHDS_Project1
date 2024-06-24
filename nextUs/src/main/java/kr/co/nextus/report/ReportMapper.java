@@ -14,5 +14,7 @@ public interface ReportMapper {
 	List<ReportVO> detail(int no);
 	List<ReportVO> detailList(String email);
 	
+	int changeStatus(int m);
+	
 	
 }

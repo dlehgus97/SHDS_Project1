@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,6 +83,39 @@ public class SellListController {
 		return "/selllist/view";
 	}
 	
+    @GetMapping("/selllistRegister")
+    public String selllistRegisterForm(HttpSession session, Model model) {
+        MemberVO login = (MemberVO) session.getAttribute("login");
+        if (login == null || login.getSeller() != 1) {
+            // 로그인되지 않았거나 판매자가 아닌 경우 접근 불가
+            model.addAttribute("msg", "접근 권한이 없습니다.");
+            model.addAttribute("url", "/member/login.do");
+            return "common/alert";
+        }
+        // 판매글 등록 폼으로 이동
+        model.addAttribute("sellListVO", new SellListVO());
+        return "seller/selllistRegister";
+    }
+	
+    // 판매자의 판매글 등록
+    @PostMapping("/selllistRegister")
+    public String registSellList(@ModelAttribute SellListVO sellListVO, HttpSession sess, Model model) {
+    	MemberVO login = (MemberVO) sess.getAttribute("login");
+    	if (login == null || login.getSeller() != 1) {
+            // 로그인되지 않았거나 판매자가 아닌 경우 접근 불가
+            model.addAttribute("msg", "접근 권한이 없습니다.");
+            model.addAttribute("url", "/member/login.do");
+            return "common/alert";
+        }
+
+        int sellerNo = login.getNo(); // 로그인된 판매자의 번호
+        
+        sellListVO.setSeller(sellerNo);
+        // SellListService를 통해 판매글 등록 로직 수행
+        sellListService.insertSellList(sellListVO);
+        
+        return "redirect:/seller/selllistManagement";
+    }
 	
 	
 	

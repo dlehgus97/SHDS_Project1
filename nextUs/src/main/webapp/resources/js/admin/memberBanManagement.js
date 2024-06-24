@@ -1,5 +1,5 @@
 function openPopup(pageName) {
-			var popupWidth = 1050;
+			var popupWidth = 1350;
             var popupHeight = 800;
 			var screenWidth = window.screen.width;
             var screenHeight = window.screen.height;

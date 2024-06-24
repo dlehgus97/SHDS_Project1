@@ -58,7 +58,7 @@ tbody tr:hover {
 											<div class="seofct-icon">
 												<i class="fa fa-line-chart"></i>Total Revenue
 											</div>
-											<h2>2,3112312312315₩</h2>
+											<h2>2,311312315₩</h2>
 										</div>
 									</div>
 								</div>
@@ -136,19 +136,15 @@ tbody tr:hover {
                     </c:forEach>
 
                     var salesChart = new Chart(ctx, {
-                        type: 'line',
+                        type: 'bar', // 막대그래프로 변경
                         data: {
                             labels: dates,
                             datasets: [{
                                 label: '매출',
                                 data: prices,
-                                fill: false,
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                                pointRadius: 5,
-                                pointHoverRadius: 7,
-                                tension: 0.4
+                                backgroundColor: 'rgba(54, 162, 235, 0.6)', // 막대 색상
+                                borderColor: 'rgba(54, 162, 235, 1)', // 막대 테두리 색상
+                                borderWidth: 1
                             }]
                         },
                         options: {
@@ -211,6 +207,7 @@ tbody tr:hover {
 
 
 
+
 					<!-- 2-2 -->
 					<div class="col-lg-4 mt-5">
 						<div class="card h-full">
@@ -270,13 +267,49 @@ tbody tr:hover {
 
 						<!-- 3-2 -->
 						<div class="col-lg-4 mt-5">
-							<div class="card h-full">
-								<div class="card-body">
-									<h4 class="header-title">가입자 현황</h4>
-									<canvas id="seolinechart8" height="233"></canvas>
+						<div class="card h-full">
+							<div class="card-body">
+								<h4 class="header-title">가입자</h4>
+								<div class="single-table">
+									<div class="table-responsive">
+										<table class="table text-center">
+											<thead class="text-uppercase bg-warning"style="color:white">
+												<tr>
+													<th>날짜</th>
+													<th>신규 가입자</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:if test="${empty sales.seven_days_sales}">
+													<tr>
+														<td class="first" colspan="8">최근 7일 가입자가 없습니다.</td>
+													</tr>
+												</c:if>
+												<c:if test="${!empty sales.seven_days_sales }">
+													<c:forEach var="vo" items="${sales.seven_days_sales}">
+
+														<tr>
+															<td class="date"><fmt:formatDate pattern="yy-MM-dd"
+																	value="${vo.date}" /></td>
+															<td>
+																<fmt:formatNumber value="${vo.totalprice}" type="number" groupingUsed="true" />원
+															</td>
+
+														</tr>
+													</c:forEach>
+												</c:if>
+											</tbody>
+
+										</table>
+										<!-- <div class="totalsale">
+											<i class="fa fa-thumbs-o-up">Revenue:<span id="totalRevenue"></span></i>
+											
+										</div> -->
+									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 
 
 

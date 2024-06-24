@@ -36,7 +36,7 @@
 		<div id="regist_content_container">
 			<img id="reg_logo" src="../resources/imgs/nexus2.png" alt="logo">
 			<p>당신의 역량을 알려주세요!</p>
-			<form id="regist_form">
+			<form id="regist_form" action="/seller/alarm/success" method="post" enctype="multipart/form-data">
 				<div id="text_area">
 					<textarea name="details" id="details" placeholder="신청 이유나 추가 정보를 입력하세요."></textarea>
 				</div>
@@ -53,7 +53,7 @@
 					<div class="filebox">
 					    <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
 					    <label for="file">파일찾기</label> 
-					    <input type="file" id="file">
+					    <input type="file" id="file" name="file">
 					</div>
 				</div>
 				<button type="submit" id="submit">제출</button>

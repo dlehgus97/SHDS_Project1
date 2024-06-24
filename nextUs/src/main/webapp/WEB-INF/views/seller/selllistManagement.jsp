@@ -84,9 +84,10 @@
 
 		.product-grid {
 		    display: grid;
-		    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* 각 카드의 최소 너비를 260px, 최대 너비를 1fr로 설정 */
+		    /* grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* 각 카드의 최소 너비를 260px, 최대 너비를 1fr로 설정 */
+		    grid-template-columns: repeat(auto-fill, 260px); /* 각 카드의 가로 길이를 260px로 고정 */
 		    gap: 20px;
-		    justify-items: center;
+		    justify-items: start;
 		}
 
 		.product-card {
@@ -239,6 +240,10 @@
 			font-size: 20px;
 			
 		}	
+		
+		.product-picture {
+		    cursor: pointer;
+		}
     </style>
 </head>
 <body>
@@ -264,7 +269,7 @@
                 <h1>판매글 관리</h1>
                 <div class="product-grid">
                     <c:forEach var="sellproduct" items="${sellList}">
-                        <div class="product-card">
+                        <div class="product-card" onclick="location.href='http://localhost:8090/selllist/view.do?sellno=${sellproduct.sellno}'">
                             <img class="product-picture" src="/upload/board/${sellproduct.thumbnail_real}" alt="상품 사진">
                            	<div class="title-container">${sellproduct.title}</div>
 
@@ -343,4 +348,3 @@
 
 </body>
 </html>
-

@@ -12,4 +12,6 @@ public interface ReportService {
 	Map<String, Object> list(ReportVO vo);
 	Map<String, Object> list(ReportVO vo, int no);
 	List<ReportVO> list(String email);
+	
+	boolean changeStatus(List<Integer> membernos);
 }

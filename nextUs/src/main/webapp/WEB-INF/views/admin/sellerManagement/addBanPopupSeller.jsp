@@ -26,7 +26,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../resources/js/admin/addBanPopupMember.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/addbanPopup.css">
+<style>
+.text-gray {
+    color: #CCCCCC;
+}
 
+.text-black {
+    color: black;
+}
+</style>
 </head>
 <body>
 
@@ -49,7 +57,7 @@
 								value="검색">
 						</form>
 
-						<form method="post" name="banForm" id="banForm" action="BAN0.do">
+						<form method="post" name="banForm" id="banForm" action="BAN1.do">
 							<div class="data-tables datatable-dark">
 								<table id="dataTable3" class="text-center">
 									<thead class="text-capitalize">
@@ -61,6 +69,7 @@
 											<th>닉네임</th>
 											<th>가입일</th>
 											<th>누적 신고횟수</th>
+											<th>누적 제재횟수</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -74,6 +83,7 @@
 												<td class="date"><fmt:formatDate pattern="yyyy-MM-dd"
 														value="${vo.regdate}" /></td>
 												<td>${vo.reportcount != null ? vo.reportcount : '0'}</td>
+												<td>${vo.bancount != null ? vo.bancount : '0'}</td>
 												<td>
 													<button class="btn btn-warning mb-3"
 														style="margin-top: 13px;"
@@ -94,6 +104,10 @@
 									<div class="data-tables datatable-dark">
 										<table id="dataTable3" class="reportTable text-center"
 											style="width: 100%;">
+											<colgroup>
+												<col style="width: 40%;">
+												<col style="width: 60%;">
+											</colgroup>
 											<thead class="text-capitalize">
 												<tr>
 													<th>시간</th>
@@ -142,7 +156,14 @@
 		</div>
 	</div>
 
+<script>
+    window.onbeforeunload = function() {
+        window.opener.location.reload();
+    };
 
+
+    
+</script>
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>

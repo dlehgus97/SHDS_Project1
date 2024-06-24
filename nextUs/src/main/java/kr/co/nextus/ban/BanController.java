@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nextus.buylist.BuyListService;
 import kr.co.nextus.buylist.BuyListVO;
+import kr.co.nextus.report.ReportService;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 
@@ -23,6 +24,9 @@ public class BanController {
 	@Autowired
 	private BanService service;
 	@Autowired
+	private ReportService RPservice;
+	
+	@Autowired
 	private SellerRequestService SRservice;
 	@Autowired
 	private BuyListService BLservice;
@@ -30,6 +34,7 @@ public class BanController {
 	@PostMapping("/BAN0.do")
 	public String BAN0(BanVO vo,Model model, @RequestParam List<Integer> membernos) {
 		model.addAttribute("ban", service.add(vo,membernos));
+		model.addAttribute("changeStatus",RPservice.changeStatus(membernos));
 		
 		model.addAttribute("msg", "제재 성공");
 		model.addAttribute("url", "/addBanPopupMember");
@@ -39,6 +44,7 @@ public class BanController {
 	@PostMapping("/BAN1.do")
 	public String BAN1(BanVO vo,Model model, @RequestParam List<Integer> membernos) {
 		model.addAttribute("ban", service.add(vo,membernos));
+		model.addAttribute("changeStatus",RPservice.changeStatus(membernos));
 		
 		model.addAttribute("msg", "제재 성공");
 		model.addAttribute("url", "/addBanPopupSeller");

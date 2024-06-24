@@ -44,4 +44,8 @@ public class SellerVO {
 	private int today_refund_count;
 	private int new_chat;
 	private int settlement_eligible;
+	
+	// 셀러등록을 위한
+	private String details;
+	private String filename;
 }

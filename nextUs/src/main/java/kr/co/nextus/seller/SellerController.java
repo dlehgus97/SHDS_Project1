@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.member.MemberVO;
@@ -297,5 +299,45 @@ public class SellerController {
     	model.addAttribute("seller", seller);
     	// 판매자 상세 정보 페이지로 이동
         return "seller/detail";
+    }
+    
+    //셀러 정보 db 등록하기
+    @PostMapping("/alarm/success")
+    public String sellerregister( HttpSession session,
+            @RequestParam("details") String details,
+            @RequestParam("bank") String bank,
+            @RequestParam("account") String account,
+            @RequestParam("file") MultipartFile file) {
+        MemberVO member = (MemberVO) session.getAttribute("login");
+        int memberno = member.getNo();
+        
+        SellerVO vo = new SellerVO();
+        vo.setNo(memberno);
+        vo.setDetails(details);
+        vo.setBank(bank);
+        vo.setAccount(account);
+        
+        // 파일 저장 로직
+        String filename = file.getOriginalFilename();
+        vo.setFilename(filename);
+        
+        sellerService.registerSeller1(vo); 
+        
+        return "/alarm/success"; 
+    }
+    
+    //셀러 결과보기
+    @GetMapping("/sellercheck")
+    public String checkSeller(HttpSession session) {
+        MemberVO member = (MemberVO) session.getAttribute("member");
+        int memberNo = member.getNo();
+        Integer state = sellerService.getSellerState(memberNo);
+        if (state == null) {
+            return "redirect:/alarm/sellnobody.do";
+        } else if (state == 1) {
+            return "redirect:/alarm/sellersuccess.do";
+        } else {
+            return "redirect:/alarm/sellerfail.do";
+        }     
     }
 }

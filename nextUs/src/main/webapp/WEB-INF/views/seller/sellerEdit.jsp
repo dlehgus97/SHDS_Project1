@@ -172,38 +172,54 @@
 	        height: 150px;
 	        resize: vertical;
 	    }
-	
 	    .button-container {
 	        text-align: center;
 	        margin-top: 20px;
+	        display: flex;
+	       	justify-content: center; /* 가운데 정렬 */
 	    }
 	
-	    .btn-submit, .btn-cancel {
-	        display: inline-block;
-	        padding: 10px 20px;
-	        border-radius: 30px;
-	        font-size: 16px;
-	        text-align: center;
-	        text-decoration: none;
-	        transition: background-color 0.3s;
-	        margin-right: 10px;
-	    }
-	
-	    .btn-submit {
-	        background-color: #28a745; /* 초록색 */
-	        color: white;
-	        border: none;
-	    }
-	
-	    .btn-cancel {
-	        background-color: #bdbdbd; /* 회색 */
-	        color: white;
-	        border: none;
-	    }
-	
-	    .btn-submit:hover, .btn-cancel:hover {
-	        opacity: 0.8;
-	    }
+	    .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-submit, .btn-cancel {
+            display: inline-block;
+            width: 110px;
+            height: 36px;
+            border-radius: 30px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            line-height: 36px;
+            vertical-align: middle;
+        }
+
+        .btn-submit {
+            background-color: #343a40; /* 무채색 */
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #495057; /* 더 어두운 무채색 */
+        }
+
+        .btn-cancel {
+            background-color: #adb5bd; /* 밝은 무채색 */
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-cancel:hover {
+            background-color: #ced4da; /* 더 밝은 무채색 */
+        }
 	    
 	    h1 {
             text-align: center;
@@ -244,8 +260,8 @@
 			            <input type="text" id="account" name="account" value="${seller.account}">
 			            
 			            <div class="button-container">
-			                <button type="submit" class="btn-submit">확인</button>
-			                <a href="seller/selllistManagement" class="btn-cancel">취소</a>
+			                <button type="submit" class="btn-submit" onclick="confirmSubmit()">확인</button>
+			                <a href="seller/sellerEdit" class="btn-cancel">취소</a>
 			            </div>
 			        </div>
 			    </form>
@@ -255,5 +271,13 @@
 
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
+    <script>
+	    function confirmSubmit() {
+	        if (confirm("정말 수정하시겠습니까?")) {
+	        	alert("수정되었습니다.");
+	            document.getElementById('myForm').submit();
+	        }
+	    }
+    </script>
 </body>
 </html>

@@ -54,10 +54,17 @@
 	<!-- 제제내역추가에서 신고내역 -->
 	<select id="detailList" parameterType="String"
 		resultType="kr.co.nextus.report.ReportVO">
-		SELECT R.date, R.content
+		SELECT R.date, R.content,R.status
 		FROM REPORT R
 		INNER JOIN MEMBER M ON R.reportedmemberno = M.no
 		WHERE M.email = #{email}
 
 	</select>
+	
+	<update id="changeStatus" parameterType="int">
+		UPDATE REPORT SET
+		status = 0
+		WHERE reportedmemberno = #{m}
+	</update>
+	
 </mapper>   

@@ -48,6 +48,23 @@
 		FROM SELLLIST WHERE sellno=#{sellno}
 	</select>
 	
+	<!-- 판매글 쓰기 , price, thumbnail_real은 나중에 -->
+	<insert id="insertSellList" parameterType="kr.co.nextus.selllist.SellListVO">
+		INSERT INTO SELLLIST (seller, title, content, postdate, view_cnt, rating_avg, review_cnt)
+		VALUES (#{seller}, #{title}, #{content}, NOW(), 0, 0, 0)
+	</insert>
+	
+	<!-- 
+	<insert id="insertSellListOption" parameterType="kr.co.nextus.selllist.SellListVO" >
+		INSERT INTO P_OPTION (sellno, optionrank, content, price)
+		VALUES(#{no}, #{optionrank}, #{content}, #{price})
+	</insert>
+	
+	<insert id="insertSellLIstCategory" parameterType="kr.co.nextus.category.CategoryVO">
+		INSERT INTO SELLCATEGORY (sellno, categoryno)
+		VALUES(#{sellno}, #{categoryno})
+	</insert>
+     -->
 	
 	<!-- ========== -->
 	<!-- 관리자 페이지 -->

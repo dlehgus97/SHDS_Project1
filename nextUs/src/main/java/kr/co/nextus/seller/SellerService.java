@@ -38,4 +38,8 @@ public interface SellerService {
     List<SellerVO> getOrderAndReviewCountsLastWeek(int no);
 	// 미니 헤더
     SellerVO getMiniHeaderData(int no);
+    
+    Integer getSellerState(int memberNo);
+    
+    void registerSeller1(SellerVO vo);
 }
