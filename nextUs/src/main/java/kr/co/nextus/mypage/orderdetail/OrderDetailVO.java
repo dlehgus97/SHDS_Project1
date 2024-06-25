@@ -13,6 +13,7 @@ public class OrderDetailVO {
 	private Timestamp buydate;
 	private Timestamp decidedate;
 	private int sellerno;
+	private int sellno;
 	private String selltitle;
 	private String sellthumbnail;
 	private String optionrank;

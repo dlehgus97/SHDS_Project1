@@ -175,14 +175,14 @@
                       <div class="col-4 col-md-3 col-xl-2">
 
                         <!-- Image -->
-                        <a href="product.html"><img src="/upload/board/${order.sellthumbnail}" alt="..." class="img-fluid"></a>
+                        <a href="/selllist/view.do?sellno=${order.sellno }"><img src="/upload/board/${order.sellthumbnail}" alt="..." class="img-fluid"></a>
 
                       </div>
                       <div class="col">
 
                         <!-- Title -->
                         <p class="mb-4 fs-sm fw-bold">
-                          <a class="text-body" href="product.html">${order.selltitle }</a> <br>
+                          <a class="text-body" href="/selllist/view.do?sellno=${order.sellno }">${order.selltitle }</a> <br>
                           <span class="text-muted">
                           	<fmt:formatNumber type="number" maxFractionDigits="3" value="${order.price }" />원
                           </span>
