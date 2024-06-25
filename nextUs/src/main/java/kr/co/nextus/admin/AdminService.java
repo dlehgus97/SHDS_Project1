@@ -1,9 +1,6 @@
 package kr.co.nextus.admin;
 
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 
@@ -14,5 +11,8 @@ public interface AdminService {
 	void deleteNotice(int no);
 	int update(AdminVO vo);
 	void insertnotice(String title, String content);
+	
+	//관리자 로그인
+	AdminVO adminLogin(AdminVO vo);
 
 }

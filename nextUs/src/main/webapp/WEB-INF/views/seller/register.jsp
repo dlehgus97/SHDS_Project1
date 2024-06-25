@@ -10,9 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/seller/regist.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -102,6 +104,19 @@
 	            $(this).css('background-color', 'white'); // 원래 배경색 복원
 	        }
 	    );
+	});
+	var msg = "${alertMsg }";
+	console.log(msg);
+	$(document).ready(function() {
+		if (msg != null) {
+			Swal.fire(
+			        '이런!',
+			        msg,
+			        'error'
+		    ).then(result => {
+		    	   window.history.back(); // 뒤로 돌아가기
+			})
+		}
 	});
 </script>
 </body>

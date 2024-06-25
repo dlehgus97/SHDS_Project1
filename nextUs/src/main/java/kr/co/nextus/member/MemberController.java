@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -334,33 +334,56 @@ public class MemberController {
     // 관리자에서하는겁니다요
     @GetMapping("/memberStatus.do")
     @RequestMapping("/memberStatus")
-    public String memberStatus(MemberVO vo, SellerRequestVO vo2,BuyListVO vo3,Model model) {
-        model.addAttribute("map", service.list(vo));
-        model.addAttribute("SRnew", SRservice.NEW(vo2));
-        model.addAttribute("STnew", BLservice.settleNEW(vo3));
-        model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-        return "admin/memberManagement/memberStatus";
+    public String memberStatus(MemberVO vo, SellerRequestVO vo2,BuyListVO vo3,Model model,HttpServletRequest request) {
+    	Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo));
+	        model.addAttribute("SRnew", SRservice.NEW(vo2));
+	        model.addAttribute("STnew", BLservice.settleNEW(vo3));
+	        model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+	        return "admin/memberManagement/memberStatus";
+		}else {
+			return "common/403";
+		}
+
+        
     }
 
     @RequestMapping("/addBanPopupMember")
-    public String addBanPopupMember(MemberVO vo, Model model) {
-        model.addAttribute("map", service.reportCountList(vo, 0));
-        return "admin/memberManagement/addBanPopupMember";
+    public String addBanPopupMember(MemberVO vo, Model model,HttpServletRequest request) {
+    	Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.reportCountList(vo, 0));
+	        return "admin/memberManagement/addBanPopupMember";
+		}else {
+			return "common/403";
+		}
+
+        
 
     }
     
     @RequestMapping(value = "/loadReportDetails", method = RequestMethod.GET)
     @ResponseBody
     public List<ReportVO> loadReportDetails(@RequestParam("email") String email,Model model) {
-        // 이메일을 기준으로 신고 내역을 조회하는 서비스 호출
-        List<ReportVO> reportDetails = reportservice.list(email);
-        return reportDetails;
+
+			// 이메일을 기준으로 신고 내역을 조회하는 서비스 호출
+	        List<ReportVO> reportDetails = reportservice.list(email);
+	        return reportDetails;
+
     }
     
     @RequestMapping("/addBanPopupSeller")
-    public String addBanPopupSeller(MemberVO vo, Model model) {
-        model.addAttribute("map", service.reportCountList(vo, 1));
-        return "admin/sellerManagement/addBanPopupSeller";
+    public String addBanPopupSeller(MemberVO vo, Model model,HttpServletRequest request) {
+    	Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.reportCountList(vo, 1));
+	        return "admin/sellerManagement/addBanPopupSeller";
+		}else {
+			return "common/403";
+		}
+
+        
     }
 }
 

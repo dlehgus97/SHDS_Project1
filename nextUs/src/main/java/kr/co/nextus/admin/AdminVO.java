@@ -11,6 +11,9 @@ public class AdminVO {
 	private String content;
 	private Timestamp writedate;
 	
+	//관리자 로그인
+	private String adminID;
+	private String adminPW;
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))
 	private String searchType;
 	private String searchWord;

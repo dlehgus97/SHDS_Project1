@@ -32,6 +32,13 @@ public class MemberVO {
 	private int page; // 사용자가 요청한 페이지 번호
 	private int startIdx; // limit 앞에 들어갈 시작인덱스값
 	
+	//최근7일 내역볼때
+	private int totalmember;
+	private Timestamp totaldate;
+	
+	private int total_members;
+	private int today_members;
+	
 	private int bancount; //누적 제재횟수
 	private int purchaseCount;//누적구매횟수
 	private int reportcount;//신고횟수

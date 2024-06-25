@@ -12,7 +12,8 @@ import kr.co.nextus.category.CategoryVO;
 @Mapper
 public interface SellListMapper {
 	SellListVO detail(SellListVO vo);
-    
+    String categoryname(int categoryno);
+	
 	// 판매글 등록
 	void insertSellList(SellListVO sellListVO);
 	void insertSellListCategory(SellListVO sellListVO);

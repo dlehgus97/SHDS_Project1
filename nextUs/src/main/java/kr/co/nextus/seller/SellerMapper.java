@@ -55,6 +55,7 @@ public interface SellerMapper {
 	
 	Integer findMemberNo(int memberNo);
 	
-	void insertSeller1(SellerVO vo);
-	
+	void insertSellerReq(SellerVO vo);
+	List<SellerRequestVO> reqList(int no);
+	int getReqCnt(int no);
 }

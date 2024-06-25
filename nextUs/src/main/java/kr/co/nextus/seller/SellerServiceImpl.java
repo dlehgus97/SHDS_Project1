@@ -1,11 +1,15 @@
 package kr.co.nextus.seller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.report.ReportVO;
@@ -106,7 +110,33 @@ public class SellerServiceImpl implements SellerService {
     }
     
     @Override
-    public void registerSeller1(SellerVO vo) {
-        sellerMapper.insertSeller1(vo);
+    public void insertSellerReq(SellerVO vo, MultipartFile file, HttpServletRequest request) {
+    	if (!file.isEmpty()) {
+			// 파일명
+			String org = file.getOriginalFilename();
+			String ext = org.substring(org.lastIndexOf("."));
+			String real = System.currentTimeMillis()+ext;
+			// 파일저장
+			String path = request.getRealPath("/upload/sellerReq/")+real;
+			try {
+				file.transferTo(new File(path));
+				System.out.println("저장완료");
+			} catch (Exception e) {
+				System.out.println("저장실패");
+			}
+			vo.setFile_org(org);
+			vo.setFile_real(real);
+		}
+        sellerMapper.insertSellerReq(vo);
+    }
+    
+    @Override
+    public List<SellerRequestVO> reqList(int no) {
+    	return sellerMapper.reqList(no);
+    }
+    
+    @Override
+    public int getReqCnt(int no) {
+    	return sellerMapper.getReqCnt(no);
     }
 }

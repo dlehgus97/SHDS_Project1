@@ -1,13 +1,11 @@
 package kr.co.nextus.seller;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.member.MemberVO;
 import kr.co.nextus.report.ReportVO;
 import kr.co.nextus.review.ReviewVO;
+import kr.co.nextus.sellerrequest.SellerRequestVO;
 import kr.co.nextus.selllist.SellListVO;
 
 // HTTP 요청 처리하여 판매자 관련 작업을 수행하는 컨트롤러
@@ -247,9 +245,13 @@ public class SellerController {
     }
     
     @GetMapping("/register")
-    public String showRegisterForm() {
+    public String showRegisterForm(HttpSession sess, Model model) {
+    	int reqCnt = sellerService.getReqCnt(((MemberVO)sess.getAttribute("login")).getNo());
+    	if (reqCnt > 0) {
+    		model.addAttribute("alertMsg", "이미 신청한 내역이 있습니다.");
+    	}
     	// 판매자 등록 폼으로 이동
-        return "seller/register";
+        return "/seller/register";
     }
 
     // 판매자 등록을 처리하는 메서드
@@ -304,6 +306,7 @@ public class SellerController {
     //셀러 정보 db 등록하기
     @PostMapping("/alarm/success")
     public String sellerregister( HttpSession session,
+    		HttpServletRequest request,
             @RequestParam("details") String details,
             @RequestParam("bank") String bank,
             @RequestParam("account") String account,
@@ -318,26 +321,19 @@ public class SellerController {
         vo.setAccount(account);
         
         // 파일 저장 로직
-        String filename = file.getOriginalFilename();
-        vo.setFilename(filename);
-        
-        sellerService.registerSeller1(vo); 
+        sellerService.insertSellerReq(vo, file, request); 
         
         return "/alarm/success"; 
     }
     
     //셀러 결과보기
-    @GetMapping("/sellercheck")
-    public String checkSeller(HttpSession session) {
-        MemberVO member = (MemberVO) session.getAttribute("member");
+    @GetMapping("/sellerReqList.do")
+    public String checkSeller(HttpSession session, Model model) {
+        MemberVO member = (MemberVO) session.getAttribute("login");
         int memberNo = member.getNo();
-        Integer state = sellerService.getSellerState(memberNo);
-        if (state == null) {
-            return "redirect:/alarm/sellnobody.do";
-        } else if (state == 1) {
-            return "redirect:/alarm/sellersuccess.do";
-        } else {
-            return "redirect:/alarm/sellerfail.do";
-        }     
+        List<SellerRequestVO> list = sellerService.reqList(memberNo);
+        model.addAttribute("reqList", list);
+        
+        return "/seller/sellerReqList";
     }
 }

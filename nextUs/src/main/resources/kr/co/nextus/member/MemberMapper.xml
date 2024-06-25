@@ -204,4 +204,34 @@
 		SET state = 1
 		WHERE no = #{no}
 	</update>
+	
+	
+	<select id="seven_days_members" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+    <![CDATA[
+    SELECT 
+        totaldate,
+        (SELECT COUNT(*)
+         FROM MEMBER
+         WHERE DATE(regdate) <= t.totaldate
+        ) AS totalmember
+    FROM (
+        SELECT DATE(regdate) AS totaldate
+        FROM MEMBER
+        WHERE regdate >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        GROUP BY DATE(regdate)
+    ) AS t
+    ORDER BY totaldate
+    ]]>
+	</select>
+	
+	<!-- adminMain -->
+	<select id="total_members" parameterType="kr.co.nextus.member.MemberVO" resultType="int" >
+	SELECT count(*) as total_members FROM MEMBER
+	</select>
+	<!-- adminMain -->
+	<select id="today_members" parameterType="kr.co.nextus.member.MemberVO" resultType="int" >
+	SELECT count(*) as total_members FROM MEMBER WHERE DATE(regdate) = CURDATE()
+	</select>
+	
+
 </mapper>

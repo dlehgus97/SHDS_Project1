@@ -13,11 +13,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import kr.co.nextus.buylist.BuyListVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -272,5 +273,17 @@ public class MemberServiceImpl implements MemberService {
     	map.put("email", email);
         mapper.updatePassword(map);
     }
+
+	@Override
+	public Map<String, Object> seven_days_members(MemberVO vo) {
+		List<BuyListVO> list = mapper.seven_days_members(vo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("seven_days_members", list);
+		map.put("total_members", mapper.total_members(vo));
+		map.put("today_members", mapper.today_members(vo));
+		return map;
+	}
+
 	
 }

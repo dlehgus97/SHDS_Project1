@@ -1,6 +1,7 @@
 package kr.co.nextus.selllist;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,6 +50,17 @@ public class SellListController {
 	@Autowired
 	private BuyListService BLservice;
 	
+	@GetMapping("/selllist/index.do")
+	public String list(Model model, HttpSession sess, @RequestParam("categoryno")int categoryno, SellListVO vo) {
+		vo.setCategoryno(categoryno);
+		vo.setDepth(2);
+		Map<String, Object> list = sellListService.list(vo);
+		String categoryname = sellListService.categoryname(categoryno);
+		model.addAttribute("vo", list);
+		model.addAttribute("categoryname", categoryname);
+		return "/selllist/index";
+	}
+
 	@GetMapping("/selllist/view.do")
 	public String detail(Model model, HttpSession sess, @RequestParam("sellno") int sellno, SellListVO vo, ReviewVO rvo, WishListVO wvo) {
 		MemberVO login = (MemberVO) sess.getAttribute("login");
@@ -107,6 +119,8 @@ public class SellListController {
         return "redirect:/seller/selllistManagement";
     }
 	
+	
+	
 	//관리자
 //	@GetMapping("/productManagement.do")
 //	public String List(SellListVO vo, Model model) {
@@ -116,20 +130,25 @@ public class SellListController {
 	
 	// 관리자						
 	@RequestMapping("/productManagement")						
-	public String productManagement(SellListVO vo, SellerRequestVO vo2,BuyListVO vo3,
- Model model) {						
-		model.addAttribute("selllist", sellListService.index(vo));					
-		model.addAttribute("SRnew", SRservice.NEW(vo2));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));					
-		return "admin/productManagement/productManagement";					
+	public String productManagement(SellListVO vo, SellerRequestVO vo2,BuyListVO vo3, Model model,HttpServletRequest request) {	
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("selllist", sellListService.index(vo));					
+			model.addAttribute("SRnew", SRservice.NEW(vo2));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));					
+			return "admin/productManagement/productManagement";	
+		}else {
+			return "common/403";
+		}
+
+						
 	}						
 							
 	// 판매글삭제						
 	@RequestMapping(value = "/deleteSelllist/{sellno}", method = RequestMethod.POST)						
 	@ResponseBody						
-	public String deleteSelllist(@PathVariable("sellno") int sellno) {						
-							
+	public String deleteSelllist(@PathVariable("sellno") int sellno) {
 		try {					
 			sellListService.deleteSelllist(sellno);				
 			return "success"; // 성공 시 success 문자열 반환				

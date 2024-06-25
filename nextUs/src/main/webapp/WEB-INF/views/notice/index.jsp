@@ -101,8 +101,7 @@
 					<div class="bbsSearch">
 						<form method="get" name="searchForm" id="searchForm"
 							action="index.do">
-							<span class="srchSelect"> <select id="stype"
-								name="searchType" class="dSelect" title="검색분류 선택">
+							<span class="srchSelect"> <select id="stype" name="searchType" class="dSelect" title="검색분류 선택">
 									<option value="all">전체</option>
 									<option value="title"
 										<c:if test="${NoticeVO.searchType == 'title'}">selected</c:if>>제목</option>

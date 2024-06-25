@@ -17,5 +17,6 @@ public interface AdminMapper {
 	void deleteNotice(int no);
 	int update(AdminVO vo);
 	void insertnotice(@Param("title") String title, @Param("content") String content);
+	AdminVO adminLogin(AdminVO vo);
 
 }
