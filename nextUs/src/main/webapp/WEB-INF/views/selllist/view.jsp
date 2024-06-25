@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				window.location.href = '/member/login.do';
 			}
 		} else {
-			window.location.href = '/chat/chats.do';
+			window.location.href = '/chat/chatStart.do?sellno=${vo.sellno}&senderno=${login.no}&opno=${vo.seller}';
 		}
 	}
 
