@@ -26,7 +26,7 @@
                 <a id="header_regist_seller" class="header_right_object" href="/seller/sellerWeeklyMetrics">셀러 마이페이지</a>
             </c:if>
             <c:if test="${!empty login && login.seller == 0}">
-                <button id="header_regist_seller" class="header_right_object">셀러등록</button>
+                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerReqList.do">셀러등록</a>
             </c:if>
             <div id="header_chat" class="header_right_object">
             	<c:if test="${!empty login }">
