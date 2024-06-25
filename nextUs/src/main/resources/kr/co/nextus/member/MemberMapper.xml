@@ -6,19 +6,19 @@
 		no, email, pwd, name,
 		nickname, gender, birthday, hp, zipcode,
 		addr1, addr2, regdate, state, seller,
-		profile_org, profile_real)
+		profile_org, profile_real, loginstate)
 		VALUES (
 		#{no}, #{email}, MD5(#{pwd}), #{name},
 		#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
 		#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
-		#{profile_org}, #{profile_real});
+		#{profile_org}, #{profile_real}, #{loginstate});
 		<selectKey order="AFTER" keyProperty="no" resultType="int">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
 	<select id="emailCheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE email=#{email}
+		SELECT COUNT(*) FROM MEMBER WHERE email=#{email} AND loginstate=#{loginstate}
 	</select>
 
 	<select id="login" parameterType="kr.co.nextus.member.MemberVO"
@@ -37,6 +37,10 @@
         SELECT * FROM MEMBER WHERE email = #{email}
     </select>
     
+    <select id="findByEmail2" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
+        SELECT * FROM MEMBER WHERE email = #{email} AND loginstate=#{loginstate}
+    </select>
+    
     <select id="findId" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
     	SELECT email
     	FROM MEMBER
@@ -44,8 +48,8 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO">
-        INSERT INTO MEMBER (email)
-        VALUES (#{email})
+        INSERT INTO MEMBER (email, name, loginstate)
+        VALUES (#{email}, #{name}, #{loginstate})
     </insert>
     
 	<update id="update" parameterType="kr.co.nextus.member.MemberVO">

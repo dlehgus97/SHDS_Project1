@@ -26,5 +26,11 @@ public interface SellListService {
 	List<SellListVO> all(SellListVO vo);
 	Map index(SellListVO vo);
 	
+	//조회수순으로 정렬 
+	List<SellListVO> listByViews(SellListVO vo);
+			
+	//조회수 증가 
+	void increaseViewCount(int sellno);
+	
 	boolean deleteSelllist(int sellno);
 }

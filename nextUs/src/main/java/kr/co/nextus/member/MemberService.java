@@ -21,6 +21,8 @@ public interface MemberService {
     MemberVO findId(MemberVO vo);
 
     MemberVO findByEmail(String email);
+    
+    MemberVO findByEmail2(MemberVO vo);
 
     boolean checkMemberExist(String email); // 존재하는 회원인지 확인
     

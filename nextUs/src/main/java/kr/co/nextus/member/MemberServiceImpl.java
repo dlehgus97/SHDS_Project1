@@ -62,6 +62,11 @@ public class MemberServiceImpl implements MemberService {
     public MemberVO findByEmail(String email) {
         return mapper.findByEmail(email);
     }
+    
+    @Override
+    public MemberVO findByEmail2(MemberVO vo) {
+        return mapper.findByEmail2(vo);
+    }
 
     @Override
     public boolean checkMemberExist(String email) {
@@ -188,19 +193,22 @@ public class MemberServiceImpl implements MemberService {
         if (email == null) {
             return false; // 이메일 정보가 없으면 처리 불가능
         }
+        MemberVO vo = new MemberVO();
+        vo.setEmail(email);
+        vo.setLoginstate(1); // 로그인 상태가 1인 회원만 조회
 
         // DB에서 해당 이메일로 회원 조회
-        MemberVO member = mapper.findByEmail(email);
+        MemberVO member = mapper.findByEmail2(vo);
 
         if (member != null) {
-            // 이미 회원으로 등록된 경우, 추가적인 로그인 처리 또는 세션 등의 처리 가능
             return true;
         } else {
             // 새로운 회원으로 DB에 저장
             String nickname = (String) userInfo.get("nickname");
             MemberVO newMember = new MemberVO();
             newMember.setEmail(email);
-            newMember.setNickname(nickname);
+            newMember.setName(nickname);
+            newMember.setLoginstate(1); // 새로운 회원의 로그인 상태를 1로 설정
 
             // 신규 회원 등록
             int result = mapper.insertMember(newMember);

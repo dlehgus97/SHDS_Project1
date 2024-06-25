@@ -39,9 +39,11 @@ public class MainController {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		Map<String, Object> list = sellListService.list(vo);
 		List<CategoryVO> catelist = categoryService.list(catevo);
+		List<SellListVO> popularList = sellListService.listByViews(vo);
 		List<SellerRankVO> sellerranklist = sellerRankService.list(sellerrankvo);
 		model.addAttribute("list", list.get("list"));
 		model.addAttribute("cate", catelist);
+		model.addAttribute("popularList", popularList);
 		model.addAttribute("rank", sellerranklist);
 		return "index";
 	}

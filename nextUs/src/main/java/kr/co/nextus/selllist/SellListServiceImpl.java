@@ -58,11 +58,28 @@ public class SellListServiceImpl implements SellListService {
 		return categoryname;
 	}
 	
-	@Override
-	public SellListVO detail(SellListVO vo) {
-		SellListVO data = mapper.detail(vo);
-		return data;
-	}
+	//조회수 증가 
+		@Override
+		public void increaseViewCount(int sellno) {
+			 mapper.increaseViewCount(sellno);
+			 }
+		
+	
+		@Override
+	    public SellListVO detail(SellListVO vo) {
+	        SellListVO data = mapper.detail(vo);
+	        if (data != null) {
+	            // 판매 상품 조회 시 조회수 증가 처리
+	            increaseViewCount(data.getSellno());
+	        }
+	        return data;
+	    }
+		
+		@Override
+	    public List<SellListVO> listByViews(SellListVO vo) {
+	        return mapper.listByViews(vo); // 추가된 메소드 구현
+	    }
+		
 	// 판매글 등록 - 셀러, 제목, 내용 등
 	@Override
 	public void insertSellList(SellListVO sellListVO, MultipartFile file, HttpServletRequest request) {

@@ -265,23 +265,32 @@ public class MemberController {
         return "member/navercallback";
     }
 
-    //네이버 로그인 콜백
+ // 네이버 로그인 콜백
     @PostMapping("/member/loginCallback")
     @ResponseBody
-    public String loginCallback(String email, MemberVO vo, HttpSession sess) {
+    public String loginCallback(String email, MemberVO vo, HttpSession sess, String name) {
+        MemberVO login = service.findByEmail2(vo);
+        System.out.println(login);
+        
         // 이메일로 기존 회원 존재 여부 확인
-        if (service.checkMemberExist(email)) {
-            MemberVO login = service.findByEmail(email);
+        // 기존 회원인 경우
+        if (login != null) {
+            // 로그인 상태 업데이트 및 세션 설정
+            login.setEmail(email);
+            login.setLoginstate(2); // 로그인 상태 설정
             sess.setAttribute("login", login);
-            return "true";
+            return "true"; // 로그인 성공
         } else {
             // 기존 회원이 아니라면 회원 정보 저장
             vo.setEmail(email);
+            vo.setName(name);
+            vo.setLoginstate(2);
+
             if (service.insertMember(vo)) {
                 sess.setAttribute("login", vo);
-                return "true";
+                return "true"; // 회원 가입 및 로그인 성공
             } else {
-                return "false";
+                return "false"; // 회원 가입 실패
             }
         }
     }
@@ -300,13 +309,15 @@ public class MemberController {
                 MemberVO loginMember = new MemberVO(); // 예시로 MemberVO 객체 생성
                 loginMember.setEmail((String) userInfo.get("email")); // 카카오에서 받은 이메일 정보 사용
                 loginMember.setName((String) userInfo.get("nickname")); // 카카오에서 받은 닉네임 정보 사용
+                loginMember.setLoginstate(1); // 로그인 상태가 1인 회원만 조회
+                
                 // 로그인 처리 메소드 예시 (실제 로그인 로직은 service.login(vo)와 같이 구현되어야 함)
-                MemberVO login = service.findByEmail(loginMember.getEmail()); // 로그인 처리 메소드 호출
+                MemberVO login = service.findByEmail2(loginMember); // 로그인 처리 메소드 호출
                 
                 if (login == null) {
                     // 로그인 실패 처리
                     redirectAttributes.addFlashAttribute("msg", "로그인에 실패하였습니다.");
-                    return "redirect:/login/error";
+                    return "redirect:/member/login.do";
                 } else {
                     // 정상 로그인 처리
                     session.setAttribute("login", login); // 세션에 로그인 정보 저장

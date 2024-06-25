@@ -35,6 +35,20 @@
 		
 	</select>
 	
+	<!-- 조회수 증가 -->
+	<update id="increaseViewCount" parameterType="int">
+    	UPDATE SELLLIST
+    	SET view_cnt = view_cnt + 1
+    	WHERE sellno = #{sellno}
+	</update>
+	
+	<!-- 조회수 순으로 정렬된 메소드 -->
+    <select id="listByViews" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO" >
+        SELECT * FROM SELLLIST
+        ORDER BY view_cnt DESC
+        LIMIT 8;
+    </select>
+	
 	<!-- 카테고리명 불러오기 -->
 	<select id="categoryname" parameterType="int" resultType="String">
 		SELECT categoryname FROM CATEGORYLIST WHERE categoryno = #{categoryno}

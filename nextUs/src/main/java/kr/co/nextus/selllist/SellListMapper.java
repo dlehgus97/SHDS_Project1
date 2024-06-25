@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.category.CategoryVO;
@@ -27,6 +28,12 @@ public interface SellListMapper {
     int count(SellListVO param);
 	List<SellListVO> all(SellListVO vo);
 	List<SellListVO> list2(SellListVO vo);
+	
+	//조회수 순으로 정렬 
+	List<SellListVO> listByViews(SellListVO vo); // 추가된 메소드
+			
+	//조회수 증가 
+	void increaseViewCount(@Param("sellno") int sellno);
 
 
 	boolean delete(int sellno);

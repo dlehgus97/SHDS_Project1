@@ -21,25 +21,30 @@ window.addEventListener('load', function () {
     naverLogin.getLoginStatus(function(status) {
         if (status) {
             const email = naverLogin.user.getEmail();
-            const nickName = naverLogin.user.getNickName();
-            const id = naverLogin.user.getId();
+            const name = naverLogin.user.getName();
             
+            console.log("Email: ", email);
+            console.log("Name: ", name);
+
             $.ajax({
                 type: 'post',
                 url: '/member/loginCallback',
-                data: {"email": email, "nickname": nickName, "id": id},
+                data: {"email": email, "name": name, "loginstate":2},
                 dataType: 'text',
                 success: function(result) {
-                	console.log(result);
+                    console.log(result);
                     if (result == '"true"') {
-                    	location.href = "/index.do"; // 가입된 회원일 경우 메인 페이지로 이동
+                        location.href = "/index.do"; // 가입된 회원일 경우 메인 페이지로 이동
                     } else if (result == '"false"') {
                         alert('가입되지 않은 회원입니다');
                         location.href = '/member/login.do'; // 가입되지 않은 회원일 경우 회원가입 페이지로 이동
                     }
                 },
-                error: function() {
+                error: function(jqXHR, textStatus, errorThrown) {
                     console.log('오류 발생');
+                    console.log("jqXHR: ", jqXHR);
+                    console.log("textStatus: ", textStatus);
+                    console.log("errorThrown: ", errorThrown);
                 }
             });
         } else {

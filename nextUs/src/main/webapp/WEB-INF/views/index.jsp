@@ -205,7 +205,7 @@
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="topSellersTab">
 					<div class="row">
-						<c:forEach var="vo" items="${list }">
+						<c:forEach var="vo" items="${popularList }">
 							<!-- 반복 시작 -->
 							<div class="col-6 col-md-4 col-lg-3 card-bg-light-purple">
 								<!-- Card -->
