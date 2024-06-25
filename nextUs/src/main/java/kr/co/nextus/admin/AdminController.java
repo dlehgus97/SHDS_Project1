@@ -43,19 +43,18 @@ public class AdminController {
 
 
 	@PostMapping("/adminLogin")
-	@GetMapping("/adminLogin")
 	public String adminLogin(@RequestParam("adminID") String adminID, HttpServletRequest request,RedirectAttributes redirectAttributes,
 							 @RequestParam("adminPW") String adminPW, Model model,AdminVO vo) {
 		vo.setAdminID(adminID);
 		vo.setAdminPW(adminPW);
-		AdminVO login = service.adminLogin(vo); 
-		if(login==null) {
+		AdminVO login = service.adminLogin(vo);
+		if(login!=null) {
 			request.getSession().setAttribute("adminLoggedIn", true);
-			return "admin/admin";
+			return "redirect:/adminMain";
 			
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Invalid admin ID or password");
-			return "redirect:/adminMain";
+			return "redirect:/admin";
 		}
 	}
 	 
