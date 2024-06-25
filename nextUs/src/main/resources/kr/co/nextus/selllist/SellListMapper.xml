@@ -21,6 +21,9 @@
     	</where>
 		ORDER BY
         <choose>
+            <when test="order != null">
+                ${order} DESC
+            </when>
             <when test="searchType != null">
                 #{searchType} DESC
             </when>

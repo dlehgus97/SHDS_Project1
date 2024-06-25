@@ -1,12 +1,67 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+#outer_container {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+#seller_req_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px
+}
+#seller_req_container > p {
+	font-family: 'SUIT-Regular';
+	font-weight: bold;
+}
+#seller_req {
+	font-family: 'SUIT-Regular';
+	border: 2px black solid;
+	padding: 10px 50px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+#req_container {
+    font-family: 'SUIT-Regular';
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
 .req_list_container {
     border: 1px solid #ccc;
+    width: 50%;
     margin-bottom: 10px;
     padding: 10px;
 }
+.req_list_container p {
+	display: inline-block;
+}
+div.file > p {
+	font-weight: bold;
+}
+.showDetailsBtn {
+	background-color: white;
+    border: 1px black solid;
+    font-family: 'SUIT-Regular';
+}
 .details {
     margin-bottom: 10px;
+    display: none;
+    transition: max-height 0.3s ease-out;
 }
 .status {
     font-weight: bold;
+}
+.show {
+    display: block;
 }
