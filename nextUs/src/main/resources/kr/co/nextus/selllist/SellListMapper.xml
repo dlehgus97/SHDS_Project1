@@ -3,7 +3,9 @@
 <mapper namespace="kr.co.nextus.selllist.SellListMapper">
 	<!-- 목록 -->
 	<select id="list" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
-		SELECT * FROM SELLLIST 
+		SELECT *,
+		(SELECT COUNT(*) FROM BUYLIST WHERE BUYLIST.sellno=SELLLIST.sellno) as like_cnt
+		FROM SELLLIST 
 		JOIN SELLCATEGORY ON SELLLIST.sellno = SELLCATEGORY.sellno 
 		JOIN CATEGORYLIST ON SELLCATEGORY.categoryno = CATEGORYLIST.categoryno
 		<where>
@@ -22,13 +24,22 @@
             <when test="order != null">
                 ${order} DESC
             </when>
+            <when test="searchType != null">
+                #{searchType} DESC
+            </when>
             <otherwise>
-                SELLLIST.sellno DESC
+                like_cnt DESC
             </otherwise>
         </choose>
     	LIMIT #{startIdx}, 10
 		
 	</select>
+	
+	<!-- 카테고리명 불러오기 -->
+	<select id="categoryname" parameterType="int" resultType="String">
+		SELECT categoryname FROM CATEGORYLIST WHERE categoryno = #{categoryno}
+	</select>
+	
 	<!-- 상세 -->
 	<select id="detail" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
 		SELECT *,

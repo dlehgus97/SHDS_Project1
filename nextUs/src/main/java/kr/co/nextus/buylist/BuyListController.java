@@ -1,5 +1,7 @@
 package kr.co.nextus.buylist;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +25,18 @@ public class BuyListController {
 	private BuyListService BLservice;
 
 	@RequestMapping("/sellerSettlement")
-	public String sellerSettlement(BuyListVO vo, SellerRequestVO vo2,BuyListVO vo3,Model model) {
-		model.addAttribute("map", service.settlelist(vo));
-		model.addAttribute("SRnew", SRservice.NEW(vo2));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-		return "admin/adjustManagement/sellerSettlement";
+	public String sellerSettlement(BuyListVO vo, SellerRequestVO vo2,BuyListVO vo3,Model model,HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.settlelist(vo));
+			model.addAttribute("SRnew", SRservice.NEW(vo2));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+			return "admin/adjustManagement/sellerSettlement";
+		}else {
+			return "common/403";
+		}
+
 	}
 
 	// 정산하기

@@ -55,5 +55,5 @@ public interface SellerMapper {
 	
 	void insertSellerReq(SellerVO vo);
 	List<SellerRequestVO> reqList(int no);
-	
+	int getReqCnt(int no);
 }

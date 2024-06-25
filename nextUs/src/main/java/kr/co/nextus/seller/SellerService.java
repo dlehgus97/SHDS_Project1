@@ -47,4 +47,5 @@ public interface SellerService {
     
     void insertSellerReq(SellerVO vo, MultipartFile file, HttpServletRequest request);
     List<SellerRequestVO> reqList(int no);
+    int getReqCnt(int no);
 }

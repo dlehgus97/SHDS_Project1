@@ -47,12 +47,19 @@ public class RefundController {
 
 	@GetMapping("/refundRequest")
 	@RequestMapping("/refundRequest")
-	public String couponManagement(RefundVO vo, SellerRequestVO vo2, BuyListVO vo3, Model model) {
-		model.addAttribute("refundRequstMap", service.list(vo));
-		model.addAttribute("SRnew", SRservice.NEW(vo2));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-		return "admin/refundManagement/refundRequest";
+	public String couponManagement(RefundVO vo, SellerRequestVO vo2, BuyListVO vo3, Model model,HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("refundRequstMap", service.list(vo));
+			model.addAttribute("SRnew", SRservice.NEW(vo2));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+			return "admin/refundManagement/refundRequest";
+		}else {
+			return "common/403";
+		}
+
+		
 	}
 
 	@RequestMapping("/refundReceipt")
@@ -63,27 +70,41 @@ public class RefundController {
 
 	// 환불하기
 	@PostMapping("/refund.do")
-	public String refund(Model model,RefundVO vo,
+	public String refund(Model model,RefundVO vo,HttpServletRequest request,
 						@RequestParam("buyno") int buyno,
 	                    @RequestParam("refundno") int refundno,
 	                    @RequestParam("reply") String reply) {
 
-	    vo.setBuyno(buyno);
-	    vo.setRefundno(refundno);
-	    vo.setReply(reply);
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			vo.setBuyno(buyno);
+		    vo.setRefundno(refundno);
+		    vo.setReply(reply);
 
-		model.addAttribute("refund",service.refund(vo));
-		model.addAttribute("msg", "환불 완료!");
-		return "common/alertThenClose";
+			model.addAttribute("refund",service.refund(vo));
+			model.addAttribute("msg", "환불 완료!");
+			return "common/alertThenClose";
+		}else {
+			return "common/403";
+		}
+
+	    
 	    
 	}
 	
 	
 	//환불상세보기
 	@RequestMapping("/refundDetailPopup")
-	public String refundDetailPopup(RefundVO vo,Model model,@RequestParam("no") int no) {
-		model.addAttribute("map", service.list(vo,no));
-		return "admin/refundManagement/refundDetailPopup";
+	public String refundDetailPopup(RefundVO vo,Model model,@RequestParam("no") int no,HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo,no));
+			return "admin/refundManagement/refundDetailPopup";
+		}else {
+			return "common/403";
+		}
+
+		
 	}
 
 }

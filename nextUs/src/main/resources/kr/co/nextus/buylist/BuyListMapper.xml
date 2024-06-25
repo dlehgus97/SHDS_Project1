@@ -77,11 +77,11 @@ ORDER BY DATE(decidedate) ASC
 	</select>
 	<!-- adminMain -->
 	<select id="total_sales" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int" >
-	SELECT SUM(price) as total_salses FROM BUYLIST WHERE status = 6
+	SELECT IFNULL(SUM(price),0) as total_salses FROM BUYLIST WHERE status = 6
 	</select>
 	<!-- adminMain -->
 	<select id="today_sales" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int" >
-	SELECT SUM(price) AS today_sales FROM BUYLIST WHERE status = 6 AND DATE(decidedate) = CURDATE();
+	SELECT IFNULL(SUM(price),0) AS today_sales FROM BUYLIST WHERE status = 6 AND DATE(decidedate) = CURDATE()
 	</select>
 	<!-- adminMain -->
 	<select id="MVP" parameterType="kr.co.nextus.buylist.BuyListVO"

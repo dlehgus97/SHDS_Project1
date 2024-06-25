@@ -9,6 +9,8 @@ import kr.co.nextus.category.CategoryVO;
 public interface SellListService {
 	Map<String, Object> list(SellListVO vo);
 	
+	String categoryname(int categoryno);
+	
 	SellListVO detail(SellListVO vo);
 	
 	void insertSellList(SellListVO sellListVO);

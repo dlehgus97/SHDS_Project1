@@ -16,7 +16,10 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminMapper Mapper;
-	
+	@Override
+	public AdminVO adminLogin(AdminVO vo) {
+		return Mapper.adminLogin(vo);
+	}
 	
 	@Override
 	public Map<String, Object> list(AdminVO param) {
@@ -65,5 +68,7 @@ public class AdminServiceImpl implements AdminService {
 		int r = Mapper.update(vo);
 		return r;
 	}
+
+	
 
 }
