@@ -21,41 +21,37 @@
 	    </a>
     </div>
     <div id="header_right_container">
-        <div id="header_userinfo_menu">
-            <c:if test="${!empty login && login.seller == 1}">
-                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerWeeklyMetrics">셀러 마이페이지</a>
-            </c:if>
-            <c:if test="${!empty login && login.seller == 0}">
-                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerReqList.do">셀러등록</a>
-            </c:if>
-            <div id="header_chat" class="header_right_object">
-            	<c:if test="${!empty login }">
-                <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
-                <a href="/chat/chats.do" id="header_chat_text" class="text_color_white">CHAT</a>
-                </c:if>
-            </div>
-            <div id="login_status" class="header_right_object">
-            	<c:if test="${empty login }">
-            		<a href="/member/login.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그인</a>
-            	</c:if>
-            	<c:if test="${!empty login }">
-            		<a href="/member/logout.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그아웃</a>
-            	</c:if>
-            </div>
-            <c:if test="${!empty login }">
-            <div class="header_right_object">
-            	<a href="/mypage/orderlist.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">마이페이지</a>
-            	<img src="" id="header_profile" alt="프로필">
-            </div>
-            <div></div><div></div>
-            <div class="header_right_object">
-            	<a href="/cart/view.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">장바구니</a>
-            </div>
-            <div class="header_right_object">
-            	<a href="/mypage/wishlist.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">찜목록</a>
-            </div>
-            </c:if>
-        </div>
+    	<c:if test="${empty login }">
+       		<a href="/member/login.do" id="go_login" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그인</a>
+       	</c:if>
+       	<c:if test="${!empty login }">
+	        <div id="header_userinfo_menu">
+	            <c:if test="${login.seller == 1}">
+	                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerWeeklyMetrics">셀러 마이페이지</a>
+	            </c:if>
+	            <c:if test="${login.seller == 0}">
+	                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerReqList.do">셀러등록</a>
+	            </c:if>
+	            <div id="header_chat" class="header_right_object">
+	                <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
+	                <a href="/chat/chats.do" id="header_chat_text" class="text_color_white">CHAT</a>
+	            </div>
+	            <div id="login_status" class="header_right_object">
+	            		<a href="/member/logout.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">로그아웃</a>
+	            </div>
+	            <div class="header_right_object">
+	            	<a href="/mypage/orderlist.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">마이페이지</a>
+	            	<img src="" id="header_profile" alt="프로필">
+	            </div>
+	            <div></div><div></div>
+	            <div class="header_right_object">
+	            	<a href="/cart/view.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">장바구니</a>
+	            </div>
+	            <div class="header_right_object">
+	            	<a href="/mypage/wishlist.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">찜목록</a>
+	            </div>
+	        </div>
+        </c:if>
     </div>
 </div>
 </body>

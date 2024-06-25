@@ -25,9 +25,9 @@
             <c:forEach var="vo" items="${reqList}" varStatus="status">
                 <div class="req_list_container">
                     <div class="file">
-                        <p>첨부파일</p>
+                        <p>첨부파일 : </p>
                         <c:if test="${vo.file_real != null}">
-                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/sellerReq&thumbnail_org=${URLEncoder.encode(vo.file_org)}&thumbnail_real=${vo.file_real}" target="_blank">첨부파일 : ${vo.file_org}</a>
+                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/sellerReq&thumbnail_org=${URLEncoder.encode(vo.file_org)}&thumbnail_real=${vo.file_real}" target="_blank">${vo.file_org}</a>
                         </c:if>
                         <c:if test="${vo.file_real == null}">
                             <p>No file available</p>
@@ -37,7 +37,7 @@
                         <p>신청현황 : </p>
                         <c:choose>
                             <c:when test="${vo.state == 0}">
-                                <p>신청승인</p>
+                                <p style="color: blue;">신청승인</p>
                             </c:when>
                             <c:when test="${vo.state == 1}">
                                 <p>신청검토중</p>
