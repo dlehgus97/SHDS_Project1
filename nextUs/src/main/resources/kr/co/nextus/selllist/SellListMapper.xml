@@ -20,7 +20,7 @@
 		ORDER BY
         <choose>
             <when test="order != null">
-                #{order} DESC
+                ${order} DESC
             </when>
             <otherwise>
                 SELLLIST.sellno DESC

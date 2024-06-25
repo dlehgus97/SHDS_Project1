@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nextus.category.CategoryService;
 import kr.co.nextus.category.CategoryVO;
@@ -35,5 +37,18 @@ public class MainController {
 		model.addAttribute("list", list.get("list"));
 		model.addAttribute("cate", catelist);
 		return "index";
+	}
+	
+	@PostMapping("/index1.do")
+	@ResponseBody
+	public Map<String, Object> index(Model model, SellListVO vo, @RequestParam("value") int value) {
+		vo.setNested(value);
+		vo.setDepth(1);
+		vo.setOrder("postdate");
+		Map<String, Object> list = sellListService.list(vo);
+	    model.addAttribute("list", list);
+		
+		
+		return list;
 	}
 }
