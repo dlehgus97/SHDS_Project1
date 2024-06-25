@@ -125,6 +125,7 @@ public class SellListServiceImpl implements SellListService {
 		boolean result = mapper.delete(sellno);	
 		return result;	
 	}		
+
 			
 
 }

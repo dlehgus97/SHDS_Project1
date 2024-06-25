@@ -245,9 +245,13 @@ public class SellerController {
     }
     
     @GetMapping("/register")
-    public String showRegisterForm() {
+    public String showRegisterForm(HttpSession sess, Model model) {
+    	int reqCnt = sellerService.getReqCnt(((MemberVO)sess.getAttribute("login")).getNo());
+    	if (reqCnt > 0) {
+    		model.addAttribute("alertMsg", "이미 신청한 내역이 있습니다.");
+    	}
     	// 판매자 등록 폼으로 이동
-        return "seller/register";
+        return "/seller/register";
     }
 
     // 판매자 등록을 처리하는 메서드

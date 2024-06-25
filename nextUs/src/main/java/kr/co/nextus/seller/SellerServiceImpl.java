@@ -132,4 +132,9 @@ public class SellerServiceImpl implements SellerService {
     public List<SellerRequestVO> reqList(int no) {
     	return sellerMapper.reqList(no);
     }
+    
+    @Override
+    public int getReqCnt(int no) {
+    	return sellerMapper.getReqCnt(no);
+    }
 }

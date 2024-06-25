@@ -191,7 +191,7 @@
 					<!-- Heading -->
 					<h2 class="mb-4 text-center">실시간 인기 서비스 <img src="/resources/imgs/hot.png" alt="인기 서비스 이미지" width="40" height="40" style="margin-right: 10px; margin-bottom: 10px"></h2>
 					
-
+					
 					<!-- Nav -->
 					<div class="nav justify-content-center mb-10">
 						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">웹</a> 
@@ -290,77 +290,76 @@
 	
 	<!-- 신규 등록 서비스 -->
 	<section class="py-12">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-12 col-md-10 col-lg-8 col-xl-6">
-
-					<!-- Heading -->
-					<h2 class="mb-4 text-center">신규 등록 서비스 <img src="/resources/imgs/new.png" alt="신규 등록 이미지" width="50" height="40" style="margin-right: 10px; margin-bottom: 10px"></h2>
-					
-
-					<!-- Nav -->
-					<div class="nav justify-content-center mb-10">
-						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">웹</a> 
-						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">모바일</a> 
-						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">인공지능</a>
-						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">기타</a>
-					</div>
-
-				</div>
-			</div>
-			<div class="tab-content">
-				<div class="tab-pane fade show active" id="topSellersTab">
-					<div class="row">
-						<c:forEach var="vo" items="${list }">
-							<!-- 반복 시작 -->
-							<div class="col-6 col-md-4 col-lg-3">
-								<!-- Card -->
-								<div class="card mb-7">
-
-									<!-- Badge -->
-									<div
-										class="badge bg-white text-body card-badge card-badge-start text-uppercase">
-										New</div>
-
-									<!-- Image -->
-									<div class="card-img">
-
-										<!-- Image -->
-										<a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }"> <img
-											class="card-img-top card-img-front"
-											src="/upload/board/1717978758514.jpg"
-											style="width: 90%; height: 250px; object-fit: cover;">
-										</a>
-									</div>
-
-									<!-- Body -->
-									<div class="card-body px-0">
-
-										<!-- Category -->
-										<div class="fs-xs">
-											<a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno }">카테고리? 별점? 중 뭐넣을까</a>
-										</div>
-
-										<!-- Title -->
-										<div class="fw-bold">
-											<a class="text-body" href="/selllist/view.do?sellno=${vo.sellno }"> ${vo.title } </a>
-										</div>
-
-										<!-- Price -->
-										<div class="fw-bold text-muted">${vo.price }원</div>
-
-									</div>
-
-								</div>
-
-							</div>
-							<!-- 반복 끝 -->
-						</c:forEach>
-					</div>
-				</div>
-			</div>
-		</div>
+	    <div class="container">
+	        <div class="row justify-content-center">
+	            <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+	
+	                <!-- Heading -->
+	                <h2 class="mb-4 text-center">신규 등록 서비스 <img src="/resources/imgs/new.png" alt="신규 등록 이미지" width="50" height="40" style="margin-right: 10px; margin-bottom: 10px"></h2>
+	                
+	                <!-- 동동초이가 건듬 -->
+	                <!-- Nav -->
+	                <div class="nav justify-content-center mb-10">
+	                    <a class="nav-link active" href="#" data-value="1">웹</a> 
+	                    <a class="nav-link" href="#" data-value="2">모바일</a> 
+	                    <a class="nav-link" href="#" data-value="3">인공지능</a>
+	                    <a class="nav-link" href="#" data-value="4">기타</a>
+	                </div>
+	
+	            </div>
+	        </div>
+	        <div class="tab-content">
+	            <div class="tab-pane fade show active" id="topSellersTab">
+	                <div class="row" id="productList">
+	                    <c:forEach var="vo" items="${list}">
+	                        <!-- 반복 시작 -->
+	                        <div class="col-6 col-md-4 col-lg-3">
+	                            <!-- Card -->
+	                            <div class="card mb-7">
+	
+	                                <!-- Badge -->
+	                                <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+	                                    New
+	                                </div>
+	
+	                                <!-- Image -->
+	                                <div class="card-img">
+	
+	                                    <!-- Image -->
+	                                    <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno}"> 
+	                                        <img class="card-img-top card-img-front" src="/upload/board/1717978758514.jpg" style="width: 90%; height: 250px; object-fit: cover;">
+	                                    </a>
+	                                </div>
+	
+	                                <!-- Body -->
+	                                <div class="card-body px-0">
+	
+	                                    <!-- Category -->
+	                                    <div class="fs-xs">
+	                                        <a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno}">카테고리? 별점? 중 뭐넣을까</a>
+	                                    </div>
+	
+	                                    <!-- Title -->
+	                                    <div class="fw-bold">
+	                                        <a class="text-body" href="/selllist/view.do?sellno=${vo.sellno}"> ${vo.title} </a>
+	                                    </div>
+	
+	                                    <!-- Price -->
+	                                    <div class="fw-bold text-muted">${vo.price}원</div>
+	
+	                                </div>
+	
+	                            </div>
+	
+	                        </div>
+	                        <!-- 반복 끝 -->
+	                    </c:forEach>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 	</section>
+
 	
 	<!-- TOP SELLERS -->
 	<section class="py-10 section-bg-light-purple">
@@ -613,6 +612,62 @@
 					showBanner(currentIndex);
 					startSlider();
 				});
+	</script>
+    <!-- 동동초이스크립트추가 -->
+    <script>
+	    $(document).ready(function() {
+	        $('.nav-link').on('click', function(event) {
+	            event.preventDefault(); // 기본 동작 방지
+	            var value = $(this).data('value');
+	            
+	            $.ajax({
+	                url: '/index1.do',
+	                type: 'POST',
+	                cache:false,
+	                data: { value: value },
+	                success: function(response) {
+	                    // 받은 데이터를 이용하여 페이지 내용을 업데이트
+	                    var productList = $('#productList');
+	                    productList.empty();     
+	                    console.log(response);
+	
+	                    $.each(response.list, function(index, vo) {
+	                    	var title = vo.title;
+	                    	var price = vo.price;
+	                    	var thumbnail_real = vo.thumbnail_real;
+	                    	console.log('나는'+thumbnail_real);
+	                        var productHtml = '';
+	                        productHtml += '    <div class="col-6 col-md-4 col-lg-3">';
+                        	productHtml += '        <div class="card mb-7">';
+                       		productHtml += '            <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">';
+                   			productHtml += '                New';
+                 			productHtml += '            </div>';
+                 			productHtml += '            <div class="card-img">';
+                 			productHtml += '                <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno}">';
+                 			productHtml += '                    <img class="card-img-top card-img-front" src="/upload/board/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
+                 			productHtml += '                </a>';
+                 			productHtml += '             </div>';
+                 			productHtml += '            <div class="card-body px-0">';
+                 			productHtml += '                 <div class="fs-xs">';
+                 			productHtml += '                     <a class="text-muted" href="/selllist/view.do?sellno="></a>';
+                 			productHtml += '                 </div>';
+                 			productHtml += '                 <div class="fw-bold">';
+                 			productHtml += '                     <a class="text-body" href="/selllist/view.do?sellno=">'+title+'</a>';
+                 			productHtml += '                </div>';
+                 			productHtml += '                <div class="fw-bold text-muted">'+price+'원</div>';
+                 			productHtml += '            </div>';
+                 			productHtml += '        </div>';
+                 			productHtml += '   </div>';
+	                        productList.append(productHtml);
+	                    });
+	                },
+	                error: function(xhr, status, error) {
+	                    // 실패 시 처리할 코드
+	                    console.log('에러:', error);
+	                }
+	            });
+	        });
+	    });
 	</script>
 	<!-- 부트스트랩 js -->
 	<!-- Map (replace the API key to enable) -->

@@ -148,11 +148,16 @@
     
     <insert id="insertSellerReq" parameterType="kr.co.nextus.seller.SellerVO">
         INSERT INTO SELLERREQUEST (memberno, details, bank, account,  regdate, state, file_org, file_real)
-        VALUES (#{no}, #{bank}, #{details} #{account}, now(), 1, #{file_org}, #{file_real})
+        VALUES (#{no}, #{details}, #{bank}, #{account}, now(), 1, #{file_org}, #{file_real})
     </insert>
     
     <select id="reqList" parameterType="int" resultType="kr.co.nextus.sellerrequest.SellerRequestVO">
     	SELECT * FROM SELLERREQUEST WHERE memberno = #{no}
+    </select>
+    
+    <!-- 셀러요청 시 이미 신청한 건이 존재하는지 여부 -->
+    <select id="getReqCnt" parameterType="int" resultType="int">
+    	SELECT COUNT(*) FROM SELLERREQUEST WHERE memberno = #{no} AND state > -1
     </select>
 	
 </mapper>
