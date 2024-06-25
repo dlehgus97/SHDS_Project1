@@ -48,17 +48,31 @@ public class ReportController {
 
 	@GetMapping("/report.do")
 	@RequestMapping("/report")
-	public String memberStatus(ReportVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model) {
-		model.addAttribute("map", service.list(vo));
-		model.addAttribute("SRnew", SRservice.NEW(vo2));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-		return "admin/reports/report";
+	public String memberStatus(ReportVO vo, SellerRequestVO vo2, BuyListVO vo3, Model model,
+			HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if (adminLoggedIn != null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo));
+			model.addAttribute("SRnew", SRservice.NEW(vo2));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+			return "admin/reports/report";
+		} else {
+			return "common/403";
+		}
+
 	}
+
 	@RequestMapping("/reportDetailPopup")
-	public String reportDetailPopup(ReportVO vo,Model model,@RequestParam("no") int no) {
-		model.addAttribute("map", service.list(vo,no));
-		return "admin/reports/reportDetailPopup";
+	public String reportDetailPopup(ReportVO vo, Model model, HttpServletRequest request, @RequestParam("no") int no) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if (adminLoggedIn != null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo, no));
+			return "admin/reports/reportDetailPopup";
+		} else {
+			return "common/403";
+		}
+
 	}
 
 	
