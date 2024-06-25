@@ -29,6 +29,8 @@ public interface SellerMapper {
 	
 	// 판매글 목록에서 판매글 삭제
 	void deleteSellerSellList(int sellno);
+	void deleteOptions(int sellno);
+	void deleteCategory(int sellno);
 	
 	// 판매자가 받은 리뷰들 조회
 	List<ReviewVO> getSellerReviews(int no);

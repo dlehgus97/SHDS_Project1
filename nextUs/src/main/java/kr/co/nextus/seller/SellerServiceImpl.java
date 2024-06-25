@@ -56,6 +56,8 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public void deleteSellerSellList(int sellno) {
         sellerMapper.deleteSellerSellList(sellno);
+        sellerMapper.deleteOptions(sellno);
+        sellerMapper.deleteCategory(sellno);
     }
     
     @Override

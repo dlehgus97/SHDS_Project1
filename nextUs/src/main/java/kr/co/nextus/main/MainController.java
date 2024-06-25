@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.nextus.category.CategoryService;
 import kr.co.nextus.category.CategoryVO;
 import kr.co.nextus.event.EventService;
+import kr.co.nextus.sellerrank.SellerRankService;
+import kr.co.nextus.sellerrank.SellerRankVO;
 import kr.co.nextus.selllist.SellListService;
 import kr.co.nextus.selllist.SellListVO;
 
@@ -28,14 +30,19 @@ public class MainController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	//판매자 순위
+	@Autowired
+	private SellerRankService sellerRankService;
 	
 	@GetMapping({"/index.do","/"})
-	public String index(Model model, SellListVO vo, CategoryVO catevo) {
+	public String index(Model model, SellListVO vo, CategoryVO catevo, SellerRankVO sellerrankvo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		Map<String, Object> list = sellListService.list(vo);
 		List<CategoryVO> catelist = categoryService.list(catevo);
+		List<SellerRankVO> sellerranklist = sellerRankService.list(sellerrankvo);
 		model.addAttribute("list", list.get("list"));
 		model.addAttribute("cate", catelist);
+		model.addAttribute("rank", sellerranklist);
 		return "index";
 	}
 	

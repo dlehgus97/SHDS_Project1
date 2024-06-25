@@ -48,7 +48,18 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <!-- 폼 제출 js -->
 <script>
+	function chat() {
+		if (${login == null}) {
+			if (confirm('로그인 후 이용 가능합니다. 로그인 하시겠습니까?')) {
+				window.location.href = '/member/login.do';
+			}
+		} else {
+			window.location.href = '/chat/chats.do';
+		}
+	}
 
+	
+	
 	function addcart() {
 		if (${login == null}) {
 			if (confirm('로그인 후 이용 가능합니다. 로그인 하시겠습니까?')) {
@@ -378,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					</style>
                     <div class="row gx-5 mb-7">
                     	<div class="col-12 col-lg">
-								<a href="/chat?no=${vo.sellno }" class="btn w-100 btn-dark mb-2" id="checkoutButton">
+								<a href="javascript:chat();" class="btn w-100 btn-dark mb-2" id="checkoutButton">
 								    판매자와 1대1 채팅하기<img src="/resources/imgs/chatico.png" alt="Image" width="30px" height="30px">
 								</a>
                         </div>

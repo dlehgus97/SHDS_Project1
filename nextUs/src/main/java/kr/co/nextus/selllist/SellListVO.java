@@ -28,11 +28,13 @@ public class SellListVO {
 	private int silverprice;
 	private int goldprice;
 	private String info;
+	private String thumbnail_org;
 	private String thumbnail_real;
 	private int like_count;
 	private int isreview;
 	private int sellerrating_avg;
 	private int sellerreview_cnt;
+	
 	private int categoryno;
 	private String categoryname;
 	private int nested;

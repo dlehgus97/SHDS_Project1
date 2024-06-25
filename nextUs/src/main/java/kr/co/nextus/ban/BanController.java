@@ -58,11 +58,11 @@ public class BanController {
 	public String memberBanManagement(BanVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model,HttpServletRequest request) {
 		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
 		if(adminLoggedIn!= null && adminLoggedIn) {
-			model.addAttribute("map", service.list(vo,1));
+			model.addAttribute("map", service.list(vo,0));
 			model.addAttribute("SRnew", SRservice.NEW(vo2));
 			model.addAttribute("STnew", BLservice.settleNEW(vo3));
 			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-			return "admin/sellerManagement/sellerBanManagement";
+			return "admin/memberManagement/memberBanManagement";
 		}else {
 			return "common/403";
 		}
