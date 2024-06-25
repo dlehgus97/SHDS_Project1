@@ -49,136 +49,135 @@
 	
 	
 	 <!-- 카테고리 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-purple border-bottom">
-      <div class="container">
-    
-        <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-    
-          <!-- 웹 -->
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item dropdown">
-    
-              <!-- Toggle -->
-              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">웹</a>
-    
-              <!-- 홈페이지 -->
-              <div class="dropdown-menu" style="margin-top: 24px;">
-                <div class="card card-lg">
-                  <div class="card-body">
-                    <ul class="list-styled fs-sm">
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=5">- 홈페이지</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=6">- UI, 퍼블리싱</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=7">- 검색최적화</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=8">- 애널리틱스</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-          
-          <!-- 모바일 -->
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item dropdown">
-    
-              <!-- Toggle -->
-              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">모바일</a>
-    
-              <!-- Menu -->
-              <div class="dropdown-menu" style="margin-top: 24px;">
-                <div class="card card-lg">
-                  <div class="card-body">
-                    <ul class="list-styled fs-sm">
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=9">- 안드로이드</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=10">- iOS</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=11">- 기타</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-          
-          <!-- 인공지능 -->
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item dropdown">
-    
-              <!-- Toggle -->
-              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">인공지능</a>
-    
-              <!-- Menu -->
-              <div class="dropdown-menu" style="margin-top: 24px;">
-                <div class="card card-lg">
-                  <div class="card-body">
-                    <ul class="list-styled fs-sm">
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=12">- 생성형 AI</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=13">- 머신러닝, 딥러닝</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-          
-          <!-- Nav -->
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item dropdown">
-    
-              <!-- Toggle -->
-              <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">기타</a>
-    
-              <!-- Menu -->
-              <div class="dropdown-menu" style="margin-top: 24px;">
-                <div class="card card-lg">
-                  <div class="card-body">
-                    <ul class="list-styled fs-sm">
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=14">- 보안</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=15">- QA</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=16">- 기술지원</a>
-                      </li>
-                      <li class="list-styled-item">
-                        <a class="list-styled-link" href="/selllist/index.do?categoryno=17">- 파일변환</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-          
-          
-        </div>
-      </div>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+	  <div class="container">
+	    
+	    <!-- Toggler -->
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    
+	    <!-- Collapse -->
+	    <div class="collapse navbar-collapse" id="navbarCollapse">
+	      
+	      <!-- 웹 -->
+	      <ul class="navbar-nav mx-auto">
+	        <li class="nav-item dropdown">
+	          <!-- Toggle -->
+	          <a class="nav-link fw-bold fs-6 text-dark" data-bs-toggle="dropdown" href="#"><strong>웹</strong></a>
+	          
+	          <!-- 홈페이지 -->
+	          <div class="dropdown-menu" style="margin-top: 24px;">
+	            <div class="card card-lg">
+	              <div class="card-body">
+	                <ul class="list-styled fs-sm">
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=5">- 홈페이지</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=6">- UI, 퍼블리싱</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=7">- 검색최적화</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=8">- 애널리틱스</a>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	          </div>
+	        </li>
+	      </ul>
+	      <hr class="my-2">
+	
+	      <!-- 모바일 -->
+	      <ul class="navbar-nav mx-auto">
+	        <li class="nav-item dropdown">
+	          <!-- Toggle -->
+	          <a class="nav-link fw-bold fs-6 text-dark" data-bs-toggle="dropdown" href="#"><strong>모바일</strong></a>
+	          
+	          <!-- Menu -->
+	          <div class="dropdown-menu" style="margin-top: 24px;">
+	            <div class="card card-lg">
+	              <div class="card-body">
+	                <ul class="list-styled fs-sm">
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=9">- 안드로이드</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=10">- iOS</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=11">- 기타</a>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	          </div>
+	        </li>
+	      </ul>
+	      <hr class="my-2">
+	
+	      <!-- 인공지능 -->
+	      <ul class="navbar-nav mx-auto">
+	        <li class="nav-item dropdown">
+	          <!-- Toggle -->
+	          <a class="nav-link fw-bold fs-6 text-dark" data-bs-toggle="dropdown" href="#"><strong>인공지능</strong></a>
+	          
+	          <!-- Menu -->
+	          <div class="dropdown-menu" style="margin-top: 24px;">
+	            <div class="card card-lg">
+	              <div class="card-body">
+	                <ul class="list-styled fs-sm">
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=12">- 생성형 AI</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=13">- 머신러닝, 딥러닝</a>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	          </div>
+	        </li>
+	      </ul>
+	      <hr class="my-2">
+	
+	      <!-- Nav -->
+	      <ul class="navbar-nav mx-auto">
+	        <li class="nav-item dropdown">
+	          <!-- Toggle -->
+	          <a class="nav-link fw-bold fs-6 text-dark" data-bs-toggle="dropdown" href="#"><strong>기타</strong></a>
+	          
+	          <!-- Menu -->
+	          <div class="dropdown-menu" style="margin-top: 24px;">
+	            <div class="card card-lg">
+	              <div class="card-body">
+	                <ul class="list-styled fs-sm">
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=14">- 보안</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=15">- QA</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=16">- 기술지원</a>
+	                  </li>
+	                  <li class="list-styled-item">
+	                    <a class="list-styled-link text-dark" href="/selllist/index.do?categoryno=17">- 파일변환</a>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	          </div>
+	        </li>
+	      </ul>
+	      <hr class="my-2">
+	      
+	    </div>
+	  </div>
+	</nav>
 	
 
 
@@ -194,18 +193,18 @@
 					
 					<!-- Nav -->
 					<div class="nav justify-content-center mb-10">
-						<a class="nav-link active" href="#topSellersTab" data-bs-toggle="tab">웹</a> 
-						<a class="nav-link"href="#topSellersTab" data-bs-toggle="tab">모바일</a> 
-						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">인공지능</a>
-						<a class="nav-link" href="#topSellersTab" data-bs-toggle="tab">기타</a>
+						<a class="nav-link popular" href="#" data-value="1" >웹</a>
+	                    <a class="nav-link popular" href="#" data-value="2" >모바일</a> 
+	                    <a class="nav-link popular" href="#" data-value="3" >인공지능</a>
+	                    <a class="nav-link popular" href="#" data-value="4" >기타</a>
 					</div>
 
 				</div>
 			</div>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="topSellersTab">
-					<div class="row">
-						<c:forEach var="vo" items="${popularList }">
+					<div class="row" id ="popluar_list">
+						<c:forEach var="vo" items="${list }">
 							<!-- 반복 시작 -->
 							<div class="col-6 col-md-4 col-lg-3 card-bg-light-purple">
 								<!-- Card -->
@@ -300,10 +299,10 @@
 	                <!-- 동동초이가 건듬 -->
 	                <!-- Nav -->
 	                <div class="nav justify-content-center mb-10">
-	                    <a class="nav-link active" href="#" data-value="1">웹</a> 
-	                    <a class="nav-link" href="#" data-value="2">모바일</a> 
-	                    <a class="nav-link" href="#" data-value="3">인공지능</a>
-	                    <a class="nav-link" href="#" data-value="4">기타</a>
+	                    <a class="nav-link regis" href="#" data-value="1">웹</a> 
+	                    <a class="nav-link regis" href="#" data-value="2">모바일</a> 
+	                    <a class="nav-link regis" href="#" data-value="3">인공지능</a>
+	                    <a class="nav-link regis" href="#" data-value="4">기타</a>
 	                </div>
 	
 	            </div>
@@ -614,10 +613,65 @@
 					startSlider();
 				});
 	</script>
-    <!-- 동동초이스크립트추가 -->
+	<!-- 실시간 인기 서비스 -->
     <script>
 	    $(document).ready(function() {
-	        $('.nav-link').on('click', function(event) {
+	        $('.popular').on('click', function(event) {
+	            event.preventDefault(); // 기본 동작 방지
+	            var value = $(this).data('value');
+	            
+	            $.ajax({
+	                url: '/index2.do',
+	                type: 'POST',
+	                cache: false,
+	                data: { value: value },
+	                success: function(response) {
+	                    // 받은 데이터를 이용하여 페이지 내용을 업데이트
+	                    var productList = $('#popluar_list');
+	                    productList.empty();     
+	                    console.log("reponse=" +response);
+	
+	                    $.each(response.list, function(index, vo) {
+	                        var title = vo.title;
+	                        var price = vo.price;
+	                        var thumbnail_real = vo.thumbnail_real;
+	                        var productHtml = '';
+	                        productHtml += '<div class="col-6 col-md-4 col-lg-3">';
+	                        productHtml += '    <div class="card mb-7">';
+	                        productHtml += '        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">';
+	                        productHtml += '            New';
+	                        productHtml += '        </div>';
+	                        productHtml += '        <div class="card-img">';
+	                        productHtml += '            <a class="card-img" href="/selllist/view.do?sellno=' + vo.sellno + '">';
+	                        productHtml += '                <img class="card-img-top card-img-front" src="/upload/board/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
+	                        productHtml += '            </a>';
+	                        productHtml += '        </div>';
+	                        productHtml += '        <div class="card-body px-0">';
+	                        productHtml += '            <div class="fs-xs">';
+	                        productHtml += '                <a class="text-muted" href="/selllist/view.do?sellno=' + vo.sellno + '">카테고리? 별점? 중 뭐넣을까</a>';
+	                        productHtml += '            </div>';
+	                        productHtml += '            <div class="fw-bold">';
+	                        productHtml += '                <a class="text-body" href="/selllist/view.do?sellno=' + vo.sellno + '">' + title + '</a>';
+	                        productHtml += '            </div>';
+	                        productHtml += '            <div class="fw-bold text-muted">' + price + '원</div>';
+	                        productHtml += '        </div>';
+	                        productHtml += '    </div>';
+	                        productHtml += '</div>';
+	                        productList.append(productHtml);
+	                    });
+	                },
+	                error: function(xhr, status, error) {
+	                    // 실패 시 처리할 코드
+	                    console.log('에러:', error);
+	                }
+	            });
+	        });
+	    });
+	</script>
+    <!-- 신규등록서비스 -->
+    <script>
+	    $(document).ready(function() {
+	        $('.regis').on('click', function(event) {
 	            event.preventDefault(); // 기본 동작 방지
 	            var value = $(this).data('value');
 	            
@@ -629,14 +683,12 @@
 	                success: function(response) {
 	                    // 받은 데이터를 이용하여 페이지 내용을 업데이트
 	                    var productList = $('#productList');
-	                    productList.empty();     
-	                    console.log(response);
+	                    productList.empty();
 	
 	                    $.each(response.list, function(index, vo) {
 	                    	var title = vo.title;
 	                    	var price = vo.price;
 	                    	var thumbnail_real = vo.thumbnail_real;
-	                    	console.log('나는'+thumbnail_real);
 	                        var productHtml = '';
 	                        productHtml += '    <div class="col-6 col-md-4 col-lg-3">';
                         	productHtml += '        <div class="card mb-7">';
