@@ -2,7 +2,10 @@ package kr.co.nextus.selllist;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.category.CategoryVO;
 
@@ -12,8 +15,10 @@ public interface SellListMapper {
     
 	// 판매글 등록
 	void insertSellList(SellListVO sellListVO);
-	//void registerCategory(CategoryVO categoryVO);
-	//void registerOption(SellListVO sellListVO);
+	void insertSellListCategory(SellListVO sellListVO);
+	void insertBronze(SellListVO sellListVO);
+	void insertSilver(SellListVO sellListVO);
+	void insertGold(SellListVO sellListVO);
     
     List<SellListVO> list(SellListVO vo);
     
@@ -25,3 +30,5 @@ public interface SellListMapper {
 
 	boolean delete(int sellno);
 }
+
+

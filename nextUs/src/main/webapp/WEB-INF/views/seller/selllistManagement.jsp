@@ -32,6 +32,37 @@
             flex-grow: 1;
         }
 
+		.header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .header-container h1 {
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            margin-left: 60px; /* h1 요소를 오른쪽으로 이동 */
+        }
+
+        .header-container button {
+            margin-left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .header-container button:hover {
+            background-color: #0056b3;
+        }
+
         .header, .footer {
             flex-shrink: 0;
         }
@@ -266,7 +297,10 @@
 					<span>신규 채팅: ${miniHeaderData.new_chat}</span>
 					<span>정산 신청 가능: ${miniHeaderData.settlement_eligible}</span>
                 </div>
-                <h1>판매글 관리</h1>
+                <div class="header-container">
+			        <h1>판매글 관리</h1>
+			        <button onclick="location.href='http://localhost:8090/selllistRegister'">+</button>
+			    </div>
                 <div class="product-grid">
                     <c:forEach var="sellproduct" items="${sellList}">
                         <div class="product-card" onclick="location.href='http://localhost:8090/selllist/view.do?sellno=${sellproduct.sellno}'">

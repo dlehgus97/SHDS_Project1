@@ -52,6 +52,14 @@
 	    WHERE sellno = #{sellno};
 	</delete>
 	
+	<delete id="deleteOptions" parameterType="int">
+        DELETE FROM P_OPTION WHERE sellno = #{sellno}
+    </delete>
+    
+    <delete id="deleteCategory" parameterType="int">
+        DELETE FROM SELLCATEGORY WHERE sellno = #{sellno}
+    </delete>
+	
 	<select id="getSellerReviews" parameterType="int" resultType="kr.co.nextus.review.ReviewVO">
 		SELECT m.nickname, r.score, r.title, r.text, s.title productTitle, s.content, s.thumbnail_real, s.sellno, s.seller, r.reviewno
 	    FROM REVIEW r
