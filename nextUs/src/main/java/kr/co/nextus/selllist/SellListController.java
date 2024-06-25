@@ -51,12 +51,13 @@ public class SellListController {
 	private BuyListService BLservice;
 	
 	@GetMapping("/selllist/index.do")
-	public String list(Model model, HttpSession sess, @RequestParam("categoryno") int categoryno, SellListVO vo) {
+	public String list(Model model, HttpSession sess, @RequestParam("categoryno")int categoryno, SellListVO vo) {
 		vo.setCategoryno(categoryno);
 		vo.setDepth(2);
 		Map<String, Object> list = sellListService.list(vo);
-		
+		String categoryname = sellListService.categoryname(categoryno);
 		model.addAttribute("vo", list);
+		model.addAttribute("categoryname", categoryname);
 		return "/selllist/index";
 	}
 
