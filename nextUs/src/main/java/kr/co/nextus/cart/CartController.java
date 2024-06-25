@@ -34,13 +34,14 @@ public class CartController {
 	
 	
 	@GetMapping("/cart/insert.do")
+	@ResponseBody
 	public String insert(Model model, HttpServletRequest request, @RequestParam("sellno") int sellno, @RequestParam("optionno") int optionno, RedirectAttributes redirectAttributes) {
 		HttpSession sess = request.getSession();
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		int memberno = login.getNo();		
 		int r = service.insert(memberno, sellno, optionno);
 		
-		return "";
+		return r > 0 ? "success" : "fail";
 	}
 	
 	@GetMapping("/cart/view.do")

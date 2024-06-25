@@ -76,10 +76,28 @@ document.addEventListener("DOMContentLoaded", function() {
 	            },
 	            success: function(response) {
 	            	if(response === 'success') {
-	            		window.location.href = '/cart/insert.do?sellno='+${vo.sellno}+'&optionno='+getSelectedOptionValue();
-	            		if (confirm('상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?')) {
-	                        window.location.href = '/cart/view.do';
-	                    }
+	            		 $.ajax({
+	                         url: '/cart/insert.do',
+	                         type: 'GET',
+	                         data: {
+	                             sellno: ${vo.sellno},
+	                             optionno: getSelectedOptionValue()
+	                         },
+	                         success: function(insertResponse) {
+	                        	 if (insertResponse === 'success') {
+	                        		 if (confirm('상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?')) {
+		                                 window.location.href = '/cart/view.do';
+		                             }
+	                        	 } else {
+	                        		 alert('장바구니에 담는 중 문제가 발생했습니다.');
+	                        	 }
+	                             
+	                         },
+	                         error: function(xhr, status, error) {
+	         	            	alert('서버와의 통신에 문제가 발생했습니다.');
+	         	            }
+
+	                     });
 	            	} else {
 	            		alert('이미 장바구니에 담긴 상품입니다.');
 	            	}

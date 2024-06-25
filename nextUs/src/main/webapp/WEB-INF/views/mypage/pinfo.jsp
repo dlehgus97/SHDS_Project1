@@ -215,7 +215,7 @@
                     <label class="form-label" for="accountFirstName">
                       전화번호 *
                     </label>
-                    <input class="form-control form-control-sm" id="accountFirstName" name="hp" type="text" placeholder="전화번호" value="${member.hp }" required>
+                    <input class="form-control form-control-sm" id="hp" name="hp" type="text" placeholder="전화번호" value="${member.hp }" required>
                   </div>
 
                 </div>
@@ -225,7 +225,7 @@
 				  <!-- 생년월일 -->
 				  <div class="form-group">
 				    <!-- Label -->
-				    <label class="form-label">생년월일 ${member.birthday }</label>
+				    <label class="form-label">생년월일</label>
 				    
 				    <script>
 				      var member = {
@@ -348,7 +348,7 @@
                     <label class="form-label">
                       기본주소 * 
                     </label>
-                    <input class="form-control form-control-sm" id="addr1" name="addr1" type="text" placeholder="기본주소 *" value="${member.addr1 }" required>
+                    <input class="form-control form-control-sm" id="addr1" name="addr1" type="text" placeholder="기본주소 *" value="${member.addr1 }" required readonly="readonly">
                   </div>
                   
                   <div class="input-group-append">
@@ -377,7 +377,7 @@
                     <label class="form-label" for="accountFirstName">
                       우편번호 *
                     </label>
-                    <input class="form-control form-control-sm" id="zipcode" name="zipcode" type="text" placeholder="우편번호 *" value="${member.zipcode }" required>
+                    <input class="form-control form-control-sm" id="zipcode" name="zipcode" type="text" placeholder="우편번호 *" value="${member.zipcode }" required readonly="readonly">
                   </div>
 
                 </div>
@@ -490,6 +490,21 @@
 	<!-- 폼 제출 js -->
 	<script type="text/javascript">
 		function checkpwd() {
+			// Check phone number format
+			var phone = $("#hp").val();
+			var phoneReg = /^010-\d{4}-\d{4}$/;
+			if (!phoneReg.test(phone)) {
+				alert('올바르지 않은 전화번호 형식입니다. 번호는 010-XXXX-XXXX형식으로 입력해주세요');
+				return;
+			}
+			
+			
+			if (${member.loginstate} != 0) {
+				$("#frm").submit();
+				return;
+			}
+			
+			
 			if ($("#newpwd").val() != '') {
 				var reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
 	    		if ($("#newpwd").val().match(reg) == null) {

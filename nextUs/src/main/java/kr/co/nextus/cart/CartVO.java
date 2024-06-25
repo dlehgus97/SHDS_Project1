@@ -8,7 +8,7 @@ import lombok.Data;
 public class CartVO {
 	private int memberno;
 	private int sellno;  
-	private String optionno;
+	private int optionno;
 	private Timestamp date;
 	private int price;
 	
