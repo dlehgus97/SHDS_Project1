@@ -54,6 +54,7 @@
 	    ) AS latest_chat
 	    ON c.chatno = latest_chat.chatno AND c.time = latest_chat.latest_time
 	    WHERE c.senderno = #{no} OR c.opno = #{no}
+	    ORDER BY latest_chat.latest_time DESC
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="kr.co.nextus.message.MessageVO">

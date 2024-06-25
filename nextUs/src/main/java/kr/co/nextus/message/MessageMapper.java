@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MessageMapper {
-	MessageVO regist();
+	void regist(MessageVO vo);
 	List<MessageVO> list(int no);
 	List<MessageVO> detail(@Param("chatno") int chatno, @Param("myno") int myno);
 	void insert(MessageVO vo);

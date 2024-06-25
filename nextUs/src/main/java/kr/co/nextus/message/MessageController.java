@@ -23,6 +23,18 @@ public class MessageController {
 	@Autowired
 	private MemberService mService;
 	
+	@GetMapping("/chat/chatStart.do")
+	public String startChat(HttpSession sess, @RequestParam(name = "sellno") int sellno, @RequestParam(name = "senderno") int senderno, @RequestParam(name = "opno") int opno) {
+		MemberVO vo = (MemberVO)sess.getAttribute("login");
+		MessageVO mvo = new MessageVO();
+		mvo.setSellno(sellno);
+		mvo.setSenderno(senderno);
+		mvo.setOpno(opno);
+		System.out.println(mvo);
+		service.regist(mvo);
+		return "redirect:/chat/chats.do";
+	}
+	
 	@GetMapping("/chat/chats.do")
 	public String chatRooms(Model model, HttpSession sess) {
 		//채팅 방 목록

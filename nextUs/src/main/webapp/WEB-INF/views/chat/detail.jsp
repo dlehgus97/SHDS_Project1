@@ -51,7 +51,7 @@
 		var webSocket = new WebSocket("ws://localhost:8090/websocket");
 		var messageTextArea = document.getElementById("messageTextArea");
 		var messageContainer = document.getElementById("messageContainer");
-		var lastSenderNo = ${previousSenderno };
+		var lastSenderNo = "${previousSenderno}";
 		// WebSocket 서버와 접속이 되면 호출되는 함수
 		webSocket.onopen = function(message) {
 			messageTextArea.value += "Server connect...\n";
@@ -132,6 +132,7 @@
             };
 			webSocket.send(JSON.stringify(messageData));
 			webSocket.close();
+			window.location.href = "/chat/chats.do";
 		}
 		
 		function addMessageToContainer(sender, text, profile_real, senderno) {

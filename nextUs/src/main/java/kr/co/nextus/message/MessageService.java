@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 public interface MessageService {
-	MessageVO regist();
+	void regist(MessageVO vo);
 	List<MessageVO> list(int no); //채팅방목록 no->memberno
 	List<MessageVO> detail(int no, int myno); //채팅 내역 no -> chatno
 	void insert(MessageVO vo);

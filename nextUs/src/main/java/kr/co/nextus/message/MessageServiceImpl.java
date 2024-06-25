@@ -14,8 +14,8 @@ public class MessageServiceImpl implements MessageService {
 	private MessageMapper mapper;
 	
 	@Override
-	public MessageVO regist() {
-		return null;
+	public void regist(MessageVO vo) {
+		mapper.regist(vo);
 	}
 	
 	@Override

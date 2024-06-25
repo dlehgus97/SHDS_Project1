@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body {
+	margin: 0;
+}
 button {
     transition: background-color 0.2s ease;
 }

@@ -108,7 +108,7 @@
 	var msg = "${alertMsg }";
 	console.log(msg);
 	$(document).ready(function() {
-		if (msg != null) {
+		if (msg !== null or msg !== "") {
 			Swal.fire(
 			        '이런!',
 			        msg,
