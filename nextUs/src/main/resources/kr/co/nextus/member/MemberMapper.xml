@@ -47,10 +47,11 @@
     	WHERE name = #{name} AND birthday = #{birthday, jdbcType=DATE} AND hp = #{hp}
 	</select>
 	
-	<insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO">
-        INSERT INTO MEMBER (email, name, loginstate)
-        VALUES (#{email}, #{name}, #{loginstate})
-    </insert>
+	<insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO" useGeneratedKeys="true" keyProperty="no">
+    INSERT INTO MEMBER (email, name, loginstate, nickname)
+    VALUES (#{email}, #{name}, #{loginstate}, #{nickname})
+	</insert>
+
     
 	<update id="update" parameterType="kr.co.nextus.member.MemberVO">
 		UPDATE MEMBER SET
@@ -72,6 +73,12 @@
         SET pwd = MD5(#{pwd})
         WHERE email = #{email}
     </update>
+    
+    <update id="updateNickname">
+    	UPDATE MEMBER
+    	SET nickname = #{nickname}
+    	WHERE no = #{no}
+	</update>
 	
 	
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import kr.co.nextus.buylist.BuyListVO;
 
@@ -38,6 +39,8 @@ public interface MemberMapper {
     int insertMember(MemberVO vo);
     
     int updatePassword(Map map);
+    
+    int updateNickname(@Param("no") int no, @Param("nickname") String nickname);
 
    
     //관리자

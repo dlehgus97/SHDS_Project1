@@ -213,8 +213,22 @@ public class MemberServiceImpl implements MemberService {
             // 신규 회원 등록
             int result = mapper.insertMember(newMember);
 
-            return result > 0;
+            if (result > 0) {
+                // 회원 등록 성공 시 닉네임 설정
+                String generatedNickname = "Kakao" + newMember.getNo(); // Kakao + 회원 번호 조합
+                newMember.setNickname(generatedNickname);
+                mapper.updateNickname(newMember.getNo(), generatedNickname); // 닉네임 업데이트
+                
+                return true;
+            } else {
+                return false; // 회원 등록 실패
+            }
         }
+    }
+    
+    @Override
+    public boolean updateNickname(int no, String nickname) {
+        return mapper.updateNickname(no, nickname) > 0;
     }
    
 	

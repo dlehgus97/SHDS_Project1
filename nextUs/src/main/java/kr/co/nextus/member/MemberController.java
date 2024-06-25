@@ -285,8 +285,12 @@ public class MemberController {
             vo.setEmail(email);
             vo.setName(name);
             vo.setLoginstate(2);
-
+            
             if (service.insertMember(vo)) {
+            	System.out.println("Inserted member ID: " + vo.getNo());
+            	String nickname = "Naver" + vo.getNo();
+                service.updateNickname(vo.getNo(), nickname);
+                
                 sess.setAttribute("login", vo);
                 return "true"; // 회원 가입 및 로그인 성공
             } else {

@@ -30,6 +30,8 @@ public interface MemberService {
     
     void updatePassword(String email, String newPassword);
     
+    boolean updateNickname(int no, String nickname);
+    
     String getAccessToken(String authorize_code);
     HashMap<String, Object> getUserInfo(String access_Token);
     boolean processKakaoLogin(HashMap<String, Object> userInfo);
