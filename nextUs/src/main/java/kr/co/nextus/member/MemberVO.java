@@ -24,6 +24,7 @@ public class MemberVO {
 	private int seller;
 	private String profile_org;
 	private String profile_real;
+	private int loginstate;
 
 	//관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))

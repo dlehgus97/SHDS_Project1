@@ -363,6 +363,7 @@
 	
 	<!-- TOP SELLERS -->
 	<section class="py-10 section-bg-light-purple">
+		<!-- 웹 -->
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-12 col-md-10 col-lg-8 col-xl-2 col-xl-6">
@@ -387,15 +388,15 @@
 			          <div class="card">
 			
 			            <!-- Image -->
-			            <div class="card-img">
+			            <div class="card-img" style="width: 100%; height: 250px;">
 			
 			              <!-- Action -->
 			              <div class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
-			                1
+			                ${status.index + 1}
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="...">
+			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." >
 			
 			            </div>
 			
@@ -442,7 +443,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="...">
+			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
 			
 			            </div>
 			
@@ -489,7 +490,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="...">
+			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
 			
 			            </div>
 			
@@ -537,7 +538,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="...">
+			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
 			
 			            </div>
 			
