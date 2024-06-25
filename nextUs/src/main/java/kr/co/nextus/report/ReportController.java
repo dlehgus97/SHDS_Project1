@@ -38,7 +38,7 @@ public class ReportController {
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
-			model.addAttribute("url", "/selllist/view.do?no=" + vo.getSellno());
+			model.addAttribute("url", "/selllist/view.do?sellno=" + vo.getSellno());
 		} else {
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "등록 오류");
