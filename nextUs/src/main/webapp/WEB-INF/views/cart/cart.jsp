@@ -69,7 +69,7 @@
 	              <div class="row align-items-center">
 	                <div class="col-1">
 	                  <!-- Checkbox -->
-	                  <input type="checkbox" class="form-check-input product-checkbox" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}" data-thumbnail="${vo.thumbnail_real}" data-title="${vo.title}" data-price="${vo.price}" data-content="${vo.content}">
+	                  <input type="checkbox" class="form-check-input product-checkbox" data-sellerno="${vo.memberno }" data-sellno="${vo.sellno}" data-optionno="${vo.optionno}" data-thumbnail="${vo.thumbnail_real}" data-title="${vo.title}" data-price="${vo.price}" data-content="${vo.content}">
 	                </div>
 	                <div class="col-3">
 	                  <!-- Image -->
@@ -220,6 +220,7 @@
 	                var checkboxes = document.querySelectorAll(".product-checkbox:checked");
 	                checkboxes.forEach(function(checkbox) {
 	                    var productInfo = {
+	                        sellerno: checkbox.getAttribute("data-sellerno"),
 	                        sellno: checkbox.getAttribute("data-sellno"),
 	                        optionno: checkbox.getAttribute("data-optionno"),
 	                        thumbnail_real: checkbox.getAttribute("data-thumbnail"),

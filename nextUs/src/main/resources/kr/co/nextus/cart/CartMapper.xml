@@ -15,7 +15,8 @@
 		    po.price,
 		    sl.sellno,
 		    sl.title,
-		    sl.thumbnail_real
+		    sl.thumbnail_real,
+		    sl.seller AS memberno
 		FROM 
 		    CART c
 		JOIN 

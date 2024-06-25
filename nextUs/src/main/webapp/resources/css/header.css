@@ -1,5 +1,10 @@
 @charset "UTF-8";
+#header_container * {
+	box-sizing: content-box !important;
+    line-height: normal !important;
+}
 #header_container {
+	box-sizing: content-box !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,6 +22,7 @@
 	align-items: center;
 }
 #header_event {
+    font-size: 16px !important;
 	color: #FFF;
 	text-decoration-line: none;
 }
@@ -67,6 +73,7 @@
     border: 0px;
     border-radius: 20px;
     background-image: linear-gradient(to bottom, rgb(70, 0, 70), rgb(204, 0, 255));
+    text-decoration: none;
 }
 
 #header_chat {
@@ -112,10 +119,6 @@
     width: 140px;
     color: #FFF;
 }
-
-
-
-
 
 .category-container {
     position: relative;

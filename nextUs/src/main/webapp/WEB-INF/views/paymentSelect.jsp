@@ -60,6 +60,7 @@
 		<c:forEach var="cartVO" items="${selectedProducts}">
 			productTitles.push('${cartVO.title}');
 			products.push({
+				sellerno: "${cartVO.sellerno}",
                 sellno: "${cartVO.sellno}",
                 optionno: "${cartVO.optionno}",
                 thumbnail_real: "${cartVO.thumbnail_real}",

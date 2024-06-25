@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 function getBasicInfo() {
     // 해당 변수를 input 필드에 설정
     $('#memberName').val(loginName);
@@ -89,7 +90,7 @@ function confirmCoupon() {
     const productPrice = parseFloat(document.getElementById('product_price').textContent.replace('원', '').replace(',','').trim());
     const couponDis = document.getElementById('coupon_discount');
     const total = document.getElementById('total_price');
-    let discountPrice;
+    
 
     if (couponType === 2) {
         discountPrice = productPrice * (parseFloat(couponDiscount) / 100);
@@ -122,6 +123,7 @@ function undoCoupon() {
     const couponDis = document.getElementById('coupon_discount');
     const total = document.getElementById('total_price');
     
+    discountPrice = 0;
     couponDis.textContent = '0원';  // 할인 금액을 0원으로 설정
     total.textContent = productPrice + '원';  // 총 결제 금액을 원래 가격으로 설정
     updatePrices(productPrice, 0);
@@ -168,6 +170,7 @@ const data = {
 
 var pI = generateRandomString(12);
 let couponSelectedNo = 0;
+let discountPrice;
 
 async function requestPayment() {
 	// 입력 필드의 값을 data 객체에 설정
@@ -190,12 +193,15 @@ async function requestPayment() {
             paymentId: pI,
             buydate: "",
             decidedate: 0,
+            sellerno: product.sellerno,
             sellno: product.sellno,
+            name: $('#memberName').val(),
             hp: $('#memberHp').val(),
             email: $('#memberEmail').val(),
             addr1: $('#memberAddr1').val(),
             addr2: $('#memberAddr2').val(),
             couponNo: couponSelectedNo,
+            discount: discountPrice,
             orderName: product.title
         };
     });
@@ -215,7 +221,7 @@ async function requestPayment() {
             contentType: 'application/json',
             data: JSON.stringify(transformedProducts),
             success: function(response) {
-                
+                window.location.href = "/mypage/orderlist.do";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('요청 실패:', textStatus, errorThrown);

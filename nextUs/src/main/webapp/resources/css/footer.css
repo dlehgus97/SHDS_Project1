@@ -1,5 +1,10 @@
 @charset "UTF-8";
+#footer_container * {
+    box-sizing: content-box !important;
+    line-height: normal !important;
+}
 #footer_container {
+	box-sizing: content-box !important;
     display: flex;
 	background-color: black;
     height: 350px;
@@ -43,7 +48,8 @@
 }
 #company_info > p {
     color: #FFF;
-    font-size: 14px;
+    font-size: 14px !important; 
+    margin: 14px 0 !important;
 }
 
 #footer_right_container {
@@ -61,13 +67,19 @@
     text-align: center;
     padding: 20px;
     color: #FFF;
+    line-height: 1.3;
 }
 .sns_icon {
     filter: invert(43%);
-    padding: 14px;
+    padding: 14px !important;
 }
 .footer_h2 {
     width: 100%;
     color: #FFF;
     text-align: center;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    line-height: 1.2;
+    margin-bottom: .75rem;
+    margin-top: 0;
 }

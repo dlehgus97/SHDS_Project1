@@ -16,4 +16,7 @@ public class CartVO {
 	private String thumbnail_real;
 	private String optionrank;
 	private String content;
+	
+	//후 memberno가 변환되는 것을 편하게 사용하기 위함
+	private int sellerno;
 }

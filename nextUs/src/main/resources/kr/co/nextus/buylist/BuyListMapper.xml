@@ -3,10 +3,10 @@
 <mapper namespace="kr.co.nextus.buylist.BuyListMapper">
 
 	<insert id="insert" parameterType="java.util.List">
-	    INSERT INTO BUYLIST (memberno, optionno, price, status, buydate, decidedate, sellno, name, hp, email, addr1, addr2, isreview) 
+	    INSERT INTO BUYLIST (memberno, optionno, price, status, buydate, decidedate, sellerno, sellno, name, hp, email, addr1, addr2, isreview, couponno, discount)
 	    VALUES 
 	    <foreach collection="list" item="item" separator=",">
-	        (#{item.memberno}, #{item.optionno}, #{item.price}, 1, NOW(), null, #{item.sellno}, #{item.name}, #{item.hp}, #{item.email}, #{item.addr1}, #{item.addr2}, 0)
+	        (#{item.memberno}, #{item.optionno}, #{item.price}, 1, NOW(), null, #{item.sellerno}, #{item.sellno}, #{item.name}, #{item.hp}, #{item.email}, #{item.addr1}, #{item.addr2}, 0, #{item.couponNo}, #{item.discount})
 	    </foreach>
 	</insert>
 
