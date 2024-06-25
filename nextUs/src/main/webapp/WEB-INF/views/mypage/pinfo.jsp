@@ -180,6 +180,9 @@
                   </div>
 
                 </div>
+                
+                
+                <c:if test="${member.loginstate == 0}">
                 <div class="col-12 col-md-6">
 
                   <!-- 현재 비밀번호 -->
@@ -202,6 +205,8 @@
                   </div>
 
                 </div>
+                </c:if>
+                
 
                 <div class="col-12 col-md-6">
 
