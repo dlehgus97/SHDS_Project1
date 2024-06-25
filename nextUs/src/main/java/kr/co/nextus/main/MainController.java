@@ -45,13 +45,26 @@ public class MainController {
 		model.addAttribute("rank", sellerranklist);
 		return "index";
 	}
-	
+	//신규등록순
 	@PostMapping("/index1.do")
 	@ResponseBody
 	public Map<String, Object> index(Model model, SellListVO vo, @RequestParam("value") int value) {
 		vo.setNested(value);
 		vo.setDepth(1);
 		vo.setOrder("postdate");
+		Map<String, Object> list = sellListService.list(vo);
+	    model.addAttribute("list", list);
+		
+		
+		return list;
+	}
+	//인기순
+	@PostMapping("/index2.do")
+	@ResponseBody
+	public Map<String, Object> index2(Model model, SellListVO vo, @RequestParam("value") int value) {
+		vo.setNested(value);
+		vo.setDepth(1);
+		vo.setOrder("view_cnt");
 		Map<String, Object> list = sellListService.list(vo);
 	    model.addAttribute("list", list);
 		
