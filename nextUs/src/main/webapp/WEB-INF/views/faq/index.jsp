@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>FAQ</title>
 <META name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
 <script
@@ -39,7 +39,7 @@
 					<div class="col-12 col-lg-10 col-xl-8">
 
 						<!-- Heading -->
-						<h3 class="mb-10 text-center">Frequently Asked Questionss</h3>
+						<h3 class="mb-10 text-center">Frequently Asked Questions</h3>
 						<p><span><strong>총 ${map.count }개</strong>  |  ${FAQVO.page }/${map.totalPage }페이지</span></p>
 						<c:if test="${empty map.list }">
 							<div>등록된 글이 없습니다.</div>

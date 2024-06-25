@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>공지사항</title>
 <META name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
 <script
@@ -66,11 +66,6 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<div class="btnSet" style="text-align: right;">
-						<c:if test="${!empty login}">
-							<a class="btn" href="write.do">글작성 </a>
-						</c:if>
-					</div>
 					
 					<!-- 페이지처리 -->
 					<div class="pagenate">
