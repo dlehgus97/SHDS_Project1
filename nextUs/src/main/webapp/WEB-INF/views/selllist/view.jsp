@@ -20,32 +20,7 @@
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- 별점평균 정수형으로 변환하는 js -->
-<script type="text/javascript">
-var ratingAvg = ${vo.rating_avg};
-var ratingAvgInt = Math.round(ratingAvg);
-console.log(ratingAvgInt);
 
-document.addEventListener("DOMContentLoaded", function() {
-	
-	 // 첫 번째 클래스 조합의 요소들 선택
-    var ratingDivs1 = document.querySelectorAll('.rating.fs-xs.text-dark');
-
-    // 두 번째 클래스 조합의 요소들 선택
-    var ratingDivs2 = document.querySelectorAll('.rating.text-dark.h6.mb-4.mb-md-0');
-
-    // data-value 속성 값을 설정하는 함수
-    function setDataValue(elements, value) {
-        elements.forEach(function(element) {
-            element.setAttribute('data-value', value);
-        });
-    }
-
-    // 원하는 값으로 설정
-    setDataValue(ratingDivs1, ratingAvgInt); // 첫 번째 클래스 조합 요소들의 data-value 설정
-    setDataValue(ratingDivs2, ratingAvgInt); // 두 번째 클래스 조합 요소들의 data-value 설정
-});
-</script>
 <!-- 폼 제출 js -->
 <script>
 	function chat() {
@@ -134,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <a class="text-gray-400" href="/index.do">Home > </a>
               </li>
               <li>
-                <a class="text-gray-400" href="shop.html">&ensp; 카테고리 > </a>
+                <a class="text-gray-400" href="/selllist/index.do?categoryno=${vo.categoryno }">&ensp; ${vo.categoryname} > </a>
               </li>
               <li>
                 &ensp;${vo.title }
@@ -160,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     <!-- Item -->
                     <a href="#" data-bigpicture='{ "imgSrc": "/upload/board/${vo.thumbnail_real}"}'>
-                      <img src="/upload/board/1717978758514.jpg" alt="..." class="card-img-top">
+                      <img src="/upload/board/${vo.thumbnail_real}" alt="..." class="card-img-top">
                     </a>
                   </div>
                 </div>
@@ -172,11 +147,11 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="col">
 
                     <!-- Preheading -->
-                    <a class="text-muted" href="shop.html">카테고리</a>
+                    <a class="text-muted" href="/selllist/index.do?categoryno=${vo.categoryno }">${vo.categoryname}</a>
 
                   </div>
                   <div class="col-auto">
-                    <div class="rating fs-xs text-dark" data-value="">
+                    <div class="rating fs-xs text-dark" data-value="<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" />">
                       <div class="rating-item">
                         <i class="fas fa-star"></i>
                       </div>
@@ -319,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         <!-- Submit -->
                         <button type="button" class="btn w-100 btn-dark mb-2" id="cart_add_btn" onclick="addcart();">
-                          장바구니에 담기 ${login.no}
+                          장바구니에 담기
                         </button>
 
                       </div>
@@ -693,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="col-12">
 
             <!-- Heading -->
-            <h4 class="mb-10 text-center">리뷰 ${vo.isreview}</h4>
+            <h4 class="mb-10 text-center">리뷰</h4>
 
             <!-- Header -->
             <div class="row align-items-center">
@@ -706,7 +681,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 <!-- Rating -->
                  <!-- 별점 별개수로 표현하는곳 소수점은 안되는듯 -->
-                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="">
+                <div class="rating text-dark h6 mb-4 mb-md-0" data-value="<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" />">
                   <div class="rating-item">
                     <i class="fas fa-star"></i>
                   </div>
@@ -812,7 +787,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="col-12 text-center">
 
                     <!-- 리뷰 등록 -->
-                    <button class="btn btn-outline-dark" type="submit">
+                    <button class="btn btn-outline-dark" type="submit" style="background-color:black;">
                       리뷰 등록하기
                     </button>
 

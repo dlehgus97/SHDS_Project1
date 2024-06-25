@@ -86,7 +86,10 @@
 		(SELECT rating_avg FROM SELLER WHERE no=(SELECT seller FROM SELLLIST WHERE sellno=#{sellno})) as sellerrating_avg,
 		(SELECT review_cnt FROM SELLER WHERE no=(SELECT seller FROM SELLLIST WHERE sellno=#{sellno})) as sellerreview_cnt,
 		(SELECT (SELECT COUNT(*) FROM BUYLIST WHERE sellno=#{sellno} and memberno=#{loginno} and isreview=0) FROM BUYLIST WHERE sellno=#{sellno} and memberno=#{loginno} LIMIT 1) as isreview
-		FROM SELLLIST WHERE sellno=#{sellno}
+		FROM SELLLIST JOIN 
+		SELLCATEGORY ON SELLLIST.sellno = SELLCATEGORY.sellno 
+		JOIN CATEGORYLIST ON SELLCATEGORY.categoryno = CATEGORYLIST.categoryno 
+		WHERE SELLLIST.sellno=#{sellno};
 	</select>
 	
 	<!-- 판매글 쓰기 , price, thumbnail_real은 나중에 -->
