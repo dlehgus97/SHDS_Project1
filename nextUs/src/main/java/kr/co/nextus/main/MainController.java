@@ -54,6 +54,7 @@ public class MainController {
 		vo.setNested(value);
 		vo.setDepth(1);
 		vo.setOrder("postdate");
+		vo.setValue(value);
 		Map<String, Object> list = sellListService.list(vo);
 	    model.addAttribute("list", list);
 		
@@ -67,6 +68,7 @@ public class MainController {
 		vo.setNested(value);
 		vo.setDepth(1);
 		vo.setOrder("view_cnt");
+		vo.setValue(value);
 		Map<String, Object> list = sellListService.list(vo);
 	    model.addAttribute("list", list);
 		

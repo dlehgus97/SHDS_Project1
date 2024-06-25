@@ -41,6 +41,7 @@ public class SellListVO {
 	private String order;
 	private int depth;
 	private int like_cnt;
+	private int value;
 	
 	// 관리자페이지에서 씁니다요
 	// 사용자로부터 전송되어지는 값(검색, 페이징, 필터링(조건))
@@ -57,4 +58,13 @@ public class SellListVO {
 	public int getStartIdx() {
 		return (page-1) * 10;
 	}
+	
+	//index.jsp전체를 위한 value값 설정
+	public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

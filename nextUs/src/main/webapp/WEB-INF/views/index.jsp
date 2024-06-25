@@ -193,6 +193,7 @@
 					
 					<!-- Nav -->
 					<div class="nav justify-content-center mb-10">
+						<a class="nav-link popular" href="#" data-value="0" >전체</a>
 						<a class="nav-link popular" href="#" data-value="1" >웹</a>
 	                    <a class="nav-link popular" href="#" data-value="2" >모바일</a> 
 	                    <a class="nav-link popular" href="#" data-value="3" >인공지능</a>
@@ -299,6 +300,7 @@
 	                <!-- 동동초이가 건듬 -->
 	                <!-- Nav -->
 	                <div class="nav justify-content-center mb-10">
+	                    <a class="nav-link regis" href="#" data-value="0">전체</a> 
 	                    <a class="nav-link regis" href="#" data-value="1">웹</a> 
 	                    <a class="nav-link regis" href="#" data-value="2">모바일</a> 
 	                    <a class="nav-link regis" href="#" data-value="3">인공지능</a>
