@@ -37,14 +37,25 @@ public class MainController {
 	@GetMapping({"/index.do","/"})
 	public String index(Model model, SellListVO vo, CategoryVO catevo, SellerRankVO sellerrankvo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
-		Map<String, Object> list = sellListService.list(vo);
 		List<CategoryVO> catelist = categoryService.list(catevo);
-		List<SellListVO> popularList = sellListService.listByViews(vo);
 		List<SellerRankVO> sellerranklist = sellerRankService.list(sellerrankvo);
-		model.addAttribute("list", list.get("list"));
-		model.addAttribute("cate", catelist);
-		model.addAttribute("popularList", popularList);
-		model.addAttribute("rank", sellerranklist);
+		
+	    // view_cnt 기준 정렬 데이터
+	    SellListVO popularVo = new SellListVO();
+	    popularVo.setValue(0);
+	    popularVo.setOrder("view_cnt");
+	    Map<String, Object> popularList = sellListService.list(popularVo);
+	    
+	    // postdate 기준 정렬 데이터
+	    SellListVO recentVo = new SellListVO();
+	    recentVo.setValue(0);
+	    recentVo.setOrder("postdate");
+	    Map<String, Object> recentList = sellListService.list(recentVo);
+		
+	    model.addAttribute("cate", catelist);
+	    model.addAttribute("rank", sellerranklist);
+	    model.addAttribute("popularList", popularList.get("list")); // view_cnt 기준 리스트 추가
+	    model.addAttribute("recentList", recentList.get("list")); // postdate 기준 리스트 추가
 		return "index";
 	}
 	//신규등록순

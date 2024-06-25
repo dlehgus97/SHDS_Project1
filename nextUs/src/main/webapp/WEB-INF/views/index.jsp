@@ -204,8 +204,8 @@
 			</div>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="topSellersTab">
-					<div class="row" id ="popluar_list">
-						<c:forEach var="vo" items="${list }">
+					<div class="row" id ="popular_list">
+						<c:forEach var="vo" items="${popularList }">
 							<!-- 반복 시작 -->
 							<div class="col-6 col-md-4 col-lg-3 card-bg-light-purple">
 								<!-- Card -->
@@ -312,7 +312,7 @@
 	        <div class="tab-content">
 	            <div class="tab-pane fade show active" id="topSellersTab">
 	                <div class="row" id="productList">
-	                    <c:forEach var="vo" items="${list}">
+	                    <c:forEach var="vo" items="${recentList}">
 	                        <!-- 반복 시작 -->
 	                        <div class="col-6 col-md-4 col-lg-3">
 	                            <!-- Card -->
@@ -328,7 +328,7 @@
 	
 	                                    <!-- Image -->
 	                                    <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno}"> 
-	                                        <img class="card-img-top card-img-front" src="/upload/board/${vo.thumbnail_real}" style="width: 90%; height: 250px; object-fit: cover;">
+	                                        <img class="card-img-top card-img-front" src="/upload/board/1717978758514.jpg" style="width: 90%; height: 250px; object-fit: cover;">
 	                                    </a>
 	                                </div>
 	
@@ -629,7 +629,7 @@
 	                data: { value: value },
 	                success: function(response) {
 	                    // 받은 데이터를 이용하여 페이지 내용을 업데이트
-	                    var productList = $('#popluar_list');
+	                    var productList = $('#popular_list');
 	                    productList.empty();     
 	                    console.log("reponse=" +response);
 	
