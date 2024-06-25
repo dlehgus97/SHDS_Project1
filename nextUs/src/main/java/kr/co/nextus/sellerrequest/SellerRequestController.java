@@ -2,6 +2,8 @@ package kr.co.nextus.sellerrequest;
 
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,20 +32,32 @@ public class SellerRequestController {
 	@GetMapping("/sellerRequestManagement")
 	@RequestMapping("/sellerRequestManagement")
 	public String sellerRequestManagement(SellerRequestVO vo,
-			BuyListVO vo3, Model model) {
-		model.addAttribute("sellerRequestMap", service.list(vo));
-		model.addAttribute("SRnew", service.NEW(vo));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-		return "admin/sellerManagement/sellerRequestManagement";
+			BuyListVO vo3, Model model,HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("sellerRequestMap", service.list(vo));
+			model.addAttribute("SRnew", service.NEW(vo));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+			return "admin/sellerManagement/sellerRequestManagement";
+		}else {
+			return "common/403";
+		}
+		
 	}
 	
 
 	
 	@RequestMapping("/sellerRequestPopup")
-	public String sellerRequestPopup(SellerRequestVO vo,Model model,@RequestParam("no") int no) {
-		model.addAttribute("map", service.list(vo,no));
-		return "admin/sellerManagement/sellerRequestPopup";
+	public String sellerRequestPopup(SellerRequestVO vo,Model model,HttpServletRequest request,@RequestParam("no") int no) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo,no));
+			return "admin/sellerManagement/sellerRequestPopup";
+		}else {
+			return "common/403";
+		}
+		
 	}
 	
 	

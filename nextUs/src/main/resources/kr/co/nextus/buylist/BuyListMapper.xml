@@ -33,6 +33,12 @@
 		SELECT COUNT(*) FROM BUYLIST
 	</select>
 	
+	<!-- 정산 필요&완료 카운트 5,6 -->
+	<select id="countallsettle"
+		parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int">
+		SELECT COUNT(*) FROM BUYLIST WHERE status = 5 OR status = 6
+	</select>
+	
 	<!-- 정산하기 -->
 	<update id="settle"
 		parameterType="int">
@@ -71,11 +77,11 @@ ORDER BY DATE(decidedate) ASC
 	</select>
 	<!-- adminMain -->
 	<select id="total_sales" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int" >
-	SELECT SUM(price) as total_salses FROM BUYLIST WHERE status = 6
+	SELECT IFNULL(SUM(price),0) as total_salses FROM BUYLIST WHERE status = 6
 	</select>
 	<!-- adminMain -->
 	<select id="today_sales" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int" >
-	SELECT SUM(price) AS today_sales FROM BUYLIST WHERE status = 6 AND DATE(decidedate) = CURDATE();
+	SELECT IFNULL(SUM(price),0) AS today_sales FROM BUYLIST WHERE status = 6 AND DATE(decidedate) = CURDATE()
 	</select>
 	<!-- adminMain -->
 	<select id="MVP" parameterType="kr.co.nextus.buylist.BuyListVO"

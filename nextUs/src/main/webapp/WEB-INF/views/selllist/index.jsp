@@ -22,7 +22,11 @@
 
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
-
+<script>
+    function submitForm() {
+      document.getElementById('searchForm').submit();
+    }
+</script>
 
 
 <style>
@@ -35,7 +39,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<!-- 카테고리 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-purple border-bottom" style="position: relative; z-index: 1000;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-purple border-bottom">
       <div class="container">
     
         <!-- Toggler -->
@@ -54,7 +58,7 @@
               <a class="nav-link fw-bold fs-6" data-bs-toggle="dropdown" href="#">웹</a>
     
               <!-- 홈페이지 -->
-              <div class="dropdown-menu" style="margin-top: 24px; z-index: 1000;">
+              <div class="dropdown-menu" style="margin-top: 24px;">
                 <div class="card card-lg">
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
@@ -62,13 +66,13 @@
                         <a class="list-styled-link" href="/selllist/index.do?categoryno=5">- 홈페이지</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- UI, 퍼블리싱</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=6">- UI, 퍼블리싱</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-fashion.html">- 검색최적화</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=7">- 검색최적화</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-boxed.html">- 애널리틱스</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=8">- 애널리틱스</a>
                       </li>
                     </ul>
                   </div>
@@ -90,13 +94,13 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 안드로이드</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=9">- 안드로이드</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- iOS</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=10">- iOS</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-fashion.html">- 기타</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=11">- 기타</a>
                       </li>
                     </ul>
                   </div>
@@ -118,10 +122,10 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 생성형 AI</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=12">- 생성형 AI</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- 머신러닝, 딥러닝</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=13">- 머신러닝, 딥러닝</a>
                       </li>
                     </ul>
                   </div>
@@ -143,16 +147,16 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 보안</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=14">- 보안</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- QA</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=15">- QA</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-fashion.html">- 기술지원</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=16">- 기술지원</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-boxed.html">- 파일변환</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=17">- 파일변환</a>
                       </li>
                     </ul>
                   </div>
@@ -173,7 +177,7 @@
         <div class="row">
           <div class="col-12">
             <!-- Heading -->
-            <h2 class="text-center text-white">홈페이지</h2>
+            <h2 class="text-center text-white">${categoryname}</h2>
 
           </div>
         </div>
@@ -183,27 +187,26 @@
     <!-- 실시간 인기 서비스 -->
 	<section class="py-12">
 		<div class="container">
+			
+			
 			<!-- FILTERS -->
+		    <!-- Form -->
+        	<form class="navbar-form" method="get" name="searchForm" id="searchForm" action="/selllist/index.do">
+		    
 		    <section class="py-7 border-bottom">
 		      <div class="container">
 		        <div class="row align-items-center">
-		        	
-		        
-		        
-		        
 		          <div class="col-12 col-md" style="margin-top: 30px;">
 					<!-- 검색창 -->
 				    <div class="navbar navbar-boxed navbar-expand-md navbar-dark mb-7">
 				      <div class="container">
 				        <div class="flex-grow-1 position-relative">
 				    
-				          <!-- Form -->
-				          <form class="navbar-form" method="get" name="searchForm" id="searchForm" action="/selllist/index.do">
 				            <div class="input-group">
 				            	<!-- Input -->
 				    			<input type="hidden" id="categoryno" name="categoryno" value="${vo.categoryno }">
 				              	
-				              	<input type="text" class="form-control form-control-lg" id="sval" name="searchWord" value="${selllistVO.searchWord}" 
+				              	<input type="text" class="form-control form-control-lg" id="sval" name="searchWord" value="${sellListVO.searchWord}" 
 				              	placeholder="Search for items and brands">
 				              <!-- Button -->
 				              <div class="input-group-append">
@@ -213,28 +216,32 @@
 				              </div>
 				    
 				            </div>
-				          </form>
-				        </div>
-				      </div>
-				    </div>
-		          </div>
-		          <div class="col-12 col-md-auto text-center">
-					
-		            <div class="col-12 col-md-auto">
+					          
+					        </div>
+					      </div>
+					    </div>
+			          </div>
+			          <div class="col-12 col-md-auto text-center">
+						
+			            <div class="col-12 col-md-auto">
 		
-		                <!-- Select -->
-		                <select class="form-select form-select-xs">
-		                  <option>평점순</option>
-		                  <option>최신순</option>
-		                  <option>조회수순</option>
-		                  <option>리뷰 많은 순</option>
-		                </select>
-		
-		            </div>
-		          </div>
-		        </div>
-		      </div>
-		    </section>
+		                <!-- 정렬기준 -->
+		            	
+	            			<select class="form-select form-select-xs" id="stype" name="searchType" class="dSelect" title="검색분류 선택" onchange="submitForm()">
+                              <option value="like_cnt">인기순</option>
+						      <option value="rating_avg" <c:if test="${sellListVO.searchType == 'rating_avg'}">selected</c:if>>평점순</option>
+						      <option value="view_cnt" <c:if test="${sellListVO.searchType == 'view_cnt'}">selected</c:if>>조회수순</option>
+						      <option value="review_cnt" <c:if test="${sellListVO.searchType == 'review_cnt'}">selected</c:if>>리뷰많은순</option>
+						      <option value="postdate" <c:if test="${sellListVO.searchType == 'postdate'}">selected</c:if>>최신순</option>
+                            </select>
+			
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      
+			    </section>
+		    </form>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="topSellersTab">
 					<div class="row">
@@ -324,31 +331,31 @@
 	<!-- 페이지 처리 -->
           <nav class="d-flex justify-content-center mt-10">
             <ul class="pagination pagination-sm text-gray-400">
-            	<c:if test="${review.prev }">
+            	<c:if test="${vo.prev }">
               <li class="page-item">
-                <a class="page-link page-link-arrow" href="view.do?sellno=${vo.sellno }&page=${review.startPage-1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
+                <a class="page-link page-link-arrow" href="/selllist/index.do?categoryno=${vo.categoryno }&page=${vo.startPage-1 }&searchWord=${sellListVO.searchWord}&searchType=${sellListVO.searchType}">
                   <i class="fa fa-caret-left"></i>
                 </a>
               </li>
               </c:if>
               
-              <c:forEach var="p" begin="${review.startPage}" end="${review.endPage}">
-              	<c:if test="${p == reviewVO.page}">
+              <c:forEach var="p" begin="${vo.startPage}" end="${vo.endPage}">
+              	<c:if test="${p == sellListVO.page}">
                <li class="page-item active">
                  <a class="page-link" href="#">${p}</a>
                </li>
                </c:if>
 			
-			<c:if test="${p != reviewVO.page}">
+			<c:if test="${p != sellListVO.page}">
                <li class="page-item">
-                 <a class="page-link" href="view.do?sellno=${vo.sellno }&page=${p}&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">${p}</a>
+                 <a class="page-link" href="/selllist/index.do?categoryno=${vo.categoryno }&page=${p}&searchWord=${sellListVO.searchWord}&searchType=${sellListVO.searchType}">${p}</a>
                </li>
                </c:if>
            </c:forEach>
               
-              <c:if test="${review.next }">
+              <c:if test="${vo.next }">
               <li class="page-item">
-                <a class="page-link page-link-arrow" href="view.do?sellno=${vo.sellno }&page=${review.endPage+1 }&searchType=${ReviewVO.searchType}&searchWord=${ReviewVO.searchWord}#reviews">
+                <a class="page-link page-link-arrow" href="/selllist/index.do?categoryno=${vo.categoryno }&page=${vo.endPage+1 }&searchWord=${sellListVO.searchWord}&searchType=${sellListVO.searchType}">
                   <i class="fa fa-caret-right"></i>
                 </a>
               </li>

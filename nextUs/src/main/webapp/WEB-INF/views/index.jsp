@@ -76,13 +76,13 @@
                         <a class="list-styled-link" href="/selllist/index.do?categoryno=5">- 홈페이지</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- UI, 퍼블리싱</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=6">- UI, 퍼블리싱</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-fashion.html">- 검색최적화</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=7">- 검색최적화</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-boxed.html">- 애널리틱스</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=8">- 애널리틱스</a>
                       </li>
                     </ul>
                   </div>
@@ -104,13 +104,13 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 안드로이드</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=9">- 안드로이드</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- iOS</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=10">- iOS</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-fashion.html">- 기타</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=11">- 기타</a>
                       </li>
                     </ul>
                   </div>
@@ -132,10 +132,10 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 생성형 AI</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=12">- 생성형 AI</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- 머신러닝, 딥러닝</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=13">- 머신러닝, 딥러닝</a>
                       </li>
                     </ul>
                   </div>
@@ -157,16 +157,16 @@
                   <div class="card-body">
                     <ul class="list-styled fs-sm">
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index.html">- 보안</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=14">- 보안</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-classic.html">- QA</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=15">- QA</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-fashion.html">- 기술지원</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=16">- 기술지원</a>
                       </li>
                       <li class="list-styled-item">
-                        <a class="list-styled-link" href="./index-boxed.html">- 파일변환</a>
+                        <a class="list-styled-link" href="/selllist/index.do?categoryno=17">- 파일변환</a>
                       </li>
                     </ul>
                   </div>

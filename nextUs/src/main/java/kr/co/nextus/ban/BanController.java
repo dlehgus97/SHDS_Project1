@@ -2,6 +2,8 @@ package kr.co.nextus.ban;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,21 +55,35 @@ public class BanController {
 	
 	@GetMapping("/memberBanManagement.do")
 	@RequestMapping("/memberBanManagement")
-	public String memberBanManagement(BanVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model) {
-		model.addAttribute("map", service.list(vo,0));
-		model.addAttribute("SRnew", SRservice.NEW(vo2));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-		return "admin/memberManagement/memberBanManagement";
+	public String memberBanManagement(BanVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model,HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo,1));
+			model.addAttribute("SRnew", SRservice.NEW(vo2));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+			return "admin/sellerManagement/sellerBanManagement";
+		}else {
+			return "common/403";
+		}
+
+		
+		
 	}
 	
 	@GetMapping("/sellerBanManagement.do")
 	@RequestMapping("/sellerBanManagement")
-	public String sellerBanManagement(BanVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model) {
-		model.addAttribute("map", service.list(vo,1));
-		model.addAttribute("SRnew", SRservice.NEW(vo2));
-		model.addAttribute("STnew", BLservice.settleNEW(vo3));
-		model.addAttribute("RFnew", BLservice.refundNEW(vo3));
-		return "admin/sellerManagement/sellerBanManagement";
+	public String sellerBanManagement(BanVO vo,SellerRequestVO vo2,BuyListVO vo3, Model model,HttpServletRequest request) {
+		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
+		if(adminLoggedIn!= null && adminLoggedIn) {
+			model.addAttribute("map", service.list(vo,1));
+			model.addAttribute("SRnew", SRservice.NEW(vo2));
+			model.addAttribute("STnew", BLservice.settleNEW(vo3));
+			model.addAttribute("RFnew", BLservice.refundNEW(vo3));
+			return "admin/sellerManagement/sellerBanManagement";
+		}else {
+			return "common/403";
+		}
+
 	}
 }

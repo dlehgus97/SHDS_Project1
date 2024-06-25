@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.io.ContentReference;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,7 +22,6 @@ import kr.co.nextus.buylist.BuyListVO;
 import kr.co.nextus.cart.CartService;
 import kr.co.nextus.cart.CartVO;
 import kr.co.nextus.coupon.CouponService;
-import kr.co.nextus.member.MemberVO;
 
 @Controller
 public class PaymentController {
