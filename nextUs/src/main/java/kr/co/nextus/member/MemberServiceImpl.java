@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean regist(MemberVO vo) {
+    	vo.setRegdate(new Timestamp(System.currentTimeMillis()));
         return mapper.regist(vo) == 1; // 가입 성공 여부 반환
     }
 
