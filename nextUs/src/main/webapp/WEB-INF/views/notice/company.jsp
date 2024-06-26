@@ -19,7 +19,7 @@
 
         <!-- 회사소개 이미지 삽입 -->
         <div class="company-intro">
-            <img src="<%= request.getContextPath() %>/resources/imgs/company.png" alt="회사소개">
+            <img src="<%= request.getContextPath() %>/resources/imgs/company.png" alt="회사소개" style="width: 100%;">
         </div>
    
     	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
