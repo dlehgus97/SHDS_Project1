@@ -109,17 +109,17 @@
 								<div class="option-row">
 						            <label class="option-label" for="bronze-description">BRONZE</label>
 						            <input type="text" id="bronze-description" class="option-input" placeholder="설명을 입력하세요." name="bronzecontent">
-						            <input type="number" id="bronze-price" class="option-input" placeholder="가격을 입력하세요." name="bronzeprice">
+						            <input type="number" id="bronze-price" class="option-input" placeholder="가격을 입력하세요." name="bronzeprice" step=1000>
 						        </div>
 						        <div class="option-row">
 						            <label class="option-label" for="silver-description">SILVER</label>
 						            <input type="text" id="silver-description" class="option-input" placeholder="설명을 입력하세요." name="silvercontent">
-						            <input type="number" id="silver-price" class="option-input" placeholder="가격을 입력하세요." name="silverprice">
+						            <input type="number" id="silver-price" class="option-input" placeholder="가격을 입력하세요." name="silverprice" step=1000>
 						        </div>
 						        <div class="option-row">
 						            <label class="option-label" for="gold-description">GOLD</label>
 						            <input type="text" id="gold-description" class="option-input" placeholder="설명을 입력하세요." name="goldcontent">
-						            <input type="number" id="gold-price" class="option-input" placeholder="가격을 입력하세요." name="goldprice">
+						            <input type="number" id="gold-price" class="option-input" placeholder="가격을 입력하세요." name="goldprice" step=1000>
 						        </div>
                             </td>
                         </tr>
