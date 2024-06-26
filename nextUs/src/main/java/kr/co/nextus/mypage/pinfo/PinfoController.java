@@ -65,6 +65,7 @@ public class PinfoController {
 		String url = "/mypage/pinfo.do";
 		if (r > 0) {
 			msg = "정상적으로 수정되었습니다.";
+			sess.setAttribute("login", vo);
 		} else {
 			msg = "수정 오류";
 		}
