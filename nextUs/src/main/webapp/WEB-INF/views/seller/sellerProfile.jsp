@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -165,13 +166,12 @@
             <div class="store-info">
                 <div class="store-name">${seller.nickname}</div>
                 <div class="rating-container">
-                                        <div class="average-rating">
+					<div class="average-rating">
                         <div class="stars-outer">
                             <div class="stars-inner" data-rating="${seller.rating_avg}"></div>
                         </div>
-                        <span>${seller.rating_avg}</span>
                     </div>
-                    <div class="count-rating">(${seller.review_cnt})</div>
+                    <div class="count-rating">${seller.rating_avg} (${seller.review_cnt})</div>
                 </div>
             </div>
         </div>
@@ -242,7 +242,7 @@
                     <tr>
                         <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
                         <td>${sellproduct.title}</td>
-                        <td><span style="color: gold;">&#9733;</span> ${sellproduct.rating_avg}</td>
+                        <td><span style="color: gold;">&#9733;</span> <fmt:formatNumber value="${sellproduct.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /></td>
                         <td>${sellproduct.review_cnt}</td>
                         <td>${sellproduct.like_count}</td>
                     </tr>

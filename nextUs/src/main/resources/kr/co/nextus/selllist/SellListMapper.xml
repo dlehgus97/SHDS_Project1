@@ -101,10 +101,10 @@
 	LIMIT 5;
 	</select>
 	
-	<!-- 판매글 쓰기 , price, thumbnail_real은 나중에 -->
+	<!-- 판매글 쓰기 -->
 	<insert id="insertSellList" parameterType="kr.co.nextus.selllist.SellListVO">
-		INSERT INTO SELLLIST (seller, title, content, postdate, view_cnt, rating_avg, review_cnt, thumbnail_org, thumbnail_real)
-		VALUES (#{seller}, #{title}, #{content}, NOW(), 0, 0, 0, #{thumbnail_org}, #{thumbnail_real})
+		INSERT INTO SELLLIST (seller, title, content, postdate, view_cnt, rating_avg, review_cnt, thumbnail_org, thumbnail_real, price)
+		VALUES (#{seller}, #{title}, #{content}, NOW(), 0, 0, 0, #{thumbnail_org}, #{thumbnail_real}, #{bronzeprice})
 		<selectKey keyProperty="sellno" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
