@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/paymentSelect.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/font.css">
 <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/resources/js/payment/payment.js"></script>

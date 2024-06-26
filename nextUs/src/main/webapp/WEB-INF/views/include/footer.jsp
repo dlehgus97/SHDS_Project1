@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>footer</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/font.css">
 </head>
 <body>
 <!-- FOOTER -->
@@ -12,13 +13,13 @@
     <div id="footer_left_container">
 	    <div id="footer_logo_container">
             <h2 class="footer_h2">NEXTUS</h2>
-	        <img id="footer_logo_icon" src="../resources/imgs/nexus2.png">
+	        <img id="footer_logo_icon" src="/resources/imgs/nexus2.png">
 	    </div>
         <h2 class="footer_h2">CONTACT US</h2>
         <div id="sns_container">
-        	<img class="sns_icon" src="../resources/imgs/icons/facebook.svg" alt="facebook" />
-            <img class="sns_icon" src="../resources/imgs/icons/youtube.svg" alt="youtube" />
-            <img class="sns_icon" src="../resources/imgs/icons/github.svg" alt="github" />
+        	<img class="sns_icon" src="/resources/imgs/icons/facebook.svg" alt="facebook" />
+            <img class="sns_icon" src="/resources/imgs/icons/youtube.svg" alt="youtube" />
+            <img class="sns_icon" src="/resources/imgs/icons/github.svg" alt="github" />
         </div>
     </div>
     <div id="footer_center_container">
