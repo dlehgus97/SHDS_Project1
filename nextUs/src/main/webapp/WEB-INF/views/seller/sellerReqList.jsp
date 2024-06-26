@@ -22,6 +22,9 @@
     		<p>! 처리되지 않은 신청건이 존재할 경우 신청이 불가합니다. !</p>
     	</div>
         <div id="req_container">
+	        <c:if test="${empty reqList }">
+	          	<img src="/resources/imgs/noOrderAlert.png" style="width: 640px; height:640px;">
+          	</c:if>
             <c:forEach var="vo" items="${reqList}" varStatus="status">
                 <div class="req_list_container">
                     <div class="file">

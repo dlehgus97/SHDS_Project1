@@ -120,8 +120,8 @@
 			<div class="col-12 col-md-9 col-lg-8 offset-lg-1">
 	            <div class="row">
 	              	<c:if test="${empty couponlist }">
-						<div>보유 쿠폰이 없습니다.</div>
-					</c:if>
+			          	<img src="/resources/imgs/noOrderAlert.png" style="width: 672px; height:640px;">
+		          	</c:if>
 					
 					<c:forEach var="coupon" items="${couponlist }">
 					<div class="col-12 col-lg-6">

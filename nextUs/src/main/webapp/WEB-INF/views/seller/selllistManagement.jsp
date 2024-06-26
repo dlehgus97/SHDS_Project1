@@ -302,12 +302,12 @@
                 </div>
                 <div class="header-container">
 			        <h1>판매글 관리</h1>
-			        <button onclick="location.href='http://localhost:8090/selllistRegister'">+</button>
+			        <button onclick="location.href='http://13.125.219.9:8090/selllistRegister'">+</button>
 			    </div>
                 <div class="product-grid">
                     <c:forEach var="sellproduct" items="${sellList}">
                         <div class="product-card">
-                            <img class="product-picture" src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" onclick="location.href='http://localhost:8090/selllist/view.do?sellno=${sellproduct.sellno}'">
+                            <img class="product-picture" src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" onclick="location.href='http://13.125.219.9:8090/selllist/view.do?sellno=${sellproduct.sellno}'">
                            	<div class="title-container">${sellproduct.title}</div>
 
                             <div class="product-details">
