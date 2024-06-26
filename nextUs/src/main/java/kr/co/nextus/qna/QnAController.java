@@ -172,7 +172,7 @@ public class QnAController {
 
 	}
 	
-	@PostMapping("/adqna/delete.do")
+	@GetMapping("/adqna/delete.do")
 	public String addelete(Model model, @RequestParam("no") int no
 			,SellerRequestVO vo2, BuyListVO vo3,HttpServletRequest request) {
 		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
