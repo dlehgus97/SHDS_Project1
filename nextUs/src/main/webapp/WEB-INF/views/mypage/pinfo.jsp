@@ -490,12 +490,11 @@
 	<!-- 폼 제출 js -->
 	<script type="text/javascript">
 		function checkpwd() {
-			// Check phone number format
 			var phone = $("#hp").val();
-			var phoneReg = /^010-\d{4}-\d{4}$/;
+			var phoneReg = /^01[1-9]-\d{4}-\d{4}$/;
 			if (!phoneReg.test(phone)) {
-				alert('올바르지 않은 전화번호 형식입니다. 번호는 010-XXXX-XXXX형식으로 입력해주세요');
-				return;
+			    alert('올바르지 않은 전화번호 형식입니다. 번호는 01X-XXXX-XXXX 형식으로 입력해주세요');
+			    return;
 			}
 			
 			
