@@ -273,7 +273,7 @@
 										<!-- Image -->
 										<a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }"> <img
 											class="card-img-top card-img-front"
-											src="/upload/board/${vo.thumbnail_real}"
+											src="/upload/thumbnail/${vo.thumbnail_real}"
 											style="width: 90%; height: 250px; object-fit: cover;">
 										</a>
 									</div>

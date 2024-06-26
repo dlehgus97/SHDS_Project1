@@ -134,8 +134,8 @@
                   <div class="mb-4" data-flickity='{"draggable": false, "fade": true}' id="productSlider">
 
                     <!-- Item -->
-                    <a href="#" data-bigpicture='{ "imgSrc": "/upload/board/${vo.thumbnail_real}"}'>
-                      <img src="/upload/board/${vo.thumbnail_real}" alt="..." class="card-img-top">
+                    <a href="#" data-bigpicture='{ "imgSrc": "/upload/thumbnail/${vo.thumbnail_real}"}'>
+                      <img src="/upload/thumbnail/${vo.thumbnail_real}" alt="..." class="card-img-top">
                     </a>
                   </div>
                 </div>
