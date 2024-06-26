@@ -39,7 +39,7 @@
 		s.*
 		FROM SELLERREQUEST s
 		LEFT JOIN MEMBER m ON s.memberno = m.no
-		WHERE s.memberno = #{no} AND state = 1
+		WHERE s.memberno = #{no} AND s.state = 1
 	</select>
 	
 	

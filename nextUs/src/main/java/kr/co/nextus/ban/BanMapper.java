@@ -1,11 +1,10 @@
 package kr.co.nextus.ban;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.co.nextus.member.MemberVO;
+
 
 @Mapper
 public interface BanMapper {
@@ -19,4 +18,5 @@ public interface BanMapper {
 	int countSeller(BanVO param);
 		
 	int add(BanVO vo);
+	boolean banFree(int no);
 }

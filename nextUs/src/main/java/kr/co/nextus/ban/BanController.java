@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nextus.buylist.BuyListService;
 import kr.co.nextus.buylist.BuyListVO;
@@ -86,4 +89,18 @@ public class BanController {
 		}
 
 	}
+	
+	// 판매글삭제						
+	@RequestMapping(value = "/banFree/{no}", method = RequestMethod.POST)
+	@ResponseBody
+	public String banFree(@PathVariable("no") int no) {
+		try {
+			service.banFree(no);
+			return "success"; // 성공 시 success 문자열 반환
+		} catch (Exception e) {
+			return "error"; // 실패 시 error 문자열 반환
+		}
+
+	}
+	
 }

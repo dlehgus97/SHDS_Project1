@@ -66,4 +66,11 @@ public class BanServiceImpl implements BanService {
 		return result == 0 ? false : true;
 
 	}
+
+	@Override
+	public boolean banFree(int no) {
+		boolean result;
+		result = memberMapper.banFree(no) && mapper.banFree(no);
+		return result;
+	}
 }

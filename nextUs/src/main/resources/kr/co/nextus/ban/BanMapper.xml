@@ -48,4 +48,10 @@
 		JOIN MEMBER m ON b.memberno = m.no
 		WHERE m.seller = 1;
 	</select>
+	
+	<delete id="deleteMemberById" parameterType="int">
+    	DELETE FROM BAN
+    	WHERE no = #{no}
+	</delete>
+
 </mapper>

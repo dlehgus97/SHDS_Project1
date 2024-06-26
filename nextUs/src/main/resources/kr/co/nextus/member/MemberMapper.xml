@@ -216,33 +216,44 @@
 		WHERE no = #{no}
 	</update>
 	
-	
+	<!-- adminMain 그래프-->
 	<select id="seven_days_members" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
     <![CDATA[
-    SELECT 
-        totaldate,
-        (SELECT COUNT(*)
-         FROM MEMBER
-         WHERE DATE(regdate) <= t.totaldate
-        ) AS totalmember
-    FROM (
-        SELECT DATE(regdate) AS totaldate
-        FROM MEMBER
-        WHERE regdate >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-        GROUP BY DATE(regdate)
-    ) AS t
-    ORDER BY totaldate
+   SELECT 
+    	totaldate,
+    	(SELECT COUNT(*)
+    	 FROM MEMBER
+    	 WHERE DATE(regdate) <= t.totaldate
+    	) AS totalmember
+	FROM (
+    	SELECT CURDATE() AS totaldate
+    	UNION ALL
+    	SELECT DATE(regdate) AS totaldate
+    	FROM MEMBER
+    	WHERE regdate >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+   	GROUP BY DATE(regdate)
+		) AS t
+	GROUP BY totaldate
+	ORDER BY totaldate
     ]]>
 	</select>
 	
-	<!-- adminMain -->
+	<!-- adminMain 1-1-->
 	<select id="total_members" parameterType="kr.co.nextus.member.MemberVO" resultType="int" >
 	SELECT count(*) as total_members FROM MEMBER
 	</select>
-	<!-- adminMain -->
+	<!-- adminMain 1-1-->
 	<select id="today_members" parameterType="kr.co.nextus.member.MemberVO" resultType="int" >
 	SELECT count(*) as total_members FROM MEMBER WHERE DATE(regdate) = CURDATE()
 	</select>
 	
+	
+	<update id="banFree" parameterType="int">
+    <![CDATA[
+    UPDATE MEMBER
+    SET state = 0
+    WHERE no = (SELECT memberno FROM BAN WHERE no = #{banno})
+    ]]>
+</update>
 
 </mapper>

@@ -58,4 +58,6 @@ public interface MemberMapper {
 
 	int total_members(MemberVO vo);
 	int today_members(MemberVO vo);
+
+	boolean banFree(int banno);
 }

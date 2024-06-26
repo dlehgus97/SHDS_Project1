@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.nextus.category.CategoryVO;
 
 
 public interface SellListService {
