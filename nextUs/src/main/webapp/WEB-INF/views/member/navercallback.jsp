@@ -9,7 +9,7 @@
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script>
 const naverLogin = new naver.LoginWithNaverId({
-    clientId: "qNDkrOO7CvCTWUbSRCJS",
+    clientId: "WIEqlNA2CqPh2z9TwTTs",
     callbackUrl: "http://localhost:8090/member/callback",
     isPopup: false,
     callbackHandle: true
