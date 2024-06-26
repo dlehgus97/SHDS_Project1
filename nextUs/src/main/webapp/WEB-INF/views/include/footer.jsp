@@ -33,7 +33,7 @@
             <a>About Us</a>
             <a>Spring</a>
             <a href="/notice/index.do">공지사항</a>
-            <a href="">회사소개</a>
+            <a href="/notice/company.do">회사소개</a>
             <a href="">Project</a>
             <a href="/qna/index.do">고객센터</a>
             <a href="">연혁</a>
