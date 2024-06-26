@@ -164,7 +164,7 @@
 	        padding: 8px;
 	        margin-top: 5px;
 	        border: 1px solid #ddd;
-	        border-radius: 4px;
+	        border-radius: 5px;
 	        box-sizing: border-box;
 	        font-size: 16px;
 	    }
@@ -246,6 +246,29 @@
 		.bank-container select {
             margin-right: 20px; /* 원하는 간격으로 조정하세요 */
         }
+        
+        select {
+        	border-radius: 5px; /* 모서리 둥글게 설정 */
+        	border: 1px solid #ccc; /* 테두리 설정 */
+        }
+        
+        select:hover {
+        	border-color: #777;
+        }
+        
+		#mainCategory1 {
+        	min-width: 60px;
+        }
+        #mainCategory2 {
+        	min-width: 60px;
+        }
+        #subCategory1 {
+        	min-width: 125px;
+        }
+        #subCategory2 {
+        	min-width: 125px;
+        }        
+        
     </style>
 </head>
 <body>
@@ -266,41 +289,37 @@
 			        <div class="edit-form">
 			    		<label for="info">설명</label>
 			            <textarea id="info" name="info">${seller.info}</textarea>
-			            <div class="big-category-container">
-							<div class="category-container">
-		                        <label for="mainCategory1">카테고리 1</label>
-		                        <select id="mainCategory1" onchange="updateSubCategory('mainCategory1', 'subCategory1')">
-		                            <option value="">선택하세요</option>
-		                        </select>
-		
-		                        <label for="subCategory1"></label>
-		                        <select id="subCategory1" name="category1">
-		                            <option value="">선택하세요</option>
-		                        </select>
-							</div>
-							<div class="category-container">
-		                        <label for="mainCategory2">카테고리 2</label>
-		                        <select id="mainCategory2" onchange="updateSubCategory('mainCategory2', 'subCategory2')">
-		                            <option value="">선택하세요</option>
-		                        </select>
-		
-		                        <label for="subCategory2"></label>
-		                        <select id="subCategory2" name="category2">
-		                            <option value="">선택하세요</option>
-		                        </select>
-							</div>
+                        <label for="mainCategory1">전문분야 1</label>
+                        <div class="category-container">
+	                        <select id="mainCategory1" onchange="updateSubCategory('mainCategory1', 'subCategory1')">
+	                            <option value="">선택하세요</option>
+	                        </select>			
+	                        <label for="subCategory1"></label>
+	                        <select id="subCategory1" name="category1">
+	                            <option value="">선택하세요</option>
+	                        </select>
 						</div>
-                        <div class="bank-container">		            
-				            <label for="bank">계좌</label>
-				            <select id="bank" name="bank">
-							    <option value="shinhan">신한</option>
-							    <option value="kookmin">국민</option>
-							    <option value="woori">우리</option>
-							</select>
-	
-				            <label for="account"></label>
-				            <input type="text" id="account" name="account" value="${seller.account}">
+                        <label for="mainCategory2">전문분야 2</label>
+                        <div class="category-container">		                        
+	                        <select id="mainCategory2" onchange="updateSubCategory('mainCategory2', 'subCategory2')">
+	                            <option value="">선택하세요</option>
+	                        </select>
+	                        <label for="subCategory2"></label>
+	                        <select id="subCategory2" name="category2">
+	                            <option value="">선택하세요</option>
+	                        </select>
 						</div>
+	            
+			            <label for="bank">은행</label>
+			            <select id="bank" name="bank">
+						    <option value="shinhan">신한</option>
+						    <option value="kookmin">국민</option>
+						    <option value="woori">우리</option>
+						</select>
+						
+			            <label for="account">계좌번호</label>
+			            <input type="text" id="account" name="account" value="${seller.account}">
+
 			            <div class="button-container">
 			                <button type="submit" class="btn-submit" onclick="return confirmSubmit()">확인</button>
 			                <a href="seller/sellerEdit" class="btn-cancel">취소</a>
