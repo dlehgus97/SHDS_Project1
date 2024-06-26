@@ -70,7 +70,12 @@ public class BanServiceImpl implements BanService {
 	@Override
 	public boolean banFree(int no) {
 		boolean result;
-		result = memberMapper.banFree(no) && mapper.banFree(no);
+		System.out.println(33);
+		boolean a =  memberMapper.banFree(no);
+		System.out.println("CCC"+a);
+		boolean b =  mapper.banFree(no);
+		System.out.println("ddd"+b);
+		result = a && b;
 		return result;
 	}
 }

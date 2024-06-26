@@ -263,11 +263,10 @@
 	
 	
 	<update id="banFree" parameterType="int">
-    <![CDATA[
     UPDATE MEMBER
     SET state = 0
     WHERE no = (SELECT memberno FROM BAN WHERE no = #{banno})
-    ]]>
+
 </update>
 
 </mapper>

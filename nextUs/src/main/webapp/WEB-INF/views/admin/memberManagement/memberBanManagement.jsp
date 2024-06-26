@@ -133,7 +133,7 @@ table tr{
             var button = event.target;
             var tr = button.closest('tr');
             var no = tr.cells[0].innerText.trim(); // 첫 번째 셀의 내용을 가져옴
-            
+            console.log(no);
             Swal.fire({
                 title: '제재를 해제하시겠습니까?',
                 text: '악질일 수도 있어요',
@@ -157,18 +157,18 @@ table tr{
                                      location.reload(); // 확인 버튼을 누를 때 페이지 새로고침
                                  });
                             } else {
-                                Swal.fire('해제 실패', '다시 시도해주세요.', 'error');
+                                Swal.fire('해제 실패11', '다시 시도해주세요.', 'error');
                             }
                         },
                         error: function(xhr, status, error) {
-                            Swal.fire('해제 실패', '다시 시도해주세요.', 'error');
+                            Swal.fire('해제 실패22', '다시 시도해주세요.', 'error');
                         }
                     });
                 }
             });
         });
  });
-
+    </script>
 <!-- alertdesign -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>

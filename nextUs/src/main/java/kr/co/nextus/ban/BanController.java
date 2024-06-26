@@ -94,8 +94,10 @@ public class BanController {
 	@RequestMapping(value = "/banFree/{no}", method = RequestMethod.POST)
 	@ResponseBody
 	public String banFree(@PathVariable("no") int no) {
+		System.out.println(1);
 		try {
-			service.banFree(no);
+			//service.banFree(no);
+			System.out.println("BBB"+service.banFree(no));
 			return "success"; // 성공 시 success 문자열 반환
 		} catch (Exception e) {
 			return "error"; // 실패 시 error 문자열 반환

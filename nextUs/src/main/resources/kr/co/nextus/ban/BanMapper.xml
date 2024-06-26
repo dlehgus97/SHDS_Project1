@@ -49,7 +49,7 @@
 		WHERE m.seller = 1;
 	</select>
 	
-	<delete id="deleteMemberById" parameterType="int">
+	<delete id="banFree" parameterType="int">
     	DELETE FROM BAN
     	WHERE no = #{no}
 	</delete>
