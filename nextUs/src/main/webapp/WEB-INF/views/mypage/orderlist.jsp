@@ -86,6 +86,9 @@
 
           
           <div class="col-12 col-md-9 col-lg-8 offset-lg-1">
+          <c:if test="${empty order.list }">
+          	<img src="/resources/imgs/noOrderAlert.png">
+          </c:if>
 			<c:forEach var="order" items="${order.list }">
             <!-- Order -->
             <div class="card card-lg mb-5 border">

@@ -87,6 +87,9 @@
 
             <!-- Products -->
             <div class="row">
+            <c:if test="${empty wishlist }">
+	          	<img src="/resources/imgs/noOrderAlert.png" style="width: 672px; height:640px;">
+          	</c:if>
             
 			<!-- 반복 시작 -->
 			<c:forEach var="wishlist" items="${wishlist}">
