@@ -38,7 +38,10 @@ public class MainController {
 	public String index(Model model, SellListVO vo, CategoryVO catevo, SellerRankVO sellerrankvo) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		List<CategoryVO> catelist = categoryService.list(catevo);
-		List<SellerRankVO> sellerranklist = sellerRankService.list(sellerrankvo);
+		List<SellerRankVO> sellerranklist1 = sellerRankService.list1(sellerrankvo);
+		List<SellerRankVO> sellerranklist2 = sellerRankService.list2(sellerrankvo);
+		List<SellerRankVO> sellerranklist3 = sellerRankService.list3(sellerrankvo);
+		List<SellerRankVO> sellerranklist4 = sellerRankService.list4(sellerrankvo);
 		
 	    // view_cnt 기준 정렬 데이터
 	    SellListVO popularVo = new SellListVO();
@@ -53,7 +56,10 @@ public class MainController {
 	    Map<String, Object> recentList = sellListService.list(recentVo);
 		
 	    model.addAttribute("cate", catelist);
-	    model.addAttribute("rank", sellerranklist);
+	    model.addAttribute("rank1", sellerranklist1);
+	    model.addAttribute("rank2", sellerranklist2);
+	    model.addAttribute("rank3", sellerranklist3);
+	    model.addAttribute("rank4", sellerranklist4);
 	    model.addAttribute("popularList", popularList.get("list")); // view_cnt 기준 리스트 추가
 	    model.addAttribute("recentList", recentList.get("list")); // postdate 기준 리스트 추가
 		return "index";

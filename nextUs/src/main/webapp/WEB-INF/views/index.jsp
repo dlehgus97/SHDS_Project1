@@ -382,8 +382,7 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }" varStatus="webstatus">
-				 <c:if test="${rank.nested1 == 1 or rank.nested2 == 1}">
+				<c:forEach var="rank" items="${rank1 }" varStatus="webstatus">
 			        <!-- Item -->
 			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
@@ -397,19 +396,18 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." >
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="...">
 			
 			            </div>
 			
 			            <!-- Body -->
 			            <div class="card-body fw-bold text-center">
-			              <a class="text-body" href="product.html">${rank.nickname }</a> <br>
+			              <a class="text-body" href="/seller/sellerProfile/${rank.no}">${rank.nickname }</a> <br>
 			              <span class="text-muted">${rank.info }</span>
 			            </div>
 			
 			          </div>
 			        </div>
-			       </c:if>
 				</c:forEach>
 		      </div>
 		</div>
@@ -429,8 +427,7 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }" varStatus="mbstatus">
-				 <c:if test="${rank.nested1 == 2 or rank.nested2 == 2}">
+				<c:forEach var="rank" items="${rank2 }" varStatus="mbstatus">
 			        <!-- Item -->
 			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
@@ -450,13 +447,12 @@
 			
 			            <!-- Body -->
 			            <div class="card-body fw-bold text-center">
-			              <a class="text-body" href="product.html">${rank.nickname }</a> <br>
+			              <a class="text-body" href="/seller/sellerProfile/${rank.no}">${rank.nickname }</a> <br>
 			              <span class="text-muted">${rank.info }</span>
 			            </div>
 			
 			          </div>
 			        </div>
-			       </c:if>
 				</c:forEach>
 		      </div>
 		</div>
@@ -476,8 +472,7 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }" varStatus="aistatus">
-				 <c:if test="${rank.nested1 == 3 or rank.nested2 == 3}">
+				<c:forEach var="rank" items="${rank3 }" varStatus="aistatus">
 			        <!-- Item -->
 			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
@@ -497,13 +492,12 @@
 			
 			            <!-- Body -->
 			            <div class="card-body fw-bold text-center">
-			              <a class="text-body" href="product.html">${rank.nickname }</a> <br>
+			              <a class="text-body" href="/seller/sellerProfile/${rank.no}">${rank.nickname }</a> <br>
 			              <span class="text-muted">${rank.info }</span>
 			            </div>
 			
 			          </div>
 			        </div>
-			       </c:if>
 				</c:forEach>
 		      </div>
 		</div>
@@ -524,8 +518,7 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }" varStatus="etcstatus">
-				 <c:if test="${rank.nested1 == 4 or rank.nested2 == 4}">
+				<c:forEach var="rank" items="${rank4 }" varStatus="etcstatus">
 			        <!-- Item -->
 			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
@@ -545,13 +538,12 @@
 			
 			            <!-- Body -->
 			            <div class="card-body fw-bold text-center">
-			              <a class="text-body" href="product.html">${rank.nickname }</a> <br>
+			              <a class="text-body" href="/seller/sellerProfile/${rank.no}">${rank.nickname }</a> <br>
 			              <span class="text-muted">${rank.info }</span>
 			            </div>
 			
 			          </div>
 			        </div>
-			       </c:if>
 				</c:forEach>
 		      </div>
 		</div>

@@ -18,8 +18,26 @@ public class SellerRankServiceImpl implements SellerRankService {
 	private SellerRankMapper mapper;
 
 	@Override
-	public List<SellerRankVO> list(SellerRankVO vo) {
+	public List<SellerRankVO> list1(SellerRankVO vo) {
 
-        return mapper.list(vo); // 목록
+        return mapper.list1(vo); // 목록
+	}
+	
+	@Override
+	public List<SellerRankVO> list2(SellerRankVO vo) {
+
+        return mapper.list2(vo); // 목록
+	}
+	
+	@Override
+	public List<SellerRankVO> list3(SellerRankVO vo) {
+
+        return mapper.list3(vo); // 목록
+	}
+	
+	@Override
+	public List<SellerRankVO> list4(SellerRankVO vo) {
+
+        return mapper.list4(vo); // 목록
 	}
 }

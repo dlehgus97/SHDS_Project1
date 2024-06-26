@@ -35,6 +35,7 @@
 		WHERE sellno=#{sellno};
 	</update>
 	
+	
 	<!-- 리뷰작성여부 업데이트 -->
 	<update id="updateisreview" parameterType="kr.co.nextus.review.ReviewVO">
 		UPDATE BUYLIST SET 

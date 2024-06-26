@@ -2,13 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nextus.sellerrank.SellerRankMapper">
 	<!-- 목록 -->
-	<select id="list" parameterType="kr.co.nextus.sellerrank.SellerRankVO" resultType="kr.co.nextus.sellerrank.SellerRankVO">
+	<select id="list1" parameterType="kr.co.nextus.sellerrank.SellerRankVO" resultType="kr.co.nextus.sellerrank.SellerRankVO">
 		SELECT *,
 		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category1) as nested1,
 		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category2) as nested2,
-		(SELECT COUNT(*) FROM BUYLIST WHERE memberno=category2) as sellerrank
+		(SELECT COUNT(*) FROM BUYLIST WHERE memberno=SELLER.no) as sellerrank
 		FROM SELLER 
 		JOIN MEMBER ON SELLER.no=MEMBER.no
+		WHERE (SELECT nested FROM CATEGORYLIST WHERE categoryno=category1)=1 or (SELECT nested FROM CATEGORYLIST WHERE categoryno=category2)=1
+		ORDER BY sellerrank DESC
+    	LIMIT 10;
+	</select>
+	
+	<!-- 목록 -->
+	<select id="list2" parameterType="kr.co.nextus.sellerrank.SellerRankVO" resultType="kr.co.nextus.sellerrank.SellerRankVO">
+		SELECT *,
+		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category1) as nested1,
+		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category2) as nested2,
+		(SELECT COUNT(*) FROM BUYLIST WHERE memberno=SELLER.no) as sellerrank
+		FROM SELLER 
+		JOIN MEMBER ON SELLER.no=MEMBER.no
+		WHERE (SELECT nested FROM CATEGORYLIST WHERE categoryno=category1)=2 or (SELECT nested FROM CATEGORYLIST WHERE categoryno=category2)=2
+		ORDER BY sellerrank DESC
+    	LIMIT 10;
+	</select>
+	
+	<!-- 목록 -->
+	<select id="list3" parameterType="kr.co.nextus.sellerrank.SellerRankVO" resultType="kr.co.nextus.sellerrank.SellerRankVO">
+		SELECT *,
+		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category1) as nested1,
+		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category2) as nested2,
+		(SELECT COUNT(*) FROM BUYLIST WHERE memberno=SELLER.no) as sellerrank
+		FROM SELLER 
+		JOIN MEMBER ON SELLER.no=MEMBER.no
+		WHERE (SELECT nested FROM CATEGORYLIST WHERE categoryno=category1)=3 or (SELECT nested FROM CATEGORYLIST WHERE categoryno=category2)=3
+		ORDER BY sellerrank DESC
+    	LIMIT 10;
+	</select>
+	
+	<!-- 목록 -->
+	<select id="list4" parameterType="kr.co.nextus.sellerrank.SellerRankVO" resultType="kr.co.nextus.sellerrank.SellerRankVO">
+		SELECT *,
+		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category1) as nested1,
+		(SELECT nested FROM CATEGORYLIST WHERE categoryno=category2) as nested2,
+		(SELECT COUNT(*) FROM BUYLIST WHERE memberno=SELLER.no) as sellerrank
+		FROM SELLER 
+		JOIN MEMBER ON SELLER.no=MEMBER.no
+		WHERE (SELECT nested FROM CATEGORYLIST WHERE categoryno=category1)=4 or (SELECT nested FROM CATEGORYLIST WHERE categoryno=category2)=4
 		ORDER BY sellerrank DESC
     	LIMIT 10;
 	</select>
