@@ -11,7 +11,7 @@
 		#{no}, #{email}, MD5(#{pwd}), #{name},
 		#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
 		#{addr1}, #{addr2}, #{regdate}, 0, #{seller},
-		'default_profile', 'default_profile', #{loginstate});
+		'default_profile.png', 'default_profile.png', #{loginstate});
 		<selectKey order="AFTER" keyProperty="no" resultType="int">
 			SELECT
 			LAST_INSERT_ID()
