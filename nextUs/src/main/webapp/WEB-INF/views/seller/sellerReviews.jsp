@@ -381,7 +381,7 @@
                     <tbody>
                         <c:forEach var="review" items="${sellerReviews}">
                             <tr>
-                                <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
+                                <td><img src="/upload/thumbnail/${review.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
                                 <td>${review.productTitle}</td>
                                 <td>
                                     <div class="stars-outer">
