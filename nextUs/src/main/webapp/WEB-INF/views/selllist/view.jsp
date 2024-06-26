@@ -528,8 +528,9 @@
                         <ul class="list-unstyled text-gray-500">
                           <li>이 판매자의 평균 별점: <fmt:formatNumber value="${vo.sellerrating_avg}" type="number" minFractionDigits="1" maxFractionDigits="1" />점</li>
                           <li>총 리뷰 수: ${vo.sellerreview_cnt }개</li>
-                          <li>판매자 소개 바로가기 -></li>
-                        </ul>
+                          <li>&nbsp;</li> <!-- 줄 띄우기 -->
+  						  <li><a href="/seller/sellerProfile/${vo.seller}" style="color: blue;">판매자 소개페이지 -></a></li>
+						</ul>
                       </div>
                     </div>
                   </div>
@@ -592,8 +593,7 @@
                   <div class="card-img">
 
                     <!-- Image -->
-                    <a class="card-img-hover" href="/selllist/view.do?sellno=${vo.sellno }">
-                      <img class="card-img-top card-img-back" src="a/upload/thumbnail/${relation.thumbnail_real}" alt="...">
+                    <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }">
                       <img class="card-img-top card-img-front" src="/upload/thumbnail/${relation.thumbnail_real}" alt="...">
                     </a>
 
