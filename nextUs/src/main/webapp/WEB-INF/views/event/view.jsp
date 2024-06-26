@@ -109,7 +109,7 @@
                         <dl class="file">
                             <dt>첨부파일 </dt>
                             <dd>
-                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/board&thumbnail_org=${URLEncoder.encode(vo.thumbnail_org)}&thumbnail_real=${vo.thumbnail_real}" target="_blank">${vo.thumbnail_org}</a></dd>
+                            <a href="<c:url value="/download.do"/>?uploadPath=/upload/event&thumbnail_org=${URLEncoder.encode(vo.thumbnail_org)}&thumbnail_real=${vo.thumbnail_real}" target="_blank">${vo.thumbnail_org}</a></dd>
                         </dl>
                 		</c:if>                    
                         <div class="btnSet clear">

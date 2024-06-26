@@ -58,7 +58,7 @@
 
 							<!-- Image -->
 							<a href="view.do?no=${vo.no}">
-								<img class="card-img-top" src="/upload/board/${vo.thumbnail_real}"
+								<img class="card-img-top" src="/upload/event/${vo.thumbnail_real}"
 									alt="..." style="width: 100%; height: 500px; object-fit: cover;">
 							</a>
 							<!-- Body -->
