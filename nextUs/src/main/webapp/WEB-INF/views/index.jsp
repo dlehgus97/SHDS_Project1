@@ -24,7 +24,7 @@
 
 <script>
 	$(document).ready(function() {
-		if (${snsmsg} != null) {
+		if ("${snsmsg}" != "") {
 			alert("${snsmsg}");
 			console.log('하이 ${snsmsg} 입니다.')
 		}

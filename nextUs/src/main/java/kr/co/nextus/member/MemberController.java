@@ -308,7 +308,7 @@ public class MemberController {
             // 카카오 사용자 정보를 DB에 저장하거나 기존 회원 여부 확인
             int isExistingMember = service.processKakaoLogin(userInfo);
 
-            if (isExistingMember < 2) {
+            if (isExistingMember < 3) {
                 // 기존 회원이라면 세션에 사용자 정보 저장
                 MemberVO loginMember = new MemberVO(); // 예시로 MemberVO 객체 생성
                 loginMember.setEmail((String) userInfo.get("email")); // 카카오에서 받은 이메일 정보 사용
@@ -326,7 +326,7 @@ public class MemberController {
                     // 정상 로그인 처리
                     session.setAttribute("login", login); // 세션에 로그인 정보 저장
                     if (isExistingMember == 2) {
-                    	session.setAttribute("snsmsg", "초기 비밀번호는 " + login.getPwd() + "입니다. 마이페이지에서 수정해주세요.");
+                    	session.setAttribute("snsmsg", "초기 비밀번호는 " + login.getNickname() + "입니다. 마이페이지에서 수정해주세요.");
                     }
                     return "redirect:/index.do"; // 메인 페이지로 리다이렉트
                 }

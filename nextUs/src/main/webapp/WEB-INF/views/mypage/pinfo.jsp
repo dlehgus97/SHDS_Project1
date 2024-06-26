@@ -182,7 +182,7 @@
                 </div>
                 
                 
-                <c:if test="${member.loginstate == 0}">
+                
                 <div class="col-12 col-md-6">
 
                   <!-- 현재 비밀번호 -->
@@ -205,7 +205,7 @@
                   </div>
 
                 </div>
-                </c:if>
+                
                 
 
                 <div class="col-12 col-md-6">
@@ -330,7 +330,7 @@
                 </div>
                 <script>
 				  document.addEventListener("DOMContentLoaded", function() {
-				    var gender = ${member.gender}; // Assuming ${member.gender} holds the value 1 or 2
+				    var gender = "${member.gender}"; // Assuming ${member.gender} holds the value 1 or 2
 				
 				    if (gender === 1) {
 				      document.getElementById("male").checked = true;
@@ -491,9 +491,10 @@
 	<script type="text/javascript">
 		function checkpwd() {
 			var phone = $("#hp").val();
-			var phoneReg = /^01[1-9]-\d{4}-\d{4}$/;
+			var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
 			if (!phoneReg.test(phone)) {
 			    alert('올바르지 않은 전화번호 형식입니다. 번호는 01X-XXXX-XXXX 형식으로 입력해주세요');
+			    console.log(phone);
 			    return;
 			}
 			
