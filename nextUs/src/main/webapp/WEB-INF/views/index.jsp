@@ -362,7 +362,7 @@
 	</section>
 
 	
-	<!-- TOP SELLERS -->
+	<!-- 셀러 순위 -->
 	<section class="py-10 section-bg-light-purple">
 		<!-- 웹 -->
 		<div class="container">
@@ -396,7 +396,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="...">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 100%; height: 250px;">
 			
 			            </div>
 			
@@ -441,7 +441,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 100%; height: 250px;">
 			
 			            </div>
 			
@@ -486,7 +486,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 100%; height: 250px;">
 			
 			            </div>
 			
@@ -532,7 +532,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 100%; height: 250px;">
 			
 			            </div>
 			
