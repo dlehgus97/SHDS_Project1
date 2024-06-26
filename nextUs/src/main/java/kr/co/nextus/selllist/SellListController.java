@@ -54,6 +54,7 @@ public class SellListController {
 	public String list(Model model, HttpSession sess, @RequestParam("categoryno")int categoryno, SellListVO vo) {
 		vo.setCategoryno(categoryno);
 		vo.setDepth(2);
+		vo.setValue(1);
 		Map<String, Object> list = sellListService.list(vo);
 		String categoryname = sellListService.categoryname(categoryno);
 		model.addAttribute("vo", list);

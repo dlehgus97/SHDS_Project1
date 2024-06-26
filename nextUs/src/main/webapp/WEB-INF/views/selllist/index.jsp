@@ -243,7 +243,7 @@
 			    </section>
 		    </form>
 			<div class="tab-content">
-				<div class="tab-pane fade show active" id="topSellersTab">
+				<div class="tab-pane fade show active" id="topSellersTab" style="margin-top: 3rem;">
 					<div class="row">
 						<c:forEach var="vo" items="${vo.list}">
 							<!-- 반복 시작 -->
@@ -329,7 +329,7 @@
 	</section>
 	
 	<!-- 페이지 처리 -->
-          <nav class="d-flex justify-content-center mt-10">
+          <nav class="d-flex justify-content-center mt-10" style="margin-bottom: 2rem;">
             <ul class="pagination pagination-sm text-gray-400">
             	<c:if test="${vo.prev }">
               <li class="page-item">
