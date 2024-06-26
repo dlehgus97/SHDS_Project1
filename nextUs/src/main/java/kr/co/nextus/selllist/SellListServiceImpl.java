@@ -53,6 +53,12 @@ public class SellListServiceImpl implements SellListService {
 	}
 	
 	@Override
+	public List<SellListVO> relation(SellListVO vo) {
+		return mapper.relation(vo);
+		
+	}
+	
+	@Override
 	public String categoryname(int categoryno) {
 		String categoryname = mapper.categoryname(categoryno);
 		return categoryname;

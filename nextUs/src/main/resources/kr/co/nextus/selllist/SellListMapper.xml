@@ -92,6 +92,15 @@
 		WHERE SELLLIST.sellno=#{sellno};
 	</select>
 	
+	<!-- 관련 상품 -->
+	<select id="relation" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
+	SELECT * FROM SELLLIST 
+	JOIN SELLCATEGORY ON SELLLIST.sellno=SELLCATEGORY.sellno 
+	JOIN CATEGORYLIST ON CATEGORYLIST.categoryno=SELLCATEGORY.categoryno
+	WHERE CATEGORYLIST.categoryno=(select categoryno FROM SELLCATEGORY WHERE sellno=#{sellno})
+	LIMIT 5;
+	</select>
+	
 	<!-- 판매글 쓰기 , price, thumbnail_real은 나중에 -->
 	<insert id="insertSellList" parameterType="kr.co.nextus.selllist.SellListVO">
 		INSERT INTO SELLLIST (seller, title, content, postdate, view_cnt, rating_avg, review_cnt, thumbnail_org, thumbnail_real)

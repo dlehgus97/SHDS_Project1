@@ -80,6 +80,7 @@ public class SellListController {
 		SellListVO detail = sellListService.detail(vo);
 		
 		model.addAttribute("vo", detail);
+		model.addAttribute("relation", sellListService.relation(vo));
 		model.addAttribute("review", reviewService.list(rvo));
 		model.addAttribute("iswishlist", wishListService.count(wvo));
 		return "/selllist/view";
