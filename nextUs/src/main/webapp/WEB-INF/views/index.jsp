@@ -39,7 +39,7 @@
 			<div class="banner-wrapper">
 				<c:forEach var="vo" items="${mainBanner}">
 					<div class="banner"
-						style="background-image: url('/upload/board/${vo.thumbnail_real}')"></div>
+						style="background-image: url('/upload/event/${vo.thumbnail_real}')"></div>
 				</c:forEach>
 			</div>
 			<button class="arrow left">&#9664;</button>
@@ -233,7 +233,7 @@
 										<!-- Image -->
 										<a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }"> <img
 											class="card-img-top card-img-front"
-											src="/upload/board/${vo.thumbnail_real}"
+											src="/upload/thumbnail/${vo.thumbnail_real}"
 											style="width: 90%; height: 250px; object-fit: cover;">
 										</a>
 									</div>
@@ -328,7 +328,7 @@
 	
 	                                    <!-- Image -->
 	                                    <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno}"> 
-	                                        <img class="card-img-top card-img-front" src="/upload/board/1717978758514.jpg" style="width: 90%; height: 250px; object-fit: cover;">
+	                                        <img class="card-img-top card-img-front" src="/upload/thumbnail/${vo.thumbnail_real}" style="width: 90%; height: 250px; object-fit: cover;">
 	                                    </a>
 	                                </div>
 	
@@ -397,7 +397,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." >
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." >
 			
 			            </div>
 			
@@ -444,7 +444,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
 			
 			            </div>
 			
@@ -491,7 +491,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
 			
 			            </div>
 			
@@ -539,7 +539,7 @@
 			              </div>
 			
 			              <!-- Image -->
-			              <img class="card-img-top" src="/upload/board/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
+			              <img class="card-img-top" src="/upload/profile/${rank.profile_real }" alt="..." style="width: 90%; height: 250px;">
 			
 			            </div>
 			
@@ -645,7 +645,7 @@
 	                        productHtml += '        </div>';
 	                        productHtml += '        <div class="card-img">';
 	                        productHtml += '            <a class="card-img" href="/selllist/view.do?sellno=' + vo.sellno + '">';
-	                        productHtml += '                <img class="card-img-top card-img-front" src="/upload/board/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
+	                        productHtml += '                <img class="card-img-top card-img-front" src="/upload/thumbnail/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
 	                        productHtml += '            </a>';
 	                        productHtml += '        </div>';
 	                        productHtml += '        <div class="card-body px-0">';
@@ -699,7 +699,7 @@
                  			productHtml += '            </div>';
                  			productHtml += '            <div class="card-img">';
                  			productHtml += '                <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno}">';
-                 			productHtml += '                    <img class="card-img-top card-img-front" src="/upload/board/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
+                 			productHtml += '                    <img class="card-img-top card-img-front" src="/upload/thumbnail/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
                  			productHtml += '                </a>';
                  			productHtml += '             </div>';
                  			productHtml += '            <div class="card-body px-0">';
