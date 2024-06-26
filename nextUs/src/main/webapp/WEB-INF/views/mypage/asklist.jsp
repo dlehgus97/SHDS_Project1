@@ -90,8 +90,8 @@
           <div class="col-12 col-md-9 col-lg-8 offset-lg-1">
 			
 			<c:if test="${empty asklist.list }">
-							<div>문의 내역이 없습니다.</div>
-						</c:if>
+	          	<img src="/resources/imgs/noOrderAlert.png" style="width: 640px; height:640px;">
+          	</c:if>
 						<c:forEach var="asklist" items="${asklist.list }">
 							<tr>
 								<!-- List group -->
