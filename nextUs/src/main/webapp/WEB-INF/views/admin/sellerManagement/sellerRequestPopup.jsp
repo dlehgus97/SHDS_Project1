@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>셀러 등록 요청 상세내용</title>
+<title>셀러 등록 요청 상세내용 | Admin</title>
 <link rel="shortcut icon" type="image/png"
 	href="admin/assets/images/icon/favicon.ico">
 <link rel="stylesheet" href="../resources/admin/assets/css/bootstrap.min.css">
