@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>판매글 관리 | NEXt Us</title>
+    <title>판매글 관리</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
     <base href="${pageContext.request.contextPath}/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -304,12 +306,12 @@
 			    </div>
                 <div class="product-grid">
                     <c:forEach var="sellproduct" items="${sellList}">
-                        <div class="product-card" onclick="location.href='http://localhost:8090/selllist/view.do?sellno=${sellproduct.sellno}'">
-                            <img class="product-picture" src="/upload/board/${sellproduct.thumbnail_real}" alt="상품 사진">
+                        <div class="product-card">
+                            <img class="product-picture" src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" onclick="location.href='http://localhost:8090/selllist/view.do?sellno=${sellproduct.sellno}'">
                            	<div class="title-container">${sellproduct.title}</div>
 
                             <div class="product-details">
-                            	<p>찜하기: ${sellproduct.like_count}건    조회수: ${sellproduct.view_cnt}회</p>
+                            	<h4>찜하기: ${sellproduct.like_count}건 &nbsp;&nbsp;&nbsp; 조회수: ${sellproduct.view_cnt}회</h4>
 								<div class="star-container">
 									<div class="star-rating">
 							            <span class="back-stars">
@@ -319,7 +321,7 @@
 							                &#9733;&#9733;&#9733;&#9733;&#9733; <!-- 채워진 별 -->
 							            </span>
 							        </div>
-                                	<p>${sellproduct.rating_avg} (${sellproduct.review_cnt})</p>
+                                	<p><fmt:formatNumber value="${sellproduct.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /> (${sellproduct.review_cnt})</p>
                  				</div>
                                 <p class=price">${sellproduct.price}원 ~</p>
                             </div>
