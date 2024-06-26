@@ -171,7 +171,7 @@
                             <div class="stars-inner" data-rating="${seller.rating_avg}"></div>
                         </div>
                     </div>
-                    <div class="count-rating">${seller.rating_avg} (${seller.review_cnt})</div>
+                    <div class="count-rating"><fmt:formatNumber value="${sellerRating.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /> (${sellerRating.review_cnt})</div>
                 </div>
             </div>
         </div>
@@ -274,7 +274,7 @@
                         <td>${review.title}</td>
                         <td>${review.text}</td>
                         <td>${review.productTitle}</td>
-                        <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" class="profile-picture-small"></td>
+                        <td><img src="/upload/thumbnail/${review.thumbnail_real}" class="profile-picture-small"></td>
                     </tr>
                 </c:forEach>
             </tbody>

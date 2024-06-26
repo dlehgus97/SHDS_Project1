@@ -326,7 +326,7 @@
 	    { categoryno: 9, categoryname: "안드로이드", nested: 2 },
 	    { categoryno: 10, categoryname: "iOS", nested: 2 },
 	    { categoryno: 11, categoryname: "기타", nested: 2 },
-	    { categoryno: 12, categoryname: "생산형 AI", nested: 3 },
+	    { categoryno: 12, categoryname: "생성형 AI", nested: 3 },
 	    { categoryno: 13, categoryname: "머신러닝, 딥러닝", nested: 3 },
 	    { categoryno: 14, categoryname: "보안", nested: 4 },
 	    { categoryno: 15, categoryname: "QA", nested: 4 },

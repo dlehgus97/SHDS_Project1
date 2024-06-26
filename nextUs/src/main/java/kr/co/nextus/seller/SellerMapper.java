@@ -20,6 +20,7 @@ public interface SellerMapper {
 	
 	// 판매자 번호로 판매자 정보를 조회
 	SellerVO getSellerByNo(int no);
+	SellerVO getSellerRating(int no);
 	
 	// 판매자 정보를 업데이트
 	int updateSeller(SellerVO seller);
