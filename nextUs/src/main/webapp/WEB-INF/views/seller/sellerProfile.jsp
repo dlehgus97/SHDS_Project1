@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>판매자 프로필 | NEXt Us</title>
+    <title>판매자 프로필</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <base href="${pageContext.request.contextPath}/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -161,12 +161,17 @@
         <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
         <div class="profile-container">
-            <img src="/profile-images/${seller.profile_real}" alt="프로필 사진" class="profile-picture">
+            <img src="/upload/profile/${seller.profile_real}" alt="프로필 사진" class="profile-picture">
             <div class="store-info">
                 <div class="store-name">${seller.nickname}</div>
                 <div class="rating-container">
-                    <div class="average-rating">평균 별점: ${seller.rating_avg}</div>
-                    <div class="count-rating">리뷰 수: ${seller.review_cnt}</div>
+                                        <div class="average-rating">
+                        <div class="stars-outer">
+                            <div class="stars-inner" data-rating="${seller.rating_avg}"></div>
+                        </div>
+                        <span>${seller.rating_avg}</span>
+                    </div>
+                    <div class="count-rating">(${seller.review_cnt})</div>
                 </div>
             </div>
         </div>
@@ -174,8 +179,51 @@
         <div class="profile">
             <p><strong>전문가 한마디</strong><br>${seller.info}</p>
             <br>
-            <p><strong>전문분야 1:</strong> ${seller.category1}</p>
-            <p><strong>전문분야 2:</strong> ${seller.category2}</p>
+	        <p><strong>전문분야</strong>
+	        <br>
+	            <c:choose>
+	                <c:when test="${seller.category1 == 1}">웹</c:when>
+	                <c:when test="${seller.category1 == 2}">모바일</c:when>
+	                <c:when test="${seller.category1 == 3}">인공지능</c:when>
+	                <c:when test="${seller.category1 == 4}">기타</c:when>
+	                <c:when test="${seller.category1 == 5}">홈페이지</c:when>
+	                <c:when test="${seller.category1 == 6}">UI, 퍼블리싱</c:when>
+	                <c:when test="${seller.category1 == 7}">검색최적화</c:when>
+	                <c:when test="${seller.category1 == 8}">애널리틱스</c:when>
+	                <c:when test="${seller.category1 == 9}">안드로이드</c:when>
+	                <c:when test="${seller.category1 == 10}">iOS</c:when>
+	                <c:when test="${seller.category1 == 11}">기타</c:when>
+	                <c:when test="${seller.category1 == 12}">생산형 AI</c:when>
+	                <c:when test="${seller.category1 == 13}">머신러닝, 딥러닝</c:when>
+	                <c:when test="${seller.category1 == 14}">보안</c:when>
+	                <c:when test="${seller.category1 == 15}">QA</c:when>
+	                <c:when test="${seller.category1 == 16}">기술지원</c:when>
+	                <c:when test="${seller.category1 == 17}">파일변환</c:when>
+	                <c:otherwise>알 수 없음</c:otherwise>
+	            </c:choose>
+				,
+	            <c:choose>
+	                <c:when test="${seller.category2 == 1}">웹</c:when>
+	                <c:when test="${seller.category2 == 2}">모바일</c:when>
+	                <c:when test="${seller.category2 == 3}">인공지능</c:when>
+	                <c:when test="${seller.category2 == 4}">기타</c:when>
+	                <c:when test="${seller.category2 == 5}">홈페이지</c:when>
+	                <c:when test="${seller.category2 == 6}">UI, 퍼블리싱</c:when>
+	                <c:when test="${seller.category2 == 7}">검색최적화</c:when>
+	                <c:when test="${seller.category2 == 8}">애널리틱스</c:when>
+	                <c:when test="${seller.category2 == 9}">안드로이드</c:when>
+	                <c:when test="${seller.category2 == 10}">iOS</c:when>
+	                <c:when test="${seller.category2 == 11}">기타</c:when>
+	                <c:when test="${seller.category2 == 12}">생산형 AI</c:when>
+	                <c:when test="${seller.category2 == 13}">머신러닝, 딥러닝</c:when>
+	                <c:when test="${seller.category2 == 14}">보안</c:when>
+	                <c:when test="${seller.category2 == 15}">QA</c:when>
+	                <c:when test="${seller.category2 == 16}">기술지원</c:when>
+	                <c:when test="${seller.category2 == 17}">파일변환</c:when>
+	                <c:otherwise>알 수 없음</c:otherwise>
+	            </c:choose>
+	        </p>
+
         </div>
 
         <h1>서비스</h1>
@@ -192,9 +240,9 @@
             <tbody>
                 <c:forEach var="sellproduct" items="${sellList}">
                     <tr>
-                        <td><img src="/profile-images/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
+                        <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
                         <td>${sellproduct.title}</td>
-                        <td>${sellproduct.rating_avg}</td>
+                        <td><span style="color: gold;">&#9733;</span> ${sellproduct.rating_avg}</td>
                         <td>${sellproduct.review_cnt}</td>
                         <td>${sellproduct.like_count}</td>
                     </tr>
@@ -226,7 +274,7 @@
                         <td>${review.title}</td>
                         <td>${review.text}</td>
                         <td>${review.productTitle}</td>
-                        <td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>
+                        <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" class="profile-picture-small"></td>
                     </tr>
                 </c:forEach>
             </tbody>

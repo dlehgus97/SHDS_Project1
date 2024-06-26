@@ -528,6 +528,7 @@
                         <ul class="list-unstyled text-gray-500">
                           <li>이 판매자의 평균 별점: <fmt:formatNumber value="${vo.sellerrating_avg}" type="number" minFractionDigits="1" maxFractionDigits="1" />점</li>
                           <li>총 리뷰 수: ${vo.sellerreview_cnt }개</li>
+                          <li>판매자 소개 바로가기 -></li>
                         </ul>
                       </div>
                     </div>
@@ -577,9 +578,11 @@
 
             <!-- Heading -->
             <h4 class="mb-10 text-center">관련 상품</h4>
-
+			
             <!-- Items -->
             <div class="row">
+            <c:forEach var="relation" items="${relation}">
+            	<c:if test="${relation.sellno != vo.sellno}">
               <div class="col-6 col-sm-6 col-md-4 col-lg-3">
 
                 <!-- Card -->
@@ -589,29 +592,10 @@
                   <div class="card-img">
 
                     <!-- Image -->
-                    <a class="card-img-hover" href="product.html">
-                      <img class="card-img-top card-img-back" src="assets/img/products/product-121.jpg" alt="...">
-                      <img class="card-img-top card-img-front" src="assets/img/products/product-6.jpg" alt="...">
+                    <a class="card-img-hover" href="/selllist/view.do?sellno=${vo.sellno }">
+                      <img class="card-img-top card-img-back" src="a/upload/thumbnail/${relation.thumbnail_real}" alt="...">
+                      <img class="card-img-top card-img-front" src="/upload/thumbnail/${relation.thumbnail_real}" alt="...">
                     </a>
-
-                    <!-- Actions -->
-                    <div class="card-actions">
-                      <span class="card-action">
-                        <button class="btn btn-xs btn-circle btn-white-primary" data-bs-toggle="modal" data-bs-target="#modalProduct">
-                          <i class="fe fe-eye"></i>
-                        </button>
-                      </span>
-                      <span class="card-action">
-                        <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
-                          <i class="fe fe-shopping-cart"></i>
-                        </button>
-                      </span>
-                      <span class="card-action">
-                        <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
-                          <i class="fe fe-heart"></i>
-                        </button>
-                      </span>
-                    </div>
 
                   </div>
 
@@ -620,23 +604,26 @@
 
                     <!-- Category -->
                     <div class="fs-xs">
-                      <a class="text-muted" href="shop.html">Dresses</a>
+                      <a class="text-muted">${relation.categoryname }</a>
                     </div>
 
                     <!-- Title -->
                     <div class="fw-bold">
-                      <a class="text-body" href="product.html">
-                        Cotton floral print Dress
+                      <a class="text-body" href="/selllist/view.do?sellno=${vo.sellno }">
+                        ${relation.title }
                       </a>
                     </div>
 
                     <!-- Price -->
                     <div class="fw-bold text-muted">
-                      $40.00
+                      <fmt:formatNumber type="number" maxFractionDigits="3" value="${relation.price }" />원
                     </div>
                   </div>
                 </div>
               </div>
+              </c:if>
+              </c:forEach>
+              
             </div>
 
           </div>

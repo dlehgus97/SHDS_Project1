@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface SellListService {
 	Map<String, Object> list(SellListVO vo);
+
+	
+	List<SellListVO> relation(SellListVO vo);
 	
 	String categoryname(int categoryno);
 	

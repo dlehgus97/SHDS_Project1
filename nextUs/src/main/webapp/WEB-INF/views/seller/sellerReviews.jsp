@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>리뷰 관리 | NEXt Us</title>
+    <title>리뷰 관리</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <base href="${pageContext.request.contextPath}/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -381,7 +381,7 @@
                     <tbody>
                         <c:forEach var="review" items="${sellerReviews}">
                             <tr>
-                                <td><img src="/profile-images/${review.thumbnail_real}" class="profile-picture-small"></td>
+                                <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
                                 <td>${review.productTitle}</td>
                                 <td>
                                     <div class="stars-outer">

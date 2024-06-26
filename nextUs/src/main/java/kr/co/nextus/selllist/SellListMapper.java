@@ -23,6 +23,7 @@ public interface SellListMapper {
 	void insertGold(SellListVO sellListVO);
     
     List<SellListVO> list(SellListVO vo);
+    List<SellListVO> relation(SellListVO vo);
     
     //관리자
     int count(SellListVO param);

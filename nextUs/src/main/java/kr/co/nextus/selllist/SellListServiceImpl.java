@@ -53,6 +53,12 @@ public class SellListServiceImpl implements SellListService {
 	}
 	
 	@Override
+	public List<SellListVO> relation(SellListVO vo) {
+		return mapper.relation(vo);
+		
+	}
+	
+	@Override
 	public String categoryname(int categoryno) {
 		String categoryname = mapper.categoryname(categoryno);
 		return categoryname;
@@ -92,7 +98,7 @@ public class SellListServiceImpl implements SellListService {
 
 	            // 파일 저장 경로 설정 (ServletContext를 이용하여 절대 경로 설정)
 	            ServletContext servletContext = request.getServletContext();
-	            String uploadPath = servletContext.getRealPath("/upload/board");
+	            String uploadPath = servletContext.getRealPath("/upload/thumbnail");
 	            File uploadDir = new File(uploadPath);
 	            if (!uploadDir.exists()) {
 	                uploadDir.mkdirs(); // 디렉토리가 없으면 생성
