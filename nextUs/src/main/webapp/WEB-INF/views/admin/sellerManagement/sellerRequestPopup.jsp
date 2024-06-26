@@ -49,7 +49,9 @@ gap:20px;
 						이메일<li class="list-group-item">${vo.email != null ? vo.email : '(미입력)'} </li><br>
 						닉네임<li class="list-group-item">${vo.nickname != null ? vo.nickname : '(미입력)'}</li><br>
 						요청일자<li class="list-group-item"><fmt:formatDate pattern="yyyy-MM-dd HH:MM" value="${vo.regdate}" /></li><br>
-						첨부파일<li class="list-group-item">${vo.file_org != null ? vo.file_org : '(미입력)'}</li>
+						첨부파일<li class="list-group-item">
+						<a href="<c:url value="/download.do"/>?uploadPath=/upload/sellerReq&thumbnail_org=${URLEncoder.encode(vo.file_org)}&thumbnail_real=${vo.file_real}" target="_blank">${vo.file_org}</a>
+						</li>
 					</c:forEach>
 					</ul>
 				</div>

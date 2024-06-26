@@ -10,6 +10,7 @@
 	flex-direction: column;
 	align-items: stretch;
     background-color: rgb(245, 245, 245);
+    min-height: 500px;
 }
 #seller_req_container {
     display: flex;

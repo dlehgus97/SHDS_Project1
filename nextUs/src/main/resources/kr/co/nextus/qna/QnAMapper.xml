@@ -38,8 +38,7 @@
 	<!-- 목록 -->
 	<select id="list" parameterType="kr.co.nextus.qna.QnAVO" resultType="kr.co.nextus.qna.QnAVO">
 		SELECT *,
-			(SELECT name FROM MEMBER WHERE no=QnA.writer) as writer_name,
-			(SELECT COUNT(*) from COMMENT WHERE no=QnA.no) as comment_count
+			(SELECT name FROM MEMBER WHERE no=QnA.writer) as writer_name
 		FROM QnA
 		<include refid="searchSql"/>
 		ORDER BY no DESC
