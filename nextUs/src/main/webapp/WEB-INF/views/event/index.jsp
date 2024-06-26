@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>Event</title>
+<title>이벤트 | NEXt Us</title>
 <META name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
 <script

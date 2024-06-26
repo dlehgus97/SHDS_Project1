@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <title>아이디 찾기</title>
+    <title>아이디 찾기 | NEXt Us</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
