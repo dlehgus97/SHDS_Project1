@@ -36,17 +36,17 @@
 		resultType="int">
 		SELECT COUNT(DISTINCT name) FROM COUPON
 	</select>
-
-
-	<!-- 쿠폰별 나눠준 멤버 리스트 -->
+	
+	<!-- 쿠폰별로 나눠준 멤버 리스트 -->
 	<select id="listAsName"
 		parameterType="kr.co.nextus.coupon.CouponVO"
 		resultType="kr.co.nextus.coupon.CouponVO">
 		SELECT M.email AS memberEmail, C.status
 		FROM COUPON C
-		JOIN MEMBER M ON C.memberno = M.no
+		LEFT JOIN MEMBER M ON C.memberno = M.no
 		WHERE C.name = #{name}
 	</select>
+
 
 	<!-- 멤버에게 보여줄 쿠폰 리스트 -->
 	<select id="listToMember" parameterType="int"

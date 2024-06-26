@@ -58,9 +58,8 @@ public class CouponServiceImpl implements CouponService {
 
 
 	@Override
-	public Map listAsName(CouponVO param,String name) {
-		param.setName(name);
-		List<CouponVO> list = mapper.listAsName(param);
+	public Map listAsName(String name) {
+		List<CouponVO> list = mapper.listAsName(name);
 
 		Map<String, Object> map = new HashMap<>();
 

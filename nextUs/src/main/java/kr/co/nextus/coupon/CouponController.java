@@ -84,21 +84,9 @@ public class CouponController {
 	}
 
 	@RequestMapping("/couponMemberPopup")
-	public String couponMemberPopup(CouponVO vo, Model model, @RequestParam("data") String name,
-			HttpServletRequest request) {
-
-		Boolean adminLoggedIn = (Boolean) request.getSession().getAttribute("adminLoggedIn");
-		if (adminLoggedIn != null && adminLoggedIn) {
-			try {
-				String encodedValue = URLEncoder.encode(name, "UTF-8");
-				model.addAttribute("map", service.listAsName(vo, encodedValue));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return "admin/memberManagement/couponMemberPopup";
-		} else {
-			return "common/403";
-		}
+	public String couponMemberPopup(CouponVO vo, Model model, @RequestParam("data") String name) {
+		model.addAttribute("map", service.listAsName(name));
+		return "admin/memberManagement/couponMemberPopup";
 
 	}
 

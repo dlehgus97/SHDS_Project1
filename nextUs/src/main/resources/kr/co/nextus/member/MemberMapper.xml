@@ -219,24 +219,38 @@
 	<!-- adminMain 그래프-->
 	<select id="seven_days_members" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
     <![CDATA[
-   SELECT 
-    	totaldate,
-    	(SELECT COUNT(*)
-    	 FROM MEMBER
-    	 WHERE DATE(regdate) <= t.totaldate
-    	) AS totalmember
-	FROM (
-    	SELECT CURDATE() AS totaldate
-    	UNION ALL
-    	SELECT DATE(regdate) AS totaldate
-    	FROM MEMBER
-    	WHERE regdate >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-   	GROUP BY DATE(regdate)
-		) AS t
-	GROUP BY totaldate
-	ORDER BY totaldate
+    SELECT 
+        d.totaldate,
+        IFNULL(m.totalmember, 0) AS totalmember
+    FROM (
+        SELECT CURDATE() AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 1 DAY) AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 2 DAY) AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 3 DAY) AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 4 DAY) AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 5 DAY) AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 6 DAY) AS totaldate
+        UNION ALL
+        SELECT DATE_SUB(CURDATE(), INTERVAL 7 DAY) AS totaldate
+    ) d
+    LEFT JOIN (
+        SELECT 
+            DATE(regdate) AS regdate,
+            COUNT(*) AS totalmember
+        FROM MEMBER
+        WHERE regdate >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        GROUP BY DATE(regdate)
+    ) m ON d.totaldate = m.regdate
+    ORDER BY d.totaldate
     ]]>
-	</select>
+</select>
+
 	
 	<!-- adminMain 1-1-->
 	<select id="total_members" parameterType="kr.co.nextus.member.MemberVO" resultType="int" >

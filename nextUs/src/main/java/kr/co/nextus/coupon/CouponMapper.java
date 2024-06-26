@@ -16,7 +16,7 @@ public interface CouponMapper {
 	
 	//쿠폰리스트 출력
 	List<CouponVO> list(CouponVO vo);
-	List<CouponVO> listAsName(CouponVO vo);
+	List<CouponVO> listAsName(String name);
 	int count(CouponVO param);
 	
 	
