@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쿠폰 발급 대상자 목록</title>
+<title>쿠폰 발급 대상자 목록 | Admin</title>
 <link rel="stylesheet" href="../resources/admin/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/admin/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/admin/assets/css/themify-icons.css">

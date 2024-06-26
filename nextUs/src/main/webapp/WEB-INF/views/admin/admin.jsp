@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Login - admin</title>
+<title>Login  | Admin</title>
 <link rel="stylesheet" href="../resources/admin/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/admin/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/admin/assets/css/themify-icons.css">

@@ -7,7 +7,7 @@
 
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>관리자 메인 페이지</title>
+<title>관리자 메인 페이지 | Admin</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">

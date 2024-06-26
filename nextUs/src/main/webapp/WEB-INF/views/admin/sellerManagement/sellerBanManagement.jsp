@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>관리자 메인 페이지</title>
+<title>셀러 제재 내역 | Admin</title>
 <script src="../resources/js/admin/memberStatus.js"></script>
 <link rel="stylesheet" href="../resources/css/admin/memberStatus.css" />
 <link rel="stylesheet" type="text/css"
