@@ -236,7 +236,7 @@ public class SellerController {
          boolean success = sellerService.updateSeller(seller);
          if (success) {
              // 성공 시 성공 페이지로 리다이렉트
-             return "redirect:/seller/selllistManagement";
+        	 return "redirect:/seller/sellerEdit";
          } else {
              // 실패 시 에러 메시지를 모델에 추가하고 상세 정보 페이지로 이동
              model.addAttribute("error", "Seller update failed.");

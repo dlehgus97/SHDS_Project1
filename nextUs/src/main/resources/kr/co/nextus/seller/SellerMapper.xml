@@ -19,15 +19,17 @@
     </select>
     
 	<select id="getSellerBuyList" parameterType="int" resultType="kr.co.nextus.buylist.BuyListVO">
-        select buyno, b.price, b.status, buydate, decidedate, nickname, title, o.optionrank, o.content
-		from BUYLIST b
-		inner join MEMBER m
-		on m.no = b.memberno
-		inner join SELLLIST s
-		on s.sellno = b.sellno
-		inner join P_OPTION o
-		on o.optionno=b.optionno
-		where b.sellerno=#{no};
+	    select buyno, b.price, b.status, buydate, decidedate,
+	        CASE
+	            WHEN m.nickname IS NULL THEN '탈퇴한 사용자'
+	            ELSE m.nickname
+	        END AS nickname,
+	        title, o.optionrank, o.content
+	    from BUYLIST b
+	    LEFT JOIN MEMBER m ON m.no = b.memberno
+	    INNER JOIN SELLLIST s ON s.sellno = b.sellno
+	    INNER JOIN P_OPTION o ON o.optionno = b.optionno
+	    where b.sellerno = #{no};
     </select>
     
     <update id="updateStatus" parameterType="map">
@@ -46,7 +48,7 @@
 		GROUP BY s.sellno, s.title, s.thumbnail_real, s.rating_avg, s.review_cnt, s.view_cnt, s.price;
 	</select>
 	
-	<!-- 판매자의 판매글 관리 페이지 : 삭제 버튼 누르면 판매글 삭제됨 -->
+	<!-- 판매자의 판매글 관리 페이지 : 삭제 버튼 누르면 판매글 삭제됨 (옵션이랑 카테고리도 같이 삭제됨 -->
 	<delete id="deleteSellerSellList" parameterType="int">
 	    DELETE FROM SELLLIST
 	    WHERE sellno = #{sellno};
@@ -61,12 +63,25 @@
     </delete>
 	
 	<select id="getSellerReviews" parameterType="int" resultType="kr.co.nextus.review.ReviewVO">
-		SELECT m.nickname, r.score, r.title, r.text, s.title productTitle, s.content, s.thumbnail_real, s.sellno, s.seller, r.reviewno
+	    SELECT 
+	        CASE 
+	            WHEN m.nickname IS NULL THEN '탈퇴한 사용자'
+	            ELSE m.nickname
+	        END AS nickname,
+	        r.score,
+	        r.title,
+	        r.text,
+	        s.title AS productTitle,
+	        s.content,
+	        s.thumbnail_real,
+	        s.sellno,
+	        s.seller,
+	        r.reviewno
 	    FROM REVIEW r
 	    INNER JOIN SELLLIST s 
-	    ON r.sellno = s.sellno
-	    INNER JOIN MEMBER m 
-	    ON m.no = r.writeno
+	        ON r.sellno = s.sellno
+	    LEFT JOIN MEMBER m 
+	        ON m.no = r.writeno
 	    WHERE s.seller = #{no}
 	    ORDER BY r.writedate DESC
 	</select>

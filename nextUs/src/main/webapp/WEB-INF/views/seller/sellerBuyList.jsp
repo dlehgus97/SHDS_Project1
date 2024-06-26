@@ -155,6 +155,7 @@
             display: flex;
             flex-direction: column;
             padding-top: 20px;
+            min-height: 500px;
         }
 
         .sidebar a {

@@ -49,6 +49,7 @@
             display: flex;
             flex-direction: column;
             padding-top: 20px;
+            min-height: 500px;
         }
 
         .sidebar a {
@@ -226,6 +227,25 @@
             margin: 20px 0;
             color: #555;
         }
+        .big-category-container {
+        	margin-top: 15px;
+        	margin-bottom: 15px;
+        }
+		.category-container {
+            display: flex;
+            align-items: center;
+        }
+        .category-container label {
+            margin-right: 10px;
+        }
+        
+        .bank-container {
+			display: flex;
+            align-items: center;
+        }
+		.bank-container select {
+            margin-right: 20px; /* 원하는 간격으로 조정하세요 */
+        }
     </style>
 </head>
 <body>
@@ -246,21 +266,44 @@
 			        <div class="edit-form">
 			    		<label for="info">설명</label>
 			            <textarea id="info" name="info">${seller.info}</textarea>
-			            
-			            <label for="category1">카테고리 1</label>
-			            <input type="text" id="category1" name="category1" value="${seller.category1}">
-			            
-			            <label for="category2">카테고리 2</label>
-			            <input type="text" id="category2" name="category2" value="${seller.category2}">
-			            
-			            <label for="bank">은행</label>
-			            <input type="text" id="bank" name="bank" value="${seller.bank}">
-			            
-			            <label for="account">계좌번호</label>
-			            <input type="text" id="account" name="account" value="${seller.account}">
-			            
+			            <div class="big-category-container">
+							<div class="category-container">
+		                        <label for="mainCategory1">카테고리 1</label>
+		                        <select id="mainCategory1" onchange="updateSubCategory('mainCategory1', 'subCategory1')">
+		                            <option value="">선택하세요</option>
+		                        </select>
+		
+		                        <label for="subCategory1"></label>
+		                        <select id="subCategory1" name="category1">
+		                            <option value="">선택하세요</option>
+		                        </select>
+							</div>
+							<div class="category-container">
+		                        <label for="mainCategory2">카테고리 2</label>
+		                        <select id="mainCategory2" onchange="updateSubCategory('mainCategory2', 'subCategory2')">
+		                            <option value="">선택하세요</option>
+		                        </select>
+		
+		                        <label for="subCategory2"></label>
+		                        <select id="subCategory2" name="category2">
+		                            <option value="">선택하세요</option>
+		                        </select>
+							</div>
+						</div>
+                        <div class="bank-container">		            
+				            <label for="bank">계좌</label>
+				            <select id="bank" name="bank">
+							    <option value="shinhan">신한</option>
+							    <option value="hana">하나</option>
+							    <option value="woori">우리</option>
+							    <option value="toss">토스</option>
+							</select>
+	
+				            <label for="account"></label>
+				            <input type="text" id="account" name="account" value="${seller.account}">
+						</div>
 			            <div class="button-container">
-			                <button type="submit" class="btn-submit" onclick="confirmSubmit()">확인</button>
+			                <button type="submit" class="btn-submit" onclick="return confirmSubmit()">확인</button>
 			                <a href="seller/sellerEdit" class="btn-cancel">취소</a>
 			            </div>
 			        </div>
@@ -271,13 +314,134 @@
 
         <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     </div>
-    <script>
-	    function confirmSubmit() {
-	        if (confirm("정말 수정하시겠습니까?")) {
-	        	alert("수정되었습니다.");
-	            document.getElementById('myForm').submit();
+<script>
+	const categories = [
+	    { categoryno: 1, categoryname: "웹", nested: null },
+	    { categoryno: 2, categoryname: "모바일", nested: null },
+	    { categoryno: 3, categoryname: "인공지능", nested: null },
+	    { categoryno: 4, categoryname: "기타", nested: null },
+	    { categoryno: 5, categoryname: "홈페이지", nested: 1 },
+	    { categoryno: 6, categoryname: "UI, 퍼블리싱", nested: 1 },
+	    { categoryno: 7, categoryname: "검색최적화", nested: 1 },
+	    { categoryno: 8, categoryname: "애널리틱스", nested: 1 },
+	    { categoryno: 9, categoryname: "안드로이드", nested: 2 },
+	    { categoryno: 10, categoryname: "iOS", nested: 2 },
+	    { categoryno: 11, categoryname: "기타", nested: 2 },
+	    { categoryno: 12, categoryname: "생산형 AI", nested: 3 },
+	    { categoryno: 13, categoryname: "머신러닝, 딥러닝", nested: 3 },
+	    { categoryno: 14, categoryname: "보안", nested: 4 },
+	    { categoryno: 15, categoryname: "QA", nested: 4 },
+	    { categoryno: 16, categoryname: "기술지원", nested: 4 },
+	    { categoryno: 17, categoryname: "파일변환", nested: 4 }
+	];
+	
+	// 대분류 카테고리 선택 옵션 추가
+	const mainCategorySelect1 = document.getElementById('mainCategory1');
+	const subCategorySelect1 = document.getElementById('subCategory1');
+	const mainCategorySelect2 = document.getElementById('mainCategory2');
+	const subCategorySelect2 = document.getElementById('subCategory2');
+	
+	function populateMainCategory() {
+	    categories.filter(cat => cat.nested === null).forEach(cat => {
+	        const option1 = document.createElement('option');
+	        option1.value = cat.categoryno;
+	        option1.textContent = cat.categoryname;
+	        mainCategorySelect1.appendChild(option1);
+	
+	        const option2 = document.createElement('option');
+	        option2.value = cat.categoryno;
+	        option2.textContent = cat.categoryname;
+	        mainCategorySelect2.appendChild(option2);
+	    });
+	}
+	
+	// 소분류 카테고리 업데이트
+	function updateSubCategory(mainCategoryId, subCategoryId) {
+	    const mainCategorySelect = document.getElementById(mainCategoryId);
+	    const subCategorySelect = document.getElementById(subCategoryId);
+	    const selectedMainCategory = mainCategorySelect.value;
+	    subCategorySelect.innerHTML = '<option value="">선택하세요</option>';
+	
+	    if (selectedMainCategory) {
+	        categories.filter(cat => cat.nested == selectedMainCategory).forEach(cat => {
+	            const option = document.createElement('option');
+	            option.value = cat.categoryno;
+	            option.textContent = cat.categoryname;
+	            subCategorySelect.appendChild(option);
+	        });
+	    }
+	}
+	
+	// 매핑 객체 생성
+	const bankMapping = {
+	    "shinhan": "신한",
+	    "hana": "하나",
+	    "woori": "우리",
+	    "toss": "토스"
+	};
+	
+	// 페이지 로드 시, DB에서 가져온 값을 한국어로 변환 및 카테고리 설정
+	window.onload = function() {
+	    populateMainCategory();
+	
+	    // 이전에 저장된 카테고리 값 설정
+	    const savedSubCategory1 = "${seller.category1}";
+	    const savedMainCategory1 = categories.find(cat => cat.categoryno == savedSubCategory1)?.nested;
+	    
+	    const savedSubCategory2 = "${seller.category2}";
+	    const savedMainCategory2 = categories.find(cat => cat.categoryno == savedSubCategory2)?.nested;
+	
+	    if (savedMainCategory1 !== undefined) {
+	        mainCategorySelect1.value = savedMainCategory1;
+	        updateSubCategory('mainCategory1', 'subCategory1');
+	        subCategorySelect1.value = savedSubCategory1;
+	    }
+	
+	    if (savedMainCategory2 !== undefined) {
+	        mainCategorySelect2.value = savedMainCategory2;
+	        updateSubCategory('mainCategory2', 'subCategory2');
+	        subCategorySelect2.value = savedSubCategory2;
+	    }
+	
+	    // DB에서 가져온 값을 한국어로 변환
+	    const selectedBank = "${seller.bank}";
+	    document.getElementById('bank').value = selectedBank;
+	};
+	
+	// 폼이 제출되기 전에 한국어 값을 영어로 변환
+	document.querySelector('form').onsubmit = function() {
+	    // 카테고리 값 가져오기
+
+	    
+	    const bankSelect = document.getElementById('bank');
+	    const selectedBankKor = bankSelect.options[bankSelect.selectedIndex].text;
+	    
+	    for (let key in bankMapping) {
+	        if (bankMapping[key] === selectedBankKor) {
+	            bankSelect.value = key;
+	            break;
 	        }
 	    }
-    </script>
+	};
+	
+	function confirmSubmit() {
+	    if (confirm("정말 수정하시겠습니까?")) {
+		    const subCategory1 = document.getElementById('subCategory1').value;
+		    const subCategory2 = document.getElementById('subCategory2').value;
+		    
+		    // 카테고리 값이 같으면 경고 메시지 표시
+		    if (subCategory1 === subCategory2) {
+		        alert("카테고리를 다르게 설정해주세요.");
+		        event.preventDefault(); // 폼 제출 방지
+		        return false;
+		    }
+		    
+	        alert("수정되었습니다.");
+	        return true;
+	    } else {
+	        return false;
+	    }
+	};
+</script>
 </body>
 </html>
