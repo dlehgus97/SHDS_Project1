@@ -8,9 +8,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/success.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-	rel="stylesheet">
 </head>
 <body>
 	<div>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/font.css">
 </head>
 <body>
 <!-- HEADER -->
@@ -17,7 +18,7 @@
     </div>
     <div id="header_logo_container">
     	<a href="/index.do">
-	    	<img id="header_logo_icon" src="../resources/imgs/nexus2.png" alt="logo">
+	    	<img id="header_logo_icon" src="/resources/imgs/nexus2.png" alt="logo">
 	    </a>
     </div>
     <div id="header_right_container">
@@ -33,7 +34,7 @@
 	                <a id="header_regist_seller" class="header_right_object" href="/seller/sellerReqList.do">셀러등록</a>
 	            </c:if>
 	            <div id="header_chat" class="header_right_object">
-	                <img id="header_chat_img" src="../resources/imgs/icons/CHAT.png">
+	                <img id="header_chat_img" src="/resources/imgs/icons/CHAT.png">
 	                <a href="/chat/chats.do" id="header_chat_text" class="text_color_white">CHAT</a>
 	            </div>
 	            <div id="login_status" class="header_right_object">

@@ -108,7 +108,7 @@
 }
 
 .text_color_white {
-    color: #FFF;
+    color: #FFF !important;
 }
 
 .header_right_object {
