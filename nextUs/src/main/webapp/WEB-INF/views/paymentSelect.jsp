@@ -88,7 +88,7 @@
 					<!-- todo setting img file route -->
 						<div class="thumbnail_container">
 							<a href="/selllist/view.do?no=${cartVO.sellno}">
-								<img src="/upload/board/${cartVO.thumbnail_real }" alt="product_thumbnail" class="thumbnail">
+								<img src="/upload/thumbnail/${cartVO.thumbnail_real }" alt="product_thumbnail" class="thumbnail">
 							</a>
 						</div>
 						<div class="product_center_container">

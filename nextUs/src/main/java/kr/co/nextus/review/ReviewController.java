@@ -30,6 +30,8 @@ public class ReviewController {
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		int r = service.insert(vo, request);
 		int n = service.update(vo, request);
+		//셀러에 업데이트 해주는게 필요함
+		service.updateSeller(vo);
 		int m = service.updateisreview(vo);
 		if (r > 0 && n > 0 && m > 0) {
 			model.addAttribute("cmd", "move");

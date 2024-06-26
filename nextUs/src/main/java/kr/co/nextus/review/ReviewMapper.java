@@ -14,6 +14,7 @@ public interface ReviewMapper {
     int count(ReviewVO vo);
     int insert(ReviewVO vo);
     int update(ReviewVO vo);
+    void updateSeller(ReviewVO vo);
     int updateisreview(ReviewVO vo);
     int delete(@Param("reviewno") int reviewno);
 }

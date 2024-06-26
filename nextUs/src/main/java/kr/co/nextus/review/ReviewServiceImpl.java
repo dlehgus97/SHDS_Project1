@@ -61,6 +61,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
+	public void updateSeller(ReviewVO vo) {
+		mapper.updateSeller(vo);
+	}
+	
+	@Override
 	public int updateisreview(ReviewVO vo) {
 		return mapper.updateisreview(vo);
 

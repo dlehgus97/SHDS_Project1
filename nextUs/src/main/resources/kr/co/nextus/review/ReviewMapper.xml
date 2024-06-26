@@ -35,6 +35,15 @@
 		WHERE sellno=#{sellno};
 	</update>
 	
+	<update id="updateSeller" parameterType="kr.co.nextus.review.ReviewVO">
+		UPDATE seller
+		    SET
+		        review_cnt = review_cnt + 1,
+		        rating_avg = ((rating_avg * review_cnt) + #{score}) / (review_cnt + 1)
+		    WHERE
+		        seller_id = #{seller}
+	</update>
+	
 	
 	<!-- 리뷰작성여부 업데이트 -->
 	<update id="updateisreview" parameterType="kr.co.nextus.review.ReviewVO">
