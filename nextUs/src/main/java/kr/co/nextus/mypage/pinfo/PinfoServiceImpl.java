@@ -41,7 +41,7 @@ public class PinfoServiceImpl implements PinfoService {
 		 if ("none".equals(request.getParameter("isprofile"))) {
 			 	MemberVO data = mapper.list(vo);
 				mapper.fileDelete(vo.getNo());
-				File f = new File(request.getRealPath("/upload/board/")+data.getProfile_real());
+				File f = new File(request.getRealPath("/upload/profile/")+data.getProfile_real());
 				f.delete();
 		 }
 		 if (!file.isEmpty()) {
@@ -50,7 +50,7 @@ public class PinfoServiceImpl implements PinfoService {
 			String ext = org.substring(org.lastIndexOf("."));
 			String real = System.currentTimeMillis()+ext;
 			// 파일저장
-			String path = request.getRealPath("/upload/board/")+real;
+			String path = request.getRealPath("/upload/profile/")+real;
 			try {
 				file.transferTo(new File(path));
 			} catch (Exception e) {}

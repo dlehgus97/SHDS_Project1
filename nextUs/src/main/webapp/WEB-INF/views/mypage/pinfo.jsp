@@ -390,7 +390,7 @@
 				    </label>
 				    
 				    <!-- Image -->
-				    <img id="profileImage" class="card-img-top" src="/upload/board/${member.profile_real}" alt="..." 
+				    <img id="profileImage" class="card-img-top" src="/upload/profile/${member.profile_real}" alt="..." 
 				         style="width: 300px; height: 300px; object-fit: cover; display: block; margin-top: 10px;"
 				         onerror="this.onerror=null;this.src='/resources/imgs/default_profile.png';">
 				    
