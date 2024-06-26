@@ -124,7 +124,7 @@
                             </div>
                             <div class="social-group">
                                 <!-- 카카오톡 간편로그인 -->
-                                <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=2acf526c8960600ac4bb86eac6ea31ab&redirect_uri=http://localhost:8090/member/kakaocallback&response_type=code">
+                                <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=2acf526c8960600ac4bb86eac6ea31ab&redirect_uri=http://13.125.219.9:8090/member/kakaocallback&response_type=code">
                                     <img src="/resources/imgs/icons/kakao_login_medium_narrow.png" alt="카카오 로그인">
                                 </a>
                                 <!-- 네이버 간편로그인 -->
