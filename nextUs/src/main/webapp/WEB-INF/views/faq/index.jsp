@@ -51,7 +51,7 @@
 									id="faqCollapseParentOne">
 									<li class="list-group-item">
 										<!-- Toggle --> <a
-										class="dropdown-toggle d-block fs-lg fw-bold text-reset"
+										class=" d-block fs-lg fw-bold text-reset"
 										data-bs-toggle="collapse" href="#faqCollapse${vo.no}"> Q.
 											${vo.question } </a> <!-- Collapse -->
 										<div class="collapse" id="faqCollapse${vo.no}"
