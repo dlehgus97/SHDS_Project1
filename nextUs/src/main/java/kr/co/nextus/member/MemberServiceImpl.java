@@ -189,11 +189,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean processKakaoLogin(HashMap<String, Object> userInfo) {
+    public int processKakaoLogin(HashMap<String, Object> userInfo) {
         String email = (String) userInfo.get("email");
 
         if (email == null) {
-            return false; // 이메일 정보가 없으면 처리 불가능
+            return 3; // 이메일 정보가 없으면 처리 불가능
         }
         MemberVO vo = new MemberVO();
         vo.setEmail(email);
@@ -203,7 +203,8 @@ public class MemberServiceImpl implements MemberService {
         MemberVO member = mapper.findByEmail2(vo);
 
         if (member != null) {
-            return true;
+        	//로그인 가능 이미 가입함
+            return 1;
         } else {
             // 새로운 회원으로 DB에 저장
             String nickname = (String) userInfo.get("nickname");
@@ -220,10 +221,9 @@ public class MemberServiceImpl implements MemberService {
                 String generatedNickname = "Kakao" + newMember.getNo(); // Kakao + 회원 번호 조합
                 newMember.setNickname(generatedNickname);
                 mapper.updateNickname(newMember.getNo(), generatedNickname); // 닉네임 업데이트
-                
-                return true;
+                return 2;
             } else {
-                return false; // 회원 등록 실패
+                return 3; // 회원 등록 실패
             }
         }
     }

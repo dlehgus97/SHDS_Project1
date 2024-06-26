@@ -12,6 +12,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="/resources/js/index.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
@@ -21,7 +22,14 @@
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
 
-
+<script>
+	$(document).ready(function() {
+		if (${snsmsg} != null) {
+			alert("${snsmsg}");
+			console.log('하이 ${snsmsg} 입니다.')
+		}
+	})
+</script>
 
 <style>
 	.bg-purple {background-color: #d3d3d3;}

@@ -3,6 +3,8 @@ package kr.co.nextus.main;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,7 @@ public class MainController {
 	private SellerRankService sellerRankService;
 	
 	@GetMapping({"/index.do","/"})
-	public String index(Model model, SellListVO vo, CategoryVO catevo, SellerRankVO sellerrankvo) {
+	public String index(Model model, SellListVO vo, CategoryVO catevo, SellerRankVO sellerrankvo, HttpSession sess) {
 		model.addAttribute("mainBanner", eventService.mainBanner());
 		List<CategoryVO> catelist = categoryService.list(catevo);
 		List<SellerRankVO> sellerranklist1 = sellerRankService.list1(sellerrankvo);
@@ -62,6 +64,8 @@ public class MainController {
 	    model.addAttribute("rank4", sellerranklist4);
 	    model.addAttribute("popularList", popularList.get("list")); // view_cnt 기준 리스트 추가
 	    model.addAttribute("recentList", recentList.get("list")); // postdate 기준 리스트 추가
+	    model.addAttribute("snsmsg", sess.getAttribute("snsmsg"));
+	    sess.removeAttribute("snsmsg");
 		return "index";
 	}
 	//신규등록순

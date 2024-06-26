@@ -300,15 +300,15 @@ public class MemberController {
     }
     
     @GetMapping("/member/kakaocallback")
-    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, RedirectAttributes redirectAttributes, HttpSession session, Model model) {
         if (code != null) {
             String access_Token = service.getAccessToken(code); // 인증 코드로 Access Token 요청
             HashMap<String, Object> userInfo = service.getUserInfo(access_Token); // Access Token으로 사용자 정보 요청
             
             // 카카오 사용자 정보를 DB에 저장하거나 기존 회원 여부 확인
-            boolean isExistingMember = service.processKakaoLogin(userInfo);
+            int isExistingMember = service.processKakaoLogin(userInfo);
 
-            if (isExistingMember) {
+            if (isExistingMember < 2) {
                 // 기존 회원이라면 세션에 사용자 정보 저장
                 MemberVO loginMember = new MemberVO(); // 예시로 MemberVO 객체 생성
                 loginMember.setEmail((String) userInfo.get("email")); // 카카오에서 받은 이메일 정보 사용
@@ -325,12 +325,19 @@ public class MemberController {
                 } else {
                     // 정상 로그인 처리
                     session.setAttribute("login", login); // 세션에 로그인 정보 저장
+                    if (isExistingMember == 2) {
+                    	session.setAttribute("snsmsg", "초기 비밀번호는 " + login.getPwd() + "입니다. 마이페이지에서 수정해주세요.");
+                    }
                     return "redirect:/index.do"; // 메인 페이지로 리다이렉트
                 }
-            } else {
+            } else if (isExistingMember == 2) {
                 // 신규 회원이라면 회원가입 페이지로 이동하거나 추가적인 처리
                 redirectAttributes.addFlashAttribute("userInfo", userInfo); // 사용자 정보를 Flash 속성에 담아서 전달
                 return "redirect:/member/regist.do"; // 회원 등록 페이지로 이동
+            }
+            else {
+                // 카카오 로그인 실패 시 처리
+                return "redirect:/login/error"; // 에러 페이지로 리다이렉트
             }
         } else {
             // 카카오 로그인 실패 시 처리

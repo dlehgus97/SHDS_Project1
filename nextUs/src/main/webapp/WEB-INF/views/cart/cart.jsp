@@ -74,7 +74,7 @@
 	                <div class="col-3">
 	                  <!-- Image -->
 	                  <a>
-	                    <img src="/upload/board/${vo.thumbnail_real }" id="thumbnail-img">
+	                    <img src="/upload/thumbnail/${vo.thumbnail_real }" id="thumbnail-img">
 	                  </a>
 	                </div>
 	                <div class="col">

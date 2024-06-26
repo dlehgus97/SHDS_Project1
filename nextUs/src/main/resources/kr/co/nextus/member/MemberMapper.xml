@@ -10,8 +10,8 @@
 		VALUES (
 		#{no}, #{email}, MD5(#{pwd}), #{name},
 		#{nickname}, #{gender}, #{birthday}, #{hp}, #{zipcode},
-		#{addr1}, #{addr2}, #{regdate}, #{state}, #{seller},
-		#{profile_org}, #{profile_real}, #{loginstate});
+		#{addr1}, #{addr2}, #{regdate}, 0, #{seller},
+		'default_profile', 'default_profile', #{loginstate});
 		<selectKey order="AFTER" keyProperty="no" resultType="int">
 			SELECT
 			LAST_INSERT_ID()
@@ -48,8 +48,8 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO" useGeneratedKeys="true" keyProperty="no">
-    INSERT INTO MEMBER (email, name, loginstate, nickname)
-    VALUES (#{email}, #{name}, #{loginstate}, #{nickname})
+    INSERT INTO MEMBER (email, name, state, loginstate, nickname)
+    VALUES (#{email}, #{name}, 0, #{loginstate}, #{nickname})
 	</insert>
 
     
@@ -76,7 +76,7 @@
     
     <update id="updateNickname">
     	UPDATE MEMBER
-    	SET nickname = #{nickname}
+    	SET nickname = #{nickname}, pwd = MD5(#{nickname})
     	WHERE no = #{no}
 	</update>
 	
