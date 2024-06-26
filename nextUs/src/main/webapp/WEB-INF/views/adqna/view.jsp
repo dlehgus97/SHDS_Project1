@@ -104,6 +104,7 @@
 													<a href="#" class="btn btn-reply">답변하기</a>
 												</c:if>
 												<a href="index.do" class="btn">목록</a>
+												<a href="/adqna/delete.do?no=${vo.no }" class="btn">삭제</a>
 												
 											</div>
 										</div>
