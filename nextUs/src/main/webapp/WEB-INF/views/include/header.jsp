@@ -41,7 +41,7 @@
 	            </div>
 	            <div class="header_right_object">
 	            	<a href="/mypage/orderlist.do" class="text_color_white" style="font-size: 18px; text-decoration-line: none;">마이페이지</a>
-	            	<img src="" id="header_profile" alt="프로필">
+	            	<img src="/upload/profile/${login.profile_real }" id="header_profile" alt="프로필">
 	            </div>
 	            <div></div><div></div>
 	            <div class="header_right_object">

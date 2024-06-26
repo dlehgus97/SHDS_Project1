@@ -39,7 +39,7 @@
 		s.*
 		FROM SELLERREQUEST s
 		LEFT JOIN MEMBER m ON s.memberno = m.no
-		WHERE s.memberno = #{no} 
+		WHERE s.memberno = #{no} AND state = 1
 	</select>
 	
 	
@@ -47,7 +47,7 @@
 	<update id="approve" parameterType="kr.co.nextus.sellerrequest.SellerRequestVO">
 		UPDATE SELLERREQUEST SET
 		state = 0
-		WHERE memberno = #{memberno}
+		WHERE memberno = #{memberno} AND state = 1
 	</update>
 	
 	

@@ -79,11 +79,8 @@ public class SellerRequestServiceImpl implements SellerRequestService {
 
 		  try {
 		        result += mapper.approve(vo);
-		        System.out.println("AAA"+"1");
 		        result += sellerMapper.insertSellerByAdmin(vo);
-		        System.out.println("AAA"+"2");
 		        result += MemberMapper.sellerRegist(memberno);
-		        System.out.println("AAA"+"3");
 
 		    } catch (Exception e) {
 		        // 예외 처리 로직

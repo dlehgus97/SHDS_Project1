@@ -294,9 +294,8 @@
 				            <label for="bank">계좌</label>
 				            <select id="bank" name="bank">
 							    <option value="shinhan">신한</option>
-							    <option value="hana">하나</option>
+							    <option value="kookmin">국민</option>
 							    <option value="woori">우리</option>
-							    <option value="toss">토스</option>
 							</select>
 	
 				            <label for="account"></label>
@@ -374,10 +373,9 @@
 	
 	// 매핑 객체 생성
 	const bankMapping = {
-	    "shinhan": "신한",
-	    "hana": "하나",
-	    "woori": "우리",
-	    "toss": "토스"
+	    "shinhan": "신한은행",
+	    "kookmin": "국민은행",
+	    "woori": "국민은행"
 	};
 	
 	// 페이지 로드 시, DB에서 가져온 값을 한국어로 변환 및 카테고리 설정

@@ -39,7 +39,7 @@
 		<c:forEach var="vo" items="${list }">
 			<a class="chat_rooms" href="/chat/detail.do?chatno=${vo.chatno }&chatMember=${vo.chatMember }" style="test-decoration: none;">
 				<!-- 나중에 프로필 폴더로 변경 필요 -->
-				<img src="/upload/board/${vo.profile_real }" id="profile" alt="프로필">
+				<img src="/upload/profile/${vo.profile_real }" id="profile" alt="프로필">
 				<p id="nickname">${vo.senderNickname }</p>
 				<p id="content">${vo.content }</p>
 				<c:if test="${vo.read_flag == 1 && not empty unReadList[vo.chatno]}">
