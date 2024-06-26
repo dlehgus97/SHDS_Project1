@@ -48,7 +48,7 @@
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     
 	<script>
-		var webSocket = new WebSocket("ws://localhost:8090/websocket");
+		var webSocket = new WebSocket("ws://13.125.219.9:8090/websocket");
 		var messageTextArea = document.getElementById("messageTextArea");
 		var messageContainer = document.getElementById("messageContainer");
 		var lastSenderNo = "${previousSenderno}";
