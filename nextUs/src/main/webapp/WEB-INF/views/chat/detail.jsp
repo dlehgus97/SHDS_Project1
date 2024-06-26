@@ -27,7 +27,7 @@
 				<c:forEach var="vo" items="${list }">
 					<c:if test="${login.no != vo.senderno && previousSenderno != vo.senderno}">
 						<div class="profile_container">
-							<img class="profile-img" src="/upload/board/${vo.profile_real}" alt="Profile Image">
+							<img class="profile-img" src="/upload/profile/${vo.profile_real}" alt="Profile Image">
 							<p>${vo.senderNickname }</p>
 						</div>
                     </c:if>
@@ -148,7 +148,7 @@
 					profileBox.classList.add("profile_container");
 					var profileImg = document.createElement("img");
 					profileImg.classList.add("profile-img");
-					profileImg.src = "/upload/board/" + profile_real;
+					profileImg.src = "/upload/profile/" + profile_real;
 					var profileNickname = document.createElement("p");
 					profileNickname.textContent = "${list[0].senderNickname}";
 					profileBox.appendChild(profileImg);
