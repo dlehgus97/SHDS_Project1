@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/resources/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/cart.css">
     <!-- Title -->
-    <title>Shopper</title>
+    <title>카트 | NEXt Us</title>
   </head>
   <body>
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
