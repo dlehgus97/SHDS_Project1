@@ -173,7 +173,7 @@
                 <div class="rating-container">
 					<div class="average-rating">
                         <div class="stars-outer">
-                            <div class="stars-inner" data-rating="${seller.rating_avg}"></div>
+                            <div class="stars-inner" data-rating="${sellerRating.rating_avg}"></div>
                         </div>
                     </div>
                     <div class="count-rating"><fmt:formatNumber value="${sellerRating.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /> (${sellerRating.review_cnt})</div>
