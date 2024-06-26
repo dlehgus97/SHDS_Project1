@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nextus.buylist.BuyListService;
 import kr.co.nextus.buylist.BuyListVO;
+import kr.co.nextus.member.MemberVO;
 import kr.co.nextus.sellerrequest.SellerRequestService;
 import kr.co.nextus.sellerrequest.SellerRequestVO;
 
@@ -42,7 +44,9 @@ public class QnAController {
 	}
 	
 	@PostMapping("/qna/insert.do")
-	public String insert(Model model, QnAVO vo) {
+	public String insert(Model model, QnAVO vo, HttpSession sess, MemberVO memvo) {
+		MemberVO login = (MemberVO) sess.getAttribute("login");
+		vo.setWriter(login.getNo());
 		int r = service.insert(vo);
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
