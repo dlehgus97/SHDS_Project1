@@ -35,11 +35,11 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-0 fs-xs text-gray-400">
-              <li class="breadcrumb-item">
-                <a class="text-gray-400" href="index.html">Home</a>
+              <li>
+                <a class="text-gray-400" href="index.html">Home &ensp;></a>
               </li>
               <li class="breadcrumb-item active">
-                마이페이지
+               &ensp; 마이페이지
               </li>
             </ol>
 
@@ -65,22 +65,22 @@
             <!-- Nav -->
             <nav class="mb-10 mb-md-0">
               <div class="list-group list-group-sm list-group-strong list-group-flush-x">
-                <a class="list-group-item list-group-item-action dropend-toggle active" href="orderlist.do">
+                <a class="list-group-item list-group-item-action" href="orderlist.do">
                   주문 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="wishlist.do">
+                <a class="list-group-item list-group-item-action" href="wishlist.do">
                   찜 목록
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="pinfo.do">
+                <a class="list-group-item list-group-item-action" href="pinfo.do">
                   내 정보 수정
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="asklist.do">
+                <a class="list-group-item list-group-item-action" href="asklist.do">
                   문의 내역
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle " href="couponlist.do">
+                <a class="list-group-item list-group-item-action" href="couponlist.do">
                   보유 쿠폰
                 </a>
-                <a class="list-group-item list-group-item-action dropend-toggle" href="withdrawal.do">
+                <a class="list-group-item list-group-item-action" href="withdrawal.do">
                   회원 탈퇴
                 </a>
               </div>
