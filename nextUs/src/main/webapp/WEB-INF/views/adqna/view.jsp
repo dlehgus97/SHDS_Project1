@@ -35,12 +35,21 @@
             justify-content: space-between;
             align-items: center;
         }
+        .answer-text {
+        	width: 50%;
+        	margin-right: 50px;
+        	text-align: left;
+        }
+        .answer-date {
+        	width: 20%;
+        	margin-right: 50px;
+        }
 
         .answer-box .answer-text {
             flex: 1;
         }
 
-      .answer-box .btnSet {
+        .answer-box .btnSet {
             display: flex;
             flex-direction: column;
             gap: 10px;
