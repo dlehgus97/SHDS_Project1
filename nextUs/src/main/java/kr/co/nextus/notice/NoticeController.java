@@ -88,4 +88,9 @@ public class NoticeController {
 	        model.addAttribute("pageTitle", "KaKaoMap");
 	        return "notice/map"; // 매핑할 JSP 파일 경로 (notice 폴더 내의 map.jsp)
 	    }
+	 
+	 @GetMapping("/notice/company.do")
+	 public String company() {
+	     return "notice/company"; // 매핑할 JSP 파일 경로 (notice 폴더 내의 map.jsp)
+	 }
 }
