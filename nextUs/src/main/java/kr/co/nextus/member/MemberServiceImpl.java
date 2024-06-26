@@ -103,7 +103,7 @@ public class MemberServiceImpl implements MemberService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=2acf526c8960600ac4bb86eac6ea31ab"); // 카카오 개발자 페이지에서 발급받은 클라이언트 ID
-            sb.append("&redirect_uri=http://localhost:8090/member/kakaocallback"); // 등록된 Redirect URI
+            sb.append("&redirect_uri=http://13.125.219.9:8090/member/kakaocallback"); // 등록된 Redirect URI
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
