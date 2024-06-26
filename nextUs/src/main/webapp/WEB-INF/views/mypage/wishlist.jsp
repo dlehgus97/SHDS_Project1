@@ -125,7 +125,7 @@
                     </a>
 
                     <!-- Image -->
-                    <img class="card-img-top" src="/upload/board/${wishlist.thumbnail_real}" alt="...">
+                    <img class="card-img-top" src="/upload/thumbnail/${wishlist.thumbnail_real}" alt="...">
 
                   </div>
 

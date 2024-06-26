@@ -53,9 +53,7 @@ public class SellListController {
 	@GetMapping("/selllist/index.do")
 	public String list(Model model, HttpSession sess, @RequestParam("categoryno")int categoryno, SellListVO vo) {
 		vo.setCategoryno(categoryno);
-		vo.setDepth(2);
-		vo.setValue(1);
-		Map<String, Object> list = sellListService.list(vo);
+		Map<String, Object> list = sellListService.catelist(vo);
 		String categoryname = sellListService.categoryname(categoryno);
 		model.addAttribute("vo", list);
 		model.addAttribute("categoryname", categoryname);

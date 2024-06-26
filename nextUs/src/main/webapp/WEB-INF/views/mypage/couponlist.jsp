@@ -124,6 +124,7 @@
 		          	</c:if>
 					
 					<c:forEach var="coupon" items="${couponlist }">
+					<c:if test="${coupon.status == 1}">
 					<div class="col-12 col-lg-6">
 					<!-- 반복 시작 -->
 	                <!-- Card -->
@@ -150,6 +151,7 @@
 		                  </div>
 	                	</div>
 	                </div>
+	                </c:if>
 	                <!-- 반복 끝 -->
 	                </c:forEach>
 	

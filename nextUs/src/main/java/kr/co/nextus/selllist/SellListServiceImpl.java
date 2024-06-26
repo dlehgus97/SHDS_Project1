@@ -52,6 +52,37 @@ public class SellListServiceImpl implements SellListService {
 		return map;
 	}
 	
+	
+	//카테고리별 페이지용
+	@Override
+	public Map<String, Object> catelist(SellListVO param) {
+		int count = mapper.catecount(param); // 총개수
+        // 총페이지수
+        int totalPage = count / 8;
+        if (count % 8 > 0) totalPage++;
+        List<SellListVO> catelist = mapper.catelist(param); // 목록
+        
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        map.put("list", catelist);
+        map.put("categoryno", param.getCategoryno());
+        map.put("categoryname", param.getCategoryname());
+        
+        // 하단에 페이징처리
+        int endPage = (int)(Math.ceil(param.getPage()/8.0)*8);
+        int startPage = endPage - 7;
+        if (endPage > totalPage) endPage = totalPage;
+        boolean isPrev = startPage > 1;
+        boolean isNext = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("isPrev", isPrev);
+		map.put("isNext", isNext);
+		return map;
+	}
+	
+	
 	@Override
 	public List<SellListVO> relation(SellListVO vo) {
 		return mapper.relation(vo);
