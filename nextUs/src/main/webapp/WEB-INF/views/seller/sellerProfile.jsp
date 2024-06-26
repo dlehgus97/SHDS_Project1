@@ -146,6 +146,11 @@
 		    font-family: FontAwesome;
 		    display: block;
 		}
+		
+		.yellow-star {
+            color: #f8ce0b;
+            font-size: 15px; /* 원하는 크기로 조정 가능 */
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -242,7 +247,7 @@
                     <tr>
                         <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
                         <td>${sellproduct.title}</td>
-                        <td><span style="color: gold;">&#9733;</span> <fmt:formatNumber value="${sellproduct.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /></td>
+                        <td><i class="fas fa-star yellow-star"></i> <fmt:formatNumber value="${sellproduct.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /></td>
                         <td>${sellproduct.review_cnt}</td>
                         <td>${sellproduct.like_count}</td>
                     </tr>
