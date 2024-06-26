@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>header/title>
+<title>header</title>
 </head>
 <body>
 <!-- HEADER -->
