@@ -11,11 +11,18 @@
 
 	
     <select id="getSellerByNo" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
-        SELECT nickname, info, category1, category2, bank, account, rating_avg, review_cnt, profile_real
+        SELECT nickname, info, category1, category2, bank, account, profile_real
         FROM SELLER s
         INNER JOIN MEMBER m
         ON m.no = s.no
         WHERE m.no = #{no}
+    </select>
+    
+	<select id="getSellerRating" parameterType="int" resultType="kr.co.nextus.seller.SellerVO">
+        SELECT AVG(r.score) AS rating_avg, COUNT(r.score) AS review_cnt
+		FROM REVIEW r
+		INNER JOIN SELLLIST s ON r.sellno = s.sellno
+		WHERE s.seller = #{no};
     </select>
     
 	<select id="getSellerBuyList" parameterType="int" resultType="kr.co.nextus.buylist.BuyListVO">

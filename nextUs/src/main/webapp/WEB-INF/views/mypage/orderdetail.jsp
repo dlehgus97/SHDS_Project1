@@ -175,7 +175,7 @@
                       <div class="col-4 col-md-3 col-xl-2">
 
                         <!-- Image -->
-                        <a href="/selllist/view.do?sellno=${order.sellno }"><img src="/upload/board/${order.sellthumbnail}" alt="..." class="img-fluid"></a>
+                        <a href="/selllist/view.do?sellno=${order.sellno }"><img src="/upload/thumbnail/${order.sellthumbnail}" alt="..." class="img-fluid"></a>
 
                       </div>
                       <div class="col">

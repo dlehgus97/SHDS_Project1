@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface SellListService {
 	Map<String, Object> list(SellListVO vo);
+	
+	Map<String, Object> catelist(SellListVO vo);
 
 	
 	List<SellListVO> relation(SellListVO vo);

@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/reset.css"/>
     <link rel="stylesheet" href="/resources/css/style.css"/>
@@ -145,8 +146,8 @@
 		}
         
 		.title-container {
-		    padding: 10px;
-		    font-size: 20px;
+		    padding: 15px;
+		    font-size: 18px;
 		    font-weight: bold;
 		    color: #333;
 		    /*text-align: center;*/
@@ -164,7 +165,7 @@
 		*/
 		
 		.product-details {
-		    padding: 20px;
+		    padding: 15px;
 		    flex-grow: 1;
 		    display: flex;
 		    flex-direction: column;
@@ -172,7 +173,7 @@
 		}
 
         .product-details h3 {
-            font-size: 25px;
+            font-size: 20px;
             margin: 10px 0;
             color: #333;
         }
@@ -184,7 +185,7 @@
         }
 */     
         .product-details .price {
-        	font-size: 30px;
+        	font-size: 20px;
         	font-weight: bold;
         }
         
@@ -244,36 +245,43 @@
 		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
 		}
 		
-		.star-rating {
+        .stars-outer {
             display: inline-block;
-            font-size: 24px; /* 별 사이의 공백을 제거하기 위해 0으로 설정 */
             position: relative;
+            font-family: FontAwesome;
         }
 
-        .star-rating .back-stars {
-            color: #d3d3d3; /* 회색 */
-            position: relative;
-            z-index: 1;
+        .stars-outer::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: FontAwesome;
+            color: #ccc;
+            display: block;
         }
 
-        .star-rating .front-stars {
-            color: #f8ce0b; /* 금색 */
+        .stars-inner {
             position: absolute;
-            z-index: 2;
             top: 0;
             left: 0;
+            white-space: nowrap;
             overflow: hidden;
             width: 0;
-		}
-		
+            color: #f8ce0b;
+        }
+
+        .stars-inner::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: FontAwesome;
+            display: block;
+        }
+        
 		.star-container{
 			display: flex;
 		}
 		
 		.star-container p {
-			font-size: 20px;
-			
-		}	
+		    margin-left: 10px; /* 별과 평균 별점 사이의 거리 조정 */
+		    font-size: 14px; /* 평균 별점과 리뷰 개수의 글자 크기 조정 */
+		}
 		
 		.product-picture {
 		    cursor: pointer;
@@ -313,17 +321,12 @@
                             <div class="product-details">
                             	<h4>찜하기: ${sellproduct.like_count}건 &nbsp;&nbsp;&nbsp; 조회수: ${sellproduct.view_cnt}회</h4>
 								<div class="star-container">
-									<div class="star-rating">
-							            <span class="back-stars">
-											&#9733;&#9733;&#9733;&#9733;&#9733; <!-- 빈 별 -->
-							            </span>
-							            <span class="front-stars" style="width: calc(${sellproduct.rating_avg} / 5 * 100%);">
-							                &#9733;&#9733;&#9733;&#9733;&#9733; <!-- 채워진 별 -->
-							            </span>
-							        </div>
+                                    <div class="stars-outer">
+                                        <div class="stars-inner" data-rating="${sellproduct.rating_avg}"></div>
+                                    </div>
                                 	<p><fmt:formatNumber value="${sellproduct.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /> (${sellproduct.review_cnt})</p>
                  				</div>
-                                <p class=price">${sellproduct.price}원 ~</p>
+                                <p class="price"><fmt:formatNumber value="${sellproduct.price}" type="number" pattern="#,##0" />원 ~</p>
                             </div>
 							<div class="button-container">
 								<a href="" class="btn-edit">수정하기</a>
@@ -340,17 +343,13 @@
 
 	<script>
 	    $(document).ready(function() {
-	        $('p.price').each(function() {
-	            var price = $(this).text();
-	            var formattedPrice = formatPrice(price);
-	            $(this).text(formattedPrice + '원');
-	        });
+            $('.stars-inner').each(function() {
+                var rating = $(this).data('rating');
+                var starPercentage = (rating / 5) * 100;
+                $(this).css('width', starPercentage + '%');
+            });
 	    }); // document.ready의 닫는 괄호 추가
-	
-	    function formatPrice(price) {
-	        return parseInt(price).toLocaleString('ko-KR');
-	    } // formatPrice 함수의 닫는 괄호 추가
-	
+		
 	    function confirmDelete(sellno) {
 	        if (confirm("정말 삭제하시겠습니까?")) {
 	            // 확인 버튼을 눌렀을 때, 삭제 요청을 서버로 보내는 AJAX 요청
@@ -376,11 +375,6 @@
 	            return false;
 	        }
 	    } // confirmDelete 함수의 닫는 괄호 추가
-	
-	    function setRating(rating) {
-	        const starWidth = (rating / 5) * 100;
-	        document.querySelector('.front-stars').style.width = `${starWidth}%`;
-	    }
 	</script>
 
 </body>

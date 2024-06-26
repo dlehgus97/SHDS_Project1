@@ -56,7 +56,7 @@ public class SellListVO {
 	}
 	
 	public int getStartIdx() {
-		return (page-1) * 10;
+		return (page-1) * 8;
 	}
 	
 	//index.jsp전체를 위한 value값 설정

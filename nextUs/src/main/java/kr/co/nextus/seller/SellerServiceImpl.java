@@ -39,6 +39,13 @@ public class SellerServiceImpl implements SellerService {
         // 판매자 정보로 판매자 정보 조회
     	return sellerMapper.getSellerByNo(no);
     }
+    // 판매자 정보 조회 구현 - 평균 별점, 리뷰 개수(=별점 개수)
+    @Override
+    public SellerVO getSellerDetailsRatings(int no) {
+        // 판매자 정보로 판매자 정보 조회
+    	return sellerMapper.getSellerRating(no);
+    }
+    
 
     // 판매자 정보 업데이트 구현
     @Override

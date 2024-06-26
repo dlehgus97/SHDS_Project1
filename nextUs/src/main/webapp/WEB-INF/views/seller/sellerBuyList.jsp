@@ -91,6 +91,7 @@
         }
 
         table {
+        	/*table-layout: fixed; /* 테이블 레이아웃을 고정 */
             width: 80%;
             margin: 0 auto 20px auto;
             border-collapse: collapse;
@@ -263,6 +264,16 @@
 		.mini-header span {
 		    margin-right: 100px; /* 각 항목 사이 여백 설정 */
 		}
+		
+		th {
+            min-width: 80px; /* 원하는 최소 가로 길이 설정 */
+		}
+		.transaction-status {
+            min-width: 100px; /* 원하는 최소 가로 길이 설정 */
+        }
+        .settlement-button {
+        	width: 60px;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -368,8 +379,8 @@
 		                    <th>옵션상세</th>
 		                    <th>결제금액</th>
 		                    <th>구매확정일자</th>
-		                    <th>거래상태</th>
-		                    <th>정산신청</th>
+		                    <th class="transaction-status">거래상태</th>
+		                    <th class="settlement-button">정산신청</th>
 		                </tr>
 		            </thead>
 		            <tbody>
@@ -420,10 +431,10 @@
                                 <td>
                              	    <c:choose>
 						                <c:when test="${buyitem.status == 4}">
-						                    <button class="enabled-button" data-buyno="${buyitem.buyno}" data-status="${buyitem.status}">정산신청</button>
+						                    <button class="enabled-button" data-buyno="${buyitem.buyno}" data-status="${buyitem.status}">정산<br>신청</button>
 						                </c:when>
 						                <c:otherwise>
-						                    <button class="disabled-button" data-buyno="${buyitem.buyno}" data-status="${buyitem.status}">신청불가</button>
+						                    <button class="disabled-button" data-buyno="${buyitem.buyno}" data-status="${buyitem.status}">신청<br>불가</button>
 						                </c:otherwise>
 						            </c:choose>
                                 </td>

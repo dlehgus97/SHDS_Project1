@@ -108,6 +108,9 @@
                         <div class="btnSet clear">
                             <div class="fl_l">
                             	<a href="index.do" class="btn">목록</a>
+                            	<c:if test="${login.no == vo.writer }">
+                            	<a href="index.do" class="btn">삭제</a>
+                            	</c:if>
                             </div>
                         </div>
                     </div>

@@ -23,10 +23,16 @@ public interface SellListMapper {
 	void insertGold(SellListVO sellListVO);
     
     List<SellListVO> list(SellListVO vo);
+    
+    //카테고리별 페이지용
+    List<SellListVO> catelist(SellListVO vo);
+    int catecount(SellListVO param);
+    
     List<SellListVO> relation(SellListVO vo);
     
     //관리자
     int count(SellListVO param);
+
 	List<SellListVO> all(SellListVO vo);
 	List<SellListVO> list2(SellListVO vo);
 	

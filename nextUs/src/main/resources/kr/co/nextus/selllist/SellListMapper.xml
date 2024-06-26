@@ -3,7 +3,7 @@
 <mapper namespace="kr.co.nextus.selllist.SellListMapper">
 	<!-- 목록 -->
 	<select id="list" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
-<choose>
+	<choose>
         <when test="value == 0">
             SELECT * 
             FROM SELLLIST 
@@ -15,7 +15,7 @@
                 SELLLIST.postdate  
             </if>
             DESC 
-            LIMIT #{startIdx}, 8
+            LIMIT 8
         </when>
         <otherwise>
             SELECT *,
@@ -46,10 +46,47 @@
                     like_cnt DESC
                 </otherwise>
             </choose>
-            LIMIT #{startIdx}, 10
+            LIMIT 8
         </otherwise>
     </choose>
 	</select>
+	
+	
+	<!-- 카테고리별 페이지 목록 -->
+	<select id="catelist" parameterType="kr.co.nextus.selllist.SellListVO" resultType="kr.co.nextus.selllist.SellListVO">
+            SELECT *,
+            (SELECT COUNT(*) FROM BUYLIST WHERE BUYLIST.sellno=SELLLIST.sellno) as like_cnt
+            FROM SELLLIST 
+            JOIN SELLCATEGORY ON SELLLIST.sellno = SELLCATEGORY.sellno 
+            JOIN CATEGORYLIST ON SELLCATEGORY.categoryno = CATEGORYLIST.categoryno
+            WHERE CATEGORYLIST.categoryno = #{categoryno}
+            <if test="searchWord != null">
+                AND SELLLIST.title LIKE '%${searchWord}%'
+            </if>
+            ORDER BY
+            <choose>
+                <when test="searchType != null">
+                    #{searchType} DESC
+                </when>
+                <otherwise>
+                    like_cnt DESC
+                </otherwise>
+            </choose>
+            LIMIT #{startIdx}, 8
+	</select>
+	
+	<!-- 카테고리별 페이지 목록 카운트 -->
+	<select id="catecount" parameterType="kr.co.nextus.selllist.SellListVO" resultType="int">
+		SELECT COUNT(*) FROM SELLLIST
+		JOIN SELLCATEGORY ON SELLLIST.sellno = SELLCATEGORY.sellno 
+        JOIN CATEGORYLIST ON SELLCATEGORY.categoryno = CATEGORYLIST.categoryno
+        WHERE CATEGORYLIST.categoryno = #{categoryno}
+        <if test="searchWord != null">
+            AND SELLLIST.title LIKE '%${searchWord}%'
+        </if>
+	</select>
+	
+	
 	
 	<!-- 조회수 증가 -->
 	<update id="increaseViewCount" parameterType="int">

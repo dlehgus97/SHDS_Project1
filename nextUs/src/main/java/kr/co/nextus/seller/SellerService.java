@@ -21,6 +21,7 @@ public interface SellerService {
 	boolean registerSeller(SellerVO seller);
     // 판매자 정보 조회
 	SellerVO getSellerDetails(int id);
+	SellerVO getSellerDetailsRatings(int id);
     // 판매자 정보 업데이트
 	boolean updateSeller(SellerVO seller);
 	// 판매자 판매 상품 가져오기

@@ -42,6 +42,9 @@ public class SellerController {
         SellerVO seller = sellerService.getSellerDetails(no); 
         // 모델에 판매자 정보 추가
         model.addAttribute("seller", seller);
+        
+        SellerVO sellerRating = sellerService.getSellerDetailsRatings(no);
+        model.addAttribute("sellerRating", sellerRating);
        
         // 판매자가 판매 중인 상품 조회
         List<SellListVO> sellList = sellerService.getSellerSellList(no);
