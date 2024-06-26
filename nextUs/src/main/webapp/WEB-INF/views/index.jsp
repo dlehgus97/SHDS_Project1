@@ -382,10 +382,10 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }">
+				<c:forEach var="rank" items="${rank }" varStatus="webstatus">
 				 <c:if test="${rank.nested1 == 1 or rank.nested2 == 1}">
 			        <!-- Item -->
-			        <div class="col px-4" style="max-width: 300px;">
+			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
 			
 			            <!-- Image -->
@@ -393,7 +393,7 @@
 			
 			              <!-- Action -->
 			              <div class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
-			                ${status.index + 1}
+			                ${webstatus.index + 1}
 			              </div>
 			
 			              <!-- Image -->
@@ -429,18 +429,18 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }">
+				<c:forEach var="rank" items="${rank }" varStatus="mbstatus">
 				 <c:if test="${rank.nested1 == 2 or rank.nested2 == 2}">
 			        <!-- Item -->
-			        <div class="col px-4" style="max-width: 300px;">
+			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
 			
 			            <!-- Image -->
-			            <div class="card-img">
+			            <div class="card-img" style="width: 100%; height: 250px;">
 			
 			              <!-- Action -->
 			              <div class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
-			                1
+			                ${mbstatus.index + 1}
 			              </div>
 			
 			              <!-- Image -->
@@ -476,18 +476,18 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }">
+				<c:forEach var="rank" items="${rank }" varStatus="aistatus">
 				 <c:if test="${rank.nested1 == 3 or rank.nested2 == 3}">
 			        <!-- Item -->
-			        <div class="col px-4" style="max-width: 300px;">
+			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
 			
 			            <!-- Image -->
-			            <div class="card-img">
+			            <div class="card-img" style="width: 100%; height: 250px;">
 			
 			              <!-- Action -->
 			              <div class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
-			                1
+			                ${aistatus.index + 1}
 			              </div>
 			
 			              <!-- Image -->
@@ -524,18 +524,18 @@
 			</div>
 
 		      <div class="flickity-page-dots-progress" data-flickity='{"pageDots": true}'>
-				<c:forEach var="rank" items="${rank }">
+				<c:forEach var="rank" items="${rank }" varStatus="etcstatus">
 				 <c:if test="${rank.nested1 == 4 or rank.nested2 == 4}">
 			        <!-- Item -->
-			        <div class="col px-4" style="max-width: 300px;">
+			        <div class="col px-4" style="width: 250px;">
 			          <div class="card">
 			
 			            <!-- Image -->
-			            <div class="card-img">
+			            <div class="card-img" style="width: 100%; height: 250px;">
 			
 			              <!-- Action -->
 			              <div class="btn btn-xs btn-circle btn-white-primary card-action card-action-end">
-			                1
+			                ${etcstatus.index + 1}
 			              </div>
 			
 			              <!-- Image -->
