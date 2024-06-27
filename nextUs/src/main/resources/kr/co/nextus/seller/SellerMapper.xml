@@ -36,7 +36,8 @@
 	    LEFT JOIN MEMBER m ON m.no = b.memberno
 	    INNER JOIN SELLLIST s ON s.sellno = b.sellno
 	    INNER JOIN P_OPTION o ON o.optionno = b.optionno
-	    where b.sellerno = #{no};
+	    where b.sellerno = #{no}
+	    ORDER BY buyno DESC
     </select>
     <select id="count" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int">
 		SELECT COUNT(*) FROM BUYLIST WHERE sellerno = #{sellerno}
