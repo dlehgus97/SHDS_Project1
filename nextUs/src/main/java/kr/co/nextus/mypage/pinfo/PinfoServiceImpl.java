@@ -39,12 +39,23 @@ public class PinfoServiceImpl implements PinfoService {
 	 @Override
 	 public int update(MemberVO vo, MultipartFile file, HttpServletRequest request) {
 		 if ("none".equals(request.getParameter("isprofile"))) {
-			 	MemberVO data = mapper.list(vo);
-				mapper.fileDelete(vo.getNo());
-				File f = new File(request.getRealPath("/upload/profile/")+data.getProfile_real());
-				f.delete();
+			 System.out.println("없어요");
+		 	MemberVO data = mapper.list(vo);
+			mapper.fileDelete(vo.getNo());
+			File f = new File(request.getRealPath("/upload/profile/")+data.getProfile_real());
+			f.delete();
+			vo.setProfile_org("default_profile.png");
+			vo.setProfile_real("default_profile.png");
+			mapper.update(vo);
+		 	return 1;
+		 } else if ("existing".equals(request.getParameter("isprofile"))) {
+		 	System.out.println("이그지스팅!");
+		 	mapper.update(vo);
+		 	return 0;
 		 }
-		 if (!file.isEmpty()) {
+		 else {
+			 System.out.println("있어요");
+			 if (!file.isEmpty()) {
 			// 파일명
 			String org = file.getOriginalFilename();
 			String ext = org.substring(org.lastIndexOf("."));
@@ -56,9 +67,12 @@ public class PinfoServiceImpl implements PinfoService {
 			} catch (Exception e) {}
 			vo.setProfile_org(org);
 			vo.setProfile_real(real);
-		}
+			mapper.update(vo);
+			return 1;
+				}
+		 }
 		 
-	     return mapper.update(vo);
+	     return -1;
 	 }
 
 }

@@ -164,7 +164,7 @@
                     <label class="form-label" for="accountFirstName">
                       닉네임 *
                     </label>
-                    <input class="form-control form-control-sm" id="accountFirstName" name="nickname" type="text" placeholder="닉네임" value="${member.nickname }" required>
+                    <input class="form-control form-control-sm" id="accountNickName" name="nickname" type="text" placeholder="닉네임" value="${member.nickname }" required>
                   </div>
 
                 </div>
@@ -410,7 +410,19 @@
 				    var deleteButton = document.getElementById('deleteButton');
 				    var isProfileInput = document.getElementById('isprofile');
 				    var profileForm = document.getElementById('profileForm');
-				
+
+				 	// 초기 로딩 시 프로필 이미지 상태 설정
+				    var prev = "${member.profile_real}";
+				    isProfileInput.value = 'existing';
+				    console.log(prev);
+				    console.log(isProfileInput.value);
+				    
+				    if (prev != "") {
+				        profileImage.src = '/upload/profile/' + prev;
+				        deleteButton.style.display = 'block';
+				        isProfileInput.value = 'existing';
+				    }
+					
 				    if (fileInput) {
 				      fileInput.addEventListener('change', function(event) {
 				        var file = event.target.files[0];
@@ -451,7 +463,6 @@
 				      var profileImageSrc = profileImage.src;
 				      if (profileImageSrc && !profileImageSrc.includes('default_profile.png')) {
 				        deleteButton.style.display = 'block';
-				        isProfileInput.value = 'uploaded';
 				      } else {
 				        isProfileInput.value = 'none';
 				      }
@@ -462,8 +473,8 @@
                 <div class="col-12">
 
                   <!-- 제출버튼 -->
- 
-				  <button type="button" class="btn btn-dark" onclick="javascript:checkpwd();">Save Changes</button>
+					<button type="button" class="btn btn-dark" onclick="checkpwd()">Save Changes</button>
+				  
                   
 
                 </div>
@@ -489,49 +500,44 @@
 	
 	<!-- 폼 제출 js -->
 	<script type="text/javascript">
-		function checkpwd() {
-			var phone = $("#hp").val();
-			var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
-			if (!phoneReg.test(phone)) {
-			    alert('올바르지 않은 전화번호 형식입니다. 번호는 01X-XXXX-XXXX 형식으로 입력해주세요');
-			    console.log(phone);
-			    return;
-			}
-			
-			
-			if (${member.loginstate} != 0) {
-				$("#frm").submit();
-				return;
-			}
-			
-			
-			if ($("#newpwd").val() != '') {
-				var reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
-	    		if ($("#newpwd").val().match(reg) == null) {
-	    			alert('비밀번호는 영문+숫자 조합으로 8자이상 입력하세요');
-	    			$("#newpwd").val('');
-	    			return;
-	    		}
-			}
-			console.log($("#pwd").val());
-			$.ajax({
+	async function checkpwd() {
+	    var phone = $("#hp").val();
+	    var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
+	    if (!phoneReg.test(phone)) {
+	        alert('올바르지 않은 전화번호 형식입니다. 번호는 01X-XXXX-XXXX 형식으로 입력해주세요');
+	        console.log(phone);
+	        return false;
+	    }
+
+	    if ($("#newpwd").val() != '') {
+	        var reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
+	        if ($("#newpwd").val().match(reg) == null) {
+	            alert('비밀번호는 영문+숫자 조합으로 8자이상 입력하세요');
+	            $("#newpwd").val('');
+	            return false;
+	        }
+	    }
+
+	    console.log($("#pwd").val());
+
+	    try {
+	        const response = await $.ajax({
 	            url: '/pinfo/checkpwd.do',
 	            type: 'POST',
-	            data: {
-	            	pwd: $("#pwd").val()
-	            },
-	            success: function(response) {
-	            	if (response === 'success') {
-	                    $("#frm").submit();
-	                } else {
-	                    alert('현재 비밀번호가 일치하지 않습니다.');
-	                }
-	            },
-	            error: function(xhr, status, error) {
-	            	alert('서버와의 통신에 문제가 발생했습니다.');
-	            }
-	          });
-		}
+	            data: { pwd: $("#pwd").val() }
+	        });
+
+	        if (response === 'success') {
+	            $("#frm")[0].submit();  // 명시적으로 폼을 제출합니다.
+	        } else {
+	            alert('현재 비밀번호가 일치하지 않습니다.');
+	        }
+	    } catch (error) {
+	        alert('서버와의 통신에 문제가 발생했습니다.');
+	    }
+
+	    return false;
+	}
 	</script>
 
 	

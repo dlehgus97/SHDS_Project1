@@ -48,11 +48,13 @@ public class PinfoController {
 	@PostMapping("/pinfo/checkpwd.do")
     @ResponseBody
 	public String check(@RequestParam("pwd") String pwd, MemberVO vo, HttpSession sess) {
+		System.out.println("들어옴");
 		MemberVO login = (MemberVO)sess.getAttribute("login");
 		vo.setNo(login.getNo());
 		vo.setPwd(pwd);
 		int r = pinfoService.check(vo);
 		System.out.println(r);
+		System.out.println(vo);
 		return r > 0 ? "success" : "error";
 	}
 	
@@ -63,12 +65,19 @@ public class PinfoController {
 		int r = pinfoService.update(vo, file, request);
 		String msg = "";
 		String url = "/mypage/pinfo.do";
-		if (r > 0) {
+		if (r == 1) {
 			msg = "정상적으로 수정되었습니다.";
+			sess.setAttribute("login", vo);
+		} else if (r == 0) {
+			msg = "정상적으로 수정되었습니다.";
+			vo.setProfile_org(login.getProfile_org());
+			vo.setProfile_real(login.getProfile_real());
 			sess.setAttribute("login", vo);
 		} else {
 			msg = "수정 오류";
 		}
+		sess.setAttribute("login", vo);
+		System.out.println(vo);
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		return "common/alert";
