@@ -571,7 +571,7 @@
 		
 		
 	</section>
-	
+	<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" var="formattedRating" />
 	
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
@@ -663,7 +663,27 @@
 	                        productHtml += '        </div>';
 	                        productHtml += '        <div class="card-body px-0">';
 	                        productHtml += '            <div class="fs-xs">';
-	                        productHtml += '                <a class="text-muted" href="/selllist/view.do?sellno=' + vo.sellno + '">카테고리? 별점? 중 뭐넣을까</a>';
+	                        productHtml += '                <a class="text-muted" href="/selllist/view.do?sellno=' + vo.sellno + '">';
+	                        productHtml += '                    <div class="col-auto">';
+	                        productHtml += '                        <div class="rating fs-xs text-dark" data-value="' + '${formattedRating}' + '">';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                        </div>';
+	                        productHtml += '                    </div>';
+	                        productHtml += '                </a>';
 	                        productHtml += '            </div>';
 	                        productHtml += '            <div class="fw-bold">';
 	                        productHtml += '                <a class="text-body" href="/selllist/view.do?sellno=' + vo.sellno + '">' + title + '</a>';
