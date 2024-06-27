@@ -654,9 +654,6 @@
 	                        var productHtml = '';
 	                        productHtml += '<div class="col-6 col-md-4 col-lg-3">';
 	                        productHtml += '    <div class="card mb-7">';
-	                        productHtml += '        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">';
-	                        productHtml += '            New';
-	                        productHtml += '        </div>';
 	                        productHtml += '        <div class="card-img">';
 	                        productHtml += '            <a class="card-img" href="/selllist/view.do?sellno=' + vo.sellno + '">';
 	                        productHtml += '                <img class="card-img-top card-img-front" src="/upload/thumbnail/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';

@@ -38,7 +38,9 @@
 	    INNER JOIN P_OPTION o ON o.optionno = b.optionno
 	    where b.sellerno = #{no};
     </select>
-    
+    <select id="count" parameterType="kr.co.nextus.buylist.BuyListVO" resultType="int">
+		SELECT COUNT(*) FROM BUYLIST WHERE sellerno = #{sellerno}
+	</select>
     <update id="updateStatus" parameterType="map">
         UPDATE BUYLIST
         SET status = #{status} 
@@ -54,7 +56,7 @@
 		WHERE sr.no = #{no}
 		GROUP BY s.sellno, s.title, s.thumbnail_real, s.rating_avg, s.review_cnt, s.view_cnt, s.price;
 	</select>
-	
+
 	<!-- 판매자의 판매글 관리 페이지 : 삭제 버튼 누르면 판매글 삭제됨 (옵션이랑 카테고리도 같이 삭제됨 -->
 	<delete id="deleteSellerSellList" parameterType="int">
 	    DELETE FROM SELLLIST
