@@ -48,8 +48,8 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO" useGeneratedKeys="true" keyProperty="no">
-    INSERT INTO MEMBER (email, name, state, loginstate, nickname)
-    VALUES (#{email}, #{name}, 0, #{loginstate}, #{nickname})
+    INSERT INTO MEMBER (email, name, state, loginstate, nickname, seller)
+    VALUES (#{email}, #{name}, 0, #{loginstate}, #{nickname}, 0)
 	</insert>
 
     
