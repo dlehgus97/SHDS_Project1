@@ -186,28 +186,71 @@
 	    });
 	</script>
 	  <script>
-    	$(document).ready(function() {
-    		  // 체크박스가 변경될 때마다 호출되는 함수
-    		  function updateSelectedTotal() {
-    		    let selectedTotal = 0;
-    		    // 체크된 체크박스의 가격을 합산
-    		    $(".product-checkbox:checked").each(function() {
-    		      let priceText = $(this).closest("li").find(".fw-bold .ms-auto").text();
-    		      // 쉼표와 화폐 기호를 제거하고 숫자로 변환
-    		      let price = parseFloat(priceText.replace(/[^0-9.-]+/g,""));
-    		      selectedTotal += price;
-    		    });
-    		    // 합산된 가격을 '선택상품 총 금액'에 표시
-    		    $("#total").text(selectedTotal.toLocaleString());
-    		  }
-
-    		  // 페이지 로드 시 초기화
-    		  updateSelectedTotal();
-
-    		  // 체크박스 상태가 변경될 때마다 updateSelectedTotal 함수 호출
-    		  $(".product-checkbox").change(updateSelectedTotal);
-    		});
-	  </script>
+	    $(document).ready(function() {
+	        function updateCartTotal() {
+	            let cartTotal = 0;
+	            $(".product-checkbox").each(function() {
+	                let priceText = $(this).closest("li").find(".fw-bold .ms-auto").text();
+	                let price = parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
+	                cartTotal += price;
+	            });
+	            $("#subtotal").text(cartTotal.toLocaleString() + "원");
+	        }
+	        
+	        function updateSelectedTotal() {
+	            let selectedTotal = 0;
+	            $(".product-checkbox:checked").each(function() {
+	                let priceText = $(this).closest("li").find(".fw-bold .ms-auto").text();
+	                let price = parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
+	                selectedTotal += price;
+	            });
+	            $("#total").text(selectedTotal.toLocaleString());
+	        }
+	        
+	        $('.remove-btn').click(function(event) {
+	            event.preventDefault();
+	            var sellno = $(this).data('sellno');
+	            var optionno = $(this).data('optionno');
+	            var listItem = $(this).closest('li.list-group-item');
+	            
+	            $.ajax({
+	                url: '/cart/delete.do',
+	                type: 'POST',
+	                data: {
+	                    sellno: sellno,
+	                    optionno: optionno
+	                },
+	                success: function(response) {
+	                    alert('상품이 삭제되었습니다.');
+	                    listItem.remove();
+	                    
+	                    // 장바구니 총계와 선택된 상품 총계를 업데이트
+	                    updateCartTotal();
+	                    updateSelectedTotal();
+	                    
+	                    // 장바구니가 비었는지 확인
+	                    if ($('.list-group-item').length === 0) {
+	                        $('#empty-cart-message').show();
+	                    }
+	                },
+	                error: function(xhr, status, error) {
+	                    alert('삭제 중 오류가 발생했습니다.');
+	                }
+	            });
+	        });
+	        
+	        $(".product-checkbox").change(updateSelectedTotal);
+	        
+	        // 페이지 로드 시 초기화
+	        updateCartTotal();
+	        updateSelectedTotal();
+	        
+	        // 페이지 로드 시 장바구니가 비었는지 확인
+	        if ($('.list-group-item').length === 0) {
+	            $('#empty-cart-message').show();
+	        }
+	    });
+	</script>
 	  <script>
 	        document.addEventListener("DOMContentLoaded", function() {
 	            document.getElementById("buy_btn").addEventListener("click", function(event) {
