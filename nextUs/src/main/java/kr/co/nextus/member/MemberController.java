@@ -265,7 +265,6 @@ public class MemberController {
         return "member/navercallback";
     }
 
- // 네이버 로그인 콜백
     @PostMapping("/member/loginCallback")
     @ResponseBody
     public String loginCallback(String email, MemberVO vo, HttpSession sess, String name) {
@@ -287,17 +286,21 @@ public class MemberController {
             vo.setLoginstate(2);
             
             if (service.insertMember(vo)) {
-            	System.out.println("Inserted member ID: " + vo.getNo());
-            	String nickname = "Naver" + vo.getNo();
+                System.out.println("Inserted member ID: " + vo.getNo());
+                String nickname = "Naver" + vo.getNo();
                 service.updateNickname(vo.getNo(), nickname);
                 
+                vo.setNickname(nickname);
                 sess.setAttribute("login", vo);
+                
+                sess.setAttribute("snsmsg", "초기 비밀번호는 " + nickname + "입니다. 마이페이지에서 수정해주세요.");
                 return "true"; // 회원 가입 및 로그인 성공
             } else {
                 return "false"; // 회원 가입 실패
             }
         }
     }
+
     
     @GetMapping("/member/kakaocallback")
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code, RedirectAttributes redirectAttributes, HttpSession session, Model model) {
