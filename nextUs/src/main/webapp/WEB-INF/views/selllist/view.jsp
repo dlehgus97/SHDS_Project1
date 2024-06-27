@@ -593,7 +593,7 @@
                   <div class="card-img">
 
                     <!-- Image -->
-                    <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno }">
+                    <a class="card-img" href="/selllist/view.do?sellno=${relation.sellno }">
                       <img class="card-img-top card-img-front" src="/upload/thumbnail/${relation.thumbnail_real}" alt="...">
                     </a>
 
