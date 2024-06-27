@@ -44,7 +44,7 @@
     <select id="findId" parameterType="kr.co.nextus.member.MemberVO" resultType="kr.co.nextus.member.MemberVO">
     	SELECT email
     	FROM MEMBER
-    	WHERE name = #{name} AND birthday = #{birthday, jdbcType=DATE} AND hp = #{hp}
+    	WHERE name = #{name} AND birthday = #{birthday, jdbcType=DATE} AND hp = #{hp} AND loginstate = 0
 	</select>
 	
 	<insert id="insertMember" parameterType="kr.co.nextus.member.MemberVO" useGeneratedKeys="true" keyProperty="no">
