@@ -32,7 +32,7 @@ public class SellListVO {
 	private String thumbnail_real;
 	private int like_count;
 	private int isreview;
-	private int sellerrating_avg;
+	private double sellerrating_avg;
 	private int sellerreview_cnt;
 	
 	private int categoryno;

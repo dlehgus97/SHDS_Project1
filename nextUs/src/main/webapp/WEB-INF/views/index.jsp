@@ -571,7 +571,7 @@
 		
 		
 	</section>
-	<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" var="formattedRating" />
+	
 	
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
@@ -649,6 +649,7 @@
 	                    $.each(response.list, function(index, vo) {
 	                        var title = vo.title;
 	                        var price = vo.price;
+	                        var score = parseInt(vo.rating_avg, 10);
 	                        var thumbnail_real = vo.thumbnail_real;
 	                        var productHtml = '';
 	                        productHtml += '<div class="col-6 col-md-4 col-lg-3">';
@@ -665,7 +666,7 @@
 	                        productHtml += '            <div class="fs-xs">';
 	                        productHtml += '                <a class="text-muted" href="/selllist/view.do?sellno=' + vo.sellno + '">';
 	                        productHtml += '                    <div class="col-auto">';
-	                        productHtml += '                        <div class="rating fs-xs text-dark" data-value="' + '${formattedRating}' + '">';
+	                        productHtml += '                        <div class="rating fs-xs text-dark" data-value="' + score + '">';
 	                        productHtml += '                            <div class="rating-item">';
 	                        productHtml += '                                <i class="fas fa-star"></i>';
 	                        productHtml += '                            </div>';
@@ -723,6 +724,7 @@
 	                    $.each(response.list, function(index, vo) {
 	                    	var title = vo.title;
 	                    	var price = vo.price;
+	                    	var score = parseInt(vo.rating_avg, 10);
 	                    	var thumbnail_real = vo.thumbnail_real;
 	                        var productHtml = '';
 	                        productHtml += '    <div class="col-6 col-md-4 col-lg-3">';
@@ -736,9 +738,29 @@
                  			productHtml += '                </a>';
                  			productHtml += '             </div>';
                  			productHtml += '            <div class="card-body px-0">';
-                 			productHtml += '                 <div class="fs-xs">';
-                 			productHtml += '                     <a class="text-muted" href="/selllist/view.do?sellno="></a>';
-                 			productHtml += '                 </div>';
+                 			productHtml += '            <div class="fs-xs">';
+	                        productHtml += '                <a class="text-muted" href="/selllist/view.do?sellno=' + vo.sellno + '">';
+	                        productHtml += '                    <div class="col-auto">';
+	                        productHtml += '                        <div class="rating fs-xs text-dark" data-value="' + score + '">';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                            <div class="rating-item">';
+	                        productHtml += '                                <i class="fas fa-star"></i>';
+	                        productHtml += '                            </div>';
+	                        productHtml += '                        </div>';
+	                        productHtml += '                    </div>';
+	                        productHtml += '                </a>';
+	                        productHtml += '            	</div>';
                  			productHtml += '                 <div class="fw-bold">';
                  			productHtml += '                     <a class="text-body" href="/selllist/view.do?sellno=">'+title+'</a>';
                  			productHtml += '                </div>';
