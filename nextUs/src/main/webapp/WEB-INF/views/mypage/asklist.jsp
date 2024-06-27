@@ -36,7 +36,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-0 fs-xs text-gray-400">
               <li>
-                <a class="text-gray-400" href="index.html">Home &ensp;></a>
+                <a class="text-gray-400" href="../index.do">Home &ensp;></a>
               </li>
               <li class="breadcrumb-item active">
                &ensp; 마이페이지
