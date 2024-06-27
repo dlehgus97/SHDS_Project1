@@ -719,6 +719,7 @@
 					
         			<!-- Hidden field -->
         			<input type="hidden" name="sellno" value="${vo.sellno }">
+        			<input type="hidden" name="seller" value="${vo.seller }">
         			<input type="hidden" name="writeno" value="${login.no }">
                     <!-- Text -->
                     <p class="mb-1 fs-xs">
