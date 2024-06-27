@@ -1,6 +1,12 @@
+# Eclipse specific files
 .classpath
 .project
 .springBeans
+.settings/
+
+# Maven specific files
+target/
 MANIFEST.MF
-.settings
-target
+
+# Properties files
+*.properties
