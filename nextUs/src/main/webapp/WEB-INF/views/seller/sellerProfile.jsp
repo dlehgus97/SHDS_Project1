@@ -246,7 +246,7 @@
                 <c:forEach var="sellproduct" items="${sellList}">
                     <tr>
                         <td><img src="/upload/thumbnail/${sellproduct.thumbnail_real}" alt="상품 사진" class="profile-picture-small"></td>
-                        <td>${sellproduct.title}</td>
+                        <td><a href="/selllist/view.do?sellno=${sellproduct.sellno}">${sellproduct.title}</a></td>
                         <td><i class="fas fa-star yellow-star"></i> <fmt:formatNumber value="${sellproduct.rating_avg}" type="number" maxFractionDigits="1" minFractionDigits="1" /></td>
                         <td>${sellproduct.review_cnt}</td>
                         <td>${sellproduct.like_count}</td>
