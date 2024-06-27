@@ -12,7 +12,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="/resources/js/index.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/footer.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
@@ -22,14 +21,7 @@
 <!--부트스트랩 Theme CSS -->
 <link rel="stylesheet" href="/resources/css/board/theme.bundle.css" />
 
-<script>
-	$(document).ready(function() {
-		if ("${snsmsg}" != "") {
-			alert("${snsmsg}");
-			console.log('하이 ${snsmsg} 입니다.')
-		}
-	})
-</script>
+
 
 <style>
 	.bg-purple {background-color: #d3d3d3;}
@@ -344,9 +336,30 @@
 	                                <div class="card-body px-0">
 	
 	                                    <!-- Category -->
-	                                    <div class="fs-xs">
-	                                        <a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno}">카테고리? 별점? 중 뭐넣을까</a>
-	                                    </div>
+										<div class="fs-xs">
+											<a class="text-muted" href="/selllist/view.do?sellno=${vo.sellno }">
+												<div class="col-auto">
+							                    <div class="rating fs-xs text-dark" data-value="<fmt:formatNumber value="${vo.rating_avg}" type="number" maxFractionDigits="0" minFractionDigits="0" />">
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                      <div class="rating-item">
+							                        <i class="fas fa-star"></i>
+							                      </div>
+							                    </div>
+							
+							                  </div>
+											</a>
+										</div>
 	
 	                                    <!-- Title -->
 	                                    <div class="fw-bold">
@@ -691,30 +704,28 @@
 	                    	var title = vo.title;
 	                    	var price = vo.price;
 	                    	var thumbnail_real = vo.thumbnail_real;
-	                        var sellno = vo.sellno;
-	                        
 	                        var productHtml = '';
-	                        productHtml += '<div class="col-6 col-md-4 col-lg-3">';
-	                        productHtml += '    <div class="card mb-7">';
-	                        productHtml += '        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">';
-	                        productHtml += '            New';
-	                        productHtml += '        </div>';
-	                        productHtml += '        <div class="card-img">';
-	                        productHtml += '            <a class="card-img" href="/selllist/view.do?sellno=' + sellno + '">';
-	                        productHtml += '                <img class="card-img-top card-img-front" src="/upload/thumbnail/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
-	                        productHtml += '            </a>';
-	                        productHtml += '        </div>';
-	                        productHtml += '        <div class="card-body px-0">';
-	                        productHtml += '            <div class="fs-xs">';
-	                        productHtml += '                <a class="text-muted" href="/selllist/view.do?sellno=' + sellno + '"></a>';
-	                        productHtml += '            </div>';
-	                        productHtml += '            <div class="fw-bold">';
-	                        productHtml += '                <a class="text-body" href="/selllist/view.do?sellno=' + sellno + '">' + title + '</a>';
-	                        productHtml += '            </div>';
-	                        productHtml += '            <div class="fw-bold text-muted">' + price + '원</div>';
-	                        productHtml += '        </div>';
-	                        productHtml += '    </div>';
-	                        productHtml += '</div>';
+	                        productHtml += '    <div class="col-6 col-md-4 col-lg-3">';
+                        	productHtml += '        <div class="card mb-7">';
+                       		productHtml += '            <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">';
+                   			productHtml += '                New';
+                 			productHtml += '            </div>';
+                 			productHtml += '            <div class="card-img">';
+                 			productHtml += '                <a class="card-img" href="/selllist/view.do?sellno=${vo.sellno}">';
+                 			productHtml += '                    <img class="card-img-top card-img-front" src="/upload/thumbnail/' + thumbnail_real + '" style="width: 90%; height: 250px; object-fit: cover;">';
+                 			productHtml += '                </a>';
+                 			productHtml += '             </div>';
+                 			productHtml += '            <div class="card-body px-0">';
+                 			productHtml += '                 <div class="fs-xs">';
+                 			productHtml += '                     <a class="text-muted" href="/selllist/view.do?sellno="></a>';
+                 			productHtml += '                 </div>';
+                 			productHtml += '                 <div class="fw-bold">';
+                 			productHtml += '                     <a class="text-body" href="/selllist/view.do?sellno=">'+title+'</a>';
+                 			productHtml += '                </div>';
+                 			productHtml += '                <div class="fw-bold text-muted">'+price+'원</div>';
+                 			productHtml += '            </div>';
+                 			productHtml += '        </div>';
+                 			productHtml += '   </div>';
 	                        productList.append(productHtml);
 	                    });
 	                },
