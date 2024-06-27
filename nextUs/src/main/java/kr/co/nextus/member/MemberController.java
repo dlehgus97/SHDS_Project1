@@ -269,7 +269,7 @@ public class MemberController {
     @ResponseBody
     public String loginCallback(String email, MemberVO vo, HttpSession sess, String name) {
         MemberVO login = service.findByEmail2(vo);
-        System.out.println(login);
+        //System.out.println(login);
         
         // 이메일로 기존 회원 존재 여부 확인
         // 기존 회원인 경우
