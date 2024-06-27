@@ -776,6 +776,16 @@
 	        });
 	    });
 	</script>
+	
+	<script>
+	$(document).ready(function() {
+		if ("${snsmsg}" != "") {
+			alert("${snsmsg}");
+			console.log('하이 ${snsmsg} 입니다.')
+		}
+	})
+	</script>
+
 	<!-- 부트스트랩 js -->
 	<!-- Map (replace the API key to enable) -->
 	<script
