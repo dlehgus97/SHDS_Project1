@@ -26,7 +26,7 @@ public class SendMail {
 				// 2. Session 객체 생성
 				Session session = Session.getDefaultInstance(prop, new Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("dlehgus97@naver.com", "lee951753!!"); // 네이버 아이디/비번
+						return new PasswordAuthentication("", ""); // 네이버 아이디/비번
 					}
 				});
 				session.setDebug(true);
